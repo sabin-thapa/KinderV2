@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+<html lang="en">
+
+{% load static %}
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href=" {% static  'register.css' %} ">
+    <script src=" {% static 'register.js' %} "></script>
+</head>
+
+
+
+<body >
+
+
+
+
+
+    <div class="jumbotron ">
+
+        <section class="login-page">
+
+        <center>
+
+
+            <div class='form-box' style="height: 350px;">
+
+                <img src="{% static 'profile.png' %}">
+                <form method='POST'>
+                    {% csrf_token %}
+                    {{ form2.as_p }}
+                    {{ form_teachers.as_p }}
+
+                    <div>
+                        <button class='submit button-normal white' type='submit'>SIGN UP</button>
+                    </div>
+                </form>
+                <div class="form-footer">
+                    <p>Already have an account? <a href='{% url 'login' %}'><strong> SIGN IN </strong></a>
+
+                </div>
+            </div>
+        </center>
+        <div class="text-block">
+            <h4><strong> Dear teacher,</strong> </h4>
+            <h4><strong> Welcome to Kinder.</strong> </h4>
+            <p>Please fill up the signup form given aside and stay</p>
+            <p> connected with us.</p>
+          </div
+        </section>
+    </div>
+
+
+
+
+
+
+</body>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base1.html" %}
+{% block base2 %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TeacherProfiles</title>
+    <script src=" {% static 'registerchild.js' %} "></script>
+    <link rel="stylesheet" href="{% static 'form1.css' %}" >
+
+</head>
+
+<body class="jumbotron">
+
+<div class="jumbotron">
+<center><h1>List of Teachers</h1></center><br>
+    {% for teach in teachers %}
+        <div class='container' style='background-color:white;width:20%;border-style:solid;border-radius:5px;border-width:1px;border-color:#969696;'>
+        <img class="rounded-circle account-img" src="{{ teach.user.profile.image.url }}" height = "45px", width="45px"><h1>{{teach.user.username}}</h1>
+        <p><b>{{teach.user.email}}</b></p>
+
+        </div><br>    
+    {% endfor %}
+
+</div>
+</body>
+</html>
+{% endblock %}

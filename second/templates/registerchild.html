@@ -1,0 +1,61 @@
+{% extends "base1.html" %}
+{% block base2 %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Ids</title>
+    <script src=" {% static 'registerchild.js' %} "></script>
+
+</head>
+
+
+<body class="jumbotron">
+
+<div class="jumbotron">
+
+
+<div class="container">
+<center>
+    <button class='btn btn-secondary' onclick="location.href='{% url 'addchild' %}'" style="margin-left:90%;">ADD CHILD</button>
+    <br>
+    <br>
+    <input class="form-control" id="myInput" onkeyup="myFunction()" type="text" placeholder="Search for names.."><br>    
+    <table class="table table-hover" id="myTable">
+        <thead class="thead-dark">
+            <tr>
+                <th onclick="sortTable(0)">Name</th>
+                <th onclick="sortTable(1)">Roll No.</th>
+                <th>Child Id</th>
+
+            </tr>
+        </thead>
+        
+        {% for ids in stid %}
+            {% if user == ids.teacher %}
+                <tr>
+                <td>{{ids.full_name}}</td>
+                <td>{{ids.roll}}</td>
+                <td>{{ids.childid}}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+        
+    </table>
+
+</center>
+</div>
+
+
+</div>
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

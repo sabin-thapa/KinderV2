@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href=" {% static  'register.css' %} ">
+    <link rel='stylesheet' href=" {% static  'form.css' %} ">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+
+<body>
+
+
+    <section class="login-page">
+       
+        <center>
+           
+            <div class='form-box'>
+
+                <img src="{% static 'profile.png' %}">
+                <form method='POST' class="login-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                
+                
+                    
+                    <div class="forgot-link d-flex align-items-center justify-content-between">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="remember" style="width: 18px; height: 18px;">
+                            <label for="remember">Remember Password? </label>
+                        </div>   
+                        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <button class="submit button-normal white" >SIGN IN</button>
+                    </div>
+              
+                </form> 
+                   <div class="form-footer">
+
+                   
+                        <p class="mt-3 font-weight-normal">Don't have an account?
+                        <a href="{% url 'signup' %}"> <strong> Register Now </strong></a> </p>
+                        </div>
+                        <a style="color:white" href="../../admin/">Admin?</a> 
+                  
+                    </div>
+                 
+                </center>
+                   
+                <div class="text-block">
+                    
+                    <h4><strong> Welcome to Kinder.</strong> </h4>
+                    <p>Please sign in and stay connected with us.</p>
+                 
+                  </div
+
+                  </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% endblock %}

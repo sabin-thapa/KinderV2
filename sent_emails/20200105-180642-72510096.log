@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: isurfer75@gmail.com
+Date: Sun, 05 Jan 2020 12:21:42 -0000
+Message-ID: <157822690297.15992.14464750406394864534@SABIN-PC>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/password-reset-confirm/MjQ/5cv-ee57497d3636f81f1cc8/
+
+Your username, in case you've forgotten: parents
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.features_class {
+    margin-left: 200px;
+    margin-right: 200px;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+
+
+}
+
+.features_class h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+
+
+
+}
+
+.features_class h3 {
+    font-size: 24px;
+    color: #222;
+    font-weight: bold;
+}
+
+#whatitis h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+
+}
+
+#whatitis h3 {
+    font-size: 24px;
+    color: #222;
+    font-weight: bold;
+}
+
+#clients h3,
+h4 {
+    font-size: 24px;
+    color: #222;
+    font-weight: bold;
+}
+
+#clients p {
+
+    color: #555;
+    font-weight: bold;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    filter: invert(1);
+}
+
+#whatitis h3 {
+    font-size: 24px;
+    color: #222;
+    font-weight: bold;
+}
+
+#clients h3 {
+    font-size: 24px;
+    color: #222;
+    font-weight: bold;
+}
+
+#contacts h3 {
+    font-size: 24px;
+    color: #222;
+    font-weight: bold;
+}
+
+#contacts h1 {
+    font-size: 36px;
+    color: #222;
+    font-weight: bold;
+}
+
+#whatitis h4 {
+    font-size: 22px;
+    color: #222;
+    font-weight: bold;
+}
+
+#whatitis p {
+    font-size: 14px;
+    color: #222;
+    margin-right: 200px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+}
+
+#services img {
+    margin-top: -70px;
+}
+
+#services p {
+    font-weight: 500;
+}
+
+#services .card {
+    border-radius: 0;
+    box-shadow: 5px 5px 15px #8a56a6;
+    transition: all 0.2s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+
+}
+
+#services .card:hover {
+    background: #8a56a6;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 5px 5px 5px #9E9E9E;
+
+}
+
+.col {
+    margin-bottom: 50px;
+}
+
+main {
+    padding-bottom: 100px;
+}
+
+body {
+    position: relative;
+
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+
+}
+
+#contacts {
+    padding-top: 70px;
+}
+
+
+#clients {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    padding-left: 60px;
+}
+
+
+.contact-form {
+    padding-left: 250px;
+    padding-bottom: 100px;
+
+}
+
+
+.back-to-top {
+    background: none;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    z-index: 100;
+    display: none;
+    text-decoration: none;
+    color: #fc7700;
+    background-color: transparent;
+}
+
+.back-to-top i {
+    font-size: 60px;
+}
+
+
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: none;
+    outline: 0;
+}
+
+
+
+form input,
+form textarea {
+    background-color: #c0bae6;
+    padding: 0 15px;
+    width: 100%;
+    height: 45px;
+    border: none;
+    margin-bottom: 10px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    border-radius: 10px;
+}
+
+form textarea {
+    padding: 10px 10px;
+    height: 130px;
+}
+
+form input:focus,
+form textarea:focus {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+
+}
+
+
+
+
+#services {
+    background-image: url(../media/first/repeated-square.png);
+
+}
+
+#whatitis {
+
+    background-image: url(../media/first/dot-grid.png);
+}
+
+#clients {
+    background-image: url(../media/first/wow.jpeg);
+    background-attachment: fixed;
+}
+
+
+.carousel-caption {
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+.baby {
+    position: relative;
+    bottom: -20px;
+    margin-left: 40%;
+}
+
+
+
+/* #Media Queries
+================================================== */

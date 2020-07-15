@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href=" {% static  'form.css' %} ">
+
+
+
+</head>
+
+<body class="jumbotron">
+
+    <div class="jumbotron ">
+
+    <section class="signup-page">
+
+
+        <center>
+            <br>
+            <br>
+        <h2><b>Who Are You?</b></h2>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2"></div>
+            <div class="col-lg-3 col-md-3">
+                <img src="/media/first/parents.png" style="width:400px; height:400px;">
+
+                <button class="btn btn-outline-info" onclick="location.href='{% url 'register_parent' %}'">A Parent</a>
+            </div>
+            <div class="col-lg-2 col-md-2"></div>
+
+            <div class="col-lg-3 col-md-3">
+                <img src="/media/first/teacher.png" style="width:400px; height:300px; margin-top: 50px; margin-left: 90px;"><br><br><br>
+                <button class="btn btn-outline-info " onclick="location.href='{% url 'register_teacher' %}'">A Teacher</a>
+            </div>
+
+            <div class="col-lg-2 col-md-2"></div>
+
+
+
+        </div>
+
+        </center>
+
+
+
+    </section>
+
+
+</div>
+
+</body>
+
+</html>
+{% endblock %}

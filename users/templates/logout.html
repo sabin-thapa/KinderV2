@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href=" {% static  'register.css' %} ">
+    <script src=" {% static 'register.js' %} "></script>
+</head>
+
+<body>
+
+
+
+    <div class="jumbotron">
+        <center>
+            <h2>You have been logged out</h2>
+            <a href="{% url 'login' %}" style="color:rgb(245, 17, 17);font-size:14px;">Log In Again</a>
+        </center>
+    </div>
+
+
+
+</body>
+
+</html>
+{% endblock %}

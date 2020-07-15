@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'index1.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Dosis:400,500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" type="text/css" href="{% static 'dev.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'responsive.css' %}">
+
+</head>
+<body>
+
+</body>
+
+
+<section id="content" class="single-wrapper">
+    <div class="grey-background wow fadeIn">
+        <div class="container">
+            <div class="heading-block page-title wow fadeInUp">
+                <h1>Contact Us</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron"> 
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+
+            <div class="contact-details col-md-4 wow fadeInUp" style="margin-top: 70px;">
+                <p> Feel free to call us directly or simply complete our form and we will follow up with you.</p>
+
+                <div class="visit-us" style="margin-top: 30px;">
+                    <div class="contact-icon">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>Visit us</h3>
+                        <p>Kathmandu University</p>
+                        <p>Dhulikhel,Kavre</p>
+                        <p>Nepal</p>
+                    </div>
+                </div>
+
+                <div class="contact-us" style="margin-top: 30px;">
+                    <div class="contact-icon">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>Contact us</h3>
+                        <p>98010101010</p>
+                        <p>kinder.mailservice@gmail.com</p>
+                        <p>www.kinderweb.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form col-md-8 wow fadeIn" style="margin-top: 70px;">
+                <form method= 'POST'>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="submit button-normal green">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</div>
+<footer>
+    <div class="footer">
+      <footer class="text-muted" style="background-color:black; color: white;">
+
+            <p class="float-right">
+
+            </p>
+            <center><p style="padding-top: 20px; color: white;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
+
+      </footer>
+  </div>
+</footer>
+</html>
+
+{% endblock %}

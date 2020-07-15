@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Email sent successfully!</h1>
+   
+
+        <a href={% url 'home' %} class='zoom btn btn-secondary'> Home </a>
+    </div>
+</body>
+</html>
+
+{% endblock %}
