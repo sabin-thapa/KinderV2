@@ -1,30 +1,89 @@
-{% extends "base1.html" %}
-{% block base2 %}
-
-{% load static %}
+{% extends "base1.html" %} {% block base2 %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>TeacherProfiles</title>
     <script src=" {% static 'registerchild.js' %} "></script>
-    <link rel="stylesheet" href="{% static 'form1.css' %}" >
+    <link rel="stylesheet" href="{% static 'form1.css' %}" />
+    <script>
 
-</head>
+            function copyToClipboard() {
+              /* Get the text field */
+              var copyText = document.getElementById("email");
 
-<body class="jumbotron">
+              /* Select the text field */
+              copyText.select();
+              copyText.setSelectionRange(0, 99999); /*For mobile devices*/
 
-<div class="jumbotron">
-<center><h1>List of Teachers</h1></center><br>
-    {% for teach in teachers %}
-        <div class='container' style='background-color:white;width:20%;border-style:solid;border-radius:5px;border-width:1px;border-color:#969696;'>
-        <img class="rounded-circle account-img" src="{{ teach.user.profile.image.url }}" height = "45px", width="45px"><h1>{{teach.user.username}}</h1>
-        <p><b>{{teach.user.email}}</b></p>
+              /* Copy the text inside the text field */
+              document.execCommand("copy");
 
-        </div><br>    
-    {% endfor %}
+              /* Alert the copied text */
+              alert("Copied the text: " + copyText.value);
+      }
+            }
+    </script>
+  </head>
 
-</div>
-</body>
+  <body class="jumbotron">
+    <center>
+      <h1>List Of Teachers</h1>
+      <input
+        class="form-control"
+        type="text"
+        id="myInput"
+        onkeyup="myFunction()"
+        placeholder="Search for names..."
+      />
+      <table class="table table-hover" id="myTable">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        {% for t in teachers %}
+        <tr>
+          <td><b> {{t.user.username}} </b></td>
+          <td id="email">
+            <a href="{% url 'send-email' %}">
+              <b>{{t.user.email}}</b>
+            </a>
+            <br />
+            <button
+              onclick="copyToClipboard()"
+              class="btn btn-dark"
+              style="height: 35px;"
+            >
+              Copy Email
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </center>
+
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+    </script>
+  </body>
 </html>
 {% endblock %}
