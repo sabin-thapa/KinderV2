@@ -6,24 +6,6 @@
     <title>TeacherProfiles</title>
     <script src=" {% static 'registerchild.js' %} "></script>
     <link rel="stylesheet" href="{% static 'form1.css' %}" />
-    <script>
-
-            function copyToClipboard() {
-              /* Get the text field */
-              var copyText = document.getElementById("email");
-
-              /* Select the text field */
-              copyText.select();
-              copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-              /* Copy the text inside the text field */
-              document.execCommand("copy");
-
-              /* Alert the copied text */
-              alert("Copied the text: " + copyText.value);
-      }
-            }
-    </script>
   </head>
 
   <body class="jumbotron">
@@ -46,18 +28,13 @@
         {% for t in teachers %}
         <tr>
           <td><b> {{t.user.username}} </b></td>
-          <td id="email">
-            <a href="{% url 'send-email' %}">
-              <b>{{t.user.email}}</b>
-            </a>
+          <td>
+            <a href="{% url 'send-email' %}">{{t.user.email}}</a>
             <br />
-            <button
-              onclick="copyToClipboard()"
-              class="btn btn-dark"
-              style="height: 35px;"
-            >
+            <button class="btn btn-dark" id="myButton" onclick="copyFunction()">
               Copy Email
             </button>
+            <br />
           </td>
         </tr>
         {% endfor %}
