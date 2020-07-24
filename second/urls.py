@@ -50,5 +50,6 @@ urlpatterns = [
     path('result/<int:pk>/update', ResultUpdate.as_view(), name='result-update'),
     path('result/<int:pk>/', ResultDetail.as_view(), name='result-detail'),
     path('contacts/', views.contacts, name='send-email'),
+    path('resources/', views.resources, name='resources'),
 
 ]

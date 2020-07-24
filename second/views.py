@@ -472,3 +472,10 @@ def contacts(request):
 
             return render(request, 'suc.html')
     return render(request, 'sendemail.html', {'form': Contact_Form})
+
+
+@login_required
+def resources(request):
+    context = {}
+
+    return render(request, "second/resources.html", context)
