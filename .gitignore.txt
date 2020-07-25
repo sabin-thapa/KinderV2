@@ -5,6 +5,9 @@ media
 .DS_Store
 *.sqlite3
 *.env
+*.pyc
+*.cpython-38.pyc
+*.cpython-38
 
 # Accept these files in the repository
 !.gitignore
