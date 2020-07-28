@@ -277,9 +277,12 @@ class Assignments(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField(null=True)
     file = models.FileField(upload_to='assignments/',
-                            null=True, verbose_name="", blank=True)
+                            null=True, verbose_name="")
     date_posted = models.DateTimeField(default=timezone.now)
     deadline = models.DateField()
+
+    def save(self, *args, **kwargs):
+        super(Assignments, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-date_posted']

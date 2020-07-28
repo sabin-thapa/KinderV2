@@ -492,11 +492,14 @@ def resources(request):
 
 
 def assignments(request):
-    form = AssignmentForm(request.POST)
     if request.method == 'POST':
+        form = AssignmentForm(request.POST, request.FILES)
+
         if form.is_valid():
             form.save()
             return redirect('assignments')
+    else:
+        form = AssignmentForm()
 
     tasks = Assignments.objects.all()
     context = {
@@ -517,7 +520,7 @@ def submissions(request):
 def assignment_update(request, pk):
     assignment = get_object_or_404(Assignments, pk=pk)
     if request.method == "POST":
-        form = AssignmentForm(request.POST, instance=assignment)
+        form = AssignmentForm(request.POST, request.FILES, instance=assignment)
         if form.is_valid():
             assignment = form.save(commit=False)
             assignment.save()

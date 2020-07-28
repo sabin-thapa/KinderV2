@@ -56,7 +56,7 @@ urlpatterns = [
          views.assignment_update, name='assignment-update'),
     path('assignments/<int:pk>/delete',
          AssignmentDeleteView.as_view(), name='assignment-delete'),
-    path('assignments/<int:pk>/submissions', views.submissions,
+    path('assignments/submissions', views.submissions,
          name='submissions'),
 
 

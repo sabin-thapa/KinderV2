@@ -19,7 +19,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-4">
         <h2>Add assignment</h2>
-        <form method='POST'>
+        <form method='POST' enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div>
@@ -32,11 +32,11 @@
         {% for t in tasks %}
         <h2>{{t.title}}</h2>
         <p>{{t.description}}</p>
-        <p>Attached File (if any): {{t.file}}</p>
+        <p>Attached File (if any):</p><a href="{{t.file.url}}"> {{t.file}}</a>
         <p>Date Posted: {{t.date_posted}}</p>
         <p>Deadline : {{t.deadline}}</p>
 
-        <a class='btn btn-outline-primary' href="{% url 'submissions' t.id %}">See Submissions</a>
+        <a class='btn btn-outline-primary' href="{% url 'submissions' %}">See Submissions</a>
 
         <a class='btn btn-outline-primary' href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
 
