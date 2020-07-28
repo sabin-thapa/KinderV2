@@ -1,6 +1,6 @@
 
-from .views import PostDetailView,SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import PostDetailView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
+from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions
 from . import views
 from django.urls import path
 from users import views as users_views
@@ -51,5 +51,13 @@ urlpatterns = [
     path('result/<int:pk>/', ResultDetail.as_view(), name='result-detail'),
     path('contacts/', views.contacts, name='send-email'),
     path('resources/', views.resources, name='resources'),
+    path('assignments/', views.assignments, name='assignments'),
+    path('assignments/<int:pk>/update',
+         views.assignment_update, name='assignment-update'),
+    path('assignments/<int:pk>/delete',
+         AssignmentDeleteView.as_view(), name='assignment-delete'),
+    path('assignments/<int:pk>/submissions', views.submissions,
+         name='submissions'),
+
 
 ]

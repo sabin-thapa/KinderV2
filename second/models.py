@@ -270,3 +270,33 @@ class Result(models.Model):
 class Contacts(models.Model):
     email = models.EmailField()
     message = models.TextField()
+
+
+class Assignments(models.Model):
+
+    title = models.CharField(max_length=500)
+    description = models.TextField(null=True)
+    file = models.FileField(upload_to='assignments/',
+                            null=True, verbose_name="", blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    deadline = models.DateField()
+
+    class Meta:
+        ordering = ['-date_posted']
+
+    def __str__(self):
+        return self.title
+
+
+class Submissions(models.Model):
+    title = models.ForeignKey(Assignments, on_delete=models.CASCADE)
+
+    file = models.FileField(upload_to='submissions/',
+                            null=True, verbose_name="")
+    date_submitted = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-date_submitted']
+
+    def __str__(self):
+        return "submission"

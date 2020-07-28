@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts
+from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Assignments
 from .models import Profile, StudentId, Attendance, Routine, Absentday
 
 
@@ -82,3 +82,9 @@ class ContactsForm(forms.ModelForm):
     class Meta:
         model = Contacts
         fields = {'email', 'message'}
+
+
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Assignments
+        fields = ('title', 'description', 'file', 'deadline')

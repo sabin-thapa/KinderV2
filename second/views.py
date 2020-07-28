@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
+from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm
+from .forms import UserUpdateForm, ResultForm, AssignmentForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
 from django.contrib.auth.models import User
@@ -16,7 +16,9 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
-from users.models import User_parents,User_teachers
+from users.models import User_parents, User_teachers
+
+
 @login_required
 def routine(request):
     context = {
@@ -25,31 +27,37 @@ def routine(request):
 
     return render(request, 'routine.html', context)
 
+
 @login_required
 def teacherprofile(request):
-    if(hasattr(request.user,'user_teachers')):
-        teachers=User_teachers.objects.filter(school=request.user.user_teachers.school)
+    if(hasattr(request.user, 'user_teachers')):
+        teachers = User_teachers.objects.filter(
+            school=request.user.user_teachers.school)
     else:
-        teachers=User_teachers.objects.filter(school=request.user.user_parents.school,grade=request.user.user_parents.ChildGrade)
-    
-    teacherlist={
+        teachers = User_teachers.objects.filter(
+            school=request.user.user_parents.school, grade=request.user.user_parents.ChildGrade)
+
+    teacherlist = {
         'teachers': teachers
     }
     return render(request, 'teacherprofile.html', teacherlist)
 
+
 @login_required
 def parentprofiles(request):
-    students=[]
-    students=SID.objects.filter(teacher=request.user)
-    parents=[]
+    students = []
+    students = SID.objects.filter(teacher=request.user)
+    parents = []
     for student in students:
         print(student.childid)
-        parents.append(User_parents.objects.filter(ChildID=student.childid).first())
+        parents.append(User_parents.objects.filter(
+            ChildID=student.childid).first())
         print(parents)
-    parentlist={
+    parentlist = {
         'parents': parents
     }
     return render(request, 'parentprofiles.html', parentlist)
+
 
 @login_required
 def result(request):
@@ -68,6 +76,7 @@ def food(request):
 
     return render(request, 'food.html', context)
 
+
 @login_required
 def addresult(request):
     form = ResultForm(request.POST)
@@ -82,7 +91,6 @@ def addresult(request):
         'form': form,
     }
     return render(request, 'addresult.html', context)
-
 
 
 @login_required
@@ -171,11 +179,12 @@ def postsandnotices(request):
     context = {
         'posts': post_list,
         'notices': Notice.objects.all().order_by('-date_posted'),
-        'events' : Events.objects.all().order_by('-date_posted'),
+        'events': Events.objects.all().order_by('-date_posted'),
 
     }
 
     return render(request, 'home.html', context)
+
 
 def home(request):
     context = {
@@ -258,10 +267,11 @@ class SIDCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return True
         return False
 
+
 class ROUTINESCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = ROUTINES
     fields = ['day', 'ten_ten45', 'ten45_eleven30', 'eleven45_twelve30',
-                'twelve30_one15', 'two_two45', 'two45_three30']
+              'twelve30_one15', 'two_two45', 'two45_three30']
     template_name = 'addroutine.html'
 
     def form_valid(self, form):
@@ -274,11 +284,13 @@ class ROUTINESCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return True
         return False
 
+
 class FoodsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Foods
-    fields = ['day','food']
+    fields = ['day', 'food']
     template_name = 'add_food.html'
-    success_url='/../home/food'
+    success_url = '/../home/food'
+
     def form_valid(self, form):
         form.instance.teacher = self.request.user
 
@@ -310,6 +322,7 @@ class EventsDetailView(DetailView):
     model = Events
     template_name = 'events_detail.html'
 
+
 class EventsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Events
     success_url = "/home/home"
@@ -335,6 +348,7 @@ class EventsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         if self.request.user.user_teachers != '':
             return True
         return False
+
 
 class EventsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Events
@@ -439,10 +453,6 @@ class ResultUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return True
 
 
-
-
-
-
 def contacts(request):
     Contact_Form = ContactsForm
     if request.method == 'POST':
@@ -465,7 +475,7 @@ def contacts(request):
                 "Class Teacher" + '',
                 [email],
                 headers={'Reply To': email},
-    
+
             )
 
             email.send()
@@ -479,3 +489,48 @@ def resources(request):
     context = {}
 
     return render(request, "second/resources.html", context)
+
+
+def assignments(request):
+    form = AssignmentForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('assignments')
+
+    tasks = Assignments.objects.all()
+    context = {
+        'tasks': tasks,
+        'form': form,
+    }
+    return render(request, 'assignments.html', context)
+
+
+def submissions(request):
+    subs = Submissions.objects.all()
+    context = {
+        'subs': subs,
+    }
+    return render(request, 'submissions.html', context)
+
+
+def assignment_update(request, pk):
+    assignment = get_object_or_404(Assignments, pk=pk)
+    if request.method == "POST":
+        form = AssignmentForm(request.POST, instance=assignment)
+        if form.is_valid():
+            assignment = form.save(commit=False)
+            assignment.save()
+            return redirect('assignments')
+    else:
+        form = AssignmentForm(instance=assignment)
+    return render(request, 'assignment-update.html', {'form': form})
+
+
+class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Assignments
+    success_url = "/home/assignments"
+
+    def test_func(self):
+        assignment = self.get_object()
+        return True

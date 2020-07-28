@@ -1,0 +1,27 @@
+{% extends "base1.html" %}
+{% block base2 %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
+    <link rel="stylesheet" href="{% static 'form1.css' %}">
+
+</head>
+
+<body>
+    <h3>Submissions</h3>
+    {%for s in subs %}
+    <p>s.title</p>
+    {% endfor %}
+
+
+</body>
+
+</html>
+{% endblock %}

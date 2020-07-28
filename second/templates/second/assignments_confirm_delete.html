@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "base1.html" %}
+{% block base2 %}
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <div class="jumbotron">
+        <center>
+            <div class='form-box'>
+
+                <form method='POST'>
+                    {% csrf_token %}
+
+                    <div>
+                        <h1>Are you sure you want to delete {{object.title}} permanently?</h1>
+                        <button class='btn btn-outline-danger' type='submit'>Yes, Delete</button>
+                        <a href="{% url 'assignments' %}" class='btn btn-secondary'>NO</a>
+                    </div>
+                </form>
+            </div>
+
+        </center>
+    </div>
+
+
+
+</body>
+
+</html>
+{% endblock %}

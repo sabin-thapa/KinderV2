@@ -8,12 +8,50 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Student Ids</title>
+    <title>Assignments</title>
     <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
+    <link rel="stylesheet" href="{% static 'form1.css' %}">
 
 </head>
 
-<body></body>
+<body>
+
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <h2>Add assignment</h2>
+        <form method='POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <button class='btn btn-outline-info' type='submit'>Post Assignment</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h2>Posted Assignments</h2>
+        {% for t in tasks %}
+        <h2>{{t.title}}</h2>
+        <p>{{t.description}}</p>
+        <p>Attached File (if any): {{t.file}}</p>
+        <p>Date Posted: {{t.date_posted}}</p>
+        <p>Deadline : {{t.deadline}}</p>
+
+        <a class='btn btn-outline-primary' href="{% url 'submissions' t.id %}">See Submissions</a>
+
+        <a class='btn btn-outline-primary' href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
+
+        <a class='btn btn-outline-danger' href="{% url 'assignment-delete' t.id %}">Delete Assignment</a>
+
+    </div>
+    <div class="col-md-2"></div>
+
+
+
+
+    {% endfor %}
+
+
+</body>
 
 </html>
 {% endblock %}
