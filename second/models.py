@@ -270,3 +270,11 @@ class Result(models.Model):
 class Contacts(models.Model):
     email = models.EmailField()
     message = models.TextField()
+
+
+class Course(models.Model):
+    course = models.TextField()
+    instructor = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.course
