@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block base1 %}
  {% load static %}
 <html lang="en">
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var select = form[i].querySelector('select')
       var option = form[i].querySelector('option')
       option.textContent = 'School:'
-      select.style.height = '30px';
+      select.style.height = '35px';
       select.style.width = '300px';
       select.style.backgroundColor = '#e8ebf3';
       select.style.color = '#757575';
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <body>
     <div class="register">
       <div class="row">
-        <div class="col-md-4 register-left">
+        <div class="col-md-3 register-left">
           <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
           <h3>Welcome!</h3>
           <p>You are a minute away from entering the Kinder World!!</p>
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <input type="submit" name="" value="Login" /><br />
           </form>
         </div>
-        <div class="col-md-8 register-right" style="min-height: 100vh;">
+        <div class="col-md-9 register-right" >
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Teacher</a>
@@ -90,19 +91,47 @@ document.addEventListener('DOMContentLoaded', function() {
             >
               <h3 class="register-heading">Sign Up as a Teacher</h3>
               <div class="row register-form">
-                  
-            <div class='col-md-6 form-box' style="">
-                <img src="{% static 'profile.png' %}">
-                <form method='POST' class="mainForm">
-                    {% csrf_token %}
-                    {{ form2.as_p }}
-                    {{ form_teachers.as_p }}
-                    <div>
+                <form method="post" style="padding-left: 20%;">
+                  {% csrf_token %}
+                  <div class="form-row" style="padding-top: 30%;">
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form2.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form2.email|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form2.first_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form2.last_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form2.password1|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form2.password2|as_crispy_field }}
+                    </div>
+
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form_teachers.age|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form_teachers.grade|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form_teachers.schoolCode|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                      {{ form_teachers.school|as_crispy_field }}
+                    </div>
+                  </form>
+                    <div class="col-md-8 mb-0" style="padding-top: 10px;">
                       <button class='submit button-normal white btnRegister' type='submit'>Register</button>
                   </div>
-                </form>
-            </div>
-              </div>
+                  </div>
+          
+                </div>
             </div>
             <div
               class="tab-pane fade show"
@@ -112,19 +141,49 @@ document.addEventListener('DOMContentLoaded', function() {
             >
               <h3 class="register-heading">Sign Up as a Parent</h3>
               <div class="row register-form">
-                  
-                <div class='col-md-6 form-box' style="">
-                    <img src="{% static 'profile.png' %}">
-                    <form method='POST' class="mainForm">
-                        {% csrf_token %}
-                        {{ form1.as_p }}
-                        {{ form_parents.as_p }}
-                        
-                    <div>
-                      <button class='submit button-normal white btnRegister' type='submit'>Register</button>
-                  </div>
+                  <form method="post" style="padding-left: 20%;">
+                    {% csrf_token %}
+                    <div class="form-row" style="padding-top: 30%;">
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form1.username|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form1.email|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form1.first_name|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form1.last_name|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form1.password1|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form1.password2|as_crispy_field }}
+                      </div>
+
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form_parents.occupation|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form_parents.ChildGrade|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form_parents.ChildID|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form_parents.school|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ form_parents.RelationToChild|as_crispy_field }}
+                      </div>
                     </form>
-                </div>
+                      <div class=" col-md-8 mb-0">
+                        <button class='submit button-normal white btnRegister' type='submit'>Register</button>
+                      </div>
+                    </div>
+                
                   </div>
             </div>
           </div>

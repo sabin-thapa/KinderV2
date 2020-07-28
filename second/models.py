@@ -278,3 +278,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course
+    
+    def get_abosulute_url(self):
+        return reverse('course-detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super(Course, self).save(*args, **kwargs)

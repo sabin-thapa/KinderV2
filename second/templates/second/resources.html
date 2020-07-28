@@ -14,7 +14,7 @@
     </div>
     <div class="course-list">
       {% for i in course %}
-      <a href="{% url 'course-detail' %}"> <h1>{{i.course}}</h1> </a>
+      <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course}}</h1> </a>
       <p>{{i.instructor}}</p>
       <hr style="width: 50%; text-align: left; margin-left: 0;" />
       <br />

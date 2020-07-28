@@ -478,3 +478,16 @@ def resources(request):
     }
 
     return render(request, "second/resources.html", context)
+
+class CourseListView(ListView):
+    model = Course
+    template_name = "second/resources.html"
+    context_object_name = 'course'
+
+    def get_queryset(self):
+        return Course.objects.all()
+
+class CourseDetailView(DetailView):
+    model = Course
+    template_name = "second/course-detail.html"
+

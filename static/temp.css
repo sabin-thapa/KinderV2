@@ -1,18 +1,25 @@
-html {
-  min-height: 100%;
-}
-
-body {
-  min-height: 100vh;
+html, body {
+  height: 100%;
   padding: 0;
   margin: 0;
 }
+
+
 
 .register {
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
   margin-top: 2%;
   padding: 2%;
-  min-height: 100vh;
+  max-height: 100vh;
+
+
+}
+
+.register .row {
+  max-height: 100%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+
 }
 
 .register-left {
@@ -36,14 +43,16 @@ body {
   cursor: pointer;
 }
 
-.register-left .loginBtn {
-  height:20%;
+ .loginBtn {
+  height:200px;
+  width: 500px;
+  margin-left: -70px;
 }
 .register-right {
   background: #f8f9fa;
-  border-top-left-radius: 10% 50%;
-  border-bottom-left-radius: 10% 50%;
-  min-height: 100vh;
+  border-top-left-radius: 15% 50%;
+  border-bottom-left-radius: 15% 50%;
+  max-height: 90vh;
 
 }
 
@@ -81,13 +90,13 @@ body {
 
 .register-left h2 {
   font-weight: lighter;
-  padding-top: 30%;
-  padding-bottom: 5%;
+  padding-top: 10%;
+  padding-bottom: 2%;
   margin-top: -9%;
 }
 
 
-.register .btnRegister {
+.btnRegister {
   margin-top: 10%;
   border: none;
   border-radius: 1.5rem;
@@ -95,9 +104,10 @@ body {
   background: #0062cc;
   color: #fff;
   font-weight: 600;
-  width: 18%;
+  width: 80px;
   cursor: pointer;
   display: flex;
+
 
 }
 .register .nav-tabs{
@@ -169,7 +179,8 @@ body {
 
 .mainForm {
   background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(107,107,107,1) 0%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(107,107,107,1) 0%, rgba(0,212,255,1) 100%);
+  width: 70%
 }
 
 .form-box li {
