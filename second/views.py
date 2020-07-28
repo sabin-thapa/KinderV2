@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -439,10 +439,6 @@ class ResultUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return True
 
 
-
-
-
-
 def contacts(request):
     Contact_Form = ContactsForm
     if request.method == 'POST':
@@ -476,6 +472,22 @@ def contacts(request):
 
 @login_required
 def resources(request):
-    context = {}
+    course = Course.objects.all()
+    context = {
+        'course' : course,
+    }
 
     return render(request, "second/resources.html", context)
+
+class CourseListView(ListView):
+    model = Course
+    template_name = "second/resources.html"
+    context_object_name = 'course'
+
+    def get_queryset(self):
+        return Course.objects.all()
+
+class CourseDetailView(DetailView):
+    model = Course
+    template_name = "second/course-detail.html"
+
