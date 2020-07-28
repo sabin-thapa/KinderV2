@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block base1 %}
+ {% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temp</title>
+    <!-- <script src="{% static 'register.js' %}" type="text/javascript"></script> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'temp.css' %}" />
+   <!-- 1. BOOTSTRAP v4.0.0         CSS !-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    var l = document.querySelectorAll('div')[0].querySelectorAll('.errorlist')
+    if (l.length) {
+        list[list.length - 1].style.display = ''
+    }
+    var sp = document.querySelectorAll('div')[0].querySelectorAll('span')
+    for (i = 0; i < sp.length; i++) {
+        sp[i].textContent = ''
+    }
+
+
+    var labels = document.querySelectorAll('label')
+    for (i = 0; i < labels.length; i++) {
+        labels[i].style.display = 'none'
+    }
+
+    var input = document.querySelectorAll('input')
+    for (i = 1; i < input.length; i++) {
+        input[i].placeholder = labels[i - 1].textContent
+    }
+    var boxlength;
+    if (labels.length > 10) {
+        boxlength = labels.length * 67 + 'px'
+    } else {
+        boxlength = labels.length * 75 + 'px'
+    }
+
+    document.querySelectorAll('div')[1].style.height = boxlength;
+
+    var select = document.querySelector('select')
+    var option = document.querySelector('option')
+    option.textContent = 'School:'
+    select.style.height = '30px';
+    select.style.width = '300px';
+    select.style.backgroundColor = '#e8ebf3';
+    select.style.color = '#757575';
+    select.style.textIndent = '35px';
+
+
+
+
+})
+</script>
+   
+  </head>
+
+  <body>
+    <div class="register">
+      <div class="row">
+        <div class="col-md-4 register-left">
+          <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+          <h3>Welcome!</h3>
+          <p>You are a minute away from entering the Kinder World!!</p>
+          <h2>Already have an account?</h2> </br>
+          <form action="{% url 'login' %}" class="loginBtn">
+            <input type="submit" name="" value="Login" /><br />
+          </form>
+        </div>
+        <div class="col-md-8 register-right" style="min-height: 100vh;">
+            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Teacher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Parent</a>
+                </li>
+            </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <h3 class="register-heading">Sign Up as a Teacher</h3>
+              <div class="row register-form">
+                  
+            <div class='col-md-6 form-box' style="">
+                <img src="{% static 'profile.png' %}">
+                <form method='POST' class="mainForm">
+                    {% csrf_token %}
+                    {{ form2.as_p }}
+                    {{ form_teachers.as_p }}
+                    <div>
+                      <button class='submit button-normal white btnRegister' type='submit'>Register</button>
+                  </div>
+                </form>
+            </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show"
+              id="profile"
+              role="tabpanel"
+              aria-labelledby="profile-tab"
+            >
+              <h3 class="register-heading">Sign Up as a Parent</h3>
+              <div class="row register-form">
+                  
+                <div class='col-md-6 form-box' style="">
+                    <img src="{% static 'profile.png' %}">
+                    <form method='POST' class="mainForm">
+                        {% csrf_token %}
+                        {{ form1.as_p }}
+                        {{ form_parents.as_p }}
+                        
+                    <div>
+                      <button class='submit button-normal white btnRegister' type='submit'>Register</button>
+                  </div>
+                    </form>
+                </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 2. GOOGLE JQUERY JS v3.2.1  JS !-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- 3. BOOTSTRAP v4.0.0         JS !-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>
+{% endblock %}
