@@ -509,10 +509,11 @@ def assignments(request):
     return render(request, 'assignments.html', context)
 
 
-def submissions(request):
-    subs = Submissions.objects.all()
+def submissions(request, assignment_id):
+    assignment = get_object_or_404(Assignments, pk=assignment_id)
     context = {
-        'subs': subs,
+        'assignment': assignment,
+        'subs': Submissions.objects.filter(assignment_id=assignment_id),
     }
     return render(request, 'submissions.html', context)
 

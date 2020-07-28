@@ -36,7 +36,7 @@
         <p>Date Posted: {{t.date_posted}}</p>
         <p>Deadline : {{t.deadline}}</p>
 
-        <a class='btn btn-outline-primary' href="{% url 'submissions' %}">See Submissions</a>
+        <a class='btn btn-outline-primary' href="{% url 'submissions' t.id %}">See Submissions</a>
 
         <a class='btn btn-outline-primary' href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
 

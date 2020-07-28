@@ -292,7 +292,7 @@ class Assignments(models.Model):
 
 
 class Submissions(models.Model):
-    title = models.ForeignKey(Assignments, on_delete=models.CASCADE)
+    assignment = models.ForeignKey(Assignments, on_delete=models.CASCADE)
 
     file = models.FileField(upload_to='submissions/',
                             null=True, verbose_name="")
