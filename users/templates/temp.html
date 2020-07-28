@@ -29,10 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     for (i = 0; i < labels.length; i++) {
         labels[i].style.display = 'none'
     }
-
     var input = document.querySelectorAll('input')
-    for (i = 1; i < input.length; i++) {
-        input[i].placeholder = labels[i - 1].textContent
+    for (i = 2; i < input.length; i++) {
+        input[i].placeholder = labels[i - 2].textContent
     }
     var boxlength;
     if (labels.length > 10) {
@@ -40,24 +39,25 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         boxlength = labels.length * 75 + 'px'
     }
-
     document.querySelectorAll('div')[1].style.height = boxlength;
-
-    var select = document.querySelector('select')
-    var option = document.querySelector('option')
-    option.textContent = 'School:'
-    select.style.height = '30px';
-    select.style.width = '300px';
-    select.style.backgroundColor = '#e8ebf3';
-    select.style.color = '#757575';
-    select.style.textIndent = '35px';
-
+    var form = document.querySelectorAll('form')
+    for(var i=1;i<form.length;i++){
+      var select = form[i].querySelector('select')
+      var option = form[i].querySelector('option')
+      option.textContent = 'School:'
+      select.style.height = '30px';
+      select.style.width = '300px';
+      select.style.backgroundColor = '#e8ebf3';
+      select.style.color = '#757575';
+      select.style.textIndent = '35px';
+    }
 
 
 
 })
 </script>
-   
+<!--<script type="text/javascript" src="{% static 'register.js' %}"></script>-->
+
   </head>
 
   <body>
