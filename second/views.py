@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .forms import UserUpdateForm, ResultForm, AssignmentForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm
+from .forms import UserUpdateForm, ResultForm, AssignmentForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
 from django.contrib.auth.models import User
@@ -510,12 +510,38 @@ def assignments(request):
 
 
 def submissions(request, assignment_id):
-    assignment = get_object_or_404(Assignments, pk=assignment_id)
+    assignment1 = get_object_or_404(Assignments, pk=assignment_id)
+
+    if request.method == "POST":
+        form1 = SubmissionForm(request.POST, request.FILES)
+        if form1.is_valid():
+            form1.save()
+            submission1 = Submissions.objects.create(
+                assignment=assignment1, date_submitted=datetime.date.today())
+            return redirect('submissions')
+    else:
+        form1 = SubmissionForm()
+
     context = {
-        'assignment': assignment,
+        'form1': form1,
+        'assignment': assignment1,
         'subs': Submissions.objects.filter(assignment_id=assignment_id),
     }
     return render(request, 'submissions.html', context)
+
+
+# def present(request, id):
+#     student = Attend.objects.get(id=id)
+#     student1 = Presentday.objects.filter(
+#         name=student, date=datetime.date.today())
+#     if student1.exists():
+#         messages.error(request, 'Attendance already done for today!')
+
+#     else:
+#         student1 = Presentday.objects.create(
+#             name=student, date=datetime.date.today())
+
+#     return redirect('attendance')
 
 
 def assignment_update(request, pk):

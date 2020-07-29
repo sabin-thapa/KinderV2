@@ -301,5 +301,8 @@ class Submissions(models.Model):
     class Meta:
         ordering = ['-date_submitted']
 
+    def save(self, *args, **kwargs):
+        super(Submissions, self).save(*args, **kwargs)
+
     def __str__(self):
         return "submission"
