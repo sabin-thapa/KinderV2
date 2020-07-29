@@ -515,10 +515,12 @@ def submissions(request, assignment_id):
     if request.method == "POST":
         form1 = SubmissionForm(request.POST, request.FILES)
         if form1.is_valid():
+
+            form1.instance.assignment = assignment1
+            form1.instance.date_submitted = datetime.date.today()
             form1.save()
-            submission1 = Submissions.objects.create(
-                assignment=assignment1, date_submitted=datetime.date.today())
-            return redirect('submissions')
+
+            return redirect('assignments')
     else:
         form1 = SubmissionForm()
 
