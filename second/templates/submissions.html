@@ -21,6 +21,10 @@
     <p>{{s.assignment}}</p>
     <p>{{s.file}}</p>
     <p>{{s.date_submitted}}</p>
+
+    <a class="btn btn-primary" href="{% url 'gradesubmissions' s.id %}">Add Grade</a>
+
+
     {% endfor %}
 
     {% elif user.user_parents != "" %}
@@ -35,7 +39,7 @@
         {% csrf_token %}
         {{ form1.as_p }}
         <div>
-            <button class='btn btn-outline-info' type='submit'>Add Submission</button>
+            <input type="submit" value="Add Submission" name="add_submission">
         </div>
     </form>
 

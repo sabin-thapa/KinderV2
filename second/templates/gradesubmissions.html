@@ -1,0 +1,35 @@
+{% extends "base1.html" %}
+{% block base2 %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
+    <link rel="stylesheet" href="{% static 'form1.css' %}">
+
+</head>
+
+<body>
+    <h3>Grade Submission</h3>
+    <p>{{submission.assignment}}</p>
+    <p>{{submission.file}}</p>
+    <p>{{submission.date_submitted}}</p>
+
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form2.as_p }}
+        <div>
+            <input type="submit" value="Add Grade" name="add_grade">
+        </div>
+    </form>
+
+
+</body>
+
+</html>
+{% endblock %}

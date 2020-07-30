@@ -1,6 +1,6 @@
 
 from .views import PostDetailView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions
+from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions, gradesubmissions
 from . import views
 from django.urls import path
 from users import views as users_views
@@ -58,6 +58,8 @@ urlpatterns = [
          AssignmentDeleteView.as_view(), name='assignment-delete'),
     path('assignments/<int:assignment_id>/submissions', views.submissions,
          name='submissions'),
+    path('submissions/<int:submission_id>/', views.gradesubmissions,
+         name='gradesubmissions'),
 
 
 

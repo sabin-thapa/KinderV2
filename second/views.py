@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .forms import UserUpdateForm, ResultForm, AssignmentForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
+from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
 from django.contrib.auth.models import User
@@ -494,7 +494,7 @@ def resources(request):
 def assignments(request):
     if request.method == 'POST':
         form = AssignmentForm(request.POST, request.FILES)
-
+        form.instance.author = request.user
         if form.is_valid():
             form.save()
             return redirect('assignments')
@@ -513,12 +513,13 @@ def submissions(request, assignment_id):
     assignment1 = get_object_or_404(Assignments, pk=assignment_id)
 
     if request.method == "POST":
-        form1 = SubmissionForm(request.POST, request.FILES)
-        if form1.is_valid():
-
-            form1.instance.assignment = assignment1
-            form1.instance.date_submitted = datetime.date.today()
-            form1.save()
+        if 'add_submission' in request.POST:
+            form1 = SubmissionForm(request.POST, request.FILES)
+            if form1.is_valid():
+                form1.instance.author = request.user
+                form1.instance.assignment = assignment1
+                form1.instance.date_submitted = datetime.date.today()
+                form1.save()
 
             return redirect('assignments')
     else:
@@ -532,18 +533,28 @@ def submissions(request, assignment_id):
     return render(request, 'submissions.html', context)
 
 
-# def present(request, id):
-#     student = Attend.objects.get(id=id)
-#     student1 = Presentday.objects.filter(
-#         name=student, date=datetime.date.today())
-#     if student1.exists():
-#         messages.error(request, 'Attendance already done for today!')
+def gradesubmissions(request, submission_id):
+    submission1 = get_object_or_404(Submissions, pk=submission_id)
 
-#     else:
-#         student1 = Presentday.objects.create(
-#             name=student, date=datetime.date.today())
+    if request.method == "POST":
 
-#     return redirect('attendance')
+        if 'add_grade' in request.POST:
+            form2 = GradeForm(request.POST)
+            if form2.is_valid():
+                form2.instance.author = request.user
+                form2.instance.submission = submission1
+                form2.instance.date_graded = datetime.date.today()
+                form2.save()
+
+            return redirect('assignments')
+    else:
+        form2 = GradeForm()
+
+    context = {
+        'form2': form2,
+        'submission': submission1,
+    }
+    return render(request, 'gradesubmissions.html', context)
 
 
 def assignment_update(request, pk):
