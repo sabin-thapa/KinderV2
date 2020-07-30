@@ -1,5 +1,5 @@
 from django.contrib import admin
-from second.models import Post, Tutorial, Profile, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School,Foods,ROUTINES
+from second.models import Post, Tutorial, Profile, Attachment, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School,Foods,ROUTINES
 
 from embed_video.admin import AdminVideoMixin
 
@@ -25,6 +25,7 @@ admin.site.register(Profile)
 admin.site.register(Notice)
 admin.site.register(Contacts)
 admin.site.register(Course)
+admin.site.register(Attachment)
 admin.site.register(Tutorial, MyModelAdmin)
 
 # Register your models here.

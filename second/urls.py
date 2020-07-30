@@ -1,6 +1,7 @@
 
 from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, TutorialUpdateView, TutorialDeleteView, TutorialCreateView, TutorialDetailView, TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import EventsCreateView, TutorialUpdateView, AttachmentListView, AttachmentCreateView, AttachmentUpdateView, AttachmentDetailView, AttachmentDeleteView
+from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView,TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView,EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
 from . import views
 from django.urls import path
 from users import views as users_views
@@ -63,5 +64,12 @@ urlpatterns = [
     path('tutorial/<int:pk>/update/', TutorialUpdateView.as_view(), name='tutorial-update'),
     path('tutorial/<int:pk>/delete/', TutorialDeleteView.as_view(), name='tutorial-delete'),
 
+    path('attachments/',AttachmentListView.as_view(), name='attachments'),
+    path('attachment/<int:pk>/', AttachmentDetailView.as_view(), name='attachment-detail'),
+    path('attachment/new/', AttachmentCreateView.as_view(), name='attachment-create'),
+    path('attachment/<int:pk>/update/', AttachmentUpdateView.as_view(), name='attachment-update'),
+    path('attachment/<int:pk>/delete/', AttachmentDeleteView.as_view(), name='attachment-delete'),
+
 
 ]
+

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
-from second.models import Post, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -482,6 +482,14 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        #Add in queryset
+        context['tutorial'] = Tutorial.objects.all()
+        return context
+
+
 class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Course
     fields = [ 'instructor', 'course', 'announcement', 'syllabus', 'course_plan']
@@ -516,6 +524,13 @@ class TutorialDetailView(DetailView):
     model = Tutorial
     template_name = 'second/tutorial_detail.html'
 
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     #Add in queryset
+    #     context['tutorial'] = Tutorial.objects.all()
+    #     return context
+
 class TutorialCreateView(CreateView):
     model = Tutorial
     fields = ['course', 'title', 'video', 'desc']
@@ -527,3 +542,28 @@ class TutorialUpdateView(UpdateView):
 class TutorialDeleteView(DeleteView):
     model = Tutorial
     success_url = '/home/tutorials/'
+
+
+class AttachmentListView(ListView):
+    model = Attachment
+    template_name = 'second/attachments.html'
+    context_object_name = 'attachment'
+
+    def get_queryset(self):
+        return Attachment.objects.all().order_by('-date_posted')
+
+class AttachmentDetailView(DetailView):
+    model = Attachment
+    template_name = 'second/attachment_detail.html'
+
+class AttachmentCreateView(CreateView):
+    model = Attachment
+    fields = ['title', 'file']
+
+class AttachmentUpdateView(UpdateView):
+    model = Tutorial
+    fields = ['title', 'file']
+
+class AttachmentDeleteView(DeleteView):
+    model = Attachment
+    success_url = '/home/attachments/'

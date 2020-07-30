@@ -290,11 +290,14 @@ class Course(models.Model):
         super(Course, self).save(*args, **kwargs)
 
 class Tutorial(models.Model):
-    course = models.ForeignKey(Course, on_delete = models.CASCADE)
+    course = models.ForeignKey(Course, on_delete = models.CASCADE, null =True)
     title = models.TextField(null = True)
     video = EmbedVideoField(null = True)
     date_posted = models.DateTimeField(default = timezone.now)
     desc = models.TextField(null = True)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         ordering = ['date_posted']
@@ -304,3 +307,20 @@ class Tutorial(models.Model):
     
     def save(self, *args, **kwargs):
         super(Tutorial, self).save(*args, **kwargs)
+
+class Attachment(models.Model):
+    title = models.CharField(max_length = 50)
+    course = models.ForeignKey(Course, on_delete = models.CASCADE)
+    file = models.FileField(null = True)
+    date_posted = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return f'{self.course.course}\'s Attachment'
+    class Meta:
+        ordering = ['date_posted']
+    
+    def get_absolute_url(self):
+        return reverse('attachment-detail', kwargs = {'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super(Attachment, self).save(*args, **kwargs)

@@ -1,4 +1,4 @@
-{% extends "second/base2.html" %} {% load static %} {% block base2 %}
+{% extends "second/base2.html" %} {% load static %} {% block base2 %} {% load embed_video_tags %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,7 +18,14 @@
     <p><a href="{{course.course_plan.url}}">  {{ course.course_plan }}</p> </a>
     <hr />
     <a href="{% url 'tutorials' %}">  <h1> Tutorials </h1></a>
-    
+    {% for i in tutorial %}
+    <a href="{% url 'tutorial-detail' i.id %}">
+      <h1>{{ i.title }}</h1>
+      {% video i.video 'small' %}
+    </a>
+
+    {% endfor %}
+    <a href="{% url 'attachments' %}"> <h1> Attachments</h1></a>  
     <div class="col-md-12 xm-0">
       <br>
       {% if user.user_teachers != '' %}
