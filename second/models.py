@@ -275,11 +275,10 @@ class Contacts(models.Model):
 
 class Course(models.Model):
     course = models.TextField()
-    instructor = models.CharField(max_length=40)
+    instructor = models.ForeignKey(User, on_delete = models.CASCADE)
     announcement = models.TextField(null = True)
     syllabus = models.FileField(null= True, blank=True, upload_to='syllabus/', verbose_name="")
     course_plan = models.FileField(null = True, upload_to = 'course_plan/', verbose_name = "")
-
 
     def __str__(self):
         return self.course

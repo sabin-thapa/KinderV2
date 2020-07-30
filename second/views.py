@@ -470,48 +470,39 @@ def contacts(request):
     return render(request, 'sendemail.html', {'form': Contact_Form})
 
 
-@login_required
-def resources(request):
-    course = Course.objects.all()
-    context = {
-        'course' : course,
-    }
-
-    return render(request, "second/resources.html", context)
 
 class CourseListView(ListView):
     model = Course
-    template_name = "second/resources.html"
+    template_name = "second/courses.html"
     context_object_name = 'course'
 
-    def get_queryset(self):
-        return Course.objects.all()
+
 
 class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
-class ResourceCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Course
     fields = [ 'instructor', 'course', 'announcement', 'syllabus', 'course_plan']
+        
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
 
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
-        
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
-class ResourceUpdateView(UpdateView):
+class CourseUpdateView(UpdateView):
     model = Course
     fields = [ 'instructor', 'course','announcement', 'syllabus', 'course_plan']
 
 
-class ResourceDeleteView(DeleteView):
+class CourseDeleteView(DeleteView):
     model = Course
-    success_url = '/home/resources/'
+    success_url = '/home/courses/'
 
 class TutorialListView(ListView):
     model = Tutorial
@@ -519,7 +510,7 @@ class TutorialListView(ListView):
     context_object_name = 'tutorial'
 
     def get_queryset(self):
-        return Tutorial.objects.all()
+        return Tutorial.objects.all().order_by('-date_posted')
 
 class TutorialDetailView(DetailView):
     model = Tutorial

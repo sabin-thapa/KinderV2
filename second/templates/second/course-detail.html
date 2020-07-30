@@ -22,8 +22,8 @@
     <div class="col-md-12 xm-0">
       <br>
       {% if user.user_teachers != '' %}
-      <a class='btn btn-secondary' name="createpost" href="{% url 'resource-update' object.id %}">Update Course</a>
-      <a class='btn btn-outline-danger' name="createpost" href="{% url 'resource-delete' object.id %}">Delete Course</a>
+      <a class='btn btn-secondary' name="createpost" href="{% url 'course-update' object.id %}">Update Course</a>
+      <a class='btn btn-outline-danger' name="createpost" href="{% url 'course-delete' object.id %}">Delete Course</a>
       {% endif %}
     </div>
   </body>
