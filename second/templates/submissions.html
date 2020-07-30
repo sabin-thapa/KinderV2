@@ -1,0 +1,54 @@
+{% extends "base1.html" %}
+{% block base2 %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
+    <link rel="stylesheet" href="{% static 'form1.css' %}">
+
+</head>
+
+<body>
+    {% if user.user_teachers != "" %}
+    <h3>Submissions</h3>
+    {%for s in subs %}
+    <p>{{s.assignment}}</p>
+    <p>{{s.file}}</p>
+    <p>{{s.date_submitted}}</p>
+
+    <a class="btn btn-primary" href="{% url 'gradesubmissions' s.id %}">Add Grade</a>
+
+
+    {% endfor %}
+
+    {% elif user.user_parents != "" %}
+
+    <h2>{{assignment.title}}</h2>
+    <p>{{assignment.description}}</p>
+    <p>Attached File (if any):</p><a href="{{assignment.file.url}}"> {{assignment.file}}</a>
+    <p>Date Posted: {{assignment.date_posted}}</p>
+    <p>Deadline : {{assignment.deadline}}</p>
+
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form1.as_p }}
+        <div>
+            <input type="submit" value="Add Submission" name="add_submission">
+        </div>
+    </form>
+
+
+
+
+    {% endif %}
+
+</body>
+
+</html>
+{% endblock %}
