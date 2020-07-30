@@ -1,27 +1,24 @@
-from django.shortcuts import render, redirect, get_object_or_404
-<<<<<<< HEAD
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
-from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
-=======
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
->>>>>>> sajan
-from django.contrib import messages
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
-# Create your views here.
-from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
-from django.core.paginator import Paginator
-from django.forms import modelformset_factory
-from django.contrib.auth.models import User
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import datetime
-from django.shortcuts import redirect
-from django.contrib import messages
-from django.template.loader import get_template
-from django.core.mail import EmailMessage
+from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
 from users.models import User_parents, User_teachers
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
+from django.shortcuts import redirect
+import datetime
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
+from django.forms import modelformset_factory
+from django.core.paginator import Paginator
+from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib import messages
+from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
+from django.shortcuts import render, redirect, get_object_or_404
+
+# Create your views here.
 
 
 @login_required
@@ -493,10 +490,11 @@ def contacts(request):
 def resources(request):
     course = Course.objects.all()
     context = {
-        'course' : course,
+        'course': course,
     }
 
     return render(request, "second/resources.html", context)
+
 
 class CourseListView(ListView):
     model = Course
@@ -506,13 +504,12 @@ class CourseListView(ListView):
     def get_queryset(self):
         return Course.objects.all()
 
+
 class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
-<<<<<<< HEAD
-=======
-    return render(request, "second/resources.html", context)
+    # return render(request, "second/resources.html", context)
 
 
 def assignments(request):
@@ -601,4 +598,3 @@ class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         assignment = self.get_object()
         return True
->>>>>>> sajan
