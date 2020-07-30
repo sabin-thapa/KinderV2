@@ -20,7 +20,7 @@
     <div class="" style="box-sizing: border-box;">
       <div class="form-box">
         <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %} {{ form.as_p }} {{formset.as_table}}
+          {% csrf_token %} {% include 'second/form-template.html' %}
           <div>
             <button class="btn btn-outline-info" type="submit">POST</button>
           </div>

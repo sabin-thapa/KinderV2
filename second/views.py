@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm
+from .forms import UserUpdateForm,ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
 from django.contrib.auth.models import User
@@ -491,3 +491,24 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
+class ResourceCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Course
+    fields = [ 'instructor', 'course', 'announcement', 'syllabus', 'course_plan']
+
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
+        
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class ResourceUpdateView(UpdateView):
+    model = Course
+    fields = [ 'instructor', 'course','announcement', 'syllabus', 'course_plan']
+
+
+class ResourceDeleteView(DeleteView):
+    model = Course
+    success_url = '/home/home'

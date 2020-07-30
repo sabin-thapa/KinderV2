@@ -1,5 +1,5 @@
 from django.contrib import admin
-from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School,Foods,ROUTINES
+from second.models import Post, Tutorial, Profile, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School,Foods,ROUTINES
 
 admin.site.register(StudentId)
 admin.site.register(Attendance)
@@ -18,5 +18,6 @@ admin.site.register(Profile)
 admin.site.register(Notice)
 admin.site.register(Contacts)
 admin.site.register(Course)
+admin.site.register(Tutorial)
 
 # Register your models here.

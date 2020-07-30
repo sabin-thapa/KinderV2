@@ -16,10 +16,16 @@
       {% for i in course %}
       <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course}}</h1> </a>
       <p>{{i.instructor}}</p>
-      <hr style="width: 50%; text-align: left; margin-left: 0;" />
-      <br />
+
       {% endfor %}
     </div>
+    <a
+      style="margin-top: 20px; margin-bottom: 10px; width: 100%;"
+      name="createpost"
+      class="zoom btn btn-secondary"
+      href="{% url 'resource-create' %}"
+      >Add Course</a
+    >
   </body>
 </html>
 {% endblock %}

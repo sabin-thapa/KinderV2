@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts
+from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Course
 from .models import Profile, StudentId, Attendance, Routine, Absentday
 
 
@@ -45,22 +45,6 @@ class AttendanceForm(forms.ModelForm):
         fields = ('full_name', 'roll', 'childid')
 
 
-class FoodForm(forms.ModelForm):
-
-    class Meta:
-        model = Foods
-        fields = ('day', 'food')
-
-
-class RoutineForm(forms.ModelForm):
-
-    class Meta:
-
-        model = Routine
-
-        fields = ('day', 'ten_ten45', 'ten45_eleven30', 'eleven45_twelve30',
-                  'twelve30_one15', 'two_two45', 'two45_three30')
-
 
 class ResultForm(forms.ModelForm):
 
@@ -82,3 +66,4 @@ class ContactsForm(forms.ModelForm):
     class Meta:
         model = Contacts
         fields = {'email', 'message'}
+
