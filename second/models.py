@@ -278,9 +278,62 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course
-    
+
     def get_abosulute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         super(Course, self).save(*args, **kwargs)
+
+
+class Assignments(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+    title = models.CharField(max_length=500)
+    description = models.TextField(null=True)
+    file = models.FileField(upload_to='assignments/',
+                            null=True, verbose_name="")
+    date_posted = models.DateTimeField(default=timezone.now)
+    deadline = models.DateField()
+
+    def save(self, *args, **kwargs):
+        super(Assignments, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-date_posted']
+
+    def __str__(self):
+        return (self.title + " by " + self.author.username)
+
+
+class Submissions(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+    assignment = models.ForeignKey(Assignments, on_delete=models.CASCADE)
+
+    file = models.FileField(upload_to='submissions/',
+                            null=True, verbose_name="")
+    date_submitted = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-date_submitted']
+
+    def save(self, *args, **kwargs):
+        super(Submissions, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('Submission by ' + self.author.username)
+
+
+class Grading(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    submission = models.ForeignKey(Submissions, on_delete=models.CASCADE)
+    grade = models.CharField(default="A", max_length=5)
+    remarks = models.TextField(blank=True, null=True)
+    date_graded = models.DateTimeField(default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        return super(Grading, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('Grading for ' + self.submission.author.username + "'s submission for " + self.submission.assignment.title)

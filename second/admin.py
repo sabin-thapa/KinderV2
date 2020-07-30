@@ -1,5 +1,9 @@
+from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
+from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Routine, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES, Assignments, Submissions, Grading
 from django.contrib import admin
-from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School,Foods,ROUTINES
+<< << << < HEAD
+== == == =
+>>>>>> > sajan
 
 admin.site.register(StudentId)
 admin.site.register(Attendance)
@@ -19,4 +23,7 @@ admin.site.register(Notice)
 admin.site.register(Contacts)
 admin.site.register(Course)
 
+admin.site.register(Assignments)
+admin.site.register(Submissions)
+admin.site.register(Grading)
 # Register your models here.
