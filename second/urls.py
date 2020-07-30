@@ -1,6 +1,6 @@
 
 from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, ResourceUpdateView, ResourceDeleteView, EventsDetailView, ResourceCreateView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import EventsCreateView, TutorialUpdateView, TutorialDeleteView, TutorialCreateView, TutorialDetailView, TutorialListView, ResourceUpdateView, ResourceDeleteView, EventsDetailView, ResourceCreateView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
 from . import views
 from django.urls import path
 from users import views as users_views
@@ -56,6 +56,12 @@ urlpatterns = [
     path('resources/new/', ResourceCreateView.as_view(), name='resource-create'),
     path('resources/<int:pk>/update/', ResourceUpdateView.as_view(), name='resource-update'),
     path('resources/<int:pk>/delete/', ResourceDeleteView.as_view(), name='resource-delete'),
+
+    path('tutorials/',TutorialListView.as_view(), name='tutorials'),
+    path('tutorials/<int:pk>/', TutorialDetailView.as_view(), name='tutorial-detail'),
+    path('tutorial/new/', TutorialCreateView.as_view(), name='tutorial-create'),
+    path('tutorial/<int:pk>/update/', TutorialUpdateView.as_view(), name='tutorial-update'),
+    path('tutorial/<int:pk>/delete/', TutorialDeleteView.as_view(), name='tutorial-delete'),
 
 
 ]

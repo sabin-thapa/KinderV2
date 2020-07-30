@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
 from django.template.defaultfilters import slugify
+from embed_video.fields import EmbedVideoField
 
 
 class School(models.Model):
@@ -291,12 +292,16 @@ class Course(models.Model):
 
 class Tutorial(models.Model):
     course = models.ForeignKey(Course, on_delete = models.CASCADE)
-    tutorial = models.FileField(null = True, upload_to = 'tutorial/', verbose_name = "")
+    title = models.TextField(null = True)
+    video = EmbedVideoField(null = True)
     date_posted = models.DateTimeField(default = timezone.now)
+    desc = models.TextField(null = True)
 
     class Meta:
         ordering = ['date_posted']
     
-    def __str__(self):
-        return self.course
+    def get_absolute_url(self):
+        return reverse('tutorial-detail', kwargs = { 'pk': self.pk})
     
+    def save(self, *args, **kwargs):
+        super(Tutorial, self).save(*args, **kwargs)

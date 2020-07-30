@@ -17,7 +17,8 @@
     <h1>Course Plan</h1>
     <p><a href="{{course.course_plan.url}}">  {{ course.course_plan }}</p> </a>
     <hr />
-    <h1> Tutorials </h1>
+    <a href="{% url 'tutorials' %}">  <h1> Tutorials </h1></a>
+    
     <div class="col-md-12 xm-0">
       <br>
       {% if user.user_teachers != '' %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
-from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+from second.models import Post, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -511,4 +511,28 @@ class ResourceUpdateView(UpdateView):
 
 class ResourceDeleteView(DeleteView):
     model = Course
-    success_url = '/home/home'
+    success_url = '/home/resources/'
+
+class TutorialListView(ListView):
+    model = Tutorial
+    template_name = 'second/tutorials.html'
+    context_object_name = 'tutorial'
+
+    def get_queryset(self):
+        return Tutorial.objects.all()
+
+class TutorialDetailView(DetailView):
+    model = Tutorial
+    template_name = 'second/tutorial_detail.html'
+
+class TutorialCreateView(CreateView):
+    model = Tutorial
+    fields = ['course', 'title', 'video', 'desc']
+
+class TutorialUpdateView(UpdateView):
+    model = Tutorial
+    fields = ['course','title', 'video', 'desc']
+
+class TutorialDeleteView(DeleteView):
+    model = Tutorial
+    success_url = '/home/tutorials/'
