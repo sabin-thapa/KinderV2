@@ -482,17 +482,17 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        #Add in queryset
-        context['tutorial'] = Tutorial.objects.all()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     #Add in queryset
+    #     context['tutorial'] = Tutorial.objects.all()
+    #     return context
 
 
 class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Course
-    fields = [ 'instructor', 'course', 'announcement', 'syllabus', 'course_plan']
+    fields = [ 'instructor', 'course_title', 'announcement', 'syllabus', 'course_plan']
         
     def form_valid(self, form):
         form.instance.instructor = self.request.user
@@ -505,7 +505,7 @@ class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class CourseUpdateView(UpdateView):
     model = Course
-    fields = [ 'instructor', 'course','announcement', 'syllabus', 'course_plan']
+    fields = [ 'instructor', 'course_title','announcement', 'syllabus', 'course_plan']
 
 
 class CourseDeleteView(DeleteView):
@@ -533,7 +533,14 @@ class TutorialDetailView(DetailView):
 
 class TutorialCreateView(CreateView):
     model = Tutorial
-    fields = ['course', 'title', 'video', 'desc']
+    fields = [ 'course', 'title', 'video', 'desc']
+
+    # def form_valid(self, form):
+    #     form.instance.subject = self.request.course.course_title
+    #     return super().form_valid(form)
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
 
 class TutorialUpdateView(UpdateView):
     model = Tutorial
@@ -558,11 +565,19 @@ class AttachmentDetailView(DetailView):
 
 class AttachmentCreateView(CreateView):
     model = Attachment
-    fields = ['title', 'file']
+    fields = ['title', 'file', 'course']
+
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     course  = Course.objects.get(course_title = course_title)
+    #     form.instance.subject = self.request.course
+    #     return super().form_valid(form)
 
 class AttachmentUpdateView(UpdateView):
-    model = Tutorial
-    fields = ['title', 'file']
+    model = Attachment
+    fields = ['title', 'file', 'course']
 
 class AttachmentDeleteView(DeleteView):
     model = Attachment

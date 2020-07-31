@@ -7,7 +7,8 @@
   </head>
 
   <body class="jumbotron">
-    <h1>Course Detail</h1>
+    <h1><strong> {{course.course_title}} </strong></h1>
+ <hr />
     <h1>Announcements</h1>
     <p>{{course.announcement}}</p>
     <br />
@@ -18,15 +19,23 @@
     <p><a href="{{course.course_plan.url}}">  {{ course.course_plan }}</p> </a>
     <hr />
     <a href="{% url 'tutorials' %}">  <h1> Tutorials </h1></a>
-    {% for i in tutorial %}
-    <a href="{% url 'tutorial-detail' i.id %}">
-      <h1>{{ i.title }}</h1>
+    
+    {% for i in course.tutorial_set.all %}
+    <a href="{% url 'tutorial-detail' i.pk %}">
+      <p>{{ i.title }}</h1>     </p>
       {% video i.video 'small' %}
-    </a>
+
 
     {% endfor %}
+    <br />
     <a href="{% url 'attachments' %}"> <h1> Attachments</h1></a>  
-    <div class="col-md-12 xm-0">
+    {% for attachment in course.attachment_set.all %}
+     <ul> <li>
+      <a href="{% url 'attachment-detail' attachment.pk %}">{{attachment.title}}
+     </li></ul>
+      {% endfor %} </a> 
+
+    <div class="col-md-12 xm-0">  
       <br>
       {% if user.user_teachers != '' %}
       <a class='btn btn-secondary' name="createpost" href="{% url 'course-update' object.id %}">Update Course</a>

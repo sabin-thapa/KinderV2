@@ -274,14 +274,14 @@ class Contacts(models.Model):
 
 
 class Course(models.Model):
-    course = models.TextField()
+    course_title = models.TextField()
     instructor = models.ForeignKey(User, on_delete = models.CASCADE)
     announcement = models.TextField(null = True)
     syllabus = models.FileField(null= True, blank=True, upload_to='syllabus/', verbose_name="")
     course_plan = models.FileField(null = True, upload_to = 'course_plan/', verbose_name = "")
 
     def __str__(self):
-        return self.course
+        return self.course_title
     
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
@@ -310,12 +310,12 @@ class Tutorial(models.Model):
 
 class Attachment(models.Model):
     title = models.CharField(max_length = 50)
-    course = models.ForeignKey(Course, on_delete = models.CASCADE)
+    course = models.ForeignKey(Course, on_delete = models.CASCADE, null=True)
     file = models.FileField(null = True)
     date_posted = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return f'{self.course.course}\'s Attachment'
+        return f'{self.title}\'s Attachment'
     class Meta:
         ordering = ['date_posted']
     
