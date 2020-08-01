@@ -95,15 +95,6 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 
-class StudentId(models.Model):
-    full_name = models.CharField(max_length=30)
-    roll = models.IntegerField()
-    childid = models.IntegerField()
-
-    def __str__(self):
-        return self.full_name
-
-
 class SID(models.Model):
     full_name = models.CharField(max_length=30)
     roll = models.IntegerField()
@@ -120,33 +111,6 @@ class SID(models.Model):
         super(SID, self).save(*args, **kwargs)
         Attend.objects.create(
             student=self)
-
-
-class Attendance(models.Model):
-    full_name = models.CharField(max_length=30)
-    roll = models.IntegerField()
-    childid = models.IntegerField()
-
-    def __str__(self):
-        return self.full_name
-
-    @property
-    def absentdayss(self):
-        return self.absentday_set.count()
-
-    @property
-    def presentdayss(self):
-        return self.presentday_set.count()
-
-    @property
-    def days(self):
-        return self.absentday_set.all()
-
-    def get_absolute_url(self):
-        return reverse('attendance-detail', kwargs={'pk': self.pk})
-
-    def save(self, *args, **kwargs):
-        super(Attendance, self).save(*args, **kwargs)
 
 
 class Attend(models.Model):
@@ -174,14 +138,6 @@ class Attend(models.Model):
         super(Attend, self).save(*args, **kwargs)
 
 
-class Food(models.Model):
-    day = models.CharField(max_length=30, null=True)
-    food = models.CharField(max_length=30, null=True)
-
-    def __str__(self):
-        return self.day
-
-
 class Foods(models.Model):
     day = models.CharField(max_length=30, null=True)
     food = models.CharField(max_length=30, null=True)
@@ -192,25 +148,6 @@ class Foods(models.Model):
 
     def save(self, *args, **kwargs):
         super(Foods, self).save(*args, **kwargs)
-
-
-class Routine(models.Model):
-    day = models.CharField(max_length=30)
-    ten_ten45 = models.CharField(max_length=30)
-    ten45_eleven30 = models.CharField(max_length=30)
-    eleven45_twelve30 = models.CharField(max_length=30)
-    twelve30_one15 = models.CharField(max_length=30)
-    two_two45 = models.CharField(max_length=30)
-    two45_three30 = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.day
-
-    def get_absolute_url(self):
-        return reverse('routine-detail', kwargs={'pk': self.pk})
-
-    def save(self, *args, **kwargs):
-        super(Routine, self).save(*args, **kwargs)
 
 
 class ROUTINES(models.Model):
