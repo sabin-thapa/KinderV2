@@ -54,7 +54,6 @@
 
 
 <body>
-<<<<<<< HEAD
     <div class="jumbotron">
 
         <div class="row row-height">
@@ -63,27 +62,13 @@
                     {% if user.user_teachers != "" %}
                     <a style="margin-top: 50px; margin-bottom: 10px; width:100%;" name="createpost"
                         class='zoom btn btn-secondary' href="{% url 'registerchild' %}">Register Children </a>
-=======
-<div class="jumbotron">
-
-    <div class = "row row-height" >
-         <div class="col-lg-2">
-            <div class="col-lg-2" style="position: fixed;">
-                {% if user.user_teachers != "" %}
-                    <a style="margin-top: 50px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'registerchild' %}">Register Children </a>
->>>>>>> origin/resources
                     <br>
                     <p id="usertype" style="display:none;">{{user.user_teachers.UserType}}</p>
                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
                         class='zoom btn btn-secondary' href="{% url 'post-create' %}">Create Post</a>
                     <br>
-<<<<<<< HEAD
                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
                         class='zoom btn btn-secondary' href="{% url 'attendance' %}">Attendance</a>
-=======
-
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'attendance' %}">Attendance</a>
->>>>>>> origin/resources
                     <br>
                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
                         class='zoom btn btn-secondary' href="{% url 'resources' %}">Resources</a>
@@ -91,14 +76,8 @@
                         class='zoom btn btn-secondary' href="{% url 'assignments' %}">Assignments</a>
 
                     <br>
-<<<<<<< HEAD
                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
                         class='zoom btn btn-secondary' href="{% url 'routine' %}">Class Routine</a>
-=======
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'tutorials' %}">Tutorials</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'routine' %}">Class Routine</a>
->>>>>>> origin/resources
                     <br>
                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
                         class='zoom btn btn-secondary' href="{% url 'notice-create' %}">Add Notice</a>

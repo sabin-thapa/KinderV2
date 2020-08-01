@@ -1,11 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-<<<<<<< HEAD
 from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Assignments, Submissions, Grading
-=======
 from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Course
->>>>>>> origin/resources
 from .models import Profile, StudentId, Attendance, Routine, Absentday
 
 
@@ -31,6 +28,23 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['image']
 
 
+class FoodForm(forms.ModelForm):
+
+    class Meta:
+        model = Foods
+        fields = ('day', 'food')
+
+
+class RoutineForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Routine
+
+        fields = ('day', 'ten_ten45', 'ten45_eleven30', 'eleven45_twelve30',
+                  'twelve30_one15', 'two_two45', 'two45_three30')
+
+
 class StudentRegisterForm(forms.ModelForm):
 
     class Meta:
@@ -47,7 +61,6 @@ class AttendanceForm(forms.ModelForm):
         model = Attendance
 
         fields = ('full_name', 'roll', 'childid')
-
 
 
 class ResultForm(forms.ModelForm):
@@ -71,7 +84,6 @@ class ContactsForm(forms.ModelForm):
         model = Contacts
         fields = {'email', 'message'}
 
-<<<<<<< HEAD
 
 class AssignmentForm(forms.ModelForm):
     class Meta:
@@ -89,5 +101,3 @@ class GradeForm(forms.ModelForm):
     class Meta:
         model = Grading
         fields = ('grade', 'remarks')
-=======
->>>>>>> origin/resources

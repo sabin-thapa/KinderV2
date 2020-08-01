@@ -273,7 +273,6 @@ class Contacts(models.Model):
     message = models.TextField()
 
 
-<<<<<<< HEAD
 class Assignments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
@@ -325,37 +324,39 @@ class Grading(models.Model):
 
     def __str__(self):
         return ('Grading for ' + self.submission.author.username + "'s submission for " + self.submission.assignment.title)
-=======
+
+
 class Course(models.Model):
     course = models.TextField()
     instructor = models.CharField(max_length=40)
-    announcement = models.TextField(null = True)
-    syllabus = models.FileField(null= True, blank=True, upload_to='syllabus/', verbose_name="")
-    course_plan = models.FileField(null = True, upload_to = 'course_plan/', verbose_name = "")
-
+    announcement = models.TextField(null=True)
+    syllabus = models.FileField(
+        null=True, blank=True, upload_to='syllabus/', verbose_name="")
+    course_plan = models.FileField(
+        null=True, upload_to='course_plan/', verbose_name="")
 
     def __str__(self):
         return self.course
-    
+
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         super(Course, self).save(*args, **kwargs)
 
+
 class Tutorial(models.Model):
-    course = models.ForeignKey(Course, on_delete = models.CASCADE)
-    title = models.TextField(null = True)
-    video = EmbedVideoField(null = True)
-    date_posted = models.DateTimeField(default = timezone.now)
-    desc = models.TextField(null = True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    title = models.TextField(null=True)
+    video = EmbedVideoField(null=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    desc = models.TextField(null=True)
 
     class Meta:
         ordering = ['date_posted']
-    
+
     def get_absolute_url(self):
-        return reverse('tutorial-detail', kwargs = { 'pk': self.pk})
-    
+        return reverse('tutorial-detail', kwargs={'pk': self.pk})
+
     def save(self, *args, **kwargs):
         super(Tutorial, self).save(*args, **kwargs)
->>>>>>> origin/resources
