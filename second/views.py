@@ -1,9 +1,17 @@
-from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
-from second.models import Post, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
-from users.models import User_parents, User_teachers
-from django.core.mail import EmailMessage
-from django.template.loader import get_template
+from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from django.contrib import messages
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+# Create your views here.
+from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
+from django.core.paginator import Paginator
+from django.forms import modelformset_factory
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import datetime
 from django.shortcuts import redirect
 import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -485,54 +493,48 @@ def contacts(request):
     return render(request, 'sendemail.html', {'form': Contact_Form})
 
 
-@login_required
-def resources(request):
-    course = Course.objects.all()
-    context = {
-        'course': course,
-    }
-
-    return render(request, "second/resources.html", context)
-
-
 class CourseListView(ListView):
     model = Course
-    template_name = "second/resources.html"
+    template_name = "second/courses.html"
     context_object_name = 'course'
-
-    def get_queryset(self):
-        return Course.objects.all()
 
 
 class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     #Add in queryset
+    #     context['tutorial'] = Tutorial.objects.all()
+    #     return context
 
-class ResourceCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Course
-    fields = ['instructor', 'course',
+    fields = ['instructor', 'course_title',
               'announcement', 'syllabus', 'course_plan']
+
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
 
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
-
-class ResourceUpdateView(UpdateView):
+class CourseUpdateView(UpdateView):
     model = Course
-    fields = ['instructor', 'course',
+    fields = ['instructor', 'course_title',
               'announcement', 'syllabus', 'course_plan']
 
 
-class ResourceDeleteView(DeleteView):
+class CourseDeleteView(DeleteView):
     model = Course
-    success_url = '/home/resources/'
+    success_url = '/home/courses/'
 
 
 class TutorialListView(ListView):
@@ -541,17 +543,31 @@ class TutorialListView(ListView):
     context_object_name = 'tutorial'
 
     def get_queryset(self):
-        return Tutorial.objects.all()
+        return Tutorial.objects.all().order_by('-date_posted')
 
 
 class TutorialDetailView(DetailView):
     model = Tutorial
     template_name = 'second/tutorial_detail.html'
 
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     #Add in queryset
+    #     context['tutorial'] = Tutorial.objects.all()
+    #     return context
+
 
 class TutorialCreateView(CreateView):
     model = Tutorial
     fields = ['course', 'title', 'video', 'desc']
+
+    # def form_valid(self, form):
+    #     form.instance.subject = self.request.course.course_title
+    #     return super().form_valid(form)
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
 
 
 class TutorialUpdateView(UpdateView):
@@ -652,3 +668,40 @@ class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class TutorialDeleteView(DeleteView):
     model = Tutorial
     success_url = '/home/tutorials/'
+
+
+class AttachmentListView(ListView):
+    model = Attachment
+    template_name = 'second/attachments.html'
+    context_object_name = 'attachment'
+
+    def get_queryset(self):
+        return Attachment.objects.all().order_by('-date_posted')
+
+
+class AttachmentDetailView(DetailView):
+    model = Attachment
+    template_name = 'second/attachment_detail.html'
+
+
+class AttachmentCreateView(CreateView):
+    model = Attachment
+    fields = ['title', 'file', 'course']
+
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     course  = Course.objects.get(course_title = course_title)
+    #     form.instance.subject = self.request.course
+    #     return super().form_valid(form)
+
+
+class AttachmentUpdateView(UpdateView):
+    model = Attachment
+    fields = ['title', 'file', 'course']
+
+
+class AttachmentDeleteView(DeleteView):
+    model = Attachment
+    success_url = '/home/attachments/'

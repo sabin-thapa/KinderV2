@@ -15,16 +15,7 @@
       <center>
         <div class="form-box">
           <form method="POST">
-            {% csrf_token %}
-            <div>
-              <h1>
-                Are you sure you want to delete {{object.title}} permanently?
-              </h1>
-              <button class="btn btn-outline-danger" type="submit">
-                Yes, Delete
-              </button>
-              <a href="{% url 'home' %}" class="btn btn-secondary">NO</a>
-            </div>
+            {% csrf_token %} {% include "second/delete-form-template.html" %}
           </form>
         </div>
       </center>

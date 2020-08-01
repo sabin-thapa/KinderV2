@@ -14,7 +14,7 @@
     </div>
     <div class="course-list">
       {% for i in course %}
-      <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course}}</h1> </a>
+      <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course_title}}</h1> </a>
       <p>{{i.instructor}}</p>
 
       {% endfor %}
@@ -23,7 +23,7 @@
       style="margin-top: 20px; margin-bottom: 10px; width: 100%;"
       name="createpost"
       class="zoom btn btn-secondary"
-      href="{% url 'resource-create' %}"
+      href="{% url 'course-create' %}"
       >Add Course</a
     >
   </body>

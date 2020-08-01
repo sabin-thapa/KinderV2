@@ -327,6 +327,7 @@ class Grading(models.Model):
 
 
 class Course(models.Model):
+<<<<<<< HEAD
     course = models.TextField()
     instructor = models.CharField(max_length=40)
     announcement = models.TextField(null=True)
@@ -338,6 +339,17 @@ class Course(models.Model):
     def __str__(self):
         return self.course
 
+=======
+    course_title = models.TextField()
+    instructor = models.ForeignKey(User, on_delete = models.CASCADE)
+    announcement = models.TextField(null = True)
+    syllabus = models.FileField(null= True, blank=True, upload_to='syllabus/', verbose_name="")
+    course_plan = models.FileField(null = True, upload_to = 'course_plan/', verbose_name = "")
+
+    def __str__(self):
+        return self.course_title
+    
+>>>>>>> 22de8a49f69b03fc4058634a3750fe149a9d7ec4
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
 
@@ -346,11 +358,22 @@ class Course(models.Model):
 
 
 class Tutorial(models.Model):
+<<<<<<< HEAD
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.TextField(null=True)
     video = EmbedVideoField(null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     desc = models.TextField(null=True)
+=======
+    course = models.ForeignKey(Course, on_delete = models.CASCADE, null =True)
+    title = models.TextField(null = True)
+    video = EmbedVideoField(null = True)
+    date_posted = models.DateTimeField(default = timezone.now)
+    desc = models.TextField(null = True)
+>>>>>>> 22de8a49f69b03fc4058634a3750fe149a9d7ec4
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         ordering = ['date_posted']
@@ -360,3 +383,23 @@ class Tutorial(models.Model):
 
     def save(self, *args, **kwargs):
         super(Tutorial, self).save(*args, **kwargs)
+<<<<<<< HEAD
+=======
+
+class Attachment(models.Model):
+    title = models.CharField(max_length = 50)
+    course = models.ForeignKey(Course, on_delete = models.CASCADE, null=True)
+    file = models.FileField(null = True)
+    date_posted = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return f'{self.title}\'s Attachment'
+    class Meta:
+        ordering = ['date_posted']
+    
+    def get_absolute_url(self):
+        return reverse('attachment-detail', kwargs = {'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super(Attachment, self).save(*args, **kwargs)
+>>>>>>> 22de8a49f69b03fc4058634a3750fe149a9d7ec4

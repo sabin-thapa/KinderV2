@@ -1,4 +1,4 @@
-{% extends "second/base2.html" %} {% load static %} {% block base2 %}
+{% extends "second/base2.html" %} {% load static %} {% block base2 %} {% load embed_video_tags %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,8 @@
   </head>
 
   <body class="jumbotron">
-    <h1>Course Detail</h1>
+    <h1><strong> {{course.course_title}} </strong></h1>
+ <hr />
     <h1>Announcements</h1>
     <p>{{course.announcement}}</p>
     <br />
@@ -19,11 +20,26 @@
     <hr />
     <a href="{% url 'tutorials' %}">  <h1> Tutorials </h1></a>
     
-    <div class="col-md-12 xm-0">
+    {% for i in course.tutorial_set.all %}
+    <a href="{% url 'tutorial-detail' i.pk %}">
+      <p>{{ i.title }}</h1>     </p>
+      {% video i.video 'small' %}
+
+
+    {% endfor %}
+    <br />
+    <a href="{% url 'attachments' %}"> <h1> Attachments</h1></a>  
+    {% for attachment in course.attachment_set.all %}
+     <ul> <li>
+      <a href="{% url 'attachment-detail' attachment.pk %}">{{attachment.title}}
+     </li></ul>
+      {% endfor %} </a> 
+
+    <div class="col-md-12 xm-0">  
       <br>
       {% if user.user_teachers != '' %}
-      <a class='btn btn-secondary' name="createpost" href="{% url 'resource-update' object.id %}">Update Course</a>
-      <a class='btn btn-outline-danger' name="createpost" href="{% url 'resource-delete' object.id %}">Delete Course</a>
+      <a class='btn btn-secondary' name="createpost" href="{% url 'course-update' object.id %}">Update Course</a>
+      <a class='btn btn-outline-danger' name="createpost" href="{% url 'course-delete' object.id %}">Delete Course</a>
       {% endif %}
     </div>
   </body>
