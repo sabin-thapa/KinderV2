@@ -58,7 +58,7 @@ urlpatterns = [
          AssignmentDeleteView.as_view(), name='assignment-delete'),
     path('assignments/<int:assignment_id>/submissions', views.submissions,
          name='submissions'),
-    path('submissions/<int:submission_id>/', views.gradesubmissions,
+    path('submissions/<int:submission_id>/grade', views.gradesubmissions,
          name='gradesubmissions'),
 
 
