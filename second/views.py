@@ -1,12 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
+<<<<<<< HEAD
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
 from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+=======
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
+from second.models import Post, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+>>>>>>> origin/resources
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+<<<<<<< HEAD
 from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
+=======
+from .forms import UserUpdateForm,ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
+>>>>>>> origin/resources
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
 from django.contrib.auth.models import User
@@ -486,8 +495,68 @@ def contacts(request):
 
 @login_required
 def resources(request):
-    context = {}
+    course = Course.objects.all()
+    context = {
+        'course' : course,
+    }
 
+    return render(request, "second/resources.html", context)
+
+class CourseListView(ListView):
+    model = Course
+    template_name = "second/resources.html"
+    context_object_name = 'course'
+
+    def get_queryset(self):
+        return Course.objects.all()
+
+class CourseDetailView(DetailView):
+    model = Course
+    template_name = "second/course-detail.html"
+
+class ResourceCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Course
+    fields = [ 'instructor', 'course', 'announcement', 'syllabus', 'course_plan']
+
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
+        
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class ResourceUpdateView(UpdateView):
+    model = Course
+    fields = [ 'instructor', 'course','announcement', 'syllabus', 'course_plan']
+
+
+class ResourceDeleteView(DeleteView):
+    model = Course
+    success_url = '/home/resources/'
+
+class TutorialListView(ListView):
+    model = Tutorial
+    template_name = 'second/tutorials.html'
+    context_object_name = 'tutorial'
+
+    def get_queryset(self):
+        return Tutorial.objects.all()
+
+class TutorialDetailView(DetailView):
+    model = Tutorial
+    template_name = 'second/tutorial_detail.html'
+
+class TutorialCreateView(CreateView):
+    model = Tutorial
+    fields = ['course', 'title', 'video', 'desc']
+
+class TutorialUpdateView(UpdateView):
+    model = Tutorial
+    fields = ['course','title', 'video', 'desc']
+
+<<<<<<< HEAD
     return render(request, "second/resources.html", context)
 
 
@@ -577,3 +646,8 @@ class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         assignment = self.get_object()
         return True
+=======
+class TutorialDeleteView(DeleteView):
+    model = Tutorial
+    success_url = '/home/tutorials/'
+>>>>>>> origin/resources
