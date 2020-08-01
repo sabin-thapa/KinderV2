@@ -16,7 +16,6 @@
       {% for i in course %}
       <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course_title}}</h1> </a>
       <p>{{i.instructor}}</p>
-
       {% endfor %}
     </div>
     <a

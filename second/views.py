@@ -492,7 +492,7 @@ class CourseDetailView(DetailView):
 
 class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Course
-    fields = [ 'instructor', 'course_title', 'announcement', 'syllabus', 'course_plan']
+    fields = [ 'course_title']
         
     def form_valid(self, form):
         form.instance.instructor = self.request.user
@@ -503,14 +503,28 @@ class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return True
         return False
 
-class CourseUpdateView(UpdateView):
+class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Course
-    fields = [ 'instructor', 'course_title','announcement', 'syllabus', 'course_plan']
+    fields = [ 'course_title','announcement', 'syllabus', 'course_plan']
+
+    def form_valid(self, form):
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
 
 
-class CourseDeleteView(DeleteView):
+class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = Course
     success_url = '/home/courses/'
+
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
 
 class TutorialListView(ListView):
     model = Tutorial
@@ -531,25 +545,38 @@ class TutorialDetailView(DetailView):
     #     context['tutorial'] = Tutorial.objects.all()
     #     return context
 
-class TutorialCreateView(CreateView):
+class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
-    fields = [ 'course', 'title', 'video', 'desc']
+    fields = [ 'course' ,'title', 'video', 'desc']
 
-    # def form_valid(self, form):
-    #     form.instance.subject = self.request.course.course_title
-    #     return super().form_valid(form)
     def form_valid(self, form):
-        form.instance.instructor = self.request.user
+        form.instance.author = self.request.user
+        # form.instance.course = self.request.course  HELP NEEDED
         return super().form_valid(form)
 
-class TutorialUpdateView(UpdateView):
+class TutorialUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tutorial
     fields = ['course','title', 'video', 'desc']
 
-class TutorialDeleteView(DeleteView):
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
+
+
+
+class TutorialDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = Tutorial
     success_url = '/home/tutorials/'
-
+    
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
 
 class AttachmentListView(ListView):
     model = Attachment
@@ -563,22 +590,39 @@ class AttachmentDetailView(DetailView):
     model = Attachment
     template_name = 'second/attachment_detail.html'
 
-class AttachmentCreateView(CreateView):
+class AttachmentCreateView(LoginRequiredMixin, CreateView):
     model = Attachment
     fields = ['title', 'file', 'course']
 
     def form_valid(self, form):
-        form.instance.instructor = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
     # def form_valid(self, form):
     #     course  = Course.objects.get(course_title = course_title)
     #     form.instance.subject = self.request.course
     #     return super().form_valid(form)
 
-class AttachmentUpdateView(UpdateView):
+class AttachmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Attachment
     fields = ['title', 'file', 'course']
 
-class AttachmentDeleteView(DeleteView):
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
+
+
+
+class AttachmentDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = Attachment
     success_url = '/home/attachments/'
+
+        
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
