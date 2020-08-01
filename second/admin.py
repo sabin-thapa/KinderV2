@@ -1,4 +1,5 @@
 from django.contrib import admin
+from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Routine, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES, Assignments, Submissions, Grading
 from second.models import Post, Tutorial, Profile, Attachment, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
 
 from embed_video.admin import AdminVideoMixin

@@ -1,31 +1,24 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
 from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
-from django.contrib import messages
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
-# Create your views here.
-from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
-from django.core.paginator import Paginator
-from django.forms import modelformset_factory
-from django.contrib.auth.models import User
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import datetime
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
+from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
 from django.shortcuts import redirect
 import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
 from django.core.paginator import Paginator
-from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, RoutineForm, FoodForm, AbsentForm, ContactsForm, SubmissionForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
+from users.models import User_parents, User_teachers
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
+from second.models import Post, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
 
 
 @login_required
@@ -503,6 +496,12 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = "second/course-detail.html"
 
+
+class ResourceCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Course
+    fields = ['instructor', 'course',
+              'announcement', 'syllabus', 'course_plan']
+
     # def get_context_data(self, **kwargs):
     #     # Call the base implementation first to get a context
     #     context = super().get_context_data(**kwargs)
@@ -524,6 +523,16 @@ class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         if self.request.user.user_teachers != '':
             return True
         return False
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class ResourceUpdateView(UpdateView):
+    model = Course
+    fields = ['instructor', 'course',
+              'announcement', 'syllabus', 'course_plan']
 
 
 class CourseUpdateView(UpdateView):

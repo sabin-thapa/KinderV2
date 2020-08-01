@@ -54,7 +54,6 @@ urlpatterns = [
     path('result/<int:pk>/', ResultDetail.as_view(), name='result-detail'),
     path('contacts/', views.contacts, name='send-email'),
 
-    path('resources/', views.resources, name='resources'),
     path('assignments/', views.assignments, name='assignments'),
     path('assignments/<int:pk>/update',
          views.assignment_update, name='assignment-update'),
