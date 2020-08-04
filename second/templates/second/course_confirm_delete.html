@@ -7,19 +7,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="{% static 'form1.css' %}" />
     <title>Document</title>
   </head>
 
-  <body class="jumbotron">
+  <body>
     <div class="jumbotron">
       <center>
         <div class="form-box">
-          <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %} {% include 'second/form-template.html' %}
-            <div>
-              <button class="btn btn-outline-info" type="submit">POST</button>
-            </div>
+          <form method="POST">
+            {% csrf_token %} {% include 'second/delete-form-template.html' %}
           </form>
         </div>
       </center>
