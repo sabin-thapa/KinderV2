@@ -15,7 +15,6 @@ from second.models import Post, Profile, Result, StudentId, Attendance, Attend, 
 from django.contrib import admin
 
 
-
 admin.site.register(StudentId)
 admin.site.register(Attendance)
 admin.site.register(Attend)

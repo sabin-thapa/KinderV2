@@ -1,3 +1,4 @@
+
 from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 from .views import EventsCreateView, TutorialUpdateView, AttachmentListView, AttachmentCreateView, AttachmentUpdateView, AttachmentDetailView, AttachmentDeleteView
 from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView,TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView,EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
@@ -6,7 +7,14 @@ from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsD
 
 from . import views
 from django.urls import path
+
 from users import views as users_views
+from django.urls import path
+from . import views
+from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions, gradesubmissions
+from .views import PostDetailView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
+from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 
 urlpatterns = [
     path('home/', views.postsandnotices, name='home'),
@@ -53,7 +61,7 @@ urlpatterns = [
     path('result/<int:pk>/update', ResultUpdate.as_view(), name='result-update'),
     path('result/<int:pk>/', ResultDetail.as_view(), name='result-detail'),
     path('contacts/', views.contacts, name='send-email'),
-   
+
     path('courses/', CourseListView.as_view(), name='courses'),
     path('courses/<int:pk>/', CourseDetailView.as_view(), name='course-detail'),
     path('courses/new/', CourseCreateView.as_view(), name='course-create'),
@@ -71,7 +79,6 @@ urlpatterns = [
     path('attachment/new/', AttachmentCreateView.as_view(), name='attachment-create'),
     path('attachment/<int:pk>/update/', AttachmentUpdateView.as_view(), name='attachment-update'),
     path('attachment/<int:pk>/delete/', AttachmentDeleteView.as_view(), name='attachment-delete'),
-
 
 
     path('assignments/', views.assignments, name='assignments'),
