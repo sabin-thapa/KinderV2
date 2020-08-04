@@ -3,6 +3,11 @@ from second.models import Post, StudentId, Attendance, Images, Food, Result, Foo
 from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
 from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
+from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
+from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -648,7 +653,6 @@ class AttachmentDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
             return True
         return False
 
-
 def assignments(request):
     if request.method == 'POST':
         form = AssignmentForm(request.POST, request.FILES)
@@ -735,4 +739,3 @@ class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         assignment = self.get_object()
         return True
-

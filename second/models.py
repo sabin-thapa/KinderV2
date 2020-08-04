@@ -273,7 +273,6 @@ class Contacts(models.Model):
     message = models.TextField()
 
 
-
 class Course(models.Model):
     course_title = models.TextField()
     instructor   = models.ForeignKey(User, on_delete = models.CASCADE)
@@ -284,7 +283,8 @@ class Course(models.Model):
     def __str__(self):
         return self.course_title
     
-    def get_absolute_url(self):
+
+    def get_abosulute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
