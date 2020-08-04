@@ -1,11 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
 from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Course
-=======
 from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Assignments, Submissions, Grading
-
 from .models import Profile, StudentId, Attendance, Routine, Absentday
 
 

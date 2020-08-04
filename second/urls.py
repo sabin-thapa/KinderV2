@@ -1,12 +1,9 @@
 
-<<<<<<< HEAD
 from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 from .views import EventsCreateView, TutorialUpdateView, AttachmentListView, AttachmentCreateView, AttachmentUpdateView, AttachmentDetailView, AttachmentDeleteView
 from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView,TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView,EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
-=======
 from .views import PostDetailView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions, gradesubmissions
->>>>>>> sajan
 from . import views
 from django.urls import path
 from users import views as users_views
@@ -75,7 +72,6 @@ urlpatterns = [
     path('attachment/<int:pk>/update/', AttachmentUpdateView.as_view(), name='attachment-update'),
     path('attachment/<int:pk>/delete/', AttachmentDeleteView.as_view(), name='attachment-delete'),
 
-    path('resources/', views.resources, name='resources'),
     path('assignments/', views.assignments, name='assignments'),
     path('assignments/<int:pk>/update',
          views.assignment_update, name='assignment-update'),
