@@ -19,7 +19,7 @@
     <h3>Submissions</h3>
     {%for s in subs %}
     <p>{{s.assignment}}</p>
-    <p>{{s.file}}</p>
+    <p><a href="{{s.file.url}}"> {{s.file}}</a></p>
     <p>{{s.date_submitted}}</p>
     {% if s.grading_set.exists %}
     <p>Graded {{s.grading_set.get.grade}}</p>

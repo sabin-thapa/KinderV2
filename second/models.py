@@ -367,6 +367,9 @@ class Assignments(models.Model):
     def __str__(self):
         return (self.title + " by " + self.author.username)
 
+    def get_absolute_url(self):
+        return reverse('assignments')
+
 
 class Submissions(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
@@ -385,6 +388,9 @@ class Submissions(models.Model):
 
     def __str__(self):
         return ('Submission by ' + self.author.username)
+
+    def get_absolute_url(self):
+        return reverse('assignments')
 
 
 class Grading(models.Model):

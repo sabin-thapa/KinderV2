@@ -49,8 +49,17 @@
     <p>Date Posted: {{t.date_posted}}</p>
     <p>Deadline : {{t.deadline}}</p>
 
+    {% if t.submissions_set.exists %}
+    <p>Submitted for Grading</p>
+    <a class='btn btn-outline-primary' href="{% url 'submissions-update' t.submissions_set.get.id %}">Edit
+        Submission</a>
+    <a class='btn btn-outline-danger' href="{% url 'submission-delete' t.submissions_set.get.id %}">Delete
+        Submission</a>
+
+    {% else %}
     <a class='btn btn-outline-primary' href="{% url 'submissions' t.id %}">Add Submissions</a>
 
+    {% endif %}
     {% endfor %}
 
 

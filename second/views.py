@@ -738,17 +738,33 @@ def grade_update(request, submission_id):
     return render(request, 'grade-update.html', {'form': form})
 
 
-def assignment_update(request, pk):
-    assignment = get_object_or_404(Assignments, pk=pk)
-    if request.method == "POST":
-        form = AssignmentForm(request.POST, request.FILES, instance=assignment)
-        if form.is_valid():
-            assignment = form.save(commit=False)
-            assignment.save()
-            return redirect('assignments')
-    else:
-        form = AssignmentForm(instance=assignment)
-    return render(request, 'assignment-update.html', {'form': form})
+class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Assignments
+    fields = ['title', 'description', 'file', 'deadline']
+    template_name = 'assignments_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
+
+
+class SubmissionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Submissions
+    fields = ['file', ]
+    template_name = 'submission_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+
+        return True
 
 
 class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -757,4 +773,13 @@ class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         assignment = self.get_object()
+        return True
+
+
+class SubmissionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Submissions
+    success_url = "/home/assignments"
+
+    def test_func(self):
+        submission = self.get_object()
         return True
