@@ -30,7 +30,7 @@
     {% for t in tasks %}
     <h2>{{t.title}}</h2>
     <p>{{t.description}}</p>
-    <p>Attached File (if any):</p><a href="{{t.file.url}}"> {{t.file}}</a>
+    <p>Attached File (if any):</p><a href="{{t.file_url}}"> {{t.file}}</a>
     <p>Date Posted: {{t.date_posted}}</p>
     <p>Deadline : {{t.deadline}}</p>
 
