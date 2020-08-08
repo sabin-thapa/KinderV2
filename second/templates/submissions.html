@@ -21,9 +21,15 @@
     <p>{{s.assignment}}</p>
     <p>{{s.file}}</p>
     <p>{{s.date_submitted}}</p>
+    {% if s.grading_set.exists %}
+    <p>Graded {{s.grading_set.get.grade}}</p>
 
+    <a class="btn btn-primary" href="{% url 'grade-update' s.grading_set.get.id %}">Update Grade</a>
+
+    {% else %}
     <a class="btn btn-primary" href="{% url 'gradesubmissions' s.id %}">Add Grade</a>
 
+    {% endif %}
 
     {% endfor %}
 

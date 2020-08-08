@@ -1,7 +1,7 @@
 
 from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 from .views import EventsCreateView, TutorialUpdateView, AttachmentListView, AttachmentCreateView, AttachmentUpdateView, AttachmentDetailView, AttachmentDeleteView
-from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView,TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView,EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView, TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
 from .views import PostDetailView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions, gradesubmissions
 
@@ -13,7 +13,7 @@ from django.urls import path
 from . import views
 from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, assignment_update, AssignmentDeleteView, submissions, gradesubmissions
 from .views import PostDetailView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, grade_update
 from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 
 urlpatterns = [
@@ -65,20 +65,28 @@ urlpatterns = [
     path('courses/', CourseListView.as_view(), name='courses'),
     path('courses/<int:pk>/', CourseDetailView.as_view(), name='course-detail'),
     path('courses/new/', CourseCreateView.as_view(), name='course-create'),
-    path('courses/<int:pk>/update/', CourseUpdateView.as_view(), name='course-update'),
-    path('courses/<int:pk>/delete/', CourseDeleteView.as_view(), name='course-delete'),
+    path('courses/<int:pk>/update/',
+         CourseUpdateView.as_view(), name='course-update'),
+    path('courses/<int:pk>/delete/',
+         CourseDeleteView.as_view(), name='course-delete'),
 
-    path('tutorials/',TutorialListView.as_view(), name='tutorials'),
+    path('tutorials/', TutorialListView.as_view(), name='tutorials'),
     path('tutorials/<int:pk>/', TutorialDetailView.as_view(), name='tutorial-detail'),
     path('tutorial/new/', TutorialCreateView.as_view(), name='tutorial-create'),
-    path('tutorial/<int:pk>/update/', TutorialUpdateView.as_view(), name='tutorial-update'),
-    path('tutorial/<int:pk>/delete/', TutorialDeleteView.as_view(), name='tutorial-delete'),
+    path('tutorial/<int:pk>/update/',
+         TutorialUpdateView.as_view(), name='tutorial-update'),
+    path('tutorial/<int:pk>/delete/',
+         TutorialDeleteView.as_view(), name='tutorial-delete'),
 
-    path('attachments/',AttachmentListView.as_view(), name='attachments'),
-    path('attachment/<int:pk>/', AttachmentDetailView.as_view(), name='attachment-detail'),
-    path('attachment/new/', AttachmentCreateView.as_view(), name='attachment-create'),
-    path('attachment/<int:pk>/update/', AttachmentUpdateView.as_view(), name='attachment-update'),
-    path('attachment/<int:pk>/delete/', AttachmentDeleteView.as_view(), name='attachment-delete'),
+    path('attachments/', AttachmentListView.as_view(), name='attachments'),
+    path('attachment/<int:pk>/', AttachmentDetailView.as_view(),
+         name='attachment-detail'),
+    path('attachment/new/', AttachmentCreateView.as_view(),
+         name='attachment-create'),
+    path('attachment/<int:pk>/update/',
+         AttachmentUpdateView.as_view(), name='attachment-update'),
+    path('attachment/<int:pk>/delete/',
+         AttachmentDeleteView.as_view(), name='attachment-delete'),
 
 
     path('assignments/', views.assignments, name='assignments'),
@@ -90,7 +98,9 @@ urlpatterns = [
          name='submissions'),
     path('submissions/<int:submission_id>/', views.gradesubmissions,
          name='gradesubmissions'),
+    path('grade/<int:submission_id>/update',
+         views.grade_update, name='grade-update'),
+
 
 
 ]
-

@@ -1,0 +1,32 @@
+{% extends "base1.html" %}
+{% block base2 %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
+    <link rel="stylesheet" href="{% static 'form1.css' %}">
+
+</head>
+
+<body>
+    <p>Update Grade</p>
+    <form method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button class='btn btn-outline-info' type='submit'>Update Grade</button>
+
+        </div>
+    </form>
+
+
+</body>
+
+</html>
+{% endblock %}

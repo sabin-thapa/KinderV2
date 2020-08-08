@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from django.core.exceptions import ValidationError
 
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -275,28 +276,29 @@ class Contacts(models.Model):
 
 class Course(models.Model):
     course_title = models.TextField()
-    instructor   = models.ForeignKey(User, on_delete = models.CASCADE)
-    announcement = models.TextField(null = True)
-    syllabus     = models.FileField(null= True, blank=True, upload_to='syllabus/', verbose_name="")
-    course_plan  = models.FileField(null = True, upload_to = 'course_plan/', verbose_name = "")
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE)
+    announcement = models.TextField(null=True)
+    syllabus = models.FileField(
+        null=True, blank=True, upload_to='syllabus/', verbose_name="")
+    course_plan = models.FileField(
+        null=True, upload_to='course_plan/', verbose_name="")
 
     def __str__(self):
         return self.course_title
-    
 
     def get_abosulute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         super(Course, self).save(*args, **kwargs)
-    
+
     @property
     def syllabus_url(self):
         if self.syllabus and hasattr(self.syllabus, 'url'):
             return self.syllabus.url
         else:
             return None
-    
+
     @property
     def course_plan_url(self):
         if self.course_plan and hasattr(self.course_plan, 'url'):
@@ -304,44 +306,47 @@ class Course(models.Model):
         else:
             return None
 
+
 class Tutorial(models.Model):
-    author       = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
-    course       = models.ForeignKey(Course, on_delete = models.CASCADE, null =True)
-    title        = models.TextField(null = True)
-    video        = EmbedVideoField(null = True)
-    date_posted  = models.DateTimeField(default = timezone.now)
-    desc         = models.TextField(null = True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    title = models.TextField(null=True)
+    video = EmbedVideoField(null=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    desc = models.TextField(null=True)
 
     def __str__(self):
         return "%s - %s" % (self.author, self.title)
 
     class Meta:
         ordering = ['date_posted']
-    
+
     def get_absolute_url(self):
-        return reverse('tutorial-detail', kwargs = { 'pk': self.pk})
-    
+        return reverse('tutorial-detail', kwargs={'pk': self.pk})
+
     def save(self, *args, **kwargs):
         super(Tutorial, self).save(*args, **kwargs)
 
+
 class Attachment(models.Model):
-    author      = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
-    title       = models.CharField(max_length = 50)
-    course      = models.ForeignKey(Course, on_delete = models.CASCADE, null=True)
-    file        = models.FileField(null = True)
-    date_posted = models.DateTimeField(auto_now_add = True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=50)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    file = models.FileField(null=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.title}\'s Attachment'
 
     class Meta:
         ordering = ['date_posted']
-    
+
     def get_absolute_url(self):
-        return reverse('attachment-detail', kwargs = {'pk': self.pk})
+        return reverse('attachment-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         super(Attachment, self).save(*args, **kwargs)
+
 
 class Assignments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
@@ -384,6 +389,7 @@ class Submissions(models.Model):
 
 class Grading(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    assignment = models.ForeignKey(Assignments, on_delete=models.CASCADE)
     submission = models.ForeignKey(Submissions, on_delete=models.CASCADE)
     grade = models.CharField(default="A", max_length=5)
     remarks = models.TextField(blank=True, null=True)
