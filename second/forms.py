@@ -46,7 +46,6 @@ class AttendanceForm(forms.ModelForm):
         fields = ('full_name', 'roll', 'childid')
 
 
-
 class ResultForm(forms.ModelForm):
 
     class Meta:
@@ -69,7 +68,6 @@ class ContactsForm(forms.ModelForm):
         fields = {'email', 'message'}
 
 
-
 class AssignmentForm(forms.ModelForm):
     class Meta:
         model = Assignments
@@ -79,11 +77,10 @@ class AssignmentForm(forms.ModelForm):
 class SubmissionForm(forms.ModelForm):
     class Meta:
         model = Submissions
-        fields = ('file',)
+        fields = ('file', 'description')
 
 
 class GradeForm(forms.ModelForm):
     class Meta:
         model = Grading
         fields = ('grade', 'remarks')
-

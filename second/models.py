@@ -352,11 +352,11 @@ class Assignments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     title = models.CharField(max_length=500)
-    description = models.TextField(null=True)
-    file = models.FileField(upload_to='assignments/',
-                            null=True, verbose_name="")
+    description = models.TextField(null=True, blank=True)
+    file = models.FileField(null=True, blank=True,
+                            upload_to='assignments/', verbose_name="")
     date_posted = models.DateTimeField(default=timezone.now)
-    deadline = models.DateField()
+    deadline = models.DateTimeField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         super(Assignments, self).save(*args, **kwargs)
@@ -375,7 +375,7 @@ class Submissions(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     assignment = models.ForeignKey(Assignments, on_delete=models.CASCADE)
-
+    description = models.TextField(null=True, blank=True)
     file = models.FileField(upload_to='submissions/',
                             null=True, verbose_name="")
     date_submitted = models.DateTimeField(default=timezone.now)

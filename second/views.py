@@ -755,7 +755,7 @@ class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class SubmissionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Submissions
-    fields = ['file', ]
+    fields = ['file', 'description']
     template_name = 'submission_form.html'
 
     def form_valid(self, form):
