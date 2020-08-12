@@ -69,9 +69,17 @@ class ContactsForm(forms.ModelForm):
 
 
 class AssignmentForm(forms.ModelForm):
+    deadline = forms.DateTimeField(
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=forms.DateTimeInput(attrs={
+            'class': 'form-control datetimepicker-input',
+            'data-target': '#datetimepicker5'
+        })
+    )
+
     class Meta:
         model = Assignments
-        fields = ('title', 'description', 'file', 'deadline')
+        fields = ('title', 'description', 'file')
 
 
 class SubmissionForm(forms.ModelForm):

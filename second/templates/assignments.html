@@ -8,6 +8,21 @@
   <title>Assignments</title>
   <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}" />
   <link rel="stylesheet" href="{% static 'form1.css' %}" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+
+  <!-- Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"
+    integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+  <!-- Tempus Dominus Bootstrap 4 -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+    integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+    integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -15,6 +30,9 @@
   <h2>Add assignment</h2>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
+    <input type="text" class="form-control datetimepicker-input" id="datetimepicker1" data-toggle="datetimepicker"
+      data-target="#datetimepicker1" />
+
     <div>
       <button class="btn btn-outline-info" type="submit">
         Post Assignment
@@ -68,7 +86,32 @@
   {% endif %}
   {% endfor %}
   {% endif %}
+
+
+
+
+  <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker1').datetimepicker();
+    });
+  </script>
+
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
 </body>
+
+
+
 
 </html>
 {% endblock %}
