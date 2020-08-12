@@ -28,6 +28,9 @@ from django.contrib import messages
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
 from users.models import User_parents, User_teachers
+from django import template
+
+register = template.Library()
 
 
 @login_required
@@ -668,9 +671,16 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
-    tasks = Assignments.objects.all()
+    # @register.filter
+    # def par_filter(value):
+    #     filtered_data = Assignments.objects.get(author=)
+    #     return filtered_data
+
+    tasks = Assignments.objects.filter(author=request.user)
+    all_tasks = Assignments.objects.all()
     context = {
         'tasks': tasks,
+        'all_tasks': all_tasks,
         'form': form,
     }
     return render(request, 'assignments.html', context)

@@ -352,7 +352,7 @@ class Assignments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     title = models.CharField(max_length=500)
-    description = models.TextField(null=True)
+    description = models.TextField(blank=True, null=True)
     file = models.FileField(upload_to='assignments/',
                             null=True, blank=True,  verbose_name="File")
     date_posted = models.DateTimeField(default=timezone.now)
