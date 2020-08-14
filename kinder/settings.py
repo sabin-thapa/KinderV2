@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'first.apps.FirstConfig',
     'second.apps.SecondConfig',
-
+    'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'embed_video',
+    'bootstrap_datepicker_plus',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -138,8 +139,7 @@ LOGIN_URL = 'login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-#for_gmail
-import os
+# for_gmail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -149,13 +149,3 @@ EMAIL_USE_SSL = False
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 EMAIL_HOST_USER = 'kinder.mailservice@gmail.com'
 EMAIL_HOST_PASSWORD = 'shjjpvwqrgeiubgh'
-
-
-
-
-
-
-
-
-
-
