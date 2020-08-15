@@ -683,7 +683,7 @@ def assignments(request):
         'all_tasks': all_tasks,
         'form': form,
     }
-    return render(request, 'assignments.html', context)
+    return render(request, 'Assignments/assignments.html', context)
 
 
 def submissions(request, assignment_id):
@@ -707,7 +707,7 @@ def submissions(request, assignment_id):
         'assignment': assignment1,
         'subs': Submissions.objects.filter(assignment_id=assignment_id),
     }
-    return render(request, 'submissions.html', context)
+    return render(request, 'Assignments/submissions.html', context)
 
 
 def gradesubmissions(request, submission_id):
@@ -732,7 +732,7 @@ def gradesubmissions(request, submission_id):
         'form2': form2,
         'submission': submission1,
     }
-    return render(request, 'gradesubmissions.html', context)
+    return render(request, 'Assignments/gradesubmissions.html', context)
 
 
 def grade_update(request, submission_id):
@@ -745,13 +745,13 @@ def grade_update(request, submission_id):
             return redirect('assignments')
     else:
         form = GradeForm(instance=grade)
-    return render(request, 'grade-update.html', {'form': form})
+    return render(request, 'Assignments/grade-update.html', {'form': form})
 
 
 class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Assignments
     fields = ['title', 'description', 'file', 'deadline']
-    template_name = 'assignments_form.html'
+    template_name = 'Assignments/assignments_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -766,7 +766,7 @@ class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class SubmissionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Submissions
     fields = ['file', 'description']
-    template_name = 'submission_form.html'
+    template_name = 'Assignments/submission_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
