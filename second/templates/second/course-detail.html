@@ -11,13 +11,21 @@
  <hr />
     <h1>Announcements</h1>
     <p>{{course.announcement}}</p>
-    <br />
+    <hr /> <br /> 
     <h1>Syllabus</h1>
     <p><a href="{{course.syllabus_url}}">  {{ course.syllabus }}</p> </a>
     <hr />
     <h1>Course Plan</h1>
     <p><a href="{{course.course_plan_url}}">  {{ course.course_plan }}</p> </a>
     <hr />
+    <br />
+    <a href="{% url 'attachments' %}"> <h1> Attachments</h1></a>  
+    {% for attachment in course.attachment_set.all %}
+     <ul> <li>
+      <a href="{% url 'attachment-detail' attachment.pk %}">{{attachment.title}}
+     </li></ul>
+      {% endfor %} </a> 
+      <hr />
     <a href="{% url 'tutorials' %}">  <h1> Tutorials </h1></a>
     
     {% for i in course.tutorial_set.all %}
@@ -27,13 +35,7 @@
 
 
     {% endfor %}
-    <br />
-    <a href="{% url 'attachments' %}"> <h1> Attachments</h1></a>  
-    {% for attachment in course.attachment_set.all %}
-     <ul> <li>
-      <a href="{% url 'attachment-detail' attachment.pk %}">{{attachment.title}}
-     </li></ul>
-      {% endfor %} </a> 
+
 
     <div class="col-md-12 xm-0">  
       <br>

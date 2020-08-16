@@ -9,7 +9,7 @@ from kinder.settings import EMAIL_HOST_USER
 from . import forms
 from django.core.mail import send_mail
 
-def temp(request):
+def signup(request):
     if request.method == 'POST':
         form1 = UserRegistrationForm(request.POST)
         form2 = UserRegistrationForm(request.POST)
@@ -60,7 +60,7 @@ def temp(request):
         form2 = UserRegistrationForm()
         form_teachers = User_t()
 
-    return render(request, 'temp.html', {'form1': form1, 'form2': form2, 'form_parents':form_parents, 'form_teachers' : form_teachers})
+    return render(request, 'signup.html', {'form1': form1, 'form2': form2, 'form_parents':form_parents, 'form_teachers' : form_teachers})
 
 
 

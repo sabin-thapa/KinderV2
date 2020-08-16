@@ -1,4 +1,4 @@
-{% extends "second/base2.html" %} {% load static %}
+{% extends "home.html" %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,16 +8,48 @@
   </head>
   <body class="jumbotron">
     {% block base2 %}
+
+  
     <div class="heading">
       <h1>My Courses!</h1>
       <hr style="width: 50%; text-align: left; margin-left: 0;" />
     </div>
+<!--     
+    For Teachers -->
+    {% for i in course %}
+    {% if user.user_teachers != '' %}
+    {% if i.instructor.user_teachers != '' %}
+    {% if i.instructor.user_teachers.school == user.user_teachers.school %}
+
     <div class="course-list">
-      {% for i in course %}
+
       <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course_title}}</h1> </a>
       <p>{{i.instructor}}</p>
-      {% endfor %}
+
     </div>
+
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    <!-- For Parents -->
+    {% for i in course %}
+    {% if i.instructor.user_teachers.school == user.user_parents.school %}
+    {% if i.instructor.user_teachers.grade == user.user_parents.ChildGrade %}
+
+    <div class="course-list">
+
+      <a href="{% url 'course-detail' i.id %}"> <h1>{{i.course_title}}</h1> </a>
+      <p>{{i.instructor}}</p>
+
+    </div>
+
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    {% if user.user_teachers != '' %}
     <a
       style="margin-top: 20px; margin-bottom: 10px; width: 100%;"
       name="createpost"
@@ -25,6 +57,8 @@
       href="{% url 'course-create' %}"
       >Add Course</a
     >
+    {% endif %}
+
   </body>
 </html>
 {% endblock %}

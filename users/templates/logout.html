@@ -1,33 +1,24 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block base1 %}
+ {% load static %}
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logout</title>
 
-{% load static %}
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel='stylesheet' href=" {% static  'register.css' %} ">
-    <script src=" {% static 'register.js' %} "></script>
-</head>
-
-<body>
-
-
-
-    <div class="jumbotron">
-        <center>
-            <h2>You have been logged out</h2>
-            <a href="{% url 'login' %}" style="color:rgb(245, 17, 17);font-size:14px;">Log In Again</a>
-        </center>
+  <body style="  background: -webkit-linear-gradient(left, #3931af, #00c6ff);">
+    <div class="logout-prompt" style="position: absolute; top: 40%; left: 40%;  ">
+            <h2 style="color: #fff;">You have been logged out!</h2>
+            <a href="{% url 'login' %}" class="zoom btn btn-light" style="margin: 30px; " >Log In Again</a>
+            <a href="{% url 'index' %}" class="zoom btn btn-light" style="margin: 30px;" >Back To Home</a>
     </div>
 
 
-
-</body>
-
+  </body>
 </html>
 {% endblock %}
