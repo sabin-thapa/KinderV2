@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Course
 from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Assignments, Submissions, Grading
 from .models import Profile, StudentId, Attendance, Routine, Absentday
+from bootstrap_datepicker_plus import DateTimePickerInput
 
 
 class UserRegisterForm(UserCreationForm):
@@ -46,7 +47,6 @@ class AttendanceForm(forms.ModelForm):
         fields = ('full_name', 'roll', 'childid')
 
 
-
 class ResultForm(forms.ModelForm):
 
     class Meta:
@@ -69,21 +69,22 @@ class ContactsForm(forms.ModelForm):
         fields = {'email', 'message'}
 
 
-
 class AssignmentForm(forms.ModelForm):
     class Meta:
         model = Assignments
+        widgets = {
+            'deadline': DateTimePickerInput()
+        }
         fields = ('title', 'description', 'file', 'deadline')
 
 
 class SubmissionForm(forms.ModelForm):
     class Meta:
         model = Submissions
-        fields = ('file',)
+        fields = ('file', 'description')
 
 
 class GradeForm(forms.ModelForm):
     class Meta:
         model = Grading
         fields = ('grade', 'remarks')
-

@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
-from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
+from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
 from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods,Attend
+from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Grading
 from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
 from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
@@ -12,9 +12,9 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+# Create your views here.ult
 
-from .forms import UserUpdateForm,ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
+from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
 
 from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm, SubmissionForm
 
@@ -28,6 +28,9 @@ from django.contrib import messages
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
 from users.models import User_parents, User_teachers
+from django import template
+
+register = template.Library()
 
 
 @login_required
@@ -495,13 +498,10 @@ def contacts(request):
     return render(request, 'sendemail.html', {'form': Contact_Form})
 
 
-
-
 class CourseListView(ListView):
     model = Course
     template_name = "second/courses.html"
     context_object_name = 'course'
-
 
 
 class CourseDetailView(DetailView):
@@ -518,8 +518,8 @@ class CourseDetailView(DetailView):
 
 class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Course
-    fields = [ 'course_title']
-        
+    fields = ['course_title']
+
     def form_valid(self, form):
         form.instance.instructor = self.request.user
         return super().form_valid(form)
@@ -528,22 +528,23 @@ class CourseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         if self.request.user.user_teachers != '':
             return True
         return False
+
 
 class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Course
-    fields = [ 'course_title','announcement', 'syllabus', 'course_plan']
+    fields = ['course_title', 'announcement', 'syllabus', 'course_plan']
 
     def form_valid(self, form):
         form.instance.instructor = self.request.user
         return super().form_valid(form)
-    
+
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
 
 
-class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
+class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Course
     success_url = '/home/courses/'
 
@@ -552,6 +553,7 @@ class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
             return True
         return False
 
+
 class TutorialListView(ListView):
     model = Tutorial
     template_name = 'second/tutorials.html'
@@ -559,6 +561,7 @@ class TutorialListView(ListView):
 
     def get_queryset(self):
         return Tutorial.objects.all().order_by('-date_posted')
+
 
 class TutorialDetailView(DetailView):
     model = Tutorial
@@ -571,38 +574,40 @@ class TutorialDetailView(DetailView):
     #     context['tutorial'] = Tutorial.objects.all()
     #     return context
 
+
 class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
-    fields = [ 'course' ,'title', 'video', 'desc']
+    fields = ['course', 'title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         # form.instance.course = self.request.course  HELP NEEDED
         return super().form_valid(form)
 
+
 class TutorialUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tutorial
-    fields = ['course','title', 'video', 'desc']
+    fields = ['course', 'title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    
+
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
 
 
-
-class TutorialDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
+class TutorialDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tutorial
     success_url = '/home/tutorials/'
-    
+
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
+
 
 class AttachmentListView(ListView):
     model = Attachment
@@ -612,9 +617,11 @@ class AttachmentListView(ListView):
     def get_queryset(self):
         return Attachment.objects.all().order_by('-date_posted')
 
+
 class AttachmentDetailView(DetailView):
     model = Attachment
     template_name = 'second/attachment_detail.html'
+
 
 class AttachmentCreateView(LoginRequiredMixin, CreateView):
     model = Attachment
@@ -628,6 +635,7 @@ class AttachmentCreateView(LoginRequiredMixin, CreateView):
     #     form.instance.subject = self.request.course
     #     return super().form_valid(form)
 
+
 class AttachmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Attachment
     fields = ['title', 'file', 'course']
@@ -635,25 +643,25 @@ class AttachmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    
+
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
 
 
-
-class AttachmentDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
+class AttachmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Attachment
     success_url = '/home/attachments/'
 
-        
     def test_func(self):
         if self.request.user.user_teachers != '':
             return True
         return False
 
+
 def assignments(request):
+
     if request.method == 'POST':
         form = AssignmentForm(request.POST, request.FILES)
         form.instance.author = request.user
@@ -663,12 +671,19 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
-    tasks = Assignments.objects.all()
+    # @register.filter
+    # def par_filter(value):
+    #     filtered_data = Assignments.objects.get(author=)
+    #     return filtered_data
+
+    tasks = Assignments.objects.filter(author=request.user)
+    all_tasks = Assignments.objects.all()
     context = {
         'tasks': tasks,
+        'all_tasks': all_tasks,
         'form': form,
     }
-    return render(request, 'assignments.html', context)
+    return render(request, 'Assignments/assignments.html', context)
 
 
 def submissions(request, assignment_id):
@@ -692,7 +707,7 @@ def submissions(request, assignment_id):
         'assignment': assignment1,
         'subs': Submissions.objects.filter(assignment_id=assignment_id),
     }
-    return render(request, 'submissions.html', context)
+    return render(request, 'Assignments/submissions.html', context)
 
 
 def gradesubmissions(request, submission_id):
@@ -705,6 +720,7 @@ def gradesubmissions(request, submission_id):
             if form2.is_valid():
                 form2.instance.author = request.user
                 form2.instance.submission = submission1
+                form2.instance.assignment = submission1.assignment
                 form2.instance.date_graded = datetime.date.today()
                 form2.save()
 
@@ -716,20 +732,49 @@ def gradesubmissions(request, submission_id):
         'form2': form2,
         'submission': submission1,
     }
-    return render(request, 'gradesubmissions.html', context)
+    return render(request, 'Assignments/gradesubmissions.html', context)
 
 
-def assignment_update(request, pk):
-    assignment = get_object_or_404(Assignments, pk=pk)
+def grade_update(request, submission_id):
+    grade = get_object_or_404(Grading, pk=submission_id)
     if request.method == "POST":
-        form = AssignmentForm(request.POST, request.FILES, instance=assignment)
+        form = GradeForm(request.POST, instance=grade)
         if form.is_valid():
-            assignment = form.save(commit=False)
-            assignment.save()
+            grade = form.save(commit=False)
+            grade.save()
             return redirect('assignments')
     else:
-        form = AssignmentForm(instance=assignment)
-    return render(request, 'assignment-update.html', {'form': form})
+        form = GradeForm(instance=grade)
+    return render(request, 'Assignments/grade-update.html', {'form': form})
+
+
+class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Assignments
+    fields = ['title', 'description', 'file', 'deadline']
+    template_name = 'Assignments/assignments_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        if self.request.user.user_teachers != '':
+            return True
+        return False
+
+
+class SubmissionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Submissions
+    fields = ['file', 'description']
+    template_name = 'Assignments/submission_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+
+        return True
 
 
 class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -738,4 +783,13 @@ class AssignmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         assignment = self.get_object()
+        return True
+
+
+class SubmissionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Submissions
+    success_url = "/home/assignments"
+
+    def test_func(self):
+        submission = self.get_object()
         return True

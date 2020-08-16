@@ -1,0 +1,108 @@
+{% extends "base1.html" %} {% block base2 %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Assignments</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}" />
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+
+</head>
+
+<body>
+
+  {% if user.user_teachers != "" %}
+  <h2>Add assignment</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} {% bootstrap_form form %}
+
+
+    <button class="btn btn-outline-info" type="submit">
+      Post Assignment
+    </button>
+    </div>
+  </form>
+
+  <h2>Posted Assignments</h2>
+  {% for t in tasks %}
+  <h2>{{t.title}}</h2>
+  <p>{{t.description}}</p>
+  <p>Attached File (if any):</p>
+  <a href="{{t.file_url}}"> {{t.file}}</a>
+  <p>Date Posted: {{t.date_posted}}</p>
+  <p>Deadline : {{t.deadline}}</p>
+
+  <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">See Submissions</a>
+
+  <a class="btn btn-outline-primary" href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
+
+  <a class="btn btn-outline-danger" href="{% url 'assignment-delete' t.id %}">Delete Assignment</a>
+  {% endfor %}
+
+
+
+  {% elif user.user_parents != "" %}
+
+  {% for t in all_tasks %}
+  {% if t.author.user_teachers.school == user.user_parents.school %}
+  {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
+  <h2>{{t.title}}</h2>
+  <p>{{t.description}}</p>
+  <p>Attached File (if any):</p>
+  <a href="{{t.file_url}}"> {{t.file}}</a>
+  <p>Date Posted: {{t.date_posted}}</p>
+  <p>Deadline : {{t.deadline}}</p>
+
+  {{t.submissions_set.all}}<br>
+  {{t.grading_set.all}}
+  {% if user in t.submissions_set.author_list %}
+  <p>Submitted for Grading</p>
+
+  <a class="btn btn-outline-primary" href="{% url 'submissions-update' t.submissions_set.get.id %}">Edit Submission</a>
+  <a class="btn btn-outline-danger" href="{% url 'submission-delete' t.submissions_set.get.id %}">Delete Submission</a>
+  {% else %}
+
+  <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
+  {% endif %}
+
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+
+
+
+  <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss',
+      });
+    });
+  </script>
+
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+  <p>sdsdsd</p>
+</body>
+
+
+
+
+</html>
+{% endblock %}

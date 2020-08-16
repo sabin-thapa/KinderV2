@@ -19,11 +19,17 @@
     <h3>Submissions</h3>
     {%for s in subs %}
     <p>{{s.assignment}}</p>
-    <p>{{s.file}}</p>
+    <p><a href="{{s.file_url}}"> {{s.file}}</a></p>
     <p>{{s.date_submitted}}</p>
+    {% if s.grading_set.exists %}
+    <p>Graded {{s.grading_set.get.grade}}</p>
 
+    <a class="btn btn-primary" href="{% url 'grade-update' s.grading_set.get.id %}">Update Grade</a>
+
+    {% else %}
     <a class="btn btn-primary" href="{% url 'gradesubmissions' s.id %}">Add Grade</a>
 
+    {% endif %}
 
     {% endfor %}
 
@@ -31,7 +37,7 @@
 
     <h2>{{assignment.title}}</h2>
     <p>{{assignment.description}}</p>
-    <p>Attached File (if any):</p><a href="{{assignment.file.url}}"> {{assignment.file}}</a>
+    <p>Attached File (if any):</p><a href="{{assignment.file_url}}"> {{assignment.file}}</a>
     <p>Date Posted: {{assignment.date_posted}}</p>
     <p>Deadline : {{assignment.deadline}}</p>
 
