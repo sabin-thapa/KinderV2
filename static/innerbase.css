@@ -107,6 +107,12 @@ a[data-toggle="collapse"] {
     min-height: 100vh;
     left: 330px;
     transition: all 0.3s;
+}
+
+#content.wide {
+    width: 100%;
+    left: 0;
+
 
 }
 

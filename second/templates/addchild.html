@@ -1,26 +1,27 @@
-{% extends "base1.html" %} {% block base2 %} {% load static %}
+{% extends "innerbase.html" %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Student Ids</title>
-    <script src=" {% static 'registerchild.js' %} "></script>
-    <link rel="stylesheet" href="{% static 'form1.css' %}" />
-  </head>
 
-  <body class="jumbotron">
-    <div class="jumbotron">
-      <center>
-        <div class="form-box">
-          <form method="POST">
-            {% csrf_token %} {% include 'second/form-template.html' %}
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Ids</title>
+  <script src=" {% static 'registerchild.js' %} "></script>
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+</head>
 
-            <button class="btn btn-outline-info" type="submit">ADD</button>
-          </form>
-        </div>
-      </center>
-      <br />
-    </div>
-  </body>
+<body class="jumbotron">{% block innerbase %}
+  <div class="jumbotron">
+    <center>
+      <div class="form-box">
+        <form method="POST">
+          {% csrf_token %} {% include 'second/form-template.html' %}
+
+          <button class="btn btn-outline-info" type="submit">ADD</button>
+        </form>
+      </div>
+    </center>
+    <br />
+  </div>{% endblock %}
+</body>
+
 </html>
-{% endblock %}
