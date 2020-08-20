@@ -7,6 +7,7 @@ from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsD
 
 from . import views
 from django.urls import path
+from django.views.generic import TemplateView
 
 from users import views as users_views
 from django.urls import path
@@ -18,7 +19,7 @@ from .views import PostDetailView, CourseDetailView, CourseListView, SIDCreateVi
 
 urlpatterns = [
     path('home/', views.postsandnotices, name='home'),
-
+    path('test/', TemplateView.as_view(template_name='innerbase.html')),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),

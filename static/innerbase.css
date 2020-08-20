@@ -1,0 +1,145 @@
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #fafafa;
+}
+
+
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+
+}
+
+/* Side bar */
+.wrapper {
+    display: flex;
+    text-decoration: none;
+    transition: all 0.3s;
+    min-height: 100vh;
+    flex-direction: row;
+}
+
+#sidebar {
+    min-width: 330px;
+    max-width: 330px;
+    min-height: 100vh;
+    position: fixed;
+    background: #1f1919;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.reactive {
+    margin-left: -330px;
+}
+
+
+
+#sidebar #sidebar-header {
+    padding: 20px;
+    background: #1d1919;
+
+}
+
+#sidebar-header a {
+    font-size: small;
+    display: block;
+    text-align: center;
+
+}
+
+#sidebar-header h3 {
+    font-size: 25px;
+    padding-top: 10px;
+    color: #f8b739;
+}
+
+#sidebar img {
+    display: block;
+    max-width: 130px;
+    max-height: 130px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#sidebar ul.components {
+    padding: 10px 0;
+    border-bottom: 1px solid #1d1919;
+}
+
+#sidebar ul li {
+    font-size: 19px;
+    padding: 0px 25px;
+}
+
+
+#sidebar ul li a {
+    padding: 12px 0;
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar ul li a:hover {
+    color: #f8b739;
+}
+
+#sidebar ul li.active>a {
+    background: transparent;
+    color: #f8b739;
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#content {
+    display: block;
+    width: calc(100% - 330px);
+    flex: 1;
+    position: absolute;
+    padding: 10px;
+    min-height: 100vh;
+    left: 330px;
+    transition: all 0.3s;
+
+}
+
+#content .main-body {
+    width: 100%;
+    padding: 50px 70px;
+    min-height: 100vh;
+
+}
+
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -330px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+
+    }
+
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+.navbar {
+    padding-top: 20px;
+    box-shadow: 3px 3px 2px 2px rgba(8, 8, 8, 0.1);
+
+}
+
+.navbar-items ul {
+    display: inline-flex;
+}
