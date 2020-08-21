@@ -20,17 +20,16 @@ class School(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
     content = models.TextField(blank=True)
     photo = models.ImageField(upload_to='posts', blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return 'post by ' + self.author.username + " on " + str(self.date_posted.date())
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse('home', kwargs={})
 
     def save(self, *args, **kwargs):
         super(Post, self).save(*args, **kwargs)
@@ -276,11 +275,12 @@ class Contacts(models.Model):
 
 class Course(models.Model):
     course_title = models.TextField()
-    instructor   = models.ForeignKey(User, on_delete = models.CASCADE)
-    announcement = models.TextField(null = True, blank=True)
-    syllabus     = models.FileField(null= True, blank=True, upload_to='syllabus/', verbose_name="Syllabus")
-    course_plan  = models.FileField(null = True, blank=True, upload_to = 'course_plan/', verbose_name = "Course Plan")
-
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE)
+    announcement = models.TextField(null=True, blank=True)
+    syllabus = models.FileField(
+        null=True, blank=True, upload_to='syllabus/', verbose_name="Syllabus")
+    course_plan = models.FileField(
+        null=True, blank=True, upload_to='course_plan/', verbose_name="Course Plan")
 
     def __str__(self):
         return self.course_title
@@ -340,7 +340,6 @@ class Attachment(models.Model):
     class Meta:
 
         ordering = ['-date_posted']
-    
 
     def get_absolute_url(self):
         return reverse('attachment-detail', kwargs={'pk': self.pk})

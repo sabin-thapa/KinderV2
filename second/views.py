@@ -221,11 +221,6 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'post_detail.html'
-
-
 class NoticeDetailView(DetailView):
     model = Notice
     template_name = 'notice_detail.html'
@@ -255,7 +250,7 @@ class NoticeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'photo']
+    fields = ['content', 'photo']
     template_name = 'post_form.html'
 
     def form_valid(self, form):
@@ -385,7 +380,7 @@ class EventsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'photo']
+    fields = ['content', 'photo']
     template_name = 'notice_form.html'
 
     def form_valid(self, form):

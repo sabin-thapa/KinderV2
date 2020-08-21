@@ -7,24 +7,7 @@
 
 <head>
     <title>posts</title>
-    <style>
-        .zoom {
-            padding: 4px;
-            background-color: none;
-            transition: transform .2s;
-            width: 150px;
-            height: 35px;
-            margin: 0 auto;
-        }
 
-        .zoom:hover {
-            -ms-transform: scale(1.2);
-            /* IE 9 */
-            -webkit-transform: scale(1.2);
-            /* Safari 3-8 */
-            transform: scale(1.2);
-        }
-    </style>
     <script>
         var createpost = document.getElementsByName("createpost")
         var posts = document.getElementsByName("posts")
@@ -50,6 +33,7 @@
             }
         }
     </script>
+
 </head>
 
 
@@ -59,7 +43,7 @@
         <div class="row row-height">
 
 
-            <div class="col-lg-8">
+            <div class="col-lg-9">
 
 
                 <br>
@@ -67,28 +51,37 @@
                 {% if post.author.user_teachers != "" %}
                 {% if user.user_teachers != ""%}
                 {% if post.author.user_teachers.school == user.user_teachers.school %}
-                <div style="margin-left: 70px;background-color:white;border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;"
+                <div style="border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;margin-bottom: 50px;"
                     name='posts'>
                     <br>
-                    <div style="margin-left:10px;margin-right:10px;">
+                    <div style="margin-left:20px;">
                         <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
-                        <b>
-                            <p style="font-size:25px;"><img class="rounded-circle account-img"
-                                    src="{{ post.author.profile.image.url }}" height="45px" , width="45px">
-                                <a href="{% url 'user-posts' post.author.username %}">{{post.author}}</a></p>
-                        </b>
-                        <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
 
-                        <div><a href="{% url 'post-detail' post.id %}">
-                                <h1>{{post.title}}</h1>
-                            </a>
-                        </div>
-                        <p><b>{{post.content}}</b></p>
+                        <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height="45px"
+                            , width="45px">
+                        <b>
+                            <a style="margin-left: 5px;"
+                                href="{% url 'user-posts' post.author.username %}">{{post.author}}</a>
+
+                        </b><br>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}
+                            <br>
+                            <div style="position: relative; float: right; right: 40px; top: -20px;">
+                                <a class="btn btn-outline-primary" href="{% url 'post-update' post.id %}">Edit
+                                </a>
+
+                                <a class="btn btn-outline-danger" href="{% url 'post-delete' post.id %}">Delete
+                                </a>
+                            </div>
+                        </small><br><br>
+                        <p style="word-break: break-all; padding-right: 20px;"><b>{{post.content}}</b></p>
+
+
                     </div>
 
 
-                    <img id='posting' style="width: 100%; height: 100%;padding-top: 20px; padding-bottom: -40px;"
-                        src="/media/{{post.photo}}" onerror="this.style.display='none'">
+                    <img id='posting' style="width: 100%; height: 100%;" src="/media/{{post.photo}}"
+                        onerror="this.style.display='none'">
                     <br>
                 </div>
                 <br>
@@ -224,11 +217,13 @@
                 </div>
             </div>
 
+
             {% endblock %}
         </div>
     </div>
     </div>
     <!-- Navbar Right Side -->
+
 </body>
 
 
