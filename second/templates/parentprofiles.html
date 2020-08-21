@@ -1,69 +1,64 @@
 <!DOCTYPE html>
-{% extends "base1.html" %} {% block base2 %}
+{% extends "innerbase.html" %} {% block innerbase %}
 <html lang="en">
-  {% load static %}
+{% load static %}
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="{% static 'form1.css' %}" />
-    <title>ParentProfiles</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+  <title>ParentProfiles</title>
+</head>
 
-  <body class="jumbotron">
-    <center>
-      <h1>List Of Parents</h1>
-      <input
-        class="form-control"
-        type="text"
-        id="myInput"
-        onkeyup="myFunction()"
-        placeholder="Search for names..."
-      />
-      <table class="table table-hover" id="myTable">
-        <thead class="thead-dark">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Child ID</th>
-          </tr>
-        </thead>
-        {% for p in parents%}
+<body class="jumbotron">
+  <center>
+    <h1>List Of Parents</h1>
+    <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..." />
+    <table class="table table-hover" id="myTable">
+      <thead class="thead-dark">
         <tr>
-          <td>{{p.user.username}}</td>
-          <td>
-            <a href="{% url 'send-email' %}"><b>{{p.user.email}}</b> </a>
-            <!-- <button class="btn btn-dark">
+          <th>Name</th>
+          <th>Email</th>
+          <th>Child ID</th>
+        </tr>
+      </thead>
+      {% for p in parents%}
+      <tr>
+        <td>{{p.user.username}}</td>
+        <td>
+          <a href="{% url 'send-email' %}"><b>{{p.user.email}}</b> </a>
+          <!-- <button class="btn btn-dark">
               Copy Email
             </button> -->
-          </td>
-          <td>{{ p.ChildID }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-    </center>
+        </td>
+        <td>{{ p.ChildID }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </center>
 
-    <script>
-      function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
           }
         }
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>
 {% endblock %}

@@ -1,74 +1,50 @@
 <!DOCTYPE html>
-{% extends "second/base2.html" %} {% block base2 %} {% load static %}
+{% extends "innerbase.html" %} {% block innerbase %} {% load static %}
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Contact</title>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'form.css' %}" />
-    <link
-      href="http://fonts.googleapis.com/css?family=Dosis:400,500,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="http://fonts.googleapis.com/css?family=Open+Sans:400,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      s
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      type="text/css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Contact</title>
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'responsive.css' %}"
-    />
-  </head>
-  <body class="">
-    <div class="">
-      <div class="contact-section">
-        <div class="container">
-          <div class="row">
-            <div
-              class="contact-form col-md-8 wow fadeIn"
-              style="margin-top: 70px;"
-            >
-              <h1>Contact</h1>
+  <link rel="stylesheet" type="text/css" href="{% static 'form.css' %}" />
+  <link href="http://fonts.googleapis.com/css?family=Dosis:400,500,700" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" s href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    type="text/css" />
 
-              <form method="POST">
-                {% csrf_token %} {{ form.as_p }}
-                <button class="btn btn-outline-info">Send</button>
-              </form>
-              {% if user.user_teachers != '' %}
-              <a
-                style="margin-top: 20px; margin-bottom: 10px; width: 50%;"
-                name="createpost"
-                class="zoom btn btn-secondary"
-                href="{% url 'parent-profiles' %}"
-                >Parent Profiles
-              </a>
-              {% endif %}
-              <a
-                style="margin-top: 20px; margin-bottom: 10px; width: 50%;"
-                name="createpost"
-                class="zoom btn btn-secondary"
-                href="{% url 'teacher-profile' %}"
-                >Teacher Profiles
-              </a>
-            </div>
+  <link rel="stylesheet" type="text/css" href="{% static 'responsive.css' %}" />
+</head>
+
+<body class="">
+  <div class="">
+    <div class="contact-section">
+      <div class="container">
+        <div class="row">
+          <div class="contact-form col-md-8 wow fadeIn" style="margin-top: 70px;">
+            <h1>Contact</h1>
+
+            <form method="POST">
+              {% csrf_token %} {{ form.as_p }}
+              <button class="btn btn-outline-info">Send</button>
+            </form>
+            {% if user.user_teachers != '' %}
+            <a style="margin-top: 20px; margin-bottom: 10px; width: 50%;" name="createpost"
+              class="zoom btn btn-secondary" href="{% url 'parent-profiles' %}">Parent Profiles
+            </a>
+            {% endif %}
+            <a style="margin-top: 20px; margin-bottom: 10px; width: 50%;" name="createpost"
+              class="zoom btn btn-secondary" href="{% url 'teacher-profile' %}">Teacher Profiles
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 {% endblock %}

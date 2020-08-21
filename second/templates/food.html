@@ -1,65 +1,73 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+{% block innerbase %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        table,th, td, tr {
-        border: 1px solid black;
-        border-collapse: collapse;
+        table,
+        th,
+        td,
+        tr {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
-        #myTable th{
-            background-color:#729FCFFF;
+
+        #myTable th {
+            background-color: #729FCFFF;
         }
     </style>
 
 </head>
+
 <body style="padding-top: 55px;" class="jumbotron">
 
 
-<div class="jumbotron">
+    <div class="jumbotron">
         <center>
-        {% if user.user_teachers != '' %}
-        <button class='btn btn-secondary' onclick="location.href='{% url 'add_food' %}'" style="margin-left:90%;">ADD</button>
-        {% endif %}
-        <br>
-        <br>
-      
-        <table class="table table-hover" id="myTable" style="width: 70%">
-          <caption>{{f.full_name}}</caption>
-            <thead class="thead-gray">
-                <tr>
-                    <th>Day</th>
-                    <th>Food</th>
-                  
-                </tr>
-                </thead>
-                
-                <tbody>
-                  
-                {% for f in food %}
-                  <tr>
-                      <td>{{f.day}}</td>
-                      <td>{{f.food}}</td>
-                 
-                  </tr>
-                
-                  {% endfor %}
+            {% if user.user_teachers != '' %}
+            <button class='btn btn-secondary' onclick="location.href='{% url 'add_food' %}'"
+                style="margin-left:90%;">ADD</button>
+            {% endif %}
+            <br>
+            <br>
 
-                   
+            <table class="table table-hover" id="myTable" style="width: 70%">
+                <caption>{{f.full_name}}</caption>
+                <thead class="thead-gray">
+                    <tr>
+                        <th>Day</th>
+                        <th>Food</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for f in food %}
+                    <tr>
+                        <td>{{f.day}}</td>
+                        <td>{{f.food}}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
                 </tbody>
-                
-                
-        </table>
-      
-   
+
+
+            </table>
+
+
 
         </center>
-</div>
+    </div>
 
 </body>
+
 </html>
 {% endblock %}

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-{% extends "base1.html" %} {% block base2 %}
+{% extends "innerbase.html" %} {% block innerbase %}
 <html lang="en">
-  {% load static %}
+{% load static %}
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
 
-  <body>
-    <div class="jumbotron">
-      <center>
-        <div class="form-box">
-          <form method="POST">
-            {% csrf_token %} {% include 'second/delete-form-template.html' %}
-          </form>
-        </div>
-      </center>
-    </div>
-  </body>
+<body>
+  <div class="jumbotron">
+    <center>
+      <div class="form-box">
+        <form method="POST">
+          {% csrf_token %} {% include 'second/delete-form-template.html' %}
+        </form>
+      </div>
+    </center>
+  </div>
+</body>
+
 </html>
 {% endblock %}

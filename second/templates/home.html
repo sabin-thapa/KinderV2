@@ -1,5 +1,5 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 <html>
 {% load static %}
 
@@ -55,83 +55,11 @@
 
 <body>
     <div class="jumbotron">
-
+        {% block innerbase %}
         <div class="row row-height">
-            <div class="col-lg-2">
-                <div class="col-lg-2" style="position: fixed;">
-                    {% if user.user_teachers != "" %}
-                    <a style="margin-top: 50px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'registerchild' %}">Register Children </a>
-                    <br>
-                    <p id="usertype" style="display:none;">{{user.user_teachers.UserType}}</p>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'post-create' %}">Create Post</a>
-                    <br>
 
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'attendance' %}">Attendance</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'courses' %}">Resources</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'assignments' %}">Assignments</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'tutorials' %}">Tutorials</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'routine' %}">Class Routine</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'notice-create' %}">Add Notice</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'events-create' %}">Add Event</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'result' %}">Add Results</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'send-email' %}">Contact</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'teacher-profile' %}">Teachers </a>
 
-                    {% elif user.user_parents != "" %}
-                    <a style="margin-top: 50px; margin-bottom: 10px; width:100%;" class='zoom btn btn-secondary'
-                        href="{% url 'result' %}">See Result</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'routine' %}">See Routine</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'food' %}">Food Routine</a>
-                    <br>
-
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'courses' %}">Resources</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'assignments' %}">Assignments</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'tutorials' %}">Tutorials</a>
-                    <br>
-                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'attendance' %}">See Attendance</a>
-
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'attendance' %}">See Attendance</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'send-email' %}">Contact </a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost"
-                        class='zoom btn btn-secondary' href="{% url 'teacher-profile' %}">Teachers</a>
-                    {% endif %}
-
-                </div>
-            </div>
-
-            <div class="col-lg-7">
+            <div class="col-lg-8">
 
 
                 <br>
@@ -201,11 +129,11 @@
                 {% endfor %}
             </div>
 
-            <div class="col-lg-2" style="padding-left: ;background-color:;">
+            <div class="col-lg-3" style="padding-left: ;background-color:;">
 
 
 
-                <div class="col-lg-3" style="position: fixed;padding-left:75px;background-color:;">
+                <div class="col-lg-2" style="position: fixed;padding-left:75px;background-color:;">
                     {% if user.is_authenticated %}
                     <div style="margin-top: 40px; width: 85%;height:300%;background-color:#ffffff;">
                         <table class="table table-hover">
@@ -249,15 +177,6 @@
 
 
                 </div>
-
-
-
-
-
-
-
-
-
 
                 <div class="col-lg-3" style="position: fixed;padding-left:75px; margin-top: 320px; background-color:;">
                     {% if user.is_authenticated %}
@@ -305,7 +224,7 @@
                 </div>
             </div>
 
-
+            {% endblock %}
         </div>
     </div>
     </div>
@@ -314,7 +233,3 @@
 
 
 </html>
-
-
-
-{% endblock %}

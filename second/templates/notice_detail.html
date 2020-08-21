@@ -1,40 +1,44 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+{% block innerbase %}
+
 <head>
-    <style>
-       .profile {
-        background-color: lightgrey;
-        width: 50%;
-        border: 2px solid black;
-        padding: 50px;
-        margin: 20px;
-      }
-    </style>
+  <style>
+    .profile {
+      background-color: lightgrey;
+      width: 50%;
+      border: 2px solid black;
+      padding: 50px;
+      margin: 20px;
+    }
+  </style>
 </head>
 
 <body class="jumbotron">
-<div class="jumbotron">
+  <div class="jumbotron">
     <div class="profile">
-    <b><p style="font-size:25px;"><img class="rounded-circle account-img" src="{{ notice.author.profile.image.url }}" height = "45px", width="45px">
-    <h4>{{notice.author}}</h4>
+      <b>
+        <p style="font-size:25px;"><img class="rounded-circle account-img" src="{{ notice.author.profile.image.url }}"
+            height="45px" , width="45px">
+          <h4>{{notice.author}}</h4>
 
-    <small class = "text-muted">{{ notice.date_posted|date:"F d, Y"}}</small>
-    
-    <h1>{{notice.title}}</h1>
-    
-    
-    <p><b>{{notice.content}}</b></p>
+          <small class="text-muted">{{ notice.date_posted|date:"F d, Y"}}</small>
 
-    <br>
-    {% if user.user_teachers != '' %}
-    <a class='btn btn-secondary' name="createpost" href="{% url 'notice-update' object.id %}">Update Notice</a>
-    <a class='btn btn-outline-danger' name="createpost" href="{% url 'notice-delete' object.id %}">Delete Notice</a>
+          <h1>{{notice.title}}</h1>
+
+
+          <p><b>{{notice.content}}</b></p>
+
+          <br>
+          {% if user.user_teachers != '' %}
+          <a class='btn btn-secondary' name="createpost" href="{% url 'notice-update' object.id %}">Update Notice</a>
+          <a class='btn btn-outline-danger' name="createpost" href="{% url 'notice-delete' object.id %}">Delete
+            Notice</a>
     </div>
     {% endif %}
 
 
 
 
-</div>
+  </div>
 </body>
 {% endblock %}

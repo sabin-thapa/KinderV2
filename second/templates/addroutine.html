@@ -1,29 +1,32 @@
-{% extends "base1.html" %} {% block base2 %} {% load static %}
+{% extends "innerbase.html" %} {% block innerbase %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Add routine</title>
-    <link rel="stylesheet" type="text/css" href="{% static "second.css" %}">
-    <link rel="stylesheet" href="{% static 'form1.css' %}" />
 
-    <script src=" {% static 'registerchild.js' %} "></script>
-  </head>
-  <body style="padding-top: 55px;" class="jumbotron">
-    <div class="jumbotron">
-      <center>
-        <div class="form-box">
-          <form method="POST">
-            {% csrf_token %} {% include 'second/form-template.html' %}
-            <div>
-              <button class="btn btn-outline-info" type="submit">ADD</button>
-            </div>
-          </form>
-        </div>
-      </center>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Add routine</title>
+  <link rel="stylesheet" type="text/css" href="{% static "second.css" %}">
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+
+  <script src=" {% static 'registerchild.js' %} "></script>
+</head>
+
+<body style="padding-top: 55px;" class="jumbotron">
+  <div class="jumbotron">
+    <center>
+      <div class="form-box">
+        <form method="POST">
+          {% csrf_token %} {% include 'second/form-template.html' %}
+          <div>
+            <button class="btn btn-outline-info" type="submit">ADD</button>
+          </div>
+        </form>
+      </div>
+    </center>
+  </div>
+</body>
+
 </html>
 
 {% endblock %}

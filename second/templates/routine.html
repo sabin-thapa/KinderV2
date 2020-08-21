@@ -1,49 +1,56 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+{% block innerbase %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        table,th, td, tr {
-        border: 1px solid black;
-        border-collapse: collapse;
+        table,
+        th,
+        td,
+        tr {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
-        #myTable th{
-            background-color:#729FCFFF;
+
+        #myTable th {
+            background-color: #729FCFFF;
         }
     </style>
 
 </head>
+
 <body style="padding-top: 55px;" class="jumbotron">
 
 
-<div class="jumbotron">
+    <div class="jumbotron">
         <center>
-        {% if user.user_teachers != "" %}
-        <button class='btn btn-secondary' onclick="location.href='{% url 'addroutine' %}'" style="margin-left:90%;">ADD</button>
-        {% endif %}
-        <br>
-        <br>
-        <table class="table table-hover" id="myTable" style="width: 70%">
-            <thead class="thead-gray">
-                <tr>
-                    <th>Day</th>
-                    <th>10:00-10:45</th>
-                    <th>10:45-11:30</th>
-                    <th>10:30-11:345</th>
-                    <th>11:45-12:30</th>
-                    <th>12:30-13:15</th>
-                    <th>13:15-14:00</th>
-                    <th>14:00-14:45</th>
-                    <th>14:45-15:30</th>
+            {% if user.user_teachers != "" %}
+            <button class='btn btn-secondary' onclick="location.href='{% url 'addroutine' %}'"
+                style="margin-left:90%;">ADD</button>
+            {% endif %}
+            <br>
+            <br>
+            <table class="table table-hover" id="myTable" style="width: 70%">
+                <thead class="thead-gray">
+                    <tr>
+                        <th>Day</th>
+                        <th>10:00-10:45</th>
+                        <th>10:45-11:30</th>
+                        <th>10:30-11:345</th>
+                        <th>11:45-12:30</th>
+                        <th>12:30-13:15</th>
+                        <th>13:15-14:00</th>
+                        <th>14:00-14:45</th>
+                        <th>14:45-15:30</th>
 
-                </tr>
-            </thead>
+                    </tr>
+                </thead>
 
-            {% for rout in routine %}
+                {% for rout in routine %}
                 {% if user == rout.teacher %}
                 <tr>
                     {% if user.user_teachers != "" %}
@@ -59,11 +66,11 @@
                     <td>Lunch</td>
                     <td>{{rout.two_two45}}</td>
                     <td>{{rout.two45_three30}}</td>
-                    </tr>
+                </tr>
                 {% endif %}
                 {% if rout.teacher.user_teachers.school == user.user_parents.school %}
                 {% if rout.teacher.user_teachers.grade == user.user_parents.ChildGrade %}
-                    <tr>
+                <tr>
                     {% if user.user_teachers != "" %}
                     <td><b><a href="{% url 'routine-detail' rout.id %}">{{rout.day}}</a></b></td>
                     {% else %}
@@ -77,17 +84,18 @@
                     <td>Lunch</td>
                     <td>{{rout.two_two45}}</td>
                     <td>{{rout.two45_three30}}</td>
-                    </tr>
+                </tr>
                 {% endif%}
                 {% endif %}
-            {% endfor %}
+                {% endfor %}
 
 
-        </table>
+            </table>
 
         </center>
-</div>
+    </div>
 
 </body>
+
 </html>
 {% endblock %}

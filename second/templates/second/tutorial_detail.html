@@ -1,40 +1,32 @@
-{% extends "second/base2.html" %} {% load embed_video_tags %} {% load static %}
-{% block base2 %}
+{% extends "innerbase.html" %} {% load embed_video_tags %} {% load static %}
+{% block innerbase %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutorial Detail</title>
-  </head>
 
-  <body class="jumbotron">
-    <h1>Tutorial Detail</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial Detail</title>
+</head>
 
+<body class="jumbotron">
+  <h1>Tutorial Detail</h1>
+
+  <br />
+  <h1>{{ tutorial.title }}</h1>
+  <!-- <a href="{{tutorial.tutorial.url}}"> {{ tutorial.tutorial }} </a> -->
+  {% video tutorial.video 'large' %}
+  <h1>Description</h1>
+  <p>{{ object}}</p>
+  <p>{{ tutorial.desc}}</p>
+
+  <div class="col-md-12 xm-0">
     <br />
-    <h1>{{ tutorial.title }}</h1>
-    <!-- <a href="{{tutorial.tutorial.url}}"> {{ tutorial.tutorial }} </a> -->
-    {% video tutorial.video 'large' %}
-    <h1>Description</h1>
-    <p>{{ object}}</p>
-    <p>{{ tutorial.desc}}</p>
+    {% if user.user_teachers != '' %}
+    <a class="btn btn-secondary" name="createpost" href="{% url 'tutorial-update' object.id %}">Update Tutorial</a>
+    <a class="btn btn-outline-danger" name="createpost" href="{% url 'tutorial-delete' object.id %}">Delete Tutorial</a>
+    {% endif %}
+  </div>
+</body>
 
-    <div class="col-md-12 xm-0">
-      <br />
-      {% if user.user_teachers != '' %}
-      <a
-        class="btn btn-secondary"
-        name="createpost"
-        href="{% url 'tutorial-update' object.id %}"
-        >Update Tutorial</a
-      >
-      <a
-        class="btn btn-outline-danger"
-        name="createpost"
-        href="{% url 'tutorial-delete' object.id %}"
-        >Delete Tutorial</a
-      >
-      {% endif %}
-    </div>
-  </body>
 </html>
 {% endblock %}

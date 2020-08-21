@@ -1,66 +1,62 @@
-{% extends "base1.html" %} {% block base2 %} {% load static %}
+{% extends "innerbase.html" %} {% block innerbase %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>TeacherProfiles</title>
-    <script src=" {% static 'registerchild.js' %} "></script>
-    <link rel="stylesheet" href="{% static 'form1.css' %}" />
-  </head>
 
-  <body class="jumbotron">
-    <center>
-      <h1>List Of Teachers</h1>
-      <input
-        class="form-control"
-        type="text"
-        id="myInput"
-        onkeyup="myFunction()"
-        placeholder="Search for names..."
-      />
-      <table class="table table-hover" id="myTable">
-        <thead class="thead-dark">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        {% for t in teachers %}
+<head>
+  <meta charset="UTF-8" />
+  <title>TeacherProfiles</title>
+  <script src=" {% static 'registerchild.js' %} "></script>
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+</head>
+
+<body class="jumbotron">
+  <center>
+    <h1>List Of Teachers</h1>
+    <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..." />
+    <table class="table table-hover" id="myTable">
+      <thead class="thead-dark">
         <tr>
-          <td><b> {{t.user.username}} </b></td>
-          <td>
-            <a href="{% url 'send-email' %}">{{t.user.email}}</a>
-            <br />
-            <button class="btn btn-dark" id="myButton" onclick="copyFunction()">
-              Copy Email
-            </button>
-            <br />
-          </td>
+          <th>Name</th>
+          <th>Email</th>
         </tr>
-        {% endfor %}
-      </table>
-    </center>
+      </thead>
+      {% for t in teachers %}
+      <tr>
+        <td><b> {{t.user.username}} </b></td>
+        <td>
+          <a href="{% url 'send-email' %}">{{t.user.email}}</a>
+          <br />
+          <button class="btn btn-dark" id="myButton" onclick="copyFunction()">
+            Copy Email
+          </button>
+          <br />
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </center>
 
-    <script>
-      function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
           }
         }
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>
 {% endblock %}
