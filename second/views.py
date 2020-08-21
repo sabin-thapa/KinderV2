@@ -110,6 +110,7 @@ def addresult(request):
 @login_required
 def registerchild(request):
     context = {
+
         'stid': SID.objects.all(),
     }
     return render(request, 'registerchild.html', context)
@@ -134,6 +135,7 @@ class ResultDetail(DetailView):
 def attendance(request):
 
     context = {
+
         'students': Attend.objects.all(),
     }
     return render(request, 'attendance.html', context)
@@ -191,6 +193,7 @@ def postsandnotices(request):
     post_list = Post.objects.all()
 
     context = {
+
         'posts': post_list,
         'notices': Notice.objects.all().order_by('-date_posted'),
         'events': Events.objects.all().order_by('-date_posted'),

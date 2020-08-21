@@ -54,6 +54,7 @@ a:focus {
     font-size: 25px;
     padding-top: 10px;
     color: #f8b739;
+    letter-spacing: 1px;
 }
 
 #sidebar img {
@@ -76,14 +77,17 @@ a:focus {
 
 
 #sidebar ul li a {
-    padding: 12px 0;
+    padding: 12px 12px;
     display: block;
     color: rgba(255, 255, 255, 0.8);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.7px;
+    border-left: 2px solid transparent;
 }
 
 #sidebar ul li a:hover {
     color: #f8b739;
+    border-left-color: cyan;
 }
 
 #sidebar ul li a:hover>.ico {
@@ -91,9 +95,10 @@ a:focus {
 
 }
 
-#sidebar ul li.active>a {
+#sidebar ul li.active a {
     background: transparent;
     color: #f8b739;
+    border-left-color: cyan;
 }
 
 
