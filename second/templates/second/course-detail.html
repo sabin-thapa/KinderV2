@@ -1,4 +1,4 @@
-{% extends "innerbase.html" %} {% load static %} {% block innerbase %} {% load embed_video_tags %}
+{% extends "innerbase.html" %} {% load static %} {% load embed_video_tags %}
 <html lang="en">
 
 <head>
@@ -8,6 +8,7 @@
 </head>
 
 <body class="jumbotron">
+  {% block innerbase %}
   <h1><strong> {{course.course_title}} </strong></h1>
   <hr />
   <h1>Announcements</h1>
@@ -52,7 +53,7 @@
       <a class='btn btn-outline-danger' name="createpost" href="{% url 'course-delete' object.id %}">Delete Course</a>
       {% endif %}
     </div>
+    {% endblock %}
 </body>
 
 </html>
-{% endblock %}

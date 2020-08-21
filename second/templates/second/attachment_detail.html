@@ -1,4 +1,4 @@
-{% extends "innerbase.html" %} {% load static %} {% block innerbase %}
+{% extends "innerbase.html" %} {% load static %}
 <html lang="en">
 
 <head>
@@ -8,6 +8,7 @@
 </head>
 
 <body class="jumbotron">
+  {% block innerbase %}
   <h1>Detail</h1>
   <h1>{{attachment.title}}</h1>
   <img src="{{attachment.file.url}}" style="height: 700px; width: 700px;" />
@@ -21,7 +22,7 @@
       Attachment</a>
     {% endif %}
   </div>
+  {% endblock %}
 </body>
 
 </html>
-{% endblock %}

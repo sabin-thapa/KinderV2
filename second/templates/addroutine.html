@@ -1,4 +1,4 @@
-{% extends "innerbase.html" %} {% block innerbase %} {% load static %}
+{% extends "innerbase.html" %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,7 @@
 </head>
 
 <body style="padding-top: 55px;" class="jumbotron">
+  {% block innerbase %}
   <div class="jumbotron">
     <center>
       <div class="form-box">
@@ -25,8 +26,7 @@
       </div>
     </center>
   </div>
+  {% endblock %}
 </body>
 
 </html>
-
-{% endblock %}

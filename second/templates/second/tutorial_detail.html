@@ -1,5 +1,5 @@
 {% extends "innerbase.html" %} {% load embed_video_tags %} {% load static %}
-{% block innerbase %}
+
 <html lang="en">
 
 <head>
@@ -9,6 +9,7 @@
 </head>
 
 <body class="jumbotron">
+  {% block innerbase %}
   <h1>Tutorial Detail</h1>
 
   <br />
@@ -26,7 +27,7 @@
     <a class="btn btn-outline-danger" name="createpost" href="{% url 'tutorial-delete' object.id %}">Delete Tutorial</a>
     {% endif %}
   </div>
+  {% endblock %}
 </body>
 
 </html>
-{% endblock %}

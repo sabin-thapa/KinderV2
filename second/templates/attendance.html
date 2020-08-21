@@ -1,5 +1,5 @@
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 
 {% load static %}
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
 
 
 <body style="margin-top: 90px;" class="jumbotron">
-
+    {% block innerbase %}
 
     <div class="container">
         <center>
@@ -112,9 +112,8 @@
         </center>
     </div>
 
-
+    {% endblock %}
 
 </body>
 
 </html>
-{% endblock %}

@@ -1,5 +1,5 @@
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +25,7 @@
 
 
 <body style="padding-top: 58px;" class="jumbotron">
+    {% block innerbase %}
 
     <a class="btn btn-primary" href="{% url 'attendance' %}"
         style="margin-left: 40px; margin-top: 30px; margin-bottom: 20px;">Back to Attendance</a>
@@ -56,7 +57,7 @@
             </table>
         </center>
     </div>
+    {% endblock %}
 </body>
 
 </html>
-{% endblock %}

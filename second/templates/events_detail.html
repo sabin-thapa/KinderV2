@@ -1,5 +1,5 @@
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 
 <head>
   <style>
@@ -14,6 +14,7 @@
 </head>
 
 <body class="jumbotron">
+  {% block innerbase %}
   <div class="jumbotron">
     <div class="profile">
       <b>
@@ -39,5 +40,5 @@
 
 
   </div>
+  {% endblock %}
 </body>
-{% endblock %}

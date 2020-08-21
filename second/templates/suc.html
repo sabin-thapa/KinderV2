@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 <html>
 
 <head>
@@ -8,14 +8,15 @@
 </head>
 
 <body>
+    {% block innerbase %}
     <div class="jumbotron">
         <h1>Email sent successfully!</h1>
 
 
         <a href={% url 'home' %} class='zoom btn btn-secondary'> Home </a>
     </div>
+
+    {% endblock %}
 </body>
 
 </html>
-
-{% endblock %}

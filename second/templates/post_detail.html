@@ -1,8 +1,9 @@
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 
 
 <body class="jumbotron">
+    {% block innerbase %}
     <div class="jumbotron">
         <script>
             var createpost = document.getElementsByName("createpost")
@@ -62,6 +63,5 @@
         </div>
 
 
-    </div>
+    </div>{% endblock %}
 </body>
-{% endblock %}

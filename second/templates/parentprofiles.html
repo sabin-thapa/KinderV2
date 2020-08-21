@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "innerbase.html" %} {% block innerbase %}
+{% extends "innerbase.html" %}
 <html lang="en">
 {% load static %}
 
@@ -12,6 +12,7 @@
 </head>
 
 <body class="jumbotron">
+  {% block innerbase %}
   <center>
     <h1>List Of Parents</h1>
     <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..." />
@@ -58,7 +59,7 @@
       }
     }
   </script>
+  {% endblock %}
 </body>
 
 </html>
-{% endblock %}

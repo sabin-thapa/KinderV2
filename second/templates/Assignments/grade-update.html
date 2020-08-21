@@ -1,5 +1,5 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 
 {% load static %}
 <!DOCTYPE html>
@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    {% block innerbase %}
     <p>Update Grade</p>
     <form method='POST'>
         {% csrf_token %}
@@ -24,9 +25,8 @@
 
         </div>
     </form>
-
+    {% endblock %}
 
 </body>
 
 </html>
-{% endblock %}

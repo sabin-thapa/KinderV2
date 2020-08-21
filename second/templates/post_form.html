@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "innerbase.html" %} {% block innerbase %}
+{% extends "innerbase.html" %}
 <html lang="en">
 {% load static %}
 
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" />
   <title>Document</title>
 </head>
-
+{% block innerbase %}
 <center>
   <div class="" style="box-sizing: border-box;">
     <div class="form-box">
@@ -24,6 +24,6 @@
     </div>
   </div>
 </center>
+{% endblock %}
 
 </html>
-{% endblock %}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 <html lang="en">
 
 {% load static %}
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+    {% block innerbase %}
 
 
     <div class="jumbotron">
@@ -34,9 +34,8 @@
         </center>
     </div>
 
-
+    {% endblock %}
 
 </body>
 
 </html>
-{% endblock %}

@@ -1,4 +1,4 @@
-{% extends "base1.html" %} {% block base2 %} {% load static %}
+{% extends "innerbase.html" %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+  {% block innerbase %}
   {% if user.user_teachers != "" %}
   <h2>Add assignment</h2>
   <form method="POST" enctype="multipart/form-data">
@@ -87,22 +87,10 @@
     });
   </script>
 
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
-  <p>sdsdsd</p>
+  {% endblock %}
 </body>
 
 
 
 
 </html>
-{% endblock %}

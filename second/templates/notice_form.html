@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "innerbase.html" %} {% block innerbase %}
+{% extends "innerbase.html" %}
 <html lang="en">
 {% load static %}
 
@@ -12,6 +12,7 @@
 </head>
 
 <body class="jumbotron" style="height: 100%; width: 100%;">
+  {% block innerbase %}
   <center>
     <div class="form-box">
       <form method="POST" enctype="multipart/form-data">
@@ -22,7 +23,7 @@
       </form>
     </div>
   </center>
+  {% endblock %}
 </body>
 
 </html>
-{% endblock %}

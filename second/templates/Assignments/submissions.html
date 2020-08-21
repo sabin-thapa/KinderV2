@@ -1,5 +1,5 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 
 {% load static %}
 <!DOCTYPE html>
@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    {% block innerbase %}
     {% if user.user_teachers != "" %}
     <h3>Submissions</h3>
     {%for s in subs %}
@@ -53,8 +54,7 @@
 
 
     {% endif %}
-
+    {% endblock %}
 </body>
 
 </html>
-{% endblock %}

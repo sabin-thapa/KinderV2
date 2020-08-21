@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 <html lang="en">
 {% load static %}
 
@@ -94,6 +94,7 @@
 </head>
 
 <body class="jumbotron">
+    {% block innerbase %}
     <div class="jumbotron">
         <table class="table table-hover" id="myTable" style="width: 70%">
             <thead class="thead thead-dark">
@@ -156,14 +157,14 @@
         <h1>Average Bar Graph</h1>
         <div id='mychart'></div>
     </div>
-
+    {% endblock %}
 </body>
 
 
 
 
 </html>
-{% endblock %}
+
 
 
 

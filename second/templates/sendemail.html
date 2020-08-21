@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "innerbase.html" %} {% block innerbase %} {% load static %}
+{% extends "innerbase.html" %} {% load static %}
 
 <html lang="en">
 
@@ -19,6 +19,7 @@
 </head>
 
 <body class="">
+  {% block innerbase %}
   <div class="">
     <div class="contact-section">
       <div class="container">
@@ -42,9 +43,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>{% endblock %}
 </body>
 
 </html>
-
-{% endblock %}
