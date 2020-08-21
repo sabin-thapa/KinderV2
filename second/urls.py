@@ -1,9 +1,9 @@
 
 from .views import CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, TutorialUpdateView, AttachmentListView, AttachmentCreateView, AttachmentUpdateView, AttachmentDetailView, AttachmentDeleteView
-from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView, TutorialListView, CourseUpdateView, CourseDeleteView, EventsDetailView, CourseCreateView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts
+from .views import TutorialUpdateView, AttachmentListView, AttachmentCreateView, AttachmentUpdateView, AttachmentDetailView, AttachmentDeleteView
+from .views import TutorialDeleteView, TutorialCreateView, TutorialDetailView, TutorialListView, CourseUpdateView, CourseDeleteView, CourseCreateView, ROUTINESCreateView, FoodsCreateView, contacts
 from .views import SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, AssignmentDeleteView, submissions, gradesubmissions, SubmissionDeleteView, AssignmentUpdateView, SubmissionUpdateView
+from .views import ROUTINESCreateView, FoodsCreateView, contacts, assignments, AssignmentDeleteView, submissions, gradesubmissions, SubmissionDeleteView, AssignmentUpdateView, SubmissionUpdateView
 
 from . import views
 from django.urls import path
@@ -12,9 +12,9 @@ from django.views.generic import TemplateView
 from users import views as users_views
 from django.urls import path
 from . import views
-from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, assignments, AssignmentDeleteView, submissions, gradesubmissions
+from .views import ROUTINESCreateView, FoodsCreateView, contacts, assignments, AssignmentDeleteView, submissions, gradesubmissions
 from .views import SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import EventsCreateView, EventsDetailView, EventsUpdateView, EventsDeleteView, ROUTINESCreateView, FoodsCreateView, contacts, grade_update
+from .views import ROUTINESCreateView, FoodsCreateView, contacts, grade_update
 from .views import CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineDetailView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 
 urlpatterns = [
@@ -30,13 +30,6 @@ urlpatterns = [
     path('notice/<int:pk>/delete', NoticeDeleteView.as_view(), name='notice-delete'),
     path('parent-profiles/', views.parentprofiles, name='parent-profiles'),
     path('teacher-profile/', views.teacherprofile, name='teacher-profile'),
-
-
-    path('events/<int:pk>/', EventsDetailView.as_view(), name='events-detail'),
-    path('events/new/', EventsCreateView.as_view(), name='events-create'),
-    path('events/<int:pk>/update', EventsUpdateView.as_view(), name='events-update'),
-    path('events/<int:pk>/delete', EventsDeleteView.as_view(), name='events-delete'),
-
 
     path('profile/', views.profile, name='profile'),
     path('registerchild/', views.registerchild, name='registerchild'),

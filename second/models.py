@@ -54,22 +54,6 @@ class Notice(models.Model):
         super(Notice, self).save(*args, **kwargs)
 
 
-class Events(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('events-detail', kwargs={'pk': self.pk})
-
-    def save(self, *args, **kwargs):
-        super(Events, self).save(*args, **kwargs)
-
-
 class Images(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', blank=True, null=True)

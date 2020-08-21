@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
-from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Grading
-from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events
+from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -196,7 +196,6 @@ def postsandnotices(request):
 
         'posts': post_list,
         'notices': Notice.objects.all().order_by('-date_posted'),
-        'events': Events.objects.all().order_by('-date_posted'),
 
     }
 
@@ -326,54 +325,6 @@ class NoticeCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def test_func(self):
         if self.request.user.user_teachers != '':
-            return True
-        return False
-
-
-class EventsDetailView(DetailView):
-    model = Events
-    template_name = 'events_detail.html'
-
-
-class EventsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Events
-    success_url = "/home/home"
-
-    def test_func(self):
-        events = self.get_object()
-        if self.request.user == events.author:
-            return True
-        return False
-
-
-class EventsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Events
-    fields = ['title', 'content']
-    template_name = 'events_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-
-        return super().form_valid(form)
-
-    def test_func(self):
-        if self.request.user.user_teachers != '':
-            return True
-        return False
-
-
-class EventsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Events
-    fields = ['title', 'content']
-    template_name = 'events_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        events = self.get_object()
-        if self.request.user == events.author:
             return True
         return False
 
