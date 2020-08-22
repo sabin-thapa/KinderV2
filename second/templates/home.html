@@ -6,7 +6,10 @@
 <!DOCTYPE html>
 
 <head>
-    <title>posts</title>
+    {% block title %}
+    Home
+    {% endblock %}
+
 
     <script>
         var createpost = document.getElementsByName("createpost")
@@ -127,7 +130,7 @@
 
 
                 <div class="col-lg-3"
-                    style="position: fixed;padding-left:25px; height:69vh; background-color: #d0d8e4; right: 30px; width: 370px; margin-top: 50px; box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);overflow-y: hidden; word-break: break-all;">
+                    style="position: fixed;padding-left:25px; min-height:55vh; background-color: #d0d8e4; right: 30px; width: 370px; margin-top: 50px; box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);overflow-y: hidden; word-break: break-all;">
                     {% if user.is_authenticated %}
 
                     <div style="padding-top: 20px;">
@@ -140,10 +143,11 @@
                             {% for notice in notices %}
                             {% if user.user_teachers != '' %}
                             {% if notice.author.user_teachers.school == user.user_teachers.school %}
-                            <div style="padding-top: 10px; ">
+                            <div style="padding-top: 10px; border-bottom: 1px solid rgb(252, 194, 194); ">
                                 <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
                                     {{ notice.date_posted|date:"F d, Y"}}</small>
-                                <div style="padding-left: 10px;"><a href="{% url 'notice-detail' notice.id %}">
+                                <div style="padding-left: 10px;"><a style="color: rgb(63, 36, 36);"
+                                        href="{% url 'notice-detail' notice.id %}">
                                         <h5>{{notice.title}}</h5>
                                     </a>
 
@@ -155,7 +159,8 @@
                             <div style="padding-top: 10px; ">
                                 <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
                                     {{ notice.date_posted|date:"F d, Y"}}</small>
-                                <div style="padding-left: 10px;"><a href="{% url 'notice-detail' notice.id %}">
+                                <div style="padding-left: 10px;"><a style="color: rgb(63, 36, 36);"
+                                        href="{% url 'notice-detail' notice.id %}">
                                         <h5>{{notice.title}}</h5>
                                     </a>
 

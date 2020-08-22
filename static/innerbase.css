@@ -120,8 +120,15 @@ a[data-toggle="collapse"] {
 #content.wide {
     width: 100%;
     left: 0;
+}
 
-
+.page-title {
+    padding-left: 70px;
+    font-size: 23px;
+    font-weight: bolder;
+    color: rgb(87, 86, 86);
+    text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
 }
 
 #content .main-body {

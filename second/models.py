@@ -53,6 +53,9 @@ class Notice(models.Model):
     def save(self, *args, **kwargs):
         super(Notice, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ["-date_posted"]
+
 
 class Images(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

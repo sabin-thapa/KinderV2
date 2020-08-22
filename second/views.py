@@ -195,7 +195,7 @@ def postsandnotices(request):
     context = {
 
         'posts': post_list,
-        'notices': Notice.objects.all().order_by('-date_posted'),
+        'notices': Notice.objects.all()[:6]
 
     }
 
