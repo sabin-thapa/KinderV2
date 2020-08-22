@@ -46,7 +46,7 @@
         <div class="row row-height">
 
 
-            <div class="col-lg-9">
+            <div class="col-lg-9" style="margin-top: -25px;">
 
                 <br>
                 {% for post in posts %}
@@ -75,7 +75,8 @@
                                 </a>
                             </div>
                         </small><br><br>
-                        <p style="word-break: break-all; padding-right: 20px;"><b>{{post.content}}</b></p>
+                        <p style="word-break: break-all; padding-right: 20px; margin-top: -35px; width: 80%;">
+                            <b>{{post.content}}</b></p>
 
 
                     </div>
@@ -129,7 +130,7 @@
 
 
                 <div class="col-lg-3"
-                    style="position: fixed;padding-left:25px; min-height:55vh; background-color: #d0d8e4; right: 30px; width: 370px; margin-top: 50px; box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);overflow-y: hidden; word-break: break-all;">
+                    style="position: fixed;padding-left:25px; min-height:55vh; background-color: #dfe5f1; right: 30px; width: 370px; margin-top: 50px; box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);overflow-y: hidden; word-break: break-all;">
                     {% if user.is_authenticated %}
 
                     <div style="padding-top: 20px;">

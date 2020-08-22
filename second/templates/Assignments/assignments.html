@@ -35,9 +35,11 @@ Assignments
     <div class="one-assignment">
       <h2>{{t.title}}</h2>
       <p>{{t.description}}</p>
-      <p>Attached File (if any):</p>
-      <a href="{{t.file_url}}"> {{t.file}}</a>
-      <p>Date Posted: {{t.date_posted}}</p>
+      {% if t.file %}
+      <p>Attached File (click to open):
+        {% endif %}
+        <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
+      <p>Posted On: {{t.date_posted}}</p>
       <p>Deadline : {{t.deadline}}</p>
 
       <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">See Submissions</a>
@@ -51,31 +53,33 @@ Assignments
 
 
     {% elif user.user_parents != "" %}
+    <div class="posted">
+      {% for t in all_tasks %}
+      {% if t.author.user_teachers.school == user.user_parents.school %}
+      {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
+      <div class="one-assignment">
+        <h2>{{t.title}}</h2>
+        <p>{{t.description}}</p>
+        {% if t.file %}
+        <p>Attached File (click to open):
+          {% endif %}
+          <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
+        <p>Posted On: {{t.date_posted}}</p>
+        <p>Deadline : {{t.deadline}}</p>
 
-    {% for t in all_tasks %}
-    {% if t.author.user_teachers.school == user.user_parents.school %}
-    {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
-    <h2>{{t.title}}</h2>
-    <p>{{t.description}}</p>
-    <p>Attached File (if any):</p>
-    <a href="{{t.file_url}}"> {{t.file}}</a>
-    <p>Date Posted: {{t.date_posted}}</p>
-    <p>Deadline : {{t.deadline}}</p>
+        {% if user in t.submissions_set.author_list %}
+        <p>Submitted for Grading</p>
 
-    {{t.submissions_set.all}}<br>
-    {{t.grading_set.all}}
-    {% if user in t.submissions_set.author_list %}
-    <p>Submitted for Grading</p>
+        <a class="btn btn-outline-primary" href="{% url 'submissions-update' t.submissions_set.get.id %}">Edit
+          Submission</a>
+        <a class="btn btn-outline-danger" href="{% url 'submission-delete' t.submissions_set.get.id %}">Delete
+          Submission</a>
+        {% else %}
 
-    <a class="btn btn-outline-primary" href="{% url 'submissions-update' t.submissions_set.get.id %}">Edit
-      Submission</a>
-    <a class="btn btn-outline-danger" href="{% url 'submission-delete' t.submissions_set.get.id %}">Delete
-      Submission</a>
-    {% else %}
-
-    <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
-    {% endif %}
-
+        <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
+        {% endif %}
+      </div>
+    </div>
     {% endif %}
     {% endif %}
     {% endfor %}
