@@ -3,16 +3,89 @@
 
 <html lang="en">
 {% load static %}
+{% block title %}
+Results
+{% endblock %}
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% block title %}
-    Results
-    {% endblock %}
+
+
+</head>
+{% block innerbase %}
+
+<body>
+
+    <div class="jumbotron">
+        <table class="table table-hover" id="myTable" style="width: 70%">
+            <thead class="thead thead-dark">
+                {% if user.user_teachers != "" %}
+                <a class="btn btn-primary" href="{% url 'addresult' %}"
+                    style="margin-left: 0px; margin-top: 10px; margin-bottom: 15px;">ADD Result</a>
+                {% endif %}
+                <tr>
+                    <td>Name</td>
+                    <td>Subject-1</td>
+                    <td>Subject-2</td>
+                    <td>Subject-3</td>
+                    <td>Subject-4</td>
+                    <td>Grade</td>
+                    <td>Remarks</td>
+                </tr>
+            </thead>
+
+            {% for result in results %}
+
+            {% if user.user_teachers != "" %}
+            {% if user == result.name.teacher %}
+            <tr>
+                {% if user.user_teachers != "" %}
+                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
+                {% else %}
+                <td>{{result.name}}</td>
+                {% endif %}
+                <td>{{result.subject1}}</td>
+                <td>{{result.subject2}}</td>
+                <td>{{result.subject3}}</td>
+                <td>{{result.subject4}}</td>
+                <td>{{result.grade}}</td>
+                <td>{{result.remarks}}</td>
+            </tr>
+            {% endif %}
+            {% else %}
+            {% if user.user_parents.ChildID == result.name.childid %}
+            <tr>
+                {% if user.user_teachers != "" %}
+                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
+                {% else %}
+                <td>{{result.name}}</td>
+                {% endif %}
+                <td>{{result.term}}</td>
+
+                <td>{{result.subject1}}</td>
+                <td>{{result.subject2}}</td>
+                <td>{{result.subject3}}</td>
+                <td>{{result.subject4}}</td>
+                <td>{{result.grade}}</td>
+                <td>{{result.remarks}}</td>
+            </tr>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+
+
+        </table>
+        <h1>Average Bar Graph</h1>
+        <div id='mychart'></div>
+    </div>
+
+
+
     <script src="http://cdn.zingchart.com/zingchart.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var tr = document.querySelector('table').querySelectorAll('tr');
@@ -93,85 +166,9 @@
             })
         }
     </script>
-</head>
-
-<body class="jumbotron">
-    {% block innerbase %}
-    <div class="jumbotron">
-        <table class="table table-hover" id="myTable" style="width: 70%">
-            <thead class="thead thead-dark">
-                {% if user.user_teachers != "" %}
-                <a class="btn btn-primary" href="{% url 'addresult' %}"
-                    style="margin-left: 0px; margin-top: 10px; margin-bottom: 15px;">ADD Result</a>
-                {% endif %}
-                <tr>
-                    <td>Name</td>
-                    <td>Subject-1</td>
-                    <td>Subject-2</td>
-                    <td>Subject-3</td>
-                    <td>Subject-4</td>
-                    <td>Grade</td>
-                    <td>Remarks</td>
-                </tr>
-            </thead>
-
-            {% for result in results %}
-
-            {% if user.user_teachers != "" %}
-            {% if user == result.name.teacher %}
-            <tr>
-                {% if user.user_teachers != "" %}
-                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
-                {% else %}
-                <td>{{result.name}}</td>
-                {% endif %}
-                <td>{{result.subject1}}</td>
-                <td>{{result.subject2}}</td>
-                <td>{{result.subject3}}</td>
-                <td>{{result.subject4}}</td>
-                <td>{{result.grade}}</td>
-                <td>{{result.remarks}}</td>
-            </tr>
-            {% endif %}
-            {% else %}
-            {% if user.user_parents.ChildID == result.name.childid %}
-            <tr>
-                {% if user.user_teachers != "" %}
-                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
-                {% else %}
-                <td>{{result.name}}</td>
-                {% endif %}
-                <td>{{result.term}}</td>
-
-                <td>{{result.subject1}}</td>
-                <td>{{result.subject2}}</td>
-                <td>{{result.subject3}}</td>
-                <td>{{result.subject4}}</td>
-                <td>{{result.grade}}</td>
-                <td>{{result.remarks}}</td>
-            </tr>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-
-
-        </table>
-        <h1>Average Bar Graph</h1>
-        <div id='mychart'></div>
-    </div>
-    {% endblock %}
 </body>
+{% endblock %}
 
 
-
-
-</html>
-
-
-
-
-
-
-</body>
 
 </html>
