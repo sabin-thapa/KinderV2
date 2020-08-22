@@ -45,7 +45,7 @@
                         Children</a>
                 </li>
                 <li class="{% if request.path == post_url %} active {%endif%}">
-                    <a href="{% url 'post-create' %}"><i class="ico fa fa-th-large" aria-hidden="true"></i>Create
+                    <a href="{% url 'post-create' %}"><i class="ico fa fa-th-large" aria-hidden="true"></i>Add
                         Post</a>
                 </li>
                 <li class="{% if request.path == attendance_url %} active {%endif%}">
@@ -129,6 +129,10 @@
             </nav>
 
             <div class="main-body">
+
+                {% block forma %}
+                {% endblock %}
+
 
                 {% block innerbase %}
                 {% endblock %}

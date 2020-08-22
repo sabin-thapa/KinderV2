@@ -11,17 +11,22 @@
 </head>
 
 <body>
-  {% block innerbase %}
+
   <div class="jumbotron">
     <center>
+      {% block forma %}
       <div class="form-box">
         <form method="POST">
-          {% csrf_token %} {% include "second/delete-form-template.html" %}
+          {% csrf_token %}
+          <h1>Are you sure you want to delete {{object}} permanently?</h1>
+          <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+          <a href="{% url 'home' %}" class="btn btn-secondary">NO</a>
         </form>
       </div>
+      {% endblock %}
     </center>
   </div>
 </body>
-{% endblock %}
+
 
 </html>

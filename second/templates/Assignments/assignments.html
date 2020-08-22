@@ -1,24 +1,17 @@
 {% extends "innerbase.html" %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+{% block title %}
+Assignments
+{% endblock %}
 {% load static %}
-{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
-{{ form.media }}
 
-<head>
-  <meta charset="UTF-8" />
-  {% block title %}
-  Assignments
-  {% endblock %}
-  <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}" />
-  <link rel="stylesheet" href="{% static 'form1.css' %}" />
-
-</head>
 
 <body>
   {% block innerbase %}
+  {% load bootstrap4 %}
+  {% bootstrap_javascript jquery='full' %}
+  {{ form.media }}
   {% if user.user_teachers != "" %}
   <h2>Add assignment</h2>
   <form method="POST" enctype="multipart/form-data">

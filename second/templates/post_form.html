@@ -11,16 +11,18 @@
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" />
   <title>Document</title>
 </head>
-{% block innerbase %}
+{% block forma %}
 <center>
   <div class="" style="box-sizing: border-box;">
     <div class="form-box">
+
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %} {% include 'second/form-template.html' %}
         <div>
           <button class="btn btn-outline-info" type="submit">POST</button>
         </div>
       </form>
+
     </div>
   </div>
 </center>

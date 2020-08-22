@@ -2,23 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8" />
-  <title>Student Ids</title>
-  <script src=" {% static 'registerchild.js' %} "></script>
   {% block title %}
   Children Registration
   {% endblock %}
 </head>
 
-<body class="jumbotron">
+<body>
   {% block innerbase %}
   <div class="jumbotron">
+
     <div class="container">
       <center>
-        <button class="btn btn-secondary" onclick="location.href='{% url 'addchild' %}'" style="margin-left: 90%;">
-          ADD CHILD
-        </button>
+        <a class="btn btn-secondary" href="{% url 'addchild' %}" style="margin-left: 90%;">
+          ADD
+        </a>
         <br />
         <br />
         <input class="form-control" id="myInput" onkeyup="myFunction()" type="text"
@@ -43,7 +43,11 @@
       </center>
     </div>
   </div>
+  <script src=" {% static 'registerchild.js' %} "></script>
+
   {% endblock %}
+
 </body>
+
 
 </html>
