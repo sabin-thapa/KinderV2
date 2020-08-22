@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
-from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
+from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Grading
-from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID
+from second.models import Post, Course, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -31,15 +31,6 @@ from users.models import User_parents, User_teachers
 from django import template
 
 register = template.Library()
-
-
-@login_required
-def routine(request):
-    context = {
-        'routine': Routine.objects.all()
-    }
-
-    return render(request, 'routine.html', context)
 
 
 @login_required
@@ -120,11 +111,6 @@ class RoutineListView(ListView):
     model = ROUTINES
     template_name = 'routine.html'
     context_object_name = 'routine'
-
-
-class RoutineDetailView(DetailView):
-    model = ROUTINES
-    template_name = 'routine_detail.html'
 
 
 class ResultDetail(DetailView):
@@ -294,6 +280,15 @@ class ROUTINESCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         if self.request.user.user_teachers != '':
             return True
         return False
+
+
+class ROUTINESDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = ROUTINES
+    success_url = "/home/routine"
+
+    def test_func(self):
+        routine = self.get_object()
+        return True
 
 
 class FoodsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):

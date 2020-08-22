@@ -17,7 +17,7 @@
     <h3>All Submissions</h3>
     {%for s in subs %}
     <div class="one-sub">
-        <p>{{s.assignment}}</p>
+        <p>Submission by: {{s.author}}</p>
         <p><a target="_blank" href="{{s.file_url}}"> {{s.file}}</a></p>
         <p>{{s.date_submitted}}</p>
         {% if s.grading_set.exists %}

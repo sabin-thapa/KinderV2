@@ -1,5 +1,5 @@
 {% extends "innerbase.html" %}
-{% block innerbase %}
+
 
 {% load static %}
 <!DOCTYPE html>
@@ -8,13 +8,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Assignments</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
-    <link rel="stylesheet" href="{% static 'form1.css' %}">
+
+
 
 </head>
 
 <body>
+    {% block innerbase %}
     <h3>Grade Submission</h3>
     <p>{{submission.assignment}}</p>
     <p>{{submission.file}}</p>
@@ -28,8 +28,7 @@
         </div>
     </form>
 
-
+    {% endblock %}
 </body>
 
 </html>
-{% endblock %}
