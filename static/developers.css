@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-height: 100%;
+    overflow-y: scroll;
+}
+
+body{
+    min-height: 100%;
+}
+
+body, html {
+    margin: 0 auto;
+    padding: 0;
+    font-family: comic-sans;
+}
+
+
+#main-wrapper {
+   /* background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(101,94,94,1) 0%, rgba(0,212,255,1) 100%); */
+}
+
+.section-title {
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    letter-spacing: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+
+}
+
+.heading-block.page-title:before {
+    content: '';
+    display: block;
+    margin: 10px 0 0 360px;
+    width: 360px;
+    border-top: 5px solid #0097a7;
+}
+.heading-block.page-title:after {
+    content: '';
+    display: block;
+    margin: 10px 0 0 360px;
+    width: 360px;
+    border-top: 5px solid #0097a7;
+}
+
+
+.section-description {
+    color: #000;
+    font-size: 30px;
+}
+
+.member-content {
+    padding-top: 20px;
+    border: 3px solid #000;
+    margin-top: 25px;
+    border-top-left-radius: 5% 10%;
+    border-top-right-radius: 5% 10%;
+    border-bottom-left-radius: 5% 10%;
+    border-bottom-right-radius: 5% 10%;
+    height: 550px;
+}
+
+.details {
+    padding-top: 80px;
+    font-size: 20px;
+}
+
+.member-thumb h4 {
+    padding-top: 10px;
+    padding-left: 40px;
+    font-weight: bolder;
+}
+
+.member-thumb p {
+    padding-left: 12px;
+    font-size: 18px;
+}
+
+.member-image {
+    height: 70%;
+    border-radius: 10%;
+}
+
+.details p {
+    font-weight: light;
+
+}
+
+
+.social-links ul {
+    list-style: none;
+    display: flex;
+    padding-left: 0;
+    justify-content: space-between;
+}
+
+.social-links ul li {
+
+}
+
+
+.banner {
+    background-color: #0097a7;
+    margin-top: -30px;
+    margin-bottom: 10px;
+}
+
+
+
+.banner.small {
+    padding: 0;
+}
+
+.banner h1,
+.banner h3 {
+    color: #ffffff;
+    margin: 10px 0;
+}
+.contact-button a{
+    display: flex;
+    color: #fff; 
+    font-size: 30px;
+    justify-content: flex-end;
+
+}
+
+.container h3 {
+    font-size: 30px;
+}
+
+body {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
