@@ -22,7 +22,7 @@
 
     <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form2.as_p }}
+        {% include 'second/form-template.html' %}
         <div>
             <input type="submit" value="Add Grade" name="add_grade">
         </div>

@@ -40,13 +40,13 @@
           <h1 style="display: none;">{{x.id}}</h1>
           {% endfor %}
         </div>
-        <form method="POST">
-          {% csrf_token %} {% include 'second/form-template.html' %}
-          <div>
-            <button class="btn btn-outline-info" href="{% url 'result' %}" type="submit">
-              ADD
-            </button>
-          </div>
+        <form method="POST"></form>
+        {% csrf_token %} {% include 'second/form-template.html' %}
+        <div>
+          <button class="btn btn-outline-info" href="{% url 'result' %}" type="submit">
+            ADD
+          </button>
+        </div>
         </form>
       </div>
     </center>

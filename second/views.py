@@ -660,20 +660,20 @@ def gradesubmissions(request, submission_id):
     if request.method == "POST":
 
         if 'add_grade' in request.POST:
-            form2 = GradeForm(request.POST)
-            if form2.is_valid():
-                form2.instance.author = request.user
-                form2.instance.submission = submission1
-                form2.instance.assignment = submission1.assignment
-                form2.instance.date_graded = datetime.date.today()
-                form2.save()
+            form = GradeForm(request.POST)
+            if form.is_valid():
+                form.instance.author = request.user
+                form.instance.submission = submission1
+                form.instance.assignment = submission1.assignment
+                form.instance.date_graded = datetime.date.today()
+                form.save()
 
             return redirect('assignments')
     else:
-        form2 = GradeForm()
+        form = GradeForm()
 
     context = {
-        'form2': form2,
+        'form': form,
         'submission': submission1,
     }
     return render(request, 'Assignments/gradesubmissions.html', context)
