@@ -176,3 +176,8 @@ a[data-toggle="collapse"] {
 .navbar-items ul {
     display: inline-flex;
 }
+
+.bell {
+    padding-right: 50px;
+    font-size: 25px;
+}
