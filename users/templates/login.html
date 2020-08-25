@@ -11,7 +11,7 @@
     <!-- <script src="{% static 'register.js' %}" type="text/javascript"></script> -->
     <link rel="stylesheet" type="text/css" href="{% static 'temp.css' %}" />
    <!-- 1. BOOTSTRAP v4.0.0         CSS !-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" >
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -53,19 +53,27 @@
       <div class="row">
         <div class="col-md-5 register-left">
           <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-          <h3 style="margin-top: -20%;">Welcome!</h3>
+          <h3 style="margin-top: -10%;">Welcome!</h3>
           <p>Please Sign In and Stay Connected With Us!</p>
-          <h2 style="margin-top: -40%;">Don't have an account? Register Now!</h2> </br>
-          <form action="{% url 'signup' %}" class="loginBtn" style="height: 300px; width: 600px;  margin-left: 80px; ">
+          <h2 style="margin-top: -20%;">Don't have an account? Register Now!</h2> </br>
+          <form action="{% url 'signup' %}" class="loginBtn" style="height: 300px; width: 600px;  margin-left: -20px; ">
             <input type="submit" name="" value="Register" /><br />
           </form>
         </div>
         <div class="col-md-7 register-right">
-            <h3 class="register-heading">Log In</h3>
+            <h3 class="register-heading">
+              <a href="#" id="neon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Log In
+              </a>
+              </h3>
             <div class="row register-form">
               <form method="post" style="padding-left: 20%;  display: flex;" class="login-form">
                 {% csrf_token %}
-                <div class="form-row" style="padding-top: 30%;">
+                <div class="form-row" style="padding-top: 20%;">
                   <div class="form-group col-md-6 mb-0" style="padding-top: 40%;">
                     {{ form.username|as_crispy_field }}
                   </div>
