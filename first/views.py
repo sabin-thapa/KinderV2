@@ -27,13 +27,13 @@ def index(request):
                 "Contact Email",
                 content,
                 "Kinder Mail" + '',
-                ['sabint017@gmail.com'], ['sajanmahat491@gmail.com'],
+                ['sabint017@gmail.com'], [''],
                 headers={'Reply To': email}
             )
 
             email.send()
 
-            return render(request, 'succ.html')
+            return render(request, 'index.html', {'form': Contact_Form})
     return render(request, 'index.html', {'form': Contact_Form})
 
 
