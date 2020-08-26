@@ -271,8 +271,10 @@ body {
   .bounce {
     animation-name: bounce-animation;
     animation-duration: 2s;
+    color: #fff;
   }
   
+
   
   
   /*everything below here is just setting up the page, so dont worry about it */

@@ -9,6 +9,7 @@ $(function(){
           return;
         }
         $('#len'+(i++)).toggleClass('bounce');
+        $('#len'+(i++)).toggleClass('active');
       }, 500)
     });
   });

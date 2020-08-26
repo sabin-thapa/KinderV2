@@ -37,7 +37,7 @@
                 <li class="">
                   <a
                   id="len1"
-                  class="nav-link nav-item hoverable "
+                  class="nav-link nav-item hoverable  "
                   href="{% url 'index' %}"
                   style="padding-right: 10px; padding-left: 10px;"
                   >Home <span class="sr-only">(current)</span></a>  
@@ -45,6 +45,7 @@
 
                 <li>
                   <a
+                  id="len2"
                   class="nav-link nav-item hoverable"
                   href="{% url 'services' %}"
                   style="padding-right: 10px; padding-left: 10px;"
@@ -54,7 +55,7 @@
 
                 <li>
                   <a
-                id="len2"
+                id="len3"
                 class="nav-link nav-item contact hoverable"
                 href="{% url 'contact' %}"
                 style="padding-right: 10px; padding-left: 10px;"
@@ -63,7 +64,7 @@
                 </li>
                 
                 <a
-                id="len3"
+                id="len4"
                 class="nav-link nav-item hoverable"
                 href="{% url 'dev' %}"
                 style="padding-right: 10px; padding-left: 10px;"
@@ -96,6 +97,23 @@
 
 
 </section>
+<script>
+  $(function(){
+    var str = '#len'; //increment by 1 up to 1-nelemnts
+    $(document).ready(function(){
+      var i, stop;
+      i = 1;
+      stop = 4; //num elements
+      setInterval(function(){
+        if (i > stop){
+          return;
+        }
+        $('#len'+(i++)).toggleClass('bounce');
+      }, 500)
+    });
+  });
+
+</script>
     </body>
     </html>
       <!--/.Navbar-->
