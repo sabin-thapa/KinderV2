@@ -67,7 +67,9 @@ Assignments
         <p>Posted On: {{t.date_posted}}</p>
         <p>Deadline : {{t.deadline}}</p>
 
-        {% if user in t.submissions_set.author_list %}
+
+
+        {% if uss %}
         <p>Submitted for Grading</p>
 
         <a class="btn btn-outline-primary" href="{% url 'submissions-update' t.submissions_set.get.id %}">Edit
@@ -78,6 +80,8 @@ Assignments
 
         <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
         {% endif %}
+
+
       </div>
     </div>
     {% endif %}

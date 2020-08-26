@@ -19,7 +19,7 @@
     <p>Update Grade</p>
     <form method='POST'>
         {% csrf_token %}
-        {{ form.as_p }}
+        {% include 'second/form-template.html' %}
         <div>
             <button class='btn btn-outline-info' type='submit'>Update Grade</button>
 

@@ -615,11 +615,6 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
-    # @register.filter
-    # def par_filter(value):
-    #     filtered_data = Assignments.objects.get(author=)
-    #     return filtered_data
-
     tasks = Assignments.objects.filter(author=request.user)
     all_tasks = Assignments.objects.all()
     context = {
@@ -635,26 +630,26 @@ def submissions(request, assignment_id):
 
     if request.method == "POST":
         if 'add_submission' in request.POST:
-            form1 = SubmissionForm(request.POST, request.FILES)
-            if form1.is_valid():
-                form1.instance.author = request.user
-                form1.instance.assignment = assignment1
-                form1.instance.date_submitted = datetime.date.today()
-                form1.save()
+            form = SubmissionForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.instance.author = request.user
+                form.instance.assignment = assignment1
+                form.instance.date_submitted = datetime.date.today()
+                form.save()
 
             return redirect('assignments')
     else:
-        form1 = SubmissionForm()
+        form = SubmissionForm()
 
     context = {
-        'form1': form1,
+        'form': form,
         'assignment': assignment1,
         'subs': Submissions.objects.filter(assignment_id=assignment_id),
     }
     return render(request, 'Assignments/submissions.html', context)
 
 
-def gradesubmissions(request, submission_id):
+def gradesubmissions(request, assignment_id, submission_id):
     submission1 = get_object_or_404(Submissions, pk=submission_id)
 
     if request.method == "POST":
@@ -668,7 +663,7 @@ def gradesubmissions(request, submission_id):
                 form.instance.date_graded = datetime.date.today()
                 form.save()
 
-            return redirect('assignments')
+            return redirect('submissions', assignment_id=assignment_id)
     else:
         form = GradeForm()
 
@@ -679,14 +674,14 @@ def gradesubmissions(request, submission_id):
     return render(request, 'Assignments/gradesubmissions.html', context)
 
 
-def grade_update(request, submission_id):
-    grade = get_object_or_404(Grading, pk=submission_id)
+def grade_update(request, assignment_id, grade_id):
+    grade = get_object_or_404(Grading, pk=grade_id)
     if request.method == "POST":
         form = GradeForm(request.POST, instance=grade)
         if form.is_valid():
             grade = form.save(commit=False)
             grade.save()
-            return redirect('assignments')
+            return redirect('submissions', assignment_id=assignment_id)
     else:
         form = GradeForm(instance=grade)
     return render(request, 'Assignments/grade-update.html', {'form': form})

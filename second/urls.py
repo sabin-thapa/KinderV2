@@ -96,9 +96,9 @@ urlpatterns = [
     path('submission/<int:pk>/delete',
          SubmissionDeleteView.as_view(), name='submission-delete'),
 
-    path('submissions/<int:submission_id>/', views.gradesubmissions,
+    path('assignments/<int:assignment_id>/submissions/<int:submission_id>', views.gradesubmissions,
          name='gradesubmissions'),
-    path('grade/<int:submission_id>/update',
+    path('assignments/<int:assignment_id>/grade/<int:grade_id>/update',
          views.grade_update, name='grade-update'),
 
 

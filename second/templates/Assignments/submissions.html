@@ -14,7 +14,8 @@
 <body>
 
     {% if user.user_teachers != "" %}
-    <h3>All Submissions</h3>
+    <h3>All Submissions For:</h3>
+    <h2>{{assignment.title}}</h2>
     {%for s in subs %}
     <div class="one-sub">
         <p>Submission by: {{s.author}}</p>
@@ -23,10 +24,11 @@
         {% if s.grading_set.exists %}
         <p>Graded {{s.grading_set.get.grade}}</p>
 
-        <a class="btn btn-outline-primary" href="{% url 'grade-update' s.grading_set.get.id %}">Update Grade</a>
+        <a class="btn btn-outline-primary" href="{% url 'grade-update' assignment.id s.grading_set.get.id %}">Update
+            Grade</a>
 
         {% else %}
-        <a class="btn btn-outline-primary" href="{% url 'gradesubmissions' s.id %}">Add Grade</a>
+        <a class="btn btn-outline-primary" href="{% url 'gradesubmissions' assignment.id s.id  %}">Add Grade</a>
 
         {% endif %}
     </div>
@@ -42,7 +44,7 @@
 
     <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form1.as_p }}
+        {% include 'second/form-template.html' %}
         <div>
             <input type="submit" value="Add Submission" name="add_submission">
         </div>

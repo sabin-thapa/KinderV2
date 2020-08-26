@@ -30,7 +30,7 @@
             <h1>Contact</h1>
 
             <form method="POST">
-              {% csrf_token %} {{ form.as_p }}
+              {% csrf_token %} {% include 'second/form-template.html' %}
               <button class="btn btn-outline-info">Send</button>
             </form>
             {% if user.user_teachers != '' %}
