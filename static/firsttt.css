@@ -6,7 +6,7 @@ body {
 
 #banner {
     background-image: linear-gradient(to right, #8181F7FE, #5882FA);
-}
+}   
 /* 
 #nav-bar {
     position: sticky;
@@ -84,7 +84,7 @@ body {
 }
 
 
-
+/* Navbar */
 .form-control {
     box-shadow: none;		
     font-weight: normal;
@@ -125,32 +125,18 @@ body {
     max-height: 36px;
 }
 
-.navbar a, .navbar a:active {
-    color: #888;
+.navbar a, .navbar a:active : {
+    color: #fff;
     padding: 8px 20px;
     background: transparent;
     line-height: normal;
 }
-.navbar .navbar-form {
-    border: none;
+
+.navbar a, .navbar a:hover : {
+    color: #fff !important;
 }
-.navbar .action-form {
-    width: 280px;
-    padding: 20px;
-    left: auto;
-    right: 0;
-    font-size: 14px;
-}
-.navbar .action-form a {		
-    color: #33cabb;
-    padding: 0 !important;
-    font-size: 14px;
-}
-.navbar .action-form .hint-text {
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 13px;
-}
+
+
 .navbar .btn-primary, .navbar .btn-primary:active {
     color: #fff;
     background: #33cabb !important;
@@ -159,36 +145,8 @@ body {
 .navbar .btn-primary:hover, .navbar .btn-primary:focus {		
     color: #fff;
     background: #31bfb1 !important;
-}
-.navbar .social-btn .btn, .navbar .social-btn .btn:hover {
-    color: #fff;
-    margin: 0;
-    padding: 0 !important;
-    font-size: 13px;
-    border: none;
-    transition: all 0.4s;
-    text-align: center;
-    line-height: 34px;
-    width: 47%;
-    text-decoration: none;
-}
-.navbar .social-btn .facebook-btn {
-    background: #507cc0;
-}
-.navbar .social-btn .facebook-btn:hover {
-    background: #4676bd;
-}
-.navbar .social-btn .twitter-btn {
-    background: #64ccf1;
-}
-.navbar .social-btn .twitter-btn:hover {
-    background: #4ec7ef;
-}
-.navbar .social-btn .btn i {
-    margin-right: 5px;
-    font-size: 16px;
-    position: relative;
-    top: 2px;
+
+
 }
 .or-seperator {
     margin-top: 32px;
@@ -238,3 +196,109 @@ body {
         width: 100%;
     }
 }
+
+
+.hoverable{
+    display:inline-block;
+    backface-visibility: hidden;
+    vertical-align: middle;
+    position:relative;
+    box-shadow: 0 0 1px rgba(0,0,0,0);
+    tranform: translateZ(0);
+    transition-duration: .3s;
+    transition-property:transform;
+  }
+  
+  .hoverable:before{
+    position:absolute;
+    pointer-events: none;
+    z-index:-1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height:10px;
+    width:90%;
+    opacity:0;
+    background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+    /* W3C */
+    transition-duration: 0.3s;
+    transition-property: transform, opacity;
+  }
+  
+  .hoverable:hover, .hoverable:active, .hoverable:focus{
+    transform: translateY(-5px);
+  }
+  .hoverable:hover:before, .hoverable:active:before, .hoverable:focus:before{
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  
+  
+  
+  @keyframes bounce-animation {
+    16.65% {
+      -webkit-transform: translateY(8px);
+      transform: translateY(8px);
+    }
+  
+    33.3% {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+    }
+  
+    49.95% {
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+    }
+  
+    66.6% {
+      -webkit-transform: translateY(-2px);
+      transform: translateY(-2px);
+    }
+  
+    83.25% {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px);
+    }
+  
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  
+  .bounce {
+    animation-name: bounce-animation;
+    animation-duration: 2s;
+  }
+  
+  
+  
+  /*everything below here is just setting up the page, so dont worry about it */
+  
+  
+  @media (min-width: 768px) {
+    .navbar{
+      text-align: center !important;
+      float: none;
+      display: inline-block;
+    }
+  }
+  
+
+  
+  nav {
+    background: none !important;
+    text-transform:uppercase;
+    li {
+      margin-left: 3em;
+      margin-right: 3em;
+      a{
+        transition: .5s color ease-in-out;
+      }
+    }
+  }
+  
+
+  
