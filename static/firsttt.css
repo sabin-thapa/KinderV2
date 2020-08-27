@@ -141,6 +141,7 @@ body {
     color: #fff;
     background: #33cabb !important;
     border: none;
+    
 }	
 .navbar .btn-primary:hover, .navbar .btn-primary:focus {		
     color: #fff;
@@ -275,7 +276,13 @@ body {
   }
   
 
+.active {
+    background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+
+  }
   
+}
   
   /*everything below here is just setting up the page, so dont worry about it */
   
@@ -303,4 +310,3 @@ body {
   }
   
 
-  

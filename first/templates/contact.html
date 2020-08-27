@@ -21,7 +21,7 @@
     href="{% static 'bootstrap/css/bootstrap.min.css' %}"
     type="text/css"
   />
-   <link rel="stylesheet" type="text/css" href="{% static 'dev.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'developers.css' %}">
 
 
 </head>
@@ -31,13 +31,13 @@
 <div class="jumbotron" style="margin-top:-5px; padding:0;"> 
     <div class="grey-background wow fadeIn">
         <div class="container">
-            <div class="heading-block page-title wow fadeInUp" style="padding: 20px 0 0 0 ; ">
-                <h1>Contact Us</h1>
+            <div class="heading-block section-title page-title wow fadeInUp" style="padding: 60px 0 0 0 ; ">
+                <h1><strong> Contact Us </strong></h1>
             </div>
         </div>
     </div>
-    <div class="contact-section">
-    <div class="container">
+    <div class="contact-section" >
+    <div class="container" >
         <div class="row">
 
             <div class="contact-details col-md-4 wow fadeInUp" style="margin-top: 70px;">
@@ -68,11 +68,11 @@
                 </div>
             </div>
 
-            <div class="contact-form col-md-8 wow fadeIn" style="margin-top: 70px;">
-                <form method= 'POST'>
+            <div class="contact-form col-md-8 wow fadeIn" style="margin-top: 70px; ">
+                <form method= 'POST' >
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button class="submit button-normal green">Send</button>
+                    <button class="btn btn-outline-info">Send</button>
                 </form>
             </div>
         </div>
