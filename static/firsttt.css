@@ -1,5 +1,5 @@
 body {
-    padding-top: 50px;
+    padding-top: 40px;
     font-family: sans-serif;
 
 }
@@ -96,6 +96,7 @@ body {
     padding-right: 16px;
     border-bottom: 1px solid #dfe3e8;
     border-radius: 0;
+    height: 6%;
 }
 .nav-link img {
     border-radius: 50%;

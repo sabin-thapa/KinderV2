@@ -83,9 +83,19 @@
                   </div>
 
                   <div class="navbar-nav ml-auto action-buttons">
-                    <div class="nav-item dropdown" style="padding-right: 20px;">
+                    <div class="nav-item dropdown  ">
+                      <li class="{% if request.path == url_signup %} active {% endif %}">
+                        <a
+                      class=" btn btn-primary  sign-up-btn"
+                      href="{% url 'signup' %}"
+                      style="margin-top: 3px; text-transform: capitalize;"
+                      >Register</a
+                    >
+                      </li> 
+                    </div>
+                    <div class="nav-item dropdown" style="padding-left: 20px;">
                       <li class="dropdown order-1" >
-                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle" >Login <span class="caret"></span></button>
+                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle" >Login <span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right mt-2" style="width: 300px; background: #fff;">
                            <li class="px-3 py-2">
                                <form method="post" class="login-form" role="form" action="{% url 'login' %}" style="width: 250px; background: ;">
@@ -97,7 +107,7 @@
                                   <input type='password' class='form-control' name='password' placeholder='Password' />
                               </div>
                               <div class="form-group">
-                                <button class="btn btn-primary" style=" width: 100%; height: 36px;" >Login</button>
+                                <button class="btn btn-primary " style=" width: 100%; height: 36px;" >Login</button>
                             </div>
                                   <div class="form-group text-center  forgot-link" >
                                     <small> <a href="{% url 'password_reset' %}" style="font-size: 12px;">Forgot Password?</a></small> 
@@ -108,17 +118,7 @@
                       </li>
                     
                     </div>
-                      <div class="nav-item dropdown hoverable ">
-                        <li class="{% if request.path == signup %} active {% endif %}"></li>
-                          <a
-                        class=" btn btn-primary  sign-up-btn"
-                        href="{% url 'signup' %}"
-                        style="padding-right: 10px; padding-left: 10px;"
-                        >Register</a
-                      >
-                        </li> 
-
-                      </div>
+     
                   </div>
               </div>
           </nav>
