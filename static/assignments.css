@@ -1,0 +1,17 @@
+.posted {
+    padding-top: 40px;
+}
+
+.posted .one-assignment {
+    padding-left: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(95, 23, 23, 0.575);
+
+}
+
+.one-sub {
+    padding-top: 20px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(95, 23, 23, 0.575);
+}

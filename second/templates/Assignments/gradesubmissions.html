@@ -1,5 +1,5 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 
 {% load static %}
 <!DOCTYPE html>
@@ -8,13 +8,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Assignments</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
-    <link rel="stylesheet" href="{% static 'form1.css' %}">
+
+
 
 </head>
 
 <body>
+    {% block innerbase %}
     <h3>Grade Submission</h3>
     <p>{{submission.assignment}}</p>
     <p>{{submission.file}}</p>
@@ -22,14 +22,13 @@
 
     <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form2.as_p }}
+        {% include 'second/form-template.html' %}
         <div>
             <input type="submit" value="Add Grade" name="add_grade">
         </div>
     </form>
 
-
+    {% endblock %}
 </body>
 
 </html>
-{% endblock %}

@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KINDER</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
+        type="text/css" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'innerbase1.css' %}" type="text/css" />
+</head>
+
+<body>
+    {% url 'attendance' as attendance_url %}
+    {% url 'post-create' as post_url%}
+    {% url 'home' as home_url%}
+    {% url 'registerchild' as register_url%}
+    {% url 'courses' as courses_url%}
+    {% url 'assignments' as assignments_url%}
+    {% url 'tutorials' as tutorials_url%}
+    {% url 'routine' as routine_url%}
+    {% url 'notice-create' as notice_url%}
+    {% url 'result' as result_url%}
+    {% url 'send-email' as chat_url%}
+
+    <div class="wrapper">
+
+        <div id="sidebar">
+            <div id="sidebar-header">
+                <img class="logo rounded-circle account-img" src="{{ user.profile.image.url }}"
+                    style="width: 200px; height: 200px;">
+                <h3 class="text-center"></i>{{ user.username }}</h3>
+                <a href="{% url 'profile' %}">View Profile <i class="fas fa-user-circle"></i> </i></a>
+            </div>
+            {% if user.user_teachers != "" %}
+            <ul class="list-unstyled components">
+
+                <li class="{% if request.path == home_url %} active {%endif%}">
+                    <a href="{% url 'home' %}"> <i class="ico fa fa-home" aria-hidden="true"></i>Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'analytics' %}" class="{% if request.path == analytics_url %} active {%endif%}"> <i
+                            class="ico fa fa-chart-bar" aria-hidden="true"></i>Analytics</a>
+                </li>
+                <li class="{% if request.path == register_url %} active {%endif%}">
+                    <a href="{% url 'registerchild' %}"><i class="ico fa fa-address-book"
+                            aria-hidden="true"></i>Register
+                        Children</a>
+                </li>
+                <li class="{% if request.path == post_url %} active {%endif%}">
+                    <a href="{% url 'post-create' %}"><i class="ico fa fa-th-large" aria-hidden="true"></i>Add
+                        Post</a>
+                </li>
+                <li class="{% if request.path == attendance_url %} active {%endif%}">
+                    <a href="{% url 'attendance' %}"><i class="ico fa fa-check-square"
+                            aria-hidden="true"></i>Attendance</a>
+                </li>
+                <li class="{% if request.path == courses_url %} active {%endif%}">
+                    <a href="{% url 'courses' %}"><i class="ico fa fa-file-pdf" aria-hidden="true"></i>Resources</a>
+                </li>
+                <li class="{% if request.path == assignments_url %} active {%endif%}">
+                    <a href="{% url 'assignments' %}"><i class="ico fa fa-pen" aria-hidden="true"></i>Assignments</a>
+                </li>
+                <li class="{% if request.path == tutorials_url %} active {%endif%}">
+                    <a href="{% url 'tutorials' %}"><i class="ico fa fa-file" aria-hidden="true"></i>Tutorials</a>
+                </li>
+                <li class="{% if request.path == routine_url %} active {%endif%}">
+                    <a href="{% url 'routine' %}"><i class="ico fa fa-calendar" aria-hidden="true"></i>Class
+                        Routine</a>
+                </li>
+                <li class="{% if request.path == notice_url %} active {%endif%}">
+                    <a href="{% url 'notice-create' %}"><i class="ico fa fa-newspaper" aria-hidden="true"></i>Add
+                        Notice</a>
+                </li>
+
+                <li class="{% if request.path == result_url %} active {%endif%}">
+                    <a href="{% url 'result' %}"><i class="ico fa fa-percent" aria-hidden="true"></i>Add Results</a>
+                </li>
+                <li class="{% if request.path == chat_url %} active {%endif%}">
+                    <a href="{% url 'send-email' %}"><i class="ico fa fa-comments" aria-hidden="true"></i>Chat</a>
+                </li>
+            </ul>
+            {% elif user.user_parents != "" %}
+            <ul class="list-unstyled components">
+
+                <li class="{% if request.path == home_url %} active {%endif%}">
+                    <a href="{% url 'home' %}"><i class="ico fa fa-home" aria-hidden="true"></i>Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'analytics' %}" class="{% if request.path == analytics_url %} active {%endif%}"> <i
+                            class="ico fa fa-chart-bar" aria-hidden="true"></i>Analytics</a>
+                </li>
+                <li class="{% if request.path == result_url %} active {%endif%}">
+                    <a href="{% url 'result' %}"><i class="ico fa fa-percent" aria-hidden="true"></i>See Result</a>
+                </li>
+                <li class="{% if request.path == routine_url %} active {%endif%}">
+                    <a href="{% url 'routine' %}"> <i class="ico fa fa-calendar" aria-hidden="true"></i>See Routine</a>
+                </li>
+                <li class="{% if request.path == courses_url %} active {%endif%}">
+                    <a href="{% url 'courses' %}"><i class="ico fa fa-file-pdf" aria-hidden="true"></i>Resources</a>
+                </li>
+                <li class="{% if request.path == assignments_url %} active {%endif%}">
+                    <a href="{% url 'assignments' %}"><i class="ico fa fa-pen" aria-hidden="true"></i>Assignments</a>
+                </li>
+                <li class="{% if request.path == tutorials_url %} active {%endif%}">
+                    <a href="{% url 'tutorials' %}"><i class="ico fa fa-file" aria-hidden="true"></i>Tutorials</a>
+                </li>
+                <li class="{% if request.path == attendance_url %} active {%endif%}">
+                    <a href="{% url 'attendance' %}"> <i class="ico fa fa-check-square" aria-hidden="true">See
+                            Attendance</a>
+                </li>
+                <li class="{% if request.path == chat_url %} active {%endif%}">
+                    <a href="{% url 'send-email' %}"><i class="ico fa fa-comments" aria-hidden="true"></i>Chat</a>
+                </li>
+
+            </ul>
+            {% endif %}
+        </div>
+
+        <div id="content">
+
+            <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-warning">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse">
+                        <h5 class="page-title">
+                            {% block title %}
+                            {% endblock %}
+                        </h5>
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="bell"><i class="fa fa-bell"></i></li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="main-body">
+
+                {% block forma %}
+                {% endblock %}
+
+
+                {% block innerbase %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+
+    <script>
+        (function ($) {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('reactive');
+                $('#content').toggleClass('wide');
+
+            });
+
+        })(jQuery);
+        $('#sidebar ul li').on('click', function () {
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+    </script>
+
+</body>
+
+</html>

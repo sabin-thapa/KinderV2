@@ -1,68 +1,68 @@
-{% extends "second/base2.html" %} {% load static %} {% load embed_video_tags %}
+{% extends "innerbase.html" %} {% load static %} {% load embed_video_tags %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resources</title>
-  </head>
-  <body class="jumbotron">
-    {% block base2 %}
-    <div class="heading">
-      <h1>Tutorials!</h1>
-      <hr style="width: 50%; text-align: left; margin-left: 0;" />
-    </div>
 
-    <!-- For Teachers -->
-    {% for tut in tutorial %}
-    {% if user.user_teachers != '' %}
-    {% if tut.author.user_teachers != '' %}
-    {% if tut.author.user_teachers.school == user.user_teachers.school %}
-      <div class="tutorial-list">
-        <a href="{% url 'tutorial-detail' tut.id %}">
-          <h1>{{ tut.title }}</h1>
-          {% video tut.video 'small' %}
-          </a>
-          <hr />
-          <p> {{tut.author}}</p>
-          <p>{{tut.date_posted}}</p>
-          <br />
-          <hr />
-      </div>
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endfor %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% block title %}
+  Tutorials
+  {% endblock %}
+</head>
 
-    <!-- For Parents -->
-    {% for tut in tutorial %}
-    {% if tut.author.user_teachers.school == user.user_parents.school %}
-    {% if tut.author.user_teachers.grade == user.user_parents.ChildGrade %}
-      <div class="tutorial-list">
-        <a href="{% url 'tutorial-detail' tut.id %}">
-          <h1>{{ tut.title }}</h1>
-          {% video tut.video 'small' %}
-        </a>
-        <hr />
-        <p> {{tut.author}}</p>
-        <p>{{tut.date_posted}}</p>
-        <br />
-        <hr />
-      </div>
+<body class="jumbotron">
+  {% block innerbase %}
+  <div class="heading">
+    <h1>Tutorials!</h1>
+    <hr style="width: 50%; text-align: left; margin-left: 0;" />
+  </div>
 
-    {% endif %}
-    {% endif %}
-    {% endfor %}
+  <!-- For Teachers -->
+  {% for tut in tutorial %}
+  {% if user.user_teachers != '' %}
+  {% if tut.author.user_teachers != '' %}
+  {% if tut.author.user_teachers.school == user.user_teachers.school %}
+  <div class="tutorial-list">
+    <a href="{% url 'tutorial-detail' tut.id %}">
+      <h1>{{ tut.title }}</h1>
+      {% video tut.video 'small' %}
+    </a>
+    <hr />
+    <p> {{tut.author}}</p>
+    <p>{{tut.date_posted}}</p>
+    <br />
+    <hr />
+  </div>
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
 
-    {% if user.user_teachers != '' %}
-    <a
-      style="margin-top: 20px; margin-bottom: 10px; width: 100%;"
-      name="createpost"
-      class="zoom btn btn-secondary"
-      href="{% url 'tutorial-create' %}"
-      >Add Tutorial</a
-    >
-    {% endif %}
-  </body>
+  <!-- For Parents -->
+  {% for tut in tutorial %}
+  {% if tut.author.user_teachers.school == user.user_parents.school %}
+  {% if tut.author.user_teachers.grade == user.user_parents.ChildGrade %}
+  <div class="tutorial-list">
+    <a href="{% url 'tutorial-detail' tut.id %}">
+      <h1>{{ tut.title }}</h1>
+      {% video tut.video 'small' %}
+    </a>
+    <hr />
+    <p> {{tut.author}}</p>
+    <p>{{tut.date_posted}}</p>
+    <br />
+    <hr />
+  </div>
+
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+  {% if user.user_teachers != '' %}
+  <a style="margin-top: 20px; margin-bottom: 10px; width: 100%;" name="createpost" class="zoom btn btn-secondary"
+    href="{% url 'tutorial-create' %}">Add Tutorial</a>
+  {% endif %}
+</body>
+
 </html>
 {% endblock %}

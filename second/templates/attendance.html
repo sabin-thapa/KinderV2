@@ -1,117 +1,122 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
-    <title>Student Ids</title>
+    {% block title %}
+    Attendance
+    {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
     <script>
-
         function disableBtn(id) {
             document.getElementById(id).disabled = true;
-            setTimeout(function(){document.getElementById(id).disabled = false;},10000);
+            setTimeout(function () {
+                document.getElementById(id).disabled = false;
+            }, 10000);
 
         }
 
         function enableBtn(id) {
             document.getElementById(id).disabled = false;
         }
-
-
-
     </script>
 </head>
 
 
-<body style="margin-top: 90px;" class="jumbotron">
+
+<body>
+    {% block innerbase %}
+
+    <div class="">
+        <center>
 
 
-<div class="container">
-<center>
+            <table class="table table-hover" id="mytable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No.</th>
+                        {% if user.user_teachers != "" %}
+                        <th>Present</th>
+                        <th>Absent</th>
+                        {% endif %}
+                        <th>Absent Days Count</th>
 
+                    </tr>
+                </thead>
 
-    <table class="table table-hover" id="mytable">
-        <thead class="thead-dark">
-            <tr>
-                <th>Name</th>
-                <th>Roll No.</th>
+                {% for i in students %}
                 {% if user.user_teachers != "" %}
-                <th>Present</th>
-                <th>Absent</th>
-                {% endif %}
-                <th>Absent Days Count</th>
-
-            </tr>
-        </thead>
-     
-        {% for i in students %}
-        {% if user.user_teachers != "" %}
-        {% if i.student.teacher == user %}
-
-        
-            <tr>
-            <td>{{i.student.full_name}}</td>
-            <td>{{i.student.roll}}</td>
-
-            <td>
-                <a class="present-btn btn btn-primary" href='{% url "present" i.id %}'>Present</a>&emsp;
-                <small><a href='{% url "presentdecrease" i.id %}'>Undo</a></small>
-
-            </td>
-            <td id="CC">
-                <a class="absent-btn btn btn-danger" href='{% url "absent" i.id %}' onclick="worker()">Absent</a>&emsp;
-                <small><a href='{% url "absentdecrease" i.id %}'>Undo</a></small>
-
-            </td>
-            <td>
-                {{i.absentdayss}} (<small><a href="{% url 'attendance-detail' i.id %}">View Details</small></a>)
+                {% if i.student.teacher == user %}
 
 
-            </td>
+                <tr>
+                    <td>{{i.student.full_name}}</td>
+                    <td>{{i.student.roll}}</td>
 
-            </tr>
-            {% endif%}
-            {% endif%}
-        {% if user.user_parents != "" %}
-        {% if user.user_parents.ChildID == i.student.childid %}
-            <tr>
-            <td>{{i.student.full_name}}</td>
-            <td>{{i.student.roll}}</td>
+                    <td>
+                        <a class="present-btn btn btn-primary" href='{% url "present" i.id %}'>Present</a>&emsp;
+                        <small><a href='{% url "presentdecrease" i.id %}'>Undo</a></small>
 
-           
-            <td>
-                {{i.absentdayss}} (<small><a href="{% url 'attendance-detail' i.id %}">View Details</small></a>)
+                    </td>
+                    <td id="CC">
+                        <a class="absent-btn btn btn-danger" href='{% url "absent" i.id %}'
+                            onclick="worker()">Absent</a>&emsp;
+                        <small><a href='{% url "absentdecrease" i.id %}'>Undo</a></small>
+
+                    </td>
+                    <td>
+                        {{i.absentdayss}} (<small><a href="{% url 'attendance-detail' i.id %}">View Details</small></a>)
 
 
-            </td>
+                    </td>
 
-            </tr>
-            
-        
-        
-        {% endif%}
-        {% endif%}
-        {% endfor %}
-    </table>
+                </tr>
+                {% endif%}
+                {% endif%}
+                {% if user.user_parents != "" %}
+                {% if user.user_parents.ChildID == i.student.childid %}
+                <tr>
+                    <td>{{i.student.full_name}}</td>
+                    <td>{{i.student.roll}}</td>
+
+
+                    <td>
+                        {{i.absentdayss}} (<small><a href="{% url 'attendance-detail' i.id %}">View Details</small></a>)
+
+
+                    </td>
+
+                </tr>
+
+
+
+                {% endif%}
+                {% endif%}
+                {% endfor %}
+            </table>
 
 
             {% if messages %}
-                {% for message in messages %}
-                {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+            {% for message in messages %}
+            {% if message.tags %} <script>
+                alert("{{ message }}")
+            </script> {% endif %}
 
-                {% endfor %}
+            {% endfor %}
 
             {% endif %}
 
-</center>
-</div>
+        </center>
+    </div>
 
-
+    {% endblock %}
 
 </body>
+
 </html>
-{% endblock %}

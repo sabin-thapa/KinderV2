@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
-from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Grading
-from second.models import Post, Course, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events
+from second.models import Post, Course, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID
 from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Routine, Notice, Absentday, Presentday, SID, Events, ROUTINES, Contacts
+from second.models import Post, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -31,15 +31,6 @@ from users.models import User_parents, User_teachers
 from django import template
 
 register = template.Library()
-
-
-@login_required
-def routine(request):
-    context = {
-        'routine': Routine.objects.all()
-    }
-
-    return render(request, 'routine.html', context)
 
 
 @login_required
@@ -82,6 +73,11 @@ def result(request):
     return render(request, 'result.html', context)
 
 
+def analytics(request):
+    context = {}
+    return render(request, 'second/analytics.html', context)
+
+
 @login_required
 def food(request):
     context = {
@@ -110,6 +106,7 @@ def addresult(request):
 @login_required
 def registerchild(request):
     context = {
+
         'stid': SID.objects.all(),
     }
     return render(request, 'registerchild.html', context)
@@ -121,11 +118,6 @@ class RoutineListView(ListView):
     context_object_name = 'routine'
 
 
-class RoutineDetailView(DetailView):
-    model = ROUTINES
-    template_name = 'routine_detail.html'
-
-
 class ResultDetail(DetailView):
     model = Result
     template_name = 'resultdetail.html'
@@ -134,6 +126,7 @@ class ResultDetail(DetailView):
 def attendance(request):
 
     context = {
+
         'students': Attend.objects.all(),
     }
     return render(request, 'attendance.html', context)
@@ -191,9 +184,9 @@ def postsandnotices(request):
     post_list = Post.objects.all()
 
     context = {
+
         'posts': post_list,
-        'notices': Notice.objects.all().order_by('-date_posted'),
-        'events': Events.objects.all().order_by('-date_posted'),
+        'notices': Notice.objects.all()[:6]
 
     }
 
@@ -216,11 +209,6 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
-
-
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'post_detail.html'
 
 
 class NoticeDetailView(DetailView):
@@ -252,7 +240,7 @@ class NoticeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'photo']
+    fields = ['content', 'photo']
     template_name = 'post_form.html'
 
     def form_valid(self, form):
@@ -299,6 +287,15 @@ class ROUTINESCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return False
 
 
+class ROUTINESDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = ROUTINES
+    success_url = "/home/routine"
+
+    def test_func(self):
+        routine = self.get_object()
+        return True
+
+
 class FoodsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Foods
     fields = ['day', 'food']
@@ -332,57 +329,9 @@ class NoticeCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return False
 
 
-class EventsDetailView(DetailView):
-    model = Events
-    template_name = 'events_detail.html'
-
-
-class EventsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Events
-    success_url = "/home/home"
-
-    def test_func(self):
-        events = self.get_object()
-        if self.request.user == events.author:
-            return True
-        return False
-
-
-class EventsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Events
-    fields = ['title', 'content']
-    template_name = 'events_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-
-        return super().form_valid(form)
-
-    def test_func(self):
-        if self.request.user.user_teachers != '':
-            return True
-        return False
-
-
-class EventsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Events
-    fields = ['title', 'content']
-    template_name = 'events_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        events = self.get_object()
-        if self.request.user == events.author:
-            return True
-        return False
-
-
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'photo']
+    fields = ['content', 'photo']
     template_name = 'notice_form.html'
 
     def form_valid(self, form):
@@ -671,14 +620,12 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
-    # @register.filter
-    # def par_filter(value):
-    #     filtered_data = Assignments.objects.get(author=)
-    #     return filtered_data
+    filtered_subs = Submissions.objects.filter(author=request.user)
 
     tasks = Assignments.objects.filter(author=request.user)
     all_tasks = Assignments.objects.all()
     context = {
+        'fsubs': filtered_subs,
         'tasks': tasks,
         'all_tasks': all_tasks,
         'form': form,
@@ -691,58 +638,58 @@ def submissions(request, assignment_id):
 
     if request.method == "POST":
         if 'add_submission' in request.POST:
-            form1 = SubmissionForm(request.POST, request.FILES)
-            if form1.is_valid():
-                form1.instance.author = request.user
-                form1.instance.assignment = assignment1
-                form1.instance.date_submitted = datetime.date.today()
-                form1.save()
+            form = SubmissionForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.instance.author = request.user
+                form.instance.assignment = assignment1
+                form.instance.date_submitted = datetime.date.today()
+                form.save()
 
             return redirect('assignments')
     else:
-        form1 = SubmissionForm()
+        form = SubmissionForm()
 
     context = {
-        'form1': form1,
+        'form': form,
         'assignment': assignment1,
         'subs': Submissions.objects.filter(assignment_id=assignment_id),
     }
     return render(request, 'Assignments/submissions.html', context)
 
 
-def gradesubmissions(request, submission_id):
+def gradesubmissions(request, assignment_id, submission_id):
     submission1 = get_object_or_404(Submissions, pk=submission_id)
 
     if request.method == "POST":
 
         if 'add_grade' in request.POST:
-            form2 = GradeForm(request.POST)
-            if form2.is_valid():
-                form2.instance.author = request.user
-                form2.instance.submission = submission1
-                form2.instance.assignment = submission1.assignment
-                form2.instance.date_graded = datetime.date.today()
-                form2.save()
+            form = GradeForm(request.POST)
+            if form.is_valid():
+                form.instance.author = request.user
+                form.instance.submission = submission1
+                form.instance.assignment = submission1.assignment
+                form.instance.date_graded = datetime.date.today()
+                form.save()
 
-            return redirect('assignments')
+            return redirect('submissions', assignment_id=assignment_id)
     else:
-        form2 = GradeForm()
+        form = GradeForm()
 
     context = {
-        'form2': form2,
+        'form': form,
         'submission': submission1,
     }
     return render(request, 'Assignments/gradesubmissions.html', context)
 
 
-def grade_update(request, submission_id):
-    grade = get_object_or_404(Grading, pk=submission_id)
+def grade_update(request, assignment_id, grade_id):
+    grade = get_object_or_404(Grading, pk=grade_id)
     if request.method == "POST":
         form = GradeForm(request.POST, instance=grade)
         if form.is_valid():
             grade = form.save(commit=False)
             grade.save()
-            return redirect('assignments')
+            return redirect('submissions', assignment_id=assignment_id)
     else:
         form = GradeForm(instance=grade)
     return render(request, 'Assignments/grade-update.html', {'form': form})

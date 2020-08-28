@@ -1,49 +1,59 @@
-{% extends "second/base2.html" %} {% load static %} {% block base2 %} {% load embed_video_tags %}
+{% extends "innerbase.html" %} {% load static %} {% load embed_video_tags %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Course Detail</title>
-  </head>
 
-  <body class="jumbotron">
-    <h1><strong> {{course.course_title}} </strong></h1>
- <hr />
-    <h1>Announcements</h1>
-    <p>{{course.announcement}}</p>
-    <hr /> <br /> 
-    <h1>Syllabus</h1>
-    <p><a href="{{course.syllabus_url}}">  {{ course.syllabus }}</p> </a>
-    <hr />
-    <h1>Course Plan</h1>
-    <p><a href="{{course.course_plan_url}}">  {{ course.course_plan }}</p> </a>
-    <hr />
-    <br />
-    <a href="{% url 'attachments' %}"> <h1> Attachments</h1></a>  
-    {% for attachment in course.attachment_set.all %}
-     <ul> <li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Detail</title>
+</head>
+
+<body class="jumbotron">
+  {% block innerbase %}
+  <h1><strong> {{course.course_title}} </strong></h1>
+  <hr />
+  <h1>Announcements</h1>
+  <p>{{course.announcement}}</p>
+  <hr /> <br />
+  <h1>Syllabus</h1>
+  <p><a href="{{course.syllabus_url}}"> {{ course.syllabus }}</p> </a>
+  <hr />
+  <h1>Course Plan</h1>
+  <p><a href="{{course.course_plan_url}}"> {{ course.course_plan }}</p> </a>
+  <hr />
+  <br />
+  <a href="{% url 'attachments' %}">
+    <h1> Attachments</h1>
+  </a>
+  {% for attachment in course.attachment_set.all %}
+  <ul>
+    <li>
       <a href="{% url 'attachment-detail' attachment.pk %}">{{attachment.title}}
-     </li></ul>
-      {% endfor %} </a> 
-      <hr />
-    <a href="{% url 'tutorials' %}">  <h1> Tutorials </h1></a>
-    
-    {% for i in course.tutorial_set.all %}
-    <a href="{% url 'tutorial-detail' i.pk %}">
-      <p>{{ i.title }}</h1>     </p>
-      {% video i.video 'small' %}
+    </li>
+  </ul>
+  {% endfor %} </a>
+  <hr />
+  <a href="{% url 'tutorials' %}">
+    <h1> Tutorials </h1>
+  </a>
+
+  {% for i in course.tutorial_set.all %}
+  <a href="{% url 'tutorial-detail' i.pk %}">
+    <p>{{ i.title }}</h1>
+    </p>
+    {% video i.video 'small' %}
 
 
     {% endfor %}
 
 
-    <div class="col-md-12 xm-0">  
+    <div class="col-md-12 xm-0">
       <br>
       {% if user.user_teachers != '' %}
       <a class='btn btn-secondary' name="createpost" href="{% url 'course-update' object.id %}">Update Course</a>
       <a class='btn btn-outline-danger' name="createpost" href="{% url 'course-delete' object.id %}">Delete Course</a>
       {% endif %}
     </div>
-  </body>
+    {% endblock %}
+</body>
+
 </html>
-{% endblock %}
