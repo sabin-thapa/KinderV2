@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% extends "innerbase.html" %}
-
 <html lang="en">
 
 {% load static %}
@@ -16,6 +15,7 @@
     {% block innerbase %}
 
 
+
     <div class="jumbotron">
         <center>
             <div class='form-box'>
@@ -24,9 +24,9 @@
                     {% csrf_token %}
 
                     <div>
-                        <h1>Are you sure you want to delete {{object.title}} permanently?</h1>
+                        <h1>Are you sure you want to delete {{object.title}}'s routine permanently?</h1>
                         <button class='btn btn-outline-danger' type='submit'>Yes, Delete</button>
-                        <a href="{% url 'assignments' %}" class='btn btn-secondary'>NO</a>
+                        <a href="{% url 'routine' %}" class='btn btn-secondary'>NO</a>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
 <html lang="en">
 
 {% load static %}
@@ -13,6 +12,7 @@
 </head>
 
 <body>
+    {% block innerbase %}
 
 
 
@@ -34,9 +34,8 @@
         </center>
     </div>
 
-
+    {% endblock %}
 
 </body>
 
 </html>
-{% endblock %}

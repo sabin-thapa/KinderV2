@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-{% extends "base.html" %}
-{% block base1 %}
+{% extends "innerbase.html" %}
+
 <html>
+
 <head>
     <title>Success</title>
 </head>
+
 <body>
+    {% block innerbase %}
     <div class="jumbotron">
         <h1>Email sent successfully!</h1>
-   
+
 
         <a href={% url 'home' %} class='zoom btn btn-secondary'> Home </a>
     </div>
-</body>
-</html>
 
-{% endblock %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,18 +1,14 @@
+from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Course, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
+from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES, Assignments, Submissions, Grading
 from django.contrib import admin
 
-from second.models import Post, Tutorial, Profile, Attachment, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School,Foods,ROUTINES
+from second.models import Post, Tutorial, Profile, Attachment, Result, StudentId, Attendance, Attend, Food, Course, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
 
 from embed_video.admin import AdminVideoMixin
 
+
 class MyModelAdmin(AdminVideoMixin, admin.ModelAdmin):
     pass
-
-
-from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Routine, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES, Assignments, Submissions, Grading
-
-from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Course, Routine, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
-
-from django.contrib import admin
 
 
 admin.site.register(StudentId)
@@ -21,7 +17,6 @@ admin.site.register(Attend)
 admin.site.register(Food)
 admin.site.register(Foods)
 admin.site.register(ROUTINES)
-admin.site.register(Routine)
 admin.site.register(Absentday)
 admin.site.register(Presentday)
 admin.site.register(SID)

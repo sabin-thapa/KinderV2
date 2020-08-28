@@ -1,38 +1,44 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
+
 <head>
-    <style>
-       .profile {
-        background-color: lightgrey;
-        width: 50%;
-        border: 2px solid black;
-        padding: 50px;
-        margin: 20px;
-      }
-    </style>
+  <style>
+    .profile {
+      background-color: lightgrey;
+      width: 50%;
+      border: 2px solid black;
+      padding: 50px;
+      margin: 20px;
+    }
+  </style>
 </head>
+
 <body class="jumbotron">
-<div class="jumbotron">
-<div class="profile">
-    <b><p style="font-size:25px;"><img class="rounded-circle account-img" src="{{ events.author.profile.image.url }}" height = "45px", width="45px">
-    <h4>{{events.author}}</h4>
+  {% block innerbase %}
+  <div class="jumbotron">
+    <div class="profile">
+      <b>
+        <p style="font-size:25px;"><img class="rounded-circle account-img" src="{{ events.author.profile.image.url }}"
+            height="45px" , width="45px">
+          <h4>{{events.author}}</h4>
 
-    <small class = "text-muted">{{ events.date_posted|date:"F d, Y"}}</small>
+          <small class="text-muted">{{ events.date_posted|date:"F d, Y"}}</small>
 
-    <h1>{{events.title}}</h1>
-    
-    
-    <p><b>{{events.content}}</b></p>
-
-    <br>
-    {% if user.user_teachers != '' %}
-    <a class='btn btn-secondary' name="createpost" href="{% url 'events-update' object.id %}">Update Event</a>
-    <a class='btn btn-outline-danger' name="createpost" href="{% url 'events-delete' object.id %}">Delete Event</a>
-    {% endif %}
-
-</div>
+          <h1>{{events.title}}</h1>
 
 
-</div>
+          <p><b>{{events.content}}</b></p>
+
+          <br>
+          {% if user.user_teachers != '' %}
+          <a class='btn btn-secondary' name="createpost" href="{% url 'events-update' object.id %}">Update Event</a>
+          <a class='btn btn-outline-danger' name="createpost" href="{% url 'events-delete' object.id %}">Delete
+            Event</a>
+          {% endif %}
+
+    </div>
+
+
+  </div>
+  {% endblock %}
 </body>
-{% endblock %}
