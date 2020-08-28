@@ -1,42 +1,33 @@
-{% extends "base1.html" %}
-{% block base2 %}
-
-{% load static %}
+{% extends "innerbase.html" %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student Ids</title>
-    <script src=" {% static 'registerchild.js' %} "></script>
-    <link rel="stylesheet" href="{% static 'form1.css' %}" >
 
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Ids</title>
+  <script src=" {% static 'registerchild.js' %} "></script>
+  <link rel="stylesheet" href="{% static 'form3.css' %}" />
+  {% block title %}
+  Student Registration
+  {% endblock %}
 </head>
 
-
-<body class="jumbotron">
-
-<div class="jumbotron">
-<center>
-<div class='form-box'>
-    <form method='POST'>
-        {% csrf_token %}
-        {{ form.as_p }}
+<body>
+  {% block innerbase %}
 
 
-    <button class='btn btn-outline-info' type='submit'>ADD</button>
+  <div class="jumbotron">
+    <center>
+      <div class="form-box">
+        <form method="POST">
+          {% csrf_token %} {% include 'second/form-template.html' %}
 
-    </form>
-</div>
-</center>
-<br>
-
-
-</div>
-
-
-
-
-
+          <button class="btn btn-outline-info" type="submit">ADD</button>
+        </form>
+      </div>
+    </center>
+    <br />
+  </div>{% endblock %}
 </body>
+
 </html>
-{% endblock %}

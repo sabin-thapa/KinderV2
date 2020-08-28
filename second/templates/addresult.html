@@ -1,58 +1,57 @@
-{% extends "base1.html" %}
-{% block base2 %}
-{% load static %}
+{% extends "innerbase.html" %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Add Result</title>
-    <link rel="stylesheet" type="text/css" href="{% static "second.css" %}">
-    <link rel="stylesheet" href="{% static 'form1.css' %}" >
+  <meta charset="UTF-8" />
+  <title>Add Result</title>
+  <link rel="stylesheet" type="text/css" href="{% static "second.css" %}">
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
 
-    <script src=" {% static 'registerchild.js' %} "></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            var options=document.querySelectorAll('option')
-            var h1=document.querySelectorAll('h1')
-            for(i=1;i<options.length;i++){
-                options[i].style.display='none'
-            }
-            for(j=0;j<h1.length;j++){
-                for(i=1;i<options.length;i++){
-                    var std=h1[j].textContent
-                    if(std==options[i].value){
-                        options[i].style.display=''
-                        break;
-                    }
-                    
-                }
-            }
-        })
-
-    </script>
+  <script src=" {% static 'registerchild.js' %} "></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var options = document.querySelectorAll("option");
+      var h1 = document.querySelectorAll("h1");
+      for (i = 1; i < options.length; i++) {
+        options[i].style.display = "none";
+      }
+      for (j = 0; j < h1.length; j++) {
+        for (i = 1; i < options.length; i++) {
+          var std = h1[j].textContent;
+          if (std == options[i].value) {
+            options[i].style.display = "";
+            break;
+          }
+        }
+      }
+    });
+  </script>
 </head>
+
 <body style="padding-top: 55px;" class="jumbotron">
-<div class='jumbotron'>
-
-<center>
-<div class="form-box">
-<div>
-    {% for x in user.sid_set.all %}
-    <h1 style='display:none;'>{{x.id}}</h1>
-    {% endfor %}
-    </div>
-    <form method='POST'>
-        {% csrf_token %}
-        {{ form.as_p }}
+  {% block innerbase %}
+  <div class="jumbotron">
+    <center>
+      <div class="form-box">
         <div>
-            <button class='btn btn-outline-info' href="{% url 'result' %}" type='submit'>ADD</button>
+          {% for x in user.sid_set.all %}
+          <h1 style="display: none;">{{x.id}}</h1>
+          {% endfor %}
         </div>
-    </form>
-</div>
-</center>
-</div>
+        <form method="POST"></form>
+        {% csrf_token %} {% include 'second/form-template.html' %}
+        <div>
+          <button class="btn btn-outline-info" href="{% url 'result' %}" type="submit">
+            ADD
+          </button>
+        </div>
+        </form>
+      </div>
+    </center>
+  </div>
+  {% endblock %}
 </body>
-</html>
 
-{% endblock %}
+</html>

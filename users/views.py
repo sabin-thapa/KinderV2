@@ -9,6 +9,59 @@ from kinder.settings import EMAIL_HOST_USER
 from . import forms
 from django.core.mail import send_mail
 
+def signup(request):
+    if request.method == 'POST':
+        form1 = UserRegistrationForm(request.POST)
+        form2 = UserRegistrationForm(request.POST)
+        form_parents = User_p(request.POST)
+        form_teachers = User_t(request.POST)
+        students = sm.SID.objects.all()
+        schools = sm.School.objects.all()
+        parents = User_parents.objects.all()
+
+        if form1.is_valid() and form_parents.is_valid():
+            p = True
+            for parent in parents:
+                if form_parents.cleaned_data.get('ChildID') == parent.ChildID:
+                    p = False
+            access = False
+
+            for student in students:
+                if form_parents.cleaned_data.get('ChildID') == student.ChildID and p:
+                    access = True
+            if access:
+                user = form1.save()
+                profile = form_parents.save(commit=False)
+                profile.user = user
+                profile.save()
+
+                username = form1.cleaned_data.get('username')
+                messages.success(request, f'Account created for {username}')
+                return redirect('login')
+
+        if form2.is_valid() and form_teachers.is_valid():
+            access=False
+            for school in schools:
+                
+                if school.schcode == form_teachers.cleaned_data.get('schoolCode') and str(form_teachers.cleaned_data.get('school')) == school.sch:
+                    access=True
+            if access:
+                user=form2.save()
+                profile1= form_teachers.save(commit=False)
+                profile1.user=user
+                profile1.save()
+
+                username = form2.cleaned_data.get('username')
+                messages.success(request, f'Account created for {username}')
+                return redirect('login')
+    else:
+        form1 = UserRegistrationForm()
+        form_parents = User_p()
+        form2 = UserRegistrationForm()
+        form_teachers = User_t()
+
+    return render(request, 'signup.html', {'form1': form1, 'form2': form2, 'form_parents':form_parents, 'form_teachers' : form_teachers})
+
 
 
 def register_parent(request):

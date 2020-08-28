@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-{% extends "second/base2.html" %} {% block base2 %}
+{% extends "innerbase.html" %}
 <html lang="en">
-  {% load static %}
+{% load static %}
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="{% static 'form1.css' %}" />
-    <title>Document</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+  <title>Document</title>
+</head>
 
-  <body class="jumbotron" style="height: 100%; width: 100%;">
-    <center>
-      <div class="form-box">
-        <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %} {{ form.as_p }} {{formset.as_table}}
-          <div>
-            <button class="btn btn-outline-info" type="submit">POST</button>
-          </div>
-        </form>
-      </div>
-    </center>
-  </body>
+<body class="jumbotron" style="height: 100%; width: 100%;">
+  {% block innerbase %}
+  <center>
+    <div class="form-box jumbotron">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {% include 'second/form-template.html' %}
+        <div>
+          <button class="btn btn-outline-info" type="submit">POST</button>
+        </div>
+      </form>
+    </div>
+  </center>
+  {% endblock %}
+</body>
+
 </html>
-{% endblock %}

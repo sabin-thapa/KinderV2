@@ -1,8 +1,20 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
 from .models import Result, Foods, Contacts
 from .models import Profile, SID, Attend, ROUTINES, Absentday
+from .models import Course, Post
+from .models import Assignments, Submissions, Grading
+
+from bootstrap_datepicker_plus import DateTimePickerInput
+from bootstrap_modal_forms.forms import BSModalModelForm
+
+
+class PostForm(BSModalModelForm):
+    class Meta:
+        model = Post
+        fields = ['content', 'photo']
 
 
 class UserRegisterForm(UserCreationForm):
@@ -44,23 +56,6 @@ class AttendanceForm(forms.ModelForm):
         exclude = ('student' ,)
 
 
-class FoodForm(forms.ModelForm):
-
-    class Meta:
-        model = Foods
-        fields = ('day', 'food')
-
-
-class RoutineForm(forms.ModelForm):
-
-    class Meta:
-
-        model = ROUTINES
-
-        fields = ('day', 'ten_ten45', 'ten45_eleven30', 'eleven45_twelve30',
-                  'twelve30_one15', 'two_two45', 'two45_three30')
-
-
 class ResultForm(forms.ModelForm):
 
     class Meta:
@@ -81,3 +76,24 @@ class ContactsForm(forms.ModelForm):
     class Meta:
         model = Contacts
         fields = {'email', 'message'}
+
+
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Assignments
+        widgets = {
+            'deadline': DateTimePickerInput()
+        }
+        fields = ('title', 'description', 'file', 'deadline')
+
+
+class SubmissionForm(forms.ModelForm):
+    class Meta:
+        model = Submissions
+        fields = ('file', 'description')
+
+
+class GradeForm(forms.ModelForm):
+    class Meta:
+        model = Grading
+        fields = ('grade', 'remarks')

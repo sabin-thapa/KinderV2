@@ -1,0 +1,28 @@
+{% extends "innerbase.html" %} {% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Detail</title>
+</head>
+
+<body class="jumbotron">
+  {% block innerbase %}
+  <h1>Detail</h1>
+  <h1>{{attachment.title}}</h1>
+  <img src="{{attachment.file.url}}" style="height: 700px; width: 700px;" />
+  <p>{{ attachment.date_posted }}</p>
+
+  <div class="col-md-12 xm-0">
+    <br />
+    {% if user.user_teachers != '' %}
+    <a class="btn btn-secondary" name="createpost" href="{% url 'attachment-update' object.pk %}">Update Attachment</a>
+    <a class="btn btn-outline-danger" name="createpost" href="{% url 'attachment-delete' object.pk %}">Delete
+      Attachment</a>
+    {% endif %}
+  </div>
+  {% endblock %}
+</body>
+
+</html>

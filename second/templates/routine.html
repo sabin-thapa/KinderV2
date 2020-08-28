@@ -1,33 +1,29 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        table,th, td, tr {
-        border: 1px solid black;
-        border-collapse: collapse;
-        }
-        #myTable th{
-            background-color:#729FCFFF;
-        }
-    </style>
+    {% block title %}
+    Class Routine
+    {% endblock %}
 
 </head>
+
 <body style="padding-top: 55px;" class="jumbotron">
+    {% block innerbase %}
 
+    <div class="">
 
-<div class="jumbotron">
-        <center>
         {% if user.user_teachers != "" %}
-        <button class='btn btn-secondary' onclick="location.href='{% url 'addroutine' %}'" style="margin-left:90%;">ADD</button>
+        <button class='btn btn-secondary' onclick="location.href='{% url 'addroutine' %}'"
+            style="margin-left:90%;">ADD</button>
         {% endif %}
         <br>
         <br>
-        <table class="table table-hover" id="myTable" style="width: 70%">
+        <table class="table table-hover" id="myTable">
             <thead class="thead-gray">
                 <tr>
                     <th>Day</th>
@@ -39,55 +35,64 @@
                     <th>13:15-14:00</th>
                     <th>14:00-14:45</th>
                     <th>14:45-15:30</th>
+                    {% if user.user_teachers != "" %}
+                    <th>Update</th>
+                    <th>Delete</th>
+                    {% endif %}
+
 
                 </tr>
             </thead>
 
             {% for rout in routine %}
-                {% if user == rout.teacher %}
-                <tr>
-                    {% if user.user_teachers != "" %}
-                    <td><b><a href="{% url 'routine-detail' rout.id %}">{{rout.day}}</a></b></td>
-                    {% else %}
-                    <td><b>{{rout.day}}</b></td>
-                    {% endif %}
-                    <td>{{rout.ten_ten45}}</td>
-                    <td>{{rout.ten45_eleven30}}</td>
-                    <td>Break</td>
-                    <td>{{rout.eleven45_twelve30}}</td>
-                    <td>{{rout.twelve30_one15}}</td>
-                    <td>Lunch</td>
-                    <td>{{rout.two_two45}}</td>
-                    <td>{{rout.two45_three30}}</td>
-                    </tr>
+            {% if user == rout.teacher %}
+            <tr>
+                {% if user.user_teachers != "" %}
+                <td><b>{{rout.day}}</b></td>
+                {% else %}
+                <td><b>{{rout.day}}</b></td>
                 {% endif %}
-                {% if rout.teacher.user_teachers.school == user.user_parents.school %}
-                {% if rout.teacher.user_teachers.grade == user.user_parents.ChildGrade %}
-                    <tr>
-                    {% if user.user_teachers != "" %}
-                    <td><b><a href="{% url 'routine-detail' rout.id %}">{{rout.day}}</a></b></td>
-                    {% else %}
-                    <td><b>{{rout.day}}</b></td>
-                    {% endif %}
-                    <td>{{rout.ten_ten45}}</td>
-                    <td>{{rout.ten45_eleven30}}</td>
-                    <td>Break</td>
-                    <td>{{rout.eleven45_twelve30}}</td>
-                    <td>{{rout.twelve30_one15}}</td>
-                    <td>Lunch</td>
-                    <td>{{rout.two_two45}}</td>
-                    <td>{{rout.two45_three30}}</td>
-                    </tr>
-                {% endif%}
+                <td>{{rout.ten_ten45}}</td>
+                <td>{{rout.ten45_eleven30}}</td>
+                <td>Break</td>
+                <td>{{rout.eleven45_twelve30}}</td>
+                <td>{{rout.twelve30_one15}}</td>
+                <td>Lunch</td>
+                <td>{{rout.two_two45}}</td>
+                <td>{{rout.two45_three30}}</td>
+                {% if user.user_teachers != "" %}
+                <td><a href="{% url 'routine-update' rout.id %}" class="btn btn-primary">Update</a></td>
+                <td><a href="{% url 'routine-delete' rout.id %}" class="btn btn-primary">Delete</a></td>
                 {% endif %}
+            </tr>
+            {% endif %}
+            {% if rout.teacher.user_teachers.school == user.user_parents.school %}
+            {% if rout.teacher.user_teachers.grade == user.user_parents.ChildGrade %}
+            <tr>
+                {% if user.user_teachers != "" %}
+                <td><b><a href="{% url 'routine-detail' rout.id %}">{{rout.day}}</a></b></td>
+                {% else %}
+                <td><b>{{rout.day}}</b></td>
+                {% endif %}
+                <td>{{rout.ten_ten45}}</td>
+                <td>{{rout.ten45_eleven30}}</td>
+                <td>Break</td>
+                <td>{{rout.eleven45_twelve30}}</td>
+                <td>{{rout.twelve30_one15}}</td>
+                <td>Lunch</td>
+                <td>{{rout.two_two45}}</td>
+                <td>{{rout.two45_three30}}</td>
+            </tr>
+            {% endif%}
+            {% endif %}
             {% endfor %}
 
 
         </table>
 
-        </center>
-</div>
 
+    </div>
+    {% endblock %}
 </body>
+
 </html>
-{% endblock %}

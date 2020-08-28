@@ -1,5 +1,5 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 
 {% load static %}
 
@@ -8,26 +8,26 @@
     <meta charset="UTF-8">
     <title> FOOD </title>
     <link rel="stylesheet" type="text/css" href="{% static "second.css" %}">
-    <link rel="stylesheet" href="{% static 'form1.css' %}" >
+    <link rel="stylesheet" href="{% static 'form1.css' %}">
 
     <script src=" {% static 'registerchild.js' %} "></script>
 
 </head>
 
 <body class="jumbotron">
-<div class='jumbotron'>
-<center>
-<div class="form-box">
-    <form method='POST'>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div>
-            <button class='btn btn-outline-info' type='submit'>ADD</button>
-        </div>
-    </form>
-</div>
-</center>
-</div>
+    {% block innerbase %}
+    <div class='jumbotron'>
+        <center>
+            <div class="form-box">
+                <form method='POST'>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div>
+                        <button class='btn btn-outline-info' type='submit'>ADD</button>
+                    </div>
+                </form>
+            </div>
+        </center>
+    </div>
+    {% endblock %}
 </body>
-
-{% endblock %}

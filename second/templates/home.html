@@ -1,272 +1,195 @@
-{% extends "base1.html" %}
-{% block base2 %}
+{% extends "innerbase.html" %}
+
 <html>
 {% load static %}
 
 <!DOCTYPE html>
 
 <head>
-    <title>posts</title>
-    <style>
-        .zoom {
-          padding: 4px;
-          background-color: none;
-          transition: transform .2s;
-          width: 150px;
-          height: 35px;
-          margin: 0 auto;
-        }
+    {% block title %}
+    Home
+    {% endblock %}
 
-        .zoom:hover {
-          -ms-transform: scale(1.2); /* IE 9 */
-          -webkit-transform: scale(1.2); /* Safari 3-8 */
-          transform: scale(1.2);
-        }
 
-    </style>
     <script>
-        var createpost=document.getElementsByName("createpost")
-        var posts=document.getElementsByName("posts")
+        var createpost = document.getElementsByName("createpost")
+        var posts = document.getElementsByName("posts")
 
-        document.addEventListener('DOMContentLoaded', function(){
-            for(i=0;i<posts.length;i++){
-                if (posts[i].querySelector('span').textContent =='teacher'){
-                    posts[i].style.display=''
-                }else{
-                    posts[i].style.display='none'
+        document.addEventListener('DOMContentLoaded', function () {
+            for (i = 0; i < posts.length; i++) {
+                if (posts[i].querySelector('span').textContent == 'teacher') {
+                    posts[i].style.display = ''
+                } else {
+                    posts[i].style.display = 'none'
                 }
             }
-            if (document.getElementById("usertype").innerText=='teacher'){
-                    displays1()
-                }else{
-                    displays1('none')
-                }
+            if (document.getElementById("usertype").innerText == 'teacher') {
+                displays1()
+            } else {
+                displays1('none')
+            }
         })
 
-        function displays1(i=''){
-            for(j=0;j<createpost.length;j++){
-                createpost[j].style.display=i
+        function displays1(i = '') {
+            for (j = 0; j < createpost.length; j++) {
+                createpost[j].style.display = i
             }
         }
     </script>
+
 </head>
 
 
 <body>
-<div class="jumbotron">
-
-    <div class = "row row-height" >
-        <div class="col-lg-2">
-            <div class="col-lg-2" style="position: fixed;">
-                {% if user.user_teachers != "" %}
-                    <a style="margin-top: 50px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'registerchild' %}">Register Children </a>
-                    <br>
-                    <p id="usertype" style="display:none;">{{user.user_teachers.UserType}}</p>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'post-create' %}">Create Post</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'attendance' %}">Attendance</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'resources' %}">Resources</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'routine' %}">Class Routine</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'notice-create' %}">Add Notice</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'events-create' %}">Add Event</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'result' %}">Add Results</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'send-email' %}">Contact</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'teacher-profile' %}">Teachers </a>
-                
-                {% elif user.user_parents != "" %}
-                    <a style="margin-top: 50px; margin-bottom: 10px; width:100%;" class='zoom btn btn-secondary' href="{% url 'result' %}">See Result</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'routine' %}">See Routine</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'food' %}">Food Routine</a>
-                    <br>
-                     <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'attendance' %}">See Attendance</a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'send-email' %}">Contact </a>
-                    <br>
-                    <a style="margin-top: 20px; margin-bottom: 10px; width:100%;" name="createpost" class='zoom btn btn-secondary' href="{% url 'teacher-profile' %}">Teachers</a>
-                {% endif %}
-
-            </div>
-        </div>
-
-        <div class="col-lg-7">
+    <div class="jumbotron">
+        {% block innerbase %}
+        <div class="row row-height">
 
 
+            <div class="col-lg-9" style="margin-top: -25px;">
+
+                <br>
+                {% for post in posts %}
+                {% if post.author.user_teachers != "" %}
+                {% if user.user_teachers != ""%}
+                {% if post.author.user_teachers.school == user.user_teachers.school %}
+                <div style="border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;margin-bottom: 50px;"
+                    name='posts'>
                     <br>
-                    {% for post in posts %}
-                    {% if post.author.user_teachers != "" %}
-                    {% if user.user_teachers != ""%}
-                    {% if post.author.user_teachers.school == user.user_teachers.school %}
-                    <div style="margin-left: 70px;background-color:white;border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;" name='posts'>
-                    <br>
-                    <div style="margin-left:10px;margin-right:10px;">
-                    <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
-                        <b><p style="font-size:25px;"><img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height = "45px", width="45px">
-                        <a href="{% url 'user-posts' post.author.username %}">{{post.author}}</a></p></b>
-                        <small class = "text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
+                    <div style="margin-left:20px;">
+                        <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
 
-                        <div><a href="{% url 'post-detail' post.id %}">
-                                <h1>{{post.title}}</h1>
-                            </a>
-                        </div>
-                        <p><b>{{post.content}}</b></p>
-                        </div>
+                        <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height="45px"
+                            , width="45px">
+                        <b>
+                            {{post.author}}
+
+                        </b><br>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}
+                            <br>
+                            <div style="position: relative; float: right; right: 40px; top: -20px;">
+                                <a class="btn btn-outline-primary" href="{% url 'post-update' post.id %}">Edit
+                                </a>
+
+                                <a class="btn btn-outline-danger" href="{% url 'post-delete' post.id %}">Delete
+                                </a>
+                            </div>
+                        </small><br><br>
+                        <p style="word-break: break-all; padding-right: 20px; margin-top: -35px; width: 80%;">
+                            <b>{{post.content}}</b></p>
 
 
-                        <img id='posting' style="width: 100%; height: 100%;padding-top: 20px; padding-bottom: -40px;" src="/media/{{post.photo}}" onerror="this.style.display='none'">
-                        <br>
                     </div>
+
+
+                    <img id='posting' style="width: 100%; height: 100%;" src="/media/{{post.photo}}"
+                        onerror="this.style.display='none'">
                     <br>
-                    {% endif %}
-                    {% else %}
+                </div>
+                <br>
+                {% endif %}
+                {% else %}
 
-                    {% if post.author.user_teachers.school == user.user_parents.school %}
-                    {% if post.author.user_teachers.grade == user.user_parents.ChildGrade %}
-                    <div style="margin-left: 70px;background-color:white;border-style:solid;border-radius:5px;border-width:1px;border-color:#969696;width:100%;" name='posts'>
+                {% if post.author.user_teachers.school == user.user_parents.school %}
+                {% if post.author.user_teachers.grade == user.user_parents.ChildGrade %}
+                <div style="border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;margin-bottom: 50px;"
+                    name='posts'>
                     <br>
-                    <div style="margin-left:10px;margin-right:10px;">
-                    <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
-                        <b><p style="font-size:25px;"><img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height = "45px", width="45px">
-                        <a href="{% url 'user-posts' post.author.username %}">{{post.author}}</a></p></b>
-                        <small class = "text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
+                    <div style="margin-left:20px;">
+                        <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
 
-                        <div><a href="{% url 'post-detail' post.id %}">
-                                <h1>{{post.title}}</h1>
-                            </a>
-                        </div>
-                        <p><b>{{post.content}}</b></p>
-                        </div>
+                        <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height="45px"
+                            , width="45px">
+                        <b>
+                            {{post.author}}
+
+                        </b><br>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}
+
+                        </small><br><br>
+                        <p style="word-break: break-all; padding-right: 20px;"><b>{{post.content}}</b></p>
 
 
-                        <img id='posting' style="width: 100%; height: 100%;padding-top: 20px; padding-bottom: -40px;" src="/media/{{post.photo}}" onerror="this.style.display='none'">
-                        <br>
                     </div>
+
+
+                    <img id='posting' style="width: 100%; height: 100%;" src="/media/{{post.photo}}"
+                        onerror="this.style.display='none'">
                     <br>
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}
-                    {% endfor %}
-            </div>
-
-            <div class="col-lg-2" style="padding-left: ;background-color:;">
-
-
-
-                <div class="col-lg-3" style="position: fixed;padding-left:75px;background-color:;" >
-                {% if user.is_authenticated %}
-                <div style="margin-top: 40px; width: 85%;height:300%;background-color:#ffffff;">
-                    <table class="table table-hover" >
-                        <thead>
-                            <tr style=" background-color:#5882FA;color:white;">
-                                <th style="border-radius:1px;"><h3>NOTICES</h3></th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>
-                                {% for notice in notices %}
-                                {% if user.user_teachers != '' %}
-                                {% if notice.author.user_teachers.school == user.user_teachers.school %}
-                                    <small class = "text-muted">{{ notice.date_posted|date:"F d, Y"}}</small>
-                                    <div><a href="{% url 'notice-detail' notice.id %}">
-                                        <h5>{{notice.title}}</h5>
-                                        </a>
-
-                                    </div>
-                                {% endif %}
-                                {% elif user.user_parents != '' %}
-                                {% if user.user_parents.school == notice.author.user_teachers.school and user.user_parents.ChildGrade == notice.author.user_teachers.grade %}
-                                    <small class = "text-muted">{{ notice.date_posted|date:"F d, Y"}}</small>
-                                    <div><a href="{% url 'notice-detail' notice.id %}">
-                                        <h5>{{notice.title}}</h5>
-                                        </a>
-
-                                    </div>
-                                    {% endif %}
-                                {% endif %}
-                                {% endfor %}
-
-                            </td>
-                        </tr>
-                    </table>
                 </div>
-
+                <br>
                 {% endif %}
-
-
-                </div>
-
-
-
-
-
-
-
-
-                
-
-                <div class="col-lg-3" style="position: fixed;padding-left:75px; margin-top: 320px; background-color:;" >
-                {% if user.is_authenticated %}
-                <div style="margin-top: 40px; width: 85%;height:300%;background-color:#ffffff;">
-                    <table class="table table-hover" >
-                        <thead>
-                            <tr style=" background-color:#5882FA;color:white;">
-                                <th style="border-radius:1px;"><h3>EVENTS</h3></th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>
-                                {% for event in events %}
-                                {% if user.user_teachers != '' %}
-                                {% if event.author.user_teachers.school == user.user_teachers.school %}
-                                    <small class = "text-muted">{{ event.date_posted|date:"F d, Y"}}</small>
-                                    <div><a href="{% url 'events-detail' event.id %}">
-                                        <h5>{{event.title}}</h5>
-                                        </a>
-
-                                    </div>
-                                {% endif %}
-                                {% elif user.user_parents != '' %}
-                                {% if user.user_parents.school == event.author.user_teachers.school and user.user_parents.ChildGrade == event.author.user_teachers.grade %}
-                                    <small class = "text-muted">{{ event.date_posted|date:"F d, Y"}}</small>
-                                    <div><a href="{% url 'events-detail' event.id %}">
-                                        <h5>{{event.title}}</h5>
-                                        </a>
-
-                                    </div>
-                                    {% endif %}
-                                {% endif %}
-                                {% endfor %}
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
                 {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-lg-3" style="padding-left: ;background-color:;">
+
+
+
+                <div class="col-lg-3"
+                    style="position: fixed;padding-left:25px; min-height:55vh; background-color: rgb(255, 255, 255); right: 30px; width: 370px; margin-top: 50px; box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);overflow-y: hidden; word-break: break-all;">
+                    {% if user.is_authenticated %}
+
+                    <div style="padding-top: 20px;">
+                        <div style="border-bottom: 1px solid rgba(133, 108, 180, 0.8);">
+                            <center>
+                                <h4>Notices and Events</h4>
+                            </center>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            {% for notice in notices %}
+                            {% if user.user_teachers != '' %}
+                            {% if notice.author.user_teachers.school == user.user_teachers.school %}
+                            <div style="padding-top: 10px; border-bottom: 1px solid rgb(252, 194, 194); ">
+                                <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
+                                    {{ notice.date_posted|date:"F d, Y"}}</small>
+                                <div style="padding-left: 10px;"><a style="color: rgb(63, 36, 36);"
+                                        href="{% url 'notice-detail' notice.id %}">
+                                        <h5>{{notice.title}}</h5>
+                                    </a>
+
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% elif user.user_parents != '' %}
+                            {% if user.user_parents.school == notice.author.user_teachers.school and user.user_parents.ChildGrade == notice.author.user_teachers.grade %}
+                            <div style="padding-top: 10px; ">
+                                <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
+                                    {{ notice.date_posted|date:"F d, Y"}}</small>
+                                <div style="padding-left: 10px;"><a style="color: rgb(63, 36, 36);"
+                                        href="{% url 'notice-detail' notice.id %}">
+                                        <h5>{{notice.title}}</h5>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
+                    </div>
+
+                    {% endif %}
 
 
                 </div>
+
+
             </div>
-    
-            
-            </div>
+
+
+            {% endblock %}
         </div>
     </div>
-<!-- Navbar Right Side -->
+    </div>
+    <!-- Navbar Right Side -->
+
 </body>
 
 
 </html>
-
-
-
-{% endblock %}

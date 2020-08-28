@@ -2,13 +2,13 @@
 /*  1. BASE
 /*-----------------------------------------------------------------------------------*/
 html {
-    font-size: 70%;
+    font-size: 100%;
     -webkit-font-smoothing: antialiased;
     height: 100%;
 }
 
 body {
-    font-size: 16px;
+    font-size: 18px;
     color: #333333;
 }
 
@@ -344,20 +344,24 @@ form textarea:focus {
 
 /* Page Title & Heading Block */
 .page-title {
-    padding: 25px 0px 30px 0px;
+    padding: 25px 0px 0px 0px;
 }
 
 .heading-block:after {
     content: '';
     display: block;
-    margin: 30px 0;
-    width: 50px;
-    border-top: 2px solid #0097a7;
+    margin: 10px 0;
+    width: 250px;
+    border-top: 6px solid #056f7a;
 }
 
-.heading-block h2 {
-    margin-bottom: 5px;
+.heading-block  {
+    margin-bottom: 0;
 }
+.heading-block h1 {
+    font-size: 40px;
+    font-family: 'comic-sans';
+   
 
 .heading-block h4.tagline {
     color: #999999;
@@ -367,7 +371,7 @@ form textarea:focus {
     content: '';
     display: block;
     margin: 10px 0 0 0;
-    width: 75px;
+    width: 200px;
     border-top: 5px solid #0097a7;
 }
 

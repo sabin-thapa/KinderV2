@@ -2,6 +2,17 @@
 
 <h2> #Notes: </h2>
 <br>
+<ul>
+  <li>
 <p>
-1.) Everyone will work on their own branches, and not on the master branch. After everything's working fine, the branches can be merged.
+Everyone will work on their own branches, and not on the master branch. After everything's working fine, the branches can be merged.
 </p>
+  </li>
+  <li> The backend for Resources Panel is almost complete. I am waiting for User Authentication to be fixed to complete it fully.</li>
+  <li>update</li>
+  <li>pip install django-bootstrap4</li>
+  <li>pip install django-bootstrap-datepicker-plus</li>
+ <li> pip install django-bootstrap-modal-forms</li>
+  <li> <b> Important: Master has been updated on 28th of August 2PM by Sabin. git pull origin master on the master branch before creating a PR or merging.</b></li>
+  </ul>
+

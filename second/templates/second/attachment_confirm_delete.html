@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "innerbase.html" %}
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  {% block innerbase %}
+  <div class="jumbotron">
+    <center>
+      <div class="form-box">
+        <form method="POST">
+          {% csrf_token %} {% include 'second/delete-form-template.html' %}
+        </form>
+      </div>
+    </center>
+  </div>
+  {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{% extends "innerbase.html" %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+
+
+
+</head>
+
+<body>
+    {% block innerbase %}
+    <h3>Grade Submission</h3>
+    <p>{{submission.assignment}}</p>
+    <p>{{submission.file}}</p>
+    <p>{{submission.date_submitted}}</p>
+
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'second/form-template.html' %}
+        <div>
+            <input type="submit" value="Add Grade" name="add_grade">
+        </div>
+    </form>
+
+    {% endblock %}
+</body>
+
+</html>
