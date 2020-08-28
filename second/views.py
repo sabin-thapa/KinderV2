@@ -73,6 +73,11 @@ def result(request):
     return render(request, 'result.html', context)
 
 
+def analytics(request):
+    context = {}
+    return render(request, 'second/analytics.html', context)
+
+
 @login_required
 def food(request):
     context = {
@@ -615,9 +620,12 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
+    filtered_subs = Submissions.objects.filter(author=request.user)
+
     tasks = Assignments.objects.filter(author=request.user)
     all_tasks = Assignments.objects.all()
     context = {
+        'fsubs': filtered_subs,
         'tasks': tasks,
         'all_tasks': all_tasks,
         'form': form,

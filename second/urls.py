@@ -14,12 +14,13 @@ from django.urls import path
 from . import views
 from .views import ROUTINESCreateView, FoodsCreateView, contacts, assignments, AssignmentDeleteView, submissions, gradesubmissions
 from .views import ROUTINESDeleteView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
-from .views import ROUTINESCreateView, FoodsCreateView, contacts, grade_update
+from .views import ROUTINESCreateView, FoodsCreateView, contacts, grade_update, analytics
 from .views import CourseDetailView, CourseListView, SIDCreateView, absentdecrease, presentdecrease, addresult, ResultDetail, ResultUpdate, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, RoutineListView, RoutineUpdateView, NoticeCreateView, NoticeDeleteView, NoticeDetailView, NoticeUpdateView, AttendanceDetailView, present, absent
 
 urlpatterns = [
     path('home/', views.postsandnotices, name='home'),
     path('test/', TemplateView.as_view(template_name='innerbase.html')),
+    path('home/analytics', views.analytics, name='analytics'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete', PostDeleteView.as_view(), name='post-delete'),
@@ -100,7 +101,6 @@ urlpatterns = [
          name='gradesubmissions'),
     path('assignments/<int:assignment_id>/grade/<int:grade_id>/update',
          views.grade_update, name='grade-update'),
-
 
 
 ]

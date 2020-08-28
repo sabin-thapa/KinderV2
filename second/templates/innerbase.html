@@ -40,6 +40,10 @@
                 <li class="{% if request.path == home_url %} active {%endif%}">
                     <a href="{% url 'home' %}"> <i class="ico fa fa-home" aria-hidden="true"></i>Home</a>
                 </li>
+                <li>
+                    <a href="{% url 'analytics' %}" class="{% if request.path == analytics_url %} active {%endif%}"> <i
+                            class="ico fa fa-chart-bar" aria-hidden="true"></i>Analytics</a>
+                </li>
                 <li class="{% if request.path == register_url %} active {%endif%}">
                     <a href="{% url 'registerchild' %}"><i class="ico fa fa-address-book"
                             aria-hidden="true"></i>Register
@@ -83,6 +87,10 @@
 
                 <li class="{% if request.path == home_url %} active {%endif%}">
                     <a href="{% url 'home' %}"><i class="ico fa fa-home" aria-hidden="true"></i>Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'analytics' %}" class="{% if request.path == analytics_url %} active {%endif%}"> <i
+                            class="ico fa fa-chart-bar" aria-hidden="true"></i>Analytics</a>
                 </li>
                 <li class="{% if request.path == result_url %} active {%endif%}">
                     <a href="{% url 'result' %}"><i class="ico fa fa-percent" aria-hidden="true"></i>See Result</a>

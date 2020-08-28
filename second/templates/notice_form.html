@@ -14,7 +14,7 @@
 <body class="jumbotron" style="height: 100%; width: 100%;">
   {% block innerbase %}
   <center>
-    <div class="form-box">
+    <div class="form-box jumbotron">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %} {% include 'second/form-template.html' %}
         <div>
