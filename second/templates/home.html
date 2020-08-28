@@ -1,9 +1,10 @@
 {% extends "innerbase.html" %}
 
+<!DOCTYPE html>
 <html>
 {% load static %}
 
-<!DOCTYPE html>
+
 
 <head>
     {% block title %}
@@ -11,17 +12,17 @@
     {% endblock %}
 
     {% block scripts %}
-
     <link rel="stylesheet" href="{% static 'home.css' %}" type="text/css" />
-
-
     {% endblock %}
-</head>
 
+
+
+</head>
+{% block innerbase %}
 
 <body>
-    <div class="jumbotron">
-        {% block innerbase %}
+    <div>
+
         <div class="row row-height">
 
 
@@ -134,30 +135,31 @@
 
                             </div>
                         </div>
+
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
                     </div>
+
                     {% endif %}
-                    {% endif %}
-                    {% endfor %}
 
 
                 </div>
 
-                {% endif %}
+
+
+
 
 
             </div>
 
-
-
-
-
-            {% endblock %}
         </div>
-    </div>
     </div>
 
 
 </body>
-
+{% endblock %}
 
 </html>
