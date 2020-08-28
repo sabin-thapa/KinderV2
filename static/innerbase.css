@@ -145,6 +145,18 @@ a[data-toggle="collapse"] {
 }
 
 
+@media (max-width: 1800px) {
+    #sidebar {
+        max-width: 290px;
+        min-width: 290px;
+    }
+
+    #content {
+        left: 290px;
+    }
+
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -330px;
