@@ -1,5 +1,5 @@
 body {
-    padding-top: 50px;
+    padding-top: 40px;
     font-family: sans-serif;
 
 }
@@ -96,6 +96,7 @@ body {
     padding-right: 16px;
     border-bottom: 1px solid #dfe3e8;
     border-radius: 0;
+    height: 6%;
 }
 .nav-link img {
     border-radius: 50%;
@@ -141,6 +142,7 @@ body {
     color: #fff;
     background: #33cabb !important;
     border: none;
+    
 }	
 .navbar .btn-primary:hover, .navbar .btn-primary:focus {		
     color: #fff;
@@ -271,9 +273,17 @@ body {
   .bounce {
     animation-name: bounce-animation;
     animation-duration: 2s;
+    color: #fff;
   }
   
+
+.active {
+    background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+
+  }
   
+}
   
   /*everything below here is just setting up the page, so dont worry about it */
   
@@ -301,4 +311,3 @@ body {
   }
   
 
-  

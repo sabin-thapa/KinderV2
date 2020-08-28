@@ -1,5 +1,6 @@
 
     {% load static %}
+    {% load crispy_forms_tags %}
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -13,7 +14,7 @@
     type="text/css"
   />
   <link rel="stylesheet" type="text/css" href="{% static 'firsttt.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}" />
+
   
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,78 +25,123 @@
 
     </head> 
     <body>
+      {% url 'index' as index_url %}
+      {% url 'services' as services_url %}
+      {% url 'contact' as contact_url %}
+      {% url 'dev' as dev_url %}
+      {% url 'login' as login_url %}
+      {% url 'signup' as signup_url %}
         <!--Navbar-->
-<section id="nav-bar">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-md fixed-top">
-        <a href="{% url 'index' %}" class="navbar-brand"><b>KIND</b><strong>ER </strong></a>  		
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-            <div class=" navbar-nav container-fluid">
-                <li class="">
-                  <a
-                  id="len1"
-                  class="nav-link nav-item hoverable "
-                  href="{% url 'index' %}"
-                  style="padding-right: 10px; padding-left: 10px;"
-                  >Home <span class="sr-only">(current)</span></a>  
-                </li>
+      <section id="nav-bar">
+          <nav class="navbar navbar-dark bg-dark navbar-expand-md fixed-top">
+              <a href="{% url 'index' %}" class="navbar-brand"><b>KIND</b><strong>ER </strong></a>  		
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <!-- Collection of nav links, forms, and other content for toggling -->
+              <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+                  <div class=" navbar-nav container-fluid">
+                      <li class="{% if request.path == index_url %} active {% endif %}">
+                        <a
+                        id="len1"
+                        class="nav-link nav-item hoverable  "
+                        href="{% url 'index' %}"
+                        style="padding-right: 10px; padding-left: 10px;"
+                        >Home <span class="sr-only">(current)</span></a>  
+                      </li>    
 
-                <li>
-                  <a
-                  class="nav-link nav-item hoverable"
-                  href="{% url 'services' %}"
-                  style="padding-right: 10px; padding-left: 10px;"
-                  >Services</a
-                >
-                </li>
+                      <li class="{% if request.path == services_url %} active {% endif %}">
+                        <a
+                        id="len2"
+                        class="nav-link nav-item hoverable"
+                        href="{% url 'services' %}"
+                        style="padding-right: 10px; padding-left: 10px;"
+                        >Services</a
+                      >
+                      </li>
 
-                <li>
-                  <a
-                id="len2"
-                class="nav-link nav-item contact hoverable"
-                href="{% url 'contact' %}"
-                style="padding-right: 10px; padding-left: 10px;"
-                >Contact</a
-              >
-                </li>
-                
-                <a
-                id="len3"
-                class="nav-link nav-item hoverable"
-                href="{% url 'dev' %}"
-                style="padding-right: 10px; padding-left: 10px;"
-                >Developers</a
-              >		
-            </div>
+                      <li class="{% if request.path == contact_url %} active {% endif %}">
+                        <a
+                      id="len3"
+                      class="nav-link nav-item contact hoverable"
+                      href="{% url 'contact' %}"
+                      style="padding-right: 10px; padding-left: 10px;"
+                      >Contact</a
+                    >
+                      </li>
 
-            <div class="navbar-nav ml-auto action-buttons">
-                <div class="nav-item dropdown">
-                    <a
-                    class="nav-link nav-link  mr-4 hoverable"
-                    href="{% url 'login' %}"
-                    style="padding-right: 10px; padding-left: 10px;"
-                    >Login</a
-                  >
+                      <li class="{% if request.path == dev_url %} active {% endif %}">
+                        <a
+                        id="len4"
+                        class="nav-link nav-item hoverable"
+                        href="{% url 'dev' %}"
+                        style="padding-right: 10px; padding-left: 10px;"
+                        >Developers</a
+                      >		
+                      </li>
 
-                </div>
-                <div class="nav-item dropdown hoverable">
-                     <a
-                class=" btn btn-primary  sign-up-btn"
-                href="{% url 'signup' %}"
-                style="padding-right: 10px; padding-left: 10px;"
-                >Sign Up</a
-              >
+                  </div>
 
-                </div>
-            </div>
-        </div>
-    </nav>
+                  <div class="navbar-nav ml-auto action-buttons">
+                    <div class="nav-item dropdown  ">
+                      <li class="{% if request.path == url_signup %} active {% endif %}">
+                        <a
+                      class=" btn btn-primary  sign-up-btn"
+                      href="{% url 'signup' %}"
+                      style="margin-top: 3px; text-transform: capitalize;"
+                      >Register</a
+                    >
+                      </li> 
+                    </div>
+                    <div class="nav-item dropdown" style="padding-left: 20px;">
+                      <li class="dropdown order-1" >
+                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle" >Login <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right mt-2" style="width: 300px; background: #fff;">
+                           <li class="px-3 py-2">
+                               <form method="post" class="login-form" role="form" action="{% url 'login' %}" style="width: 250px; background: ;">
+                                 {% csrf_token %}
+                                 <div class='form-group'>
+                                  <input type='text' class='form-control' name='username' placeholder='Username' /> 
+                              </div>
+                              <div class='form-group'>
+                                  <input type='password' class='form-control' name='password' placeholder='Password' />
+                              </div>
+                              <div class="form-group">
+                                <button class="btn btn-primary " style=" width: 100%; height: 36px;" >Login</button>
+                            </div>
+                                  <div class="form-group text-center  forgot-link" >
+                                    <small> <a href="{% url 'password_reset' %}" style="font-size: 12px;">Forgot Password?</a></small> 
+                                  </div>
+                                </form>
+                            </li>
+                        </ul>
+                      </li>
+                    
+                    </div>
+     
+                  </div>
+              </div>
+          </nav>
 
 
-</section>
+      </section>
+      <script>
+        $(function(){
+          var str = '#len'; //increment by 1 up to 1-nelemnts
+          $(document).ready(function(){
+            var i, stop;
+            i = 1;
+            stop = 4; //num elements
+            setInterval(function(){
+              if (i > stop){
+                return;
+              }
+              $('#len'+(i++)).toggleClass('bounce');
+            }, 500)
+          });
+        });
+
+      </script>
     </body>
     </html>
       <!--/.Navbar-->
