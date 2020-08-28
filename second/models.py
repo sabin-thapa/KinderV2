@@ -317,7 +317,7 @@ class Attachment(models.Model):
 
 
 class Assignments(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     title = models.CharField(max_length=500)
     description = models.TextField(blank=True, null=True)
@@ -349,7 +349,7 @@ class Assignments(models.Model):
 
 
 class Submissions(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     assignment = models.ForeignKey(Assignments, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
@@ -378,7 +378,7 @@ class Submissions(models.Model):
 
 
 class Grading(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     assignment = models.ForeignKey(Assignments, on_delete=models.CASCADE)
     submission = models.ForeignKey(Submissions, on_delete=models.CASCADE)
     grade = models.CharField(default="A", max_length=5)
