@@ -1,9 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Course, Post
-from .models import Profile, Result, StudentId, Attendance, Food, Foods, Contacts, Assignments, Submissions, Grading
-from .models import Profile, StudentId, Attendance, Absentday
+
+from .models import Result, Foods, Contacts
+from .models import Profile, SID, Attend, ROUTINES, Absentday
+from .models import Course, Post
+from .models import Assignments, Submissions, Grading
+
 from bootstrap_datepicker_plus import DateTimePickerInput
 from bootstrap_modal_forms.forms import BSModalModelForm
 
@@ -40,7 +43,7 @@ class StudentRegisterForm(forms.ModelForm):
 
     class Meta:
 
-        model = StudentId
+        model = SID
 
         fields = ('full_name', 'roll', 'childid')
 
@@ -49,9 +52,8 @@ class AttendanceForm(forms.ModelForm):
 
     class Meta:
 
-        model = Attendance
-
-        fields = ('full_name', 'roll', 'childid')
+        model = Attend
+        exclude = ('student' ,)
 
 
 class ResultForm(forms.ModelForm):

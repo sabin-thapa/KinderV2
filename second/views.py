@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend
-from second.models import Post, Attachment, Tutorial, Course, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Grading
-from second.models import Post, Course, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID
-from second.models import Post, StudentId, Attendance, Images, Food, Result, Foods, Attend, Assignments, Submissions
-from second.models import Post, StudentId, Attendance, Images, Notice, Absentday, Presentday, SID, ROUTINES, Contacts
+from second.models import Post, Images, Result, Foods, Attend
+from second.models import Notice, Absentday, Presentday, SID, Events,ROUTINES, Contacts
+
+from second.models import  Attachment, Tutorial, Course
+from second.models import StudentId, Attendance
+from second.models import Grading
+from second.models import Course
+from second.models import Assignments, Submissions
 
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView

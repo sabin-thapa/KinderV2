@@ -83,15 +83,6 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 
-class StudentId(models.Model):
-    full_name = models.CharField(max_length=30)
-    roll = models.IntegerField()
-    childid = models.IntegerField()
-
-    def __str__(self):
-        return self.full_name
-
-
 class SID(models.Model):
     full_name = models.CharField(max_length=30)
     roll = models.IntegerField()
@@ -108,33 +99,6 @@ class SID(models.Model):
         super(SID, self).save(*args, **kwargs)
         Attend.objects.create(
             student=self)
-
-
-class Attendance(models.Model):
-    full_name = models.CharField(max_length=30)
-    roll = models.IntegerField()
-    childid = models.IntegerField()
-
-    def __str__(self):
-        return self.full_name
-
-    @property
-    def absentdayss(self):
-        return self.absentday_set.count()
-
-    @property
-    def presentdayss(self):
-        return self.presentday_set.count()
-
-    @property
-    def days(self):
-        return self.absentday_set.all()
-
-    def get_absolute_url(self):
-        return reverse('attendance-detail', kwargs={'pk': self.pk})
-
-    def save(self, *args, **kwargs):
-        super(Attendance, self).save(*args, **kwargs)
 
 
 class Attend(models.Model):
@@ -160,14 +124,6 @@ class Attend(models.Model):
 
     def save(self, *args, **kwargs):
         super(Attend, self).save(*args, **kwargs)
-
-
-class Food(models.Model):
-    day = models.CharField(max_length=30, null=True)
-    food = models.CharField(max_length=30, null=True)
-
-    def __str__(self):
-        return self.day
 
 
 class Foods(models.Model):
