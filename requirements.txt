@@ -13,5 +13,8 @@ sqlparse == 0.3.0
 urllib3 == 1.25.8
 webencodings == 0.5.1
 django-embed-video
+django-bootstrap4
+django-bootstrap-datepicker-plus
+django-bootstrap-modal-forms
 
 
