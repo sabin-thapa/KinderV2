@@ -1,5 +1,5 @@
-from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Course, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
-from second.models import Post, Profile, Result, StudentId, Attendance, Attend, Food, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES, Assignments, Submissions, Grading
+from second.models import Post, Profile, Result, Attend, Course, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
+from second.models import Assignments, Submissions, Grading
 from django.contrib import admin
 
 from second.models import Post, Profile, Result, Attend, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES

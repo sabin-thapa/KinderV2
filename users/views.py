@@ -20,19 +20,19 @@ def signup(request):
         parents = User_parents.objects.all()
 
         if form1.is_valid() and form_parents.is_valid():
-            p = True
-            for parent in parents:
-                if form_parents.cleaned_data.get('ChildID') == parent.ChildID:
-                    p = False
-            access = False
+            p=True
+            school=str(form_parents.cleaned_data.get('school'))
+            print(school)
+            if User_parents.objects.filter(ChildID=form_parents.cleaned_data.get('ChildID')).exists():
+                p=False
+            access=False
 
-            for student in students:
-                if form_parents.cleaned_data.get('ChildID') == student.ChildID and p:
-                    access = True
+            if sm.SID.objects.filter(childid=form_parents.cleaned_data.get('ChildID')).exists() and p:
+                access=True
             if access:
-                user = form1.save()
-                profile = form_parents.save(commit=False)
-                profile.user = user
+                user=form1.save()
+                profile= form_parents.save(commit=False)
+                profile.user=user
                 profile.save()
 
                 username = form1.cleaned_data.get('username')
@@ -41,10 +41,11 @@ def signup(request):
 
         if form2.is_valid() and form_teachers.is_valid():
             access=False
-            for school in schools:
-                
-                if school.schcode == form_teachers.cleaned_data.get('schoolCode') and str(form_teachers.cleaned_data.get('school')) == school.sch:
-                    access=True
+            if sm.School.objects.filter(schcode=form_teachers.cleaned_data.get('schoolCode'), sch=str(form_teachers.cleaned_data.get('school'))).exists():
+                access=True
+            #if User_teachers.objects.filter(schoolstr(form_teachers.cleaned_data.get('school')),grade=form_teachers.cleaned_data.get('grade')).exists():
+            if sm.School.objects.filter(sch=str(form_teachers.cleaned_data.get('school')),user_teachers__grade=form_teachers.cleaned_data.get('grade')).exists():
+                access=False
             if access:
                 user=form2.save()
                 profile1= form_teachers.save(commit=False)
