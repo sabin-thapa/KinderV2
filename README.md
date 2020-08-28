@@ -12,6 +12,6 @@ Everyone will work on their own branches, and not on the master branch. After ev
   <li>update</li>
   <li>pip install django-bootstrap4</li>
   <li>pip install django-bootstrap-datepicker-plus</li>
-  <li> <b> Important: Master has been updated on 28th of August. git pull origin master on the master branch before creating a PR or merging.</b></li>
+  <li> <b> Important: Master has been updated on 28th of August 2PM by Sabin. git pull origin master on the master branch before creating a PR or merging.</b></li>
   </ul>
 
