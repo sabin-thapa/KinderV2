@@ -1,48 +1,28 @@
 {% extends "innerbase.html" %}
 
+<!DOCTYPE html>
 <html>
 {% load static %}
 
-<!DOCTYPE html>
+
 
 <head>
     {% block title %}
     Home
     {% endblock %}
 
+    {% block scripts %}
+    <link rel="stylesheet" href="{% static 'home.css' %}" type="text/css" />
+    {% endblock %}
 
-    <script>
-        var createpost = document.getElementsByName("createpost")
-        var posts = document.getElementsByName("posts")
 
-        document.addEventListener('DOMContentLoaded', function () {
-            for (i = 0; i < posts.length; i++) {
-                if (posts[i].querySelector('span').textContent == 'teacher') {
-                    posts[i].style.display = ''
-                } else {
-                    posts[i].style.display = 'none'
-                }
-            }
-            if (document.getElementById("usertype").innerText == 'teacher') {
-                displays1()
-            } else {
-                displays1('none')
-            }
-        })
-
-        function displays1(i = '') {
-            for (j = 0; j < createpost.length; j++) {
-                createpost[j].style.display = i
-            }
-        }
-    </script>
 
 </head>
-
+{% block innerbase %}
 
 <body>
-    <div class="jumbotron">
-        {% block innerbase %}
+    <div>
+
         <div class="row row-height">
 
 
@@ -53,21 +33,19 @@
                 {% if post.author.user_teachers != "" %}
                 {% if user.user_teachers != ""%}
                 {% if post.author.user_teachers.school == user.user_teachers.school %}
-                <div style="border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;margin-bottom: 50px;"
-                    name='posts'>
+                <div class="posts" name='posts'>
                     <br>
                     <div style="margin-left:20px;">
-                        <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
 
                         <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height="45px"
-                            , width="45px">
+                            width="45px">
                         <b>
                             {{post.author}}
 
                         </b><br>
                         <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}
                             <br>
-                            <div style="position: relative; float: right; right: 40px; top: -20px;">
+                            <div class="edits">
                                 <a class="btn btn-outline-primary" href="{% url 'post-update' post.id %}">Edit
                                 </a>
 
@@ -75,15 +53,12 @@
                                 </a>
                             </div>
                         </small><br><br>
-                        <p style="word-break: break-all; padding-right: 20px; margin-top: -35px; width: 80%;">
+                        <p class="content">
                             <b>{{post.content}}</b></p>
-
-
                     </div>
 
 
-                    <img id='posting' style="width: 100%; height: 100%;" src="/media/{{post.photo}}"
-                        onerror="this.style.display='none'">
+                    <img id='posting' src="/media/{{post.photo}}" onerror="this.style.display='none'">
                     <br>
                 </div>
                 <br>
@@ -92,29 +67,24 @@
 
                 {% if post.author.user_teachers.school == user.user_parents.school %}
                 {% if post.author.user_teachers.grade == user.user_parents.ChildGrade %}
-                <div style="border-style:solid;border-radius:5px;border-width:1px;border-color:#b3b3b3;width:100%;margin-bottom: 50px;"
-                    name='posts'>
+                <div class="posts" name='posts'>
                     <br>
                     <div style="margin-left:20px;">
-                        <span style="display:none;">{{post.author.user_teachers.UserType}}</span>
 
                         <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" height="45px"
-                            , width="45px">
+                            width="45px">
                         <b>
                             {{post.author}}
 
                         </b><br>
                         <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}
+                            <br>
 
-                        </small><br><br>
-                        <p style="word-break: break-all; padding-right: 20px;"><b>{{post.content}}</b></p>
-
-
+                        </small><br><br><br>
+                        <p class="content">
+                            <b>{{post.content}}</b></p>
                     </div>
-
-
-                    <img id='posting' style="width: 100%; height: 100%;" src="/media/{{post.photo}}"
-                        onerror="this.style.display='none'">
+                    <img id='posting' src="/media/{{post.photo}}" onerror="this.style.display='none'">
                     <br>
                 </div>
                 <br>
@@ -125,48 +95,47 @@
                 {% endfor %}
             </div>
 
-            <div class="col-lg-3" style="padding-left: ;background-color:;">
 
 
 
-                <div class="col-lg-3"
-                    style="position: fixed;padding-left:25px; min-height:55vh; background-color: rgb(255, 255, 255); right: 30px; width: 370px; margin-top: 50px; box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);overflow-y: hidden; word-break: break-all;">
-                    {% if user.is_authenticated %}
 
-                    <div style="padding-top: 20px;">
-                        <div style="border-bottom: 1px solid rgba(133, 108, 180, 0.8);">
-                            <center>
-                                <h4>Notices and Events</h4>
-                            </center>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            {% for notice in notices %}
-                            {% if user.user_teachers != '' %}
-                            {% if notice.author.user_teachers.school == user.user_teachers.school %}
-                            <div style="padding-top: 10px; border-bottom: 1px solid rgb(252, 194, 194); ">
-                                <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
-                                    {{ notice.date_posted|date:"F d, Y"}}</small>
-                                <div style="padding-left: 10px;"><a style="color: rgb(63, 36, 36);"
-                                        href="{% url 'notice-detail' notice.id %}">
-                                        <h5>{{notice.title}}</h5>
-                                    </a>
+            <div class="col-lg-3 notices">
+                {% if user.is_authenticated %}
 
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% elif user.user_parents != '' %}
-                            {% if user.user_parents.school == notice.author.user_teachers.school and user.user_parents.ChildGrade == notice.author.user_teachers.grade %}
-                            <div style="padding-top: 10px; ">
-                                <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
-                                    {{ notice.date_posted|date:"F d, Y"}}</small>
-                                <div style="padding-left: 10px;"><a style="color: rgb(63, 36, 36);"
-                                        href="{% url 'notice-detail' notice.id %}">
-                                        <h5>{{notice.title}}</h5>
-                                    </a>
+                <div style="padding-top: 20px;">
+                    <div class="notice-header">
+                        <center>
+                            <h4>Notices and Events</h4>
+                        </center>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        {% for notice in notices %}
+                        {% if user.user_teachers != '' %}
+                        {% if notice.author.user_teachers.school == user.user_teachers.school %}
+                        <div class="one-notice">
+                            <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
+                                {{ notice.date_posted|date:"F d, Y"}}</small>
+                            <div class="notice-title"><a style="color: rgb(63, 36, 36);"
+                                    href="{% url 'notice-detail' notice.id %}">
+                                    <h5>{{notice.title}}</h5>
+                                </a>
 
-                                </div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% elif user.user_parents != '' %}
+                        {% if user.user_parents.school == notice.author.user_teachers.school and user.user_parents.ChildGrade == notice.author.user_teachers.grade %}
+                        <div class="one-notice">
+                            <small class="text-muted"> <i class="fa fa-circle" style="font-size: smaller;"></i>
+                                {{ notice.date_posted|date:"F d, Y"}}</small>
+                            <div class="notice-title"><a style="color: rgb(63, 36, 36);"
+                                    href="{% url 'notice-detail' notice.id %}">
+                                    <h5>{{notice.title}}</h5>
+                                </a>
+
+                            </div>
+                        </div>
+
                         {% endif %}
                         {% endif %}
                         {% endfor %}
@@ -180,16 +149,17 @@
                 </div>
 
 
+
+
+
+
             </div>
 
-
-            {% endblock %}
         </div>
     </div>
-    </div>
-    <!-- Navbar Right Side -->
+
 
 </body>
-
+{% endblock %}
 
 </html>
