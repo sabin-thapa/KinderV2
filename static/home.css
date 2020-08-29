@@ -1,0 +1,76 @@
+.posts {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #b3b3b3;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.edits {
+    position: relative;
+    float: right;
+    right: 40px;
+    top: -20px;
+}
+
+.content {
+    word-break: break-all;
+    padding-right: 20px;
+    margin-top: -35px;
+    width: 80%;
+}
+
+#posting {
+    width: 100%;
+    height: 100%;
+}
+
+.notices {
+    position: fixed;
+    padding-left: 25px;
+    min-height: 55vh;
+    background-color: rgb(255, 255, 255);
+    right: 30px;
+    width: 370px;
+    margin-top: 50px;
+    box-shadow: -2px -2px 0px 0px rgba(133, 108, 180, 0.8);
+    overflow-y: hidden;
+    word-break: break-all;
+}
+
+.notice-header {
+    border-bottom: 1px solid rgba(133, 108, 180, 0.8);
+}
+
+.one-notice {
+    padding-top: 10px;
+    border-bottom: 1px solid rgb(252, 194, 194);
+}
+
+.notice-title {
+    padding-left: 10px;
+}
+
+
+@media (max-width: 1800px) {
+    .notices {
+        max-width: 340px;
+        min-width: 340px;
+    }
+
+
+}
+
+@media (max-width: 1500px) {
+    .notices {
+        max-width: 300px;
+        min-width: 300px;
+    }
+}
+
+@media (max-width:968px) {
+    .notices {
+        display: none;
+    }
+}
