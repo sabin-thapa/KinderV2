@@ -14,3 +14,7 @@ media
 !.travis.yml
 /.env
 /.vscode
+
+# Migrations (ignore all migrations but __init__.py
+_migrations/*
+!_migrations/__init__.py
