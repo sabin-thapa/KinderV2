@@ -26,7 +26,6 @@ def signup(request):
             if User_parents.objects.filter(ChildID=form_parents.cleaned_data.get('ChildID')).exists():
                 p=False
             access=False
-
             if sm.SID.objects.filter(childid=form_parents.cleaned_data.get('ChildID')).exists() and p:
                 access=True
             if access:
@@ -34,12 +33,10 @@ def signup(request):
                 profile= form_parents.save(commit=False)
                 profile.user=user
                 profile.save()
-
                 username = form1.cleaned_data.get('username')
                 messages.success(request, f'Account created for {username}')
                 return redirect('login')
-
-        if form2.is_valid() and form_teachers.is_valid():
+        elif form2.is_valid() and form_teachers.is_valid():
             access=False
             if sm.School.objects.filter(schcode=form_teachers.cleaned_data.get('schoolCode'), sch=str(form_teachers.cleaned_data.get('school'))).exists():
                 access=True
@@ -51,7 +48,6 @@ def signup(request):
                 profile1= form_teachers.save(commit=False)
                 profile1.user=user
                 profile1.save()
-
                 username = form2.cleaned_data.get('username')
                 messages.success(request, f'Account created for {username}')
                 return redirect('login')
