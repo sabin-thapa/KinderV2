@@ -1,6 +1,5 @@
 const pushForm = document.querySelector('form');
 //const errorMsg = document.querySelector('.error');
-console.log('running');
 
 pushForm.addEventListener('submit', async function(e) {
     const input = this[1];
@@ -11,7 +10,6 @@ pushForm.addEventListener('submit', async function(e) {
     const head = input.value;
     const body = textarea.value;
     const meta = document.querySelector('meta[name="user_id"]');
-    console.log(meta);
     const id = meta ? meta.content : null;
 
     if (head && body && id) {

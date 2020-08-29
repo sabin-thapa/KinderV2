@@ -62,7 +62,7 @@ MIDDLEWARE = [
 WEBPUSH_SETTINGS = {
     "VAPID_PUBLIC_KEY": "BDcNT6CqM1LUnoF071bVWQllle33irydRAs67IAyfTHvUPoTHtjFC7jNoJzVQkLNv8WeN-0H-WU7nsRJqrW1x5o",
     "VAPID_PRIVATE_KEY":"CnhcvVKD-C_5Otm3ibcoDQftQVaxDiO1mAbNNm5LuCg",
-    "VAPID_ADMIN_EMAIL": "your@mail.example"
+    "VAPID_ADMIN_EMAIL": "kinder.mailservice@gmail.com"
 }
 
 ROOT_URLCONF = 'kinder.urls'
