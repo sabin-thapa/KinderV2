@@ -6,7 +6,7 @@ from .views import SIDCreateView, absentdecrease, presentdecrease, addresult, Re
 from .views import ROUTINESCreateView, FoodsCreateView, contacts, assignments, AssignmentDeleteView, submissions, gradesubmissions, SubmissionDeleteView, AssignmentUpdateView, SubmissionUpdateView
 
 from . import views
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 
 from users import views as users_views
@@ -19,6 +19,10 @@ from .views import CourseDetailView, CourseListView, SIDCreateView, absentdecrea
 
 urlpatterns = [
     path('home/', views.postsandnotices, name='home'),
+     path('home/webpush/',include('webpush.urls')),
+     path('notice/new/send_push/',views.send_push),
+     path('home/sw.js',TemplateView.as_view(template_name='sw.js',content_type='application/x-javascript'),name='sw.js'),
+
     path('test/', TemplateView.as_view(template_name='innerbase.html')),
     path('home/analytics', views.analytics, name='analytics'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
