@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
         type="text/css" />
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'innerbase1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'innerbase.css' %}" type="text/css" />
     <meta name="vapid-key" content="{{ vapid_key }}">
 
     {% block scripts %}
@@ -148,7 +148,8 @@
                             {% endblock %}
                         </h5>
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="bell"><button style='border:0px;' name='bell'><i class="fa fa-bell"></i></button></li>
+                            <li class="bell"><button style='border:0px;' name='bell'><i class="fa fa-bell"></i></button>
+                            </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
                             </li>
@@ -188,21 +189,21 @@
         });
 
         const button = document.querySelector('button[name="bell"]');
-        function colour(){
-            if(Notification.permission==='granted'){
-                button.style.color='green';
-            }else{
-                button.style.color='red';
+
+        function colour() {
+            if (Notification.permission === 'granted') {
+                button.style.color = 'green';
+            } else {
+                button.style.color = 'red';
             }
         }
         colour()
-        button.onclick=function(){
-            Notification.requestPermission().then(permission=>{
+        button.onclick = function () {
+            Notification.requestPermission().then(permission => {
                 console.log(permission);
                 colour();
             })
         }
-
     </script>
 
 </body>
