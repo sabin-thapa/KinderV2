@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'embed_video',
     'bootstrap_datepicker_plus',
+    'webpush',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -57,6 +58,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BDcNT6CqM1LUnoF071bVWQllle33irydRAs67IAyfTHvUPoTHtjFC7jNoJzVQkLNv8WeN-0H-WU7nsRJqrW1x5o",
+    "VAPID_PRIVATE_KEY":"CnhcvVKD-C_5Otm3ibcoDQftQVaxDiO1mAbNNm5LuCg",
+    "VAPID_ADMIN_EMAIL": "your@mail.example"
+}
 
 ROOT_URLCONF = 'kinder.urls'
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')

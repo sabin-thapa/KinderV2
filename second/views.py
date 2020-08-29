@@ -29,7 +29,37 @@ from django.core.mail import EmailMessage
 from users.models import User_parents, User_teachers
 from django import template
 
+from django.http.response import JsonResponse, HttpResponse
+from django.views.decorators.http import require_GET, require_POST
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from webpush import send_user_notification
+import json
+from django.conf import settings
+
 register = template.Library()
+
+@require_POST
+@csrf_exempt
+def send_push(request):
+    try:
+        body = request.body
+        data = json.loads(body)
+
+        if 'head' not in data or 'body' not in data or 'id' not in data:
+            return JsonResponse(status=400, data={"message": "Invalid data format"})
+
+        user_id = data['id']
+        user = get_object_or_404(User, pk=user_id)
+        receivers=User_parents.objects.filter(school=user.user_teachers.school,ChildGrade=user.user_teachers.grade)
+        payload = {'head': data['head'], 'body': data['body']}
+        for receiver in receivers:
+            send_user_notification(user=receiver.user, payload=payload, ttl=1000)
+
+        return JsonResponse(status=200, data={"message": "Web push successful"})
+    except TypeError:
+        return JsonResponse(status=500, data={"message": "An error occurred"})
 
 
 @login_required
@@ -178,14 +208,16 @@ class AttendanceDetailView(DetailView):
     model = Attend
     template_name = 'attendance_detail.html'
 
-
+@login_required
 def postsandnotices(request):
     post_list = Post.objects.all()
-
+    webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
+    vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
     context = {
 
         'posts': post_list,
-        'notices': Notice.objects.all()[:6]
+        'notices': Notice.objects.all()[:6],
+        'vapid_key':vapid_key,
 
     }
 

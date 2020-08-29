@@ -5,11 +5,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if user %}
+    <meta name="user_id" content="{{ user.id }}">
+    {% endif %}
     <title>KINDER</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
         type="text/css" />
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'innerbase1.css' %}" type="text/css" />
+    <meta name="vapid-key" content="{{ vapid_key }}">
+
 </head>
 
 <body>
@@ -134,7 +139,7 @@
                             {% endblock %}
                         </h5>
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="bell"><i class="fa fa-bell"></i></li>
+                            <li class="bell"><button style='border:0px;' name='bell'><i class="fa fa-bell"></i></button></li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
                             </li>
@@ -172,6 +177,23 @@
         $('#sidebar ul li').on('click', function () {
             $(this).addClass("active").siblings().removeClass("active");
         });
+
+        const button = document.querySelector('button[name="bell"]');
+        function colour(){
+            if(Notification.permission==='granted'){
+                button.style.color='green';
+            }else{
+                button.style.color='red';
+            }
+        }
+        colour()
+        button.onclick=function(){
+            Notification.requestPermission().then(permission=>{
+                console.log(permission);
+                colour();
+            })
+        }
+
     </script>
 
 </body>
