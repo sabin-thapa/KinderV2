@@ -18,6 +18,18 @@ class School(models.Model):
     def __str__(self):
         return self.sch
 
+class Room(models.Model):
+    """Represents chat rooms that users can join"""
+    name = models.CharField(max_length=30)
+    talkto=models.ForeignKey(User, on_delete=models.CASCADE)
+    slug = models.CharField(max_length=50)
+
+    def __str__(self):
+        """Returns human-readable representation of the model instance."""
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        super(Room, self).save(*args, **kwargs)
 
 class Post(models.Model):
     content = models.TextField(blank=True)

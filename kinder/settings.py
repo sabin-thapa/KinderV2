@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'embed_video',
     'bootstrap_datepicker_plus',
     'webpush',
+    'chat.apps.ChatConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -139,6 +140,10 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', 'AC3d2e4f51d5e188cb8f1e3f526de96303')
+TWILIO_API_KEY = os.environ.get('TWILIO_API_KEY', 'SK8a833829a89650f2a3b85eae2523a4bd')
+TWILIO_API_SECRET = os.environ.get('TWILIO_API_SECRET', 'k2MqspU7jSDDQ8dAbECmbCkc5YELSDvz')
+TWILIO_CHAT_SERVICE_SID = os.environ.get('TWILIO_CHAT_SERVICE_SID', 'IS1a6f557fb08a48b39dcc1651c6ad72bb')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'index'

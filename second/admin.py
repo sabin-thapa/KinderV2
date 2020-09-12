@@ -1,4 +1,4 @@
-from second.models import Post, Profile, Result, Attend, Course, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
+from second.models import Post,Room, Profile, Result, Attend, Course, Contacts, Absentday, Notice, Presentday, SID, School, Foods, ROUTINES
 from second.models import Assignments, Submissions, Grading
 from django.contrib import admin
 
@@ -31,3 +31,4 @@ admin.site.register(Tutorial, MyModelAdmin)
 admin.site.register(Assignments)
 admin.site.register(Submissions)
 admin.site.register(Grading)
+admin.site.register(Room)
