@@ -18,9 +18,20 @@
     type="text/css" />
 
   <link rel="stylesheet" type="text/css" href="{% static 'responsive.css' %}" />
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
+  <style>
+    .rounded-edges {
+      border-radius: 0.25rem;
+    }
+  </style>
+
 </head>
 
-<body class="">
+{% comment %} <body class="">
   {% block innerbase %}
   <div class="">
     <div class="contact-section">
@@ -46,6 +57,70 @@
       </div>
     </div>
   </div>{% endblock %}
-</body>
+</body> {% endcomment %}
 
+
+<body>
+{% block innerbase %}
+  <section class="hero is-info">
+    <div class="hero-body has-text-centered">
+      <div class="container">
+        <h1 class="title is-2">
+          Let's Chat !!
+        </h1>
+        <h2 class="subtitle is-5">
+          An exploration into Twilio Programmable Chat.
+          <br/> Join one of the rooms below to start your adventure
+        </h2>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+      {% if user.user_parents != ''%}
+      {% for room in rooms %}
+      {% if room.talkto == user %}
+        <div class="column">
+          <div class="card rounded-edges">
+            <div class="card-content">
+              <p class="title is-4">{{room.name}}</p>
+              <div class="content">
+                <p>
+                  {{room.description}}
+                </p>
+                <a href="rooms/{{room.slug}}" class="button">Join Room</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      {% elif user.user_teachers != ''%}
+      {% for room in rooms %}
+      {% if room.talkto.user_parents.school == user.user_teachers.school %}
+      {% if room.talkto.user_parents.ChildGrade == user.user_teachers.grade %}
+        <div class="column">
+          <div class="card rounded-edges">
+            <div class="card-content">
+              <p class="title is-4">{{room.name}}</p>
+              <div class="content">
+                <p>
+                  {{room.description}}
+                </p>
+                <a href="rooms/{{room.slug}}" class="button">Join Room</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      {% endif %}
+        
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+</body>
 </html>

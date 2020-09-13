@@ -38,6 +38,13 @@ from webpush import send_user_notification
 import json
 from django.conf import settings
 
+# Create your views here.
+from faker import Faker
+from twilio.jwt.access_token import AccessToken
+from twilio.jwt.access_token.grants import ChatGrant
+
+from .models import Room
+
 register = template.Library()
 
 
@@ -64,6 +71,35 @@ def send_push(request):
     except TypeError:
         return JsonResponse(status=500, data={"message": "An error occurred"})
 
+
+def token(request):
+    identity = request.GET.get('identity', request.user.username)
+    device_id = request.GET.get('device', 'default')  # unique device ID
+
+    account_sid = settings.TWILIO_ACCOUNT_SID
+    api_key = settings.TWILIO_API_KEY
+    api_secret = settings.TWILIO_API_SECRET
+    chat_service_sid = settings.TWILIO_CHAT_SERVICE_SID
+
+    token = AccessToken(account_sid, api_key, api_secret, identity=identity)
+
+    # Create a unique endpoint ID for the device
+    endpoint = "MyDjangoChatRoom:{0}:{1}".format(identity, device_id)
+
+    if chat_service_sid:
+        chat_grant = ChatGrant(endpoint_id=endpoint,service_sid=chat_service_sid)
+        token.add_grant(chat_grant)
+
+    response = {
+        'identity': identity,
+        'token': token.to_jwt().decode('utf-8')
+    }
+
+    return JsonResponse(response)
+
+def room_detail(request, slug):
+    room = Room.objects.filter(slug=slug)
+    return render(request, 'room_detail.html', {'room': room})
 
 @login_required
 def teacherprofile(request):
@@ -218,7 +254,7 @@ def postsandnotices(request):
     webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
     vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
     context = {
-
+        'rooms': Room.objects.all(),
         'posts': post_list,
         'notices': Notice.objects.all()[:6],
         'vapid_key': vapid_key,
@@ -453,6 +489,7 @@ class ResultUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 def contacts(request):
     Contact_Form = ContactsForm
+    context={'form': Contact_Form,'rooms': Room.objects.all()}
     if request.method == 'POST':
         form = Contact_Form(data=request.POST)
 
@@ -479,7 +516,7 @@ def contacts(request):
             email.send()
 
             return render(request, 'suc.html')
-    return render(request, 'sendemail.html', {'form': Contact_Form})
+    return render(request, 'sendemail.html', context)
 
 
 class CourseListView(ListView):
