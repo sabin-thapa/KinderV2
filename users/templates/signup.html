@@ -140,12 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                   </form>
                     <div class="col-md-8 mb-0" style="padding-top: 10px;">
-                      <button class='submit button-normal white btnRegister' type='submit'>Register</button>
+                      <button class='submit button-normal white btnRegister' type='submit' name='teacherRegister' value="teacher">Register</button>
                   </div>
                   </div>
           
                 </div>
             </div>
+            <p style="margin: 1px;">  </p>
             <div
               class="tab-pane fade show"
               id="profile"
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
               </h3>
               <div class="row register-form">
-                  <form method="post" style="padding-left: 20%;">
+                  <form method="post" style="padding-left: 20%; margin: 1px;">
                     {% csrf_token %}
                     <div class="form-row" style="padding-top: 30%;">
                       <div class="form-group col-md-6 mb-0">
@@ -201,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
                       </div>
                     </form>
                       <div class=" col-md-8 mb-0">
-                        <button class='submit button-normal white btnRegister' type='submit'>Register</button>
+                        <button class='submit button-normal white btnRegister' type='submit' name='parentRegister' value="parent">Register</button>
                       </div>
                     </div>
                 

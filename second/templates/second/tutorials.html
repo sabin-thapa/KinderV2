@@ -12,19 +12,22 @@
 
 <body class="jumbotron">
   {% block innerbase %}
-  <div class="heading">
-    <h1>Tutorials!</h1>
-    <hr style="width: 50%; text-align: left; margin-left: 0;" />
+  <div class="heading" style="display: flex; justify-content: space-between;">
+    <h1><strong>Tutorials</strong></h1>
+    {% if user.user_teachers != '' %}
+    <a style="width: 12%; height: 20%; float: right; " name="createpost" class="zoom btn btn-primary"
+      href="{% url 'tutorial-create' %}">Add Tutorial</a>
+    {% endif %}
   </div>
 
   <!-- For Teachers -->
   {% for tut in tutorial %}
-  {% if user.user_teachers != '' %}
+  {% if user.user_teachers == tut.author.user_teachers %}
   {% if tut.author.user_teachers != '' %}
   {% if tut.author.user_teachers.school == user.user_teachers.school %}
   <div class="tutorial-list">
     <a href="{% url 'tutorial-detail' tut.id %}">
-      <h1>{{ tut.title }}</h1>
+      <h2  onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{ tut.title }}</h2>
       {% video tut.video 'small' %}
     </a>
     <hr />
@@ -57,11 +60,6 @@
   {% endif %}
   {% endif %}
   {% endfor %}
-
-  {% if user.user_teachers != '' %}
-  <a style="margin-top: 20px; margin-bottom: 10px; width: 100%;" name="createpost" class="zoom btn btn-secondary"
-    href="{% url 'tutorial-create' %}">Add Tutorial</a>
-  {% endif %}
 </body>
 
 </html>
