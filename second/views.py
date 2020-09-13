@@ -39,7 +39,6 @@ import json
 from django.conf import settings
 
 # Create your views here.
-from faker import Faker
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
 
