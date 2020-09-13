@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, Images, Result, Foods, Attend
 from second.models import Notice, Absentday, Presentday, SID, ROUTINES, Contacts
 
-from second.models import  Attachment, Tutorial, Course
+from second.models import Attachment, Tutorial, Course
 from second.models import Grading
 from second.models import Course
 from second.models import Assignments, Submissions
@@ -40,6 +40,7 @@ from django.conf import settings
 
 register = template.Library()
 
+
 @require_POST
 @csrf_exempt
 def send_push(request):
@@ -52,10 +53,12 @@ def send_push(request):
 
         user_id = data['id']
         user = get_object_or_404(User, pk=user_id)
-        receivers=User_parents.objects.filter(school=user.user_teachers.school,ChildGrade=user.user_teachers.grade)
+        receivers = User_parents.objects.filter(
+            school=user.user_teachers.school, ChildGrade=user.user_teachers.grade)
         payload = {'head': data['head'], 'body': data['body']}
         for receiver in receivers:
-            send_user_notification(user=receiver.user, payload=payload, ttl=1000)
+            send_user_notification(
+                user=receiver.user, payload=payload, ttl=1000)
 
         return JsonResponse(status=200, data={"message": "Web push successful"})
     except TypeError:
@@ -158,7 +161,7 @@ def attendance(request):
 
         'students': Attend.objects.all(),
     }
-    return render(request, 'attendance.html', context)
+    return render(request, 'Attendance/attendance.html', context)
 
 
 def present(request, id):
@@ -206,7 +209,8 @@ def absentdecrease(request, id):
 
 class AttendanceDetailView(DetailView):
     model = Attend
-    template_name = 'attendance_detail.html'
+    template_name = 'Attendance/attendance_detail.html'
+
 
 @login_required
 def postsandnotices(request):
@@ -217,7 +221,7 @@ def postsandnotices(request):
 
         'posts': post_list,
         'notices': Notice.objects.all()[:6],
-        'vapid_key':vapid_key,
+        'vapid_key': vapid_key,
 
     }
 
