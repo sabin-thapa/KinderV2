@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'embed_video',
     'bootstrap_datepicker_plus',
     'webpush',
-    'chat.apps.ChatConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
