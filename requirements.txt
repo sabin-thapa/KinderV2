@@ -17,3 +17,4 @@ django-bootstrap4
 django-bootstrap-datepicker-plus
 django-bootstrap-modal-forms
 django-webpush
+django-multi-form-view

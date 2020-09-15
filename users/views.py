@@ -8,6 +8,7 @@ from second import models as sm
 from kinder.settings import EMAIL_HOST_USER
 from . import forms
 from django.core.mail import send_mail
+from django.views.generic import FormView
 
 def signup(request):
     if request.method == 'POST':
@@ -136,3 +137,19 @@ def subscribe(request):
         return render(request, 'success.html',
             {'recepient': recepient})
     return render(request, 'reset.html', {'form':sub})
+
+# class SignupView(MultipleFormsView):
+#     template_name = "second/signup.html"
+#     form_classes = {
+#         'form1' : UserRegistrationForm(request.POST),
+#         'form2' : UserRegistrationForm(request.POST),
+#         'form_parents' : User_p(request.POST),
+#         'form_teachers' : User_t(request.POST)
+#     }
+
+#     success_urls = {
+#         'parent' : reverse_lazy('parent-form-redirect'),
+#         'teacher' : reverse_lazy('teacher-form-redirect')
+#     }
+
+#     def teacher_form_valid(self, form):

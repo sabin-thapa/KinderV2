@@ -13,25 +13,30 @@
 <body class="jumbotron">
   {% block innerbase %}
 
+<div class="courses jumbotron">
 
-  <div class="heading">
-    <h1>My Courses!</h1>
-    <hr style="width: 50%; text-align: left; margin-left: 0;" />
+  <div class="heading" style="display: flex; justify-content:space-between;">
+    <h1><strong>My Courses!</strong></h1>
+    {% if user.user_teachers != '' %}
+    <a style="width: 12%; height: 20%;" name="createpost" class="zoom btn btn-primary"
+      href="{% url 'course-create' %}">Add Course</a>
+    {% endif %}
   </div>
+  <hr style="width: 50%; text-align: left; margin-left: 0;" />
   <!--     
     For Teachers -->
   {% for i in course %}
-  {% if user.user_teachers != '' %}
+  {% if user.user_teachers == i.instructor.user_teachers %}
   {% if i.instructor.user_teachers != '' %}
   {% if i.instructor.user_teachers.school == user.user_teachers.school %}
 
-  <div class="course-list">
+  <div class="course-list" style="padding-bottom: 5px; background-color: #fff; margin: 2% 0; padding: 1% 2%;">
 
     <a href="{% url 'course-detail' i.id %}">
-      <h1>{{i.course_title}}</h1>
+      <h1 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h1>
     </a>
-    <p>{{i.instructor}}</p>
-
+    <p style="color: rgb(44, 57, 65);">{{i.instructor}}</p>
+    <hr height="10px" />
   </div>
 
   {% endif %}
@@ -44,23 +49,21 @@
   {% if i.instructor.user_teachers.school == user.user_parents.school %}
   {% if i.instructor.user_teachers.grade == user.user_parents.ChildGrade %}
 
-  <div class="course-list">
+  <div class="course-list" style="padding-bottom: 5px;">
 
     <a href="{% url 'course-detail' i.id %}">
-      <h1>{{i.course_title}}</h1>
+      <h1 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h1>
     </a>
-    <p>{{i.instructor}}</p>
-
+    <p style="color: rgb(44, 57, 65);">{{i.instructor}}</p>
+    <hr style="height:10%; color: black solid;"  />
   </div>
 
   {% endif %}
   {% endif %}
   {% endfor %}
 
-  {% if user.user_teachers != '' %}
-  <a style="margin-top: 20px; margin-bottom: 10px; width: 100%;" name="createpost" class="zoom btn btn-secondary"
-    href="{% url 'course-create' %}">Add Course</a>
-  {% endif %}
+
+</div>
 
 </body>
 

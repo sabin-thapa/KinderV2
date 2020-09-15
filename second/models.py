@@ -205,9 +205,13 @@ class Course(models.Model):
         null=True, blank=True, upload_to='syllabus/', verbose_name="Syllabus")
     course_plan = models.FileField(
         null=True, blank=True, upload_to='course_plan/', verbose_name="Course Plan")
+    date_posted = models.DateTimeField(default = timezone.now)
 
     def __str__(self):
         return self.course_title
+
+    class Meta:
+        ordering = ['-date_posted']
 
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
