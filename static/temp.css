@@ -6,7 +6,7 @@ html, body {
 
 
 .register {
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  background: rgb(68, 163, 139);
   margin-top: 2%;
   padding: 2%;
   min-height: 100%;
@@ -46,7 +46,7 @@ html, body {
  .loginBtn {
   height:250px;
   width: 500px;
-  margin-left: -85px;
+  margin-left: -10%;
 }
 .register-right {
   background: #f8f9fa;
@@ -121,7 +121,7 @@ html, body {
   border: none;
   background: #0062cc;
   border-radius: 1.5rem;
-  width: 18%;
+  width: 14%;
   float: right;
 }
 .register .nav-tabs .nav-link{

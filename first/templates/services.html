@@ -16,17 +16,51 @@
 
     <style>
        .profile {
-        background-color: none;
+        background: rgb(235, 243, 240);
         width: 500px;
         border: 2px solid black;
-        height: 310px;
+        height: 320px;
         padding:30px;
         border-radius: 20px;
       }
       body{
-
+         font-size: 18px;
          overflow-x: hidden;
       }
+
+      
+.section-title {
+    justify-content: center;
+    font-size: 30px;
+    color: #000;
+    text-align: center;
+    letter-spacing: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+
+}
+
+.section-description {
+    color: #000;
+    font-size: 18px;
+}
+
+.heading-block.page-title:before {
+    content: '';
+    display: block;
+    padding-top: 5px;
+    margin: 1% 0 0 40%;
+    width: 360px;
+    border-top: 5px solid #0097a7;
+}
+.heading-block.page-title:after {
+    content: '';
+    display: block;
+    margin: 1% 0 0 40%;
+    width: 360px;
+    border-top: 5px solid #0097a7;
+}
+
     </style>
   </head>
 
@@ -35,8 +69,8 @@
 
     <div style="padding-top:40px;">
       <center>
-    <h1>Services</h1>
-    <h4>"Our best services for your kids"</h4>
+        <h1 class="section-title text-center heading-block page-title wow fadeInUp">Services</h1>
+        <p class="section-description text-center ">"Our best services for your kids." </p>	
     </center>
     </div>
 
@@ -341,19 +375,18 @@
 
 
 
+ <footer>
+  <div class="footer">
+    <footer class="text-muted" style="background-color:black; color: white; position: fixed; height: 40px; width: 100%; bottom: 0; left: 0;">
 
-    <footer>
-      <div class="footer">
-        <footer class="text-muted" style="background-color:black; color: white;">
+          <p class="float-right">
 
-              <p class="float-right">
+          </p>
+          <center><p style="padding-top: 10px; color: white;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
 
-              </p>
-              <center><p style="padding-top: 20px; color: white;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
-
-        </footer>
-      </div>
     </footer>
+</div>
+</footer>
 
 </body>
 

@@ -3,6 +3,7 @@
 {% block base1 %}
 <html lang="en">
 {% load static %}
+{% load crispy_forms_tags %}
 
 <head>
     <meta charset="utf-8">
@@ -25,19 +26,20 @@
 
     <header>
         <section id="banner">
-            <div class="container">
+            <div class="container" style="height: 800px;">
                 <div class="row">
-                    <div class="lft col-lg-6 col-md-6 col-sm-12">
-                        <p class="banner-text wow fadeInDown">DEAR PRINCIPALS, STAFFS, TEACHERS & PARENTS</p>
-
-                        <p class="wow fadeInDown" data-wow-delay="0.5s" style="font-size: 20px;">This is the Right Time for your Child Monitoring to go <b>Completely Digital</b></p>
+                    <div class="col-lg12 col-sm-12">
+                        <p class="banner-text wow fadeInDown" style="  background: rgba(235, 243, 240, 0.4); ">DEAR PRINCIPALS, STAFFS, TEACHERS & PARENTS</p>
+                      <center>
+                        <p class="wow fadeInDown" data-wow-delay="0.5s" style="font-size: 20px;   background: rgba(235, 243, 240,0.4);" >This is the Right Time for your Child Monitoring to go <b>Completely Digital</b></p>
                         <br>
+                  
                         <div>
-
-                              <a class="wow fadeInLeft btn btn-warning scroll" data-wow-delay="1s" href = "#contacts">Contact Us Now </a> </div>
-
+                          <a class="wow fadeInLeft btn btn-warning scroll" data-wow-delay="1s" href = "#contacts">Contact Us Now </a>   
+                        </div>
+                      </center>
                         <br><br>
-                              <div class="spinner-grow text-primary"></div>
+                              <!-- <div class="spinner-grow text-primary"></div>
                               <div class="spinner-grow text-success"></div>
                               <div class="spinner-grow text-info"></div>
                               <div class="spinner-grow text-warning"></div>
@@ -50,20 +52,20 @@
                               <div class="spinner-grow text-info"></div>
                               <div class="spinner-grow text-warning"></div>
                               <div class="spinner-grow text-danger"></div>
-                    </div>
+                    </div> -->
                     <div class="col-md-5 col-lg-5">
                         <br>
                         <br><br><br><br><br><br><br><br>
-                        <img src="/media/first/1.png" class="baby" alt="kids">
+                        <!-- <img src="/media/first/1.png" class="baby" alt="kids"> -->
                     </div>
                 </div>
             </div>
-
+            </div>
             <img src="/media/first/wave.png" class="bottom-img">
       </section>
     </header>
     <main>
-    <section id="whatitis" style="margin-top: 150px; margin-right: 40px;">
+    <section id="whatitis" style="margin-top: 30px; margin-left: 40px;">
       <div class="row">
         <div class="text-center col-lg-6" >
           <img class="wow fadeInLeft" src="/media/first/laptop1.png">
@@ -249,18 +251,17 @@
       </div>
   <div class="contact-section">
       <div class="container">
-          <div class="row">
+          <div class="row" style="justify-content: space-between;">
 
               <div class="contact-details col-lg-2 col-md-2">
                   <div class="map wow fadeInLeft" style="margin-left: -60px; padding-top: 20px;">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3535.160409935585!2d85.53645301506015!3d27.619548182828314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb092082d99e3b%3A0xe509dafa47685dba!2sKathmandu%20University!5e0!3m2!1sen!2snp!4v1581171128689!5m2!1sen!2snp" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                   </div>
               </div>
-              <div class="col-lg-3"></div>
-              <div class="contact-form col-lg-7 col-md-7 wow fadeInRight" style="padding-left: 200px;">
+              <div class="contact-form col-lg-7 col-md-7 wow fadeInRight" style="  padding-left: 200px; ">
                   <form method= 'POST'>
                       {% csrf_token %}
-                      {{ form.as_p }}
+                      {{ form|crispy}}
                       <button onclick="popup()" type="submit" class="btn btn-outline-info">Send</button>
                   </form>
               </div>
@@ -271,12 +272,12 @@
   </main>
   <footer>
     <div class="footer">
-      <footer class="text-muted" style="background-color:black; color: white;">
+      <footer class="text-muted" style="background-color:black; color: white; position: fixed; height: 40px; width: 100%; bottom: 0; left: 0;">
 
             <p class="float-right">
 
             </p>
-            <center><p style="padding-top: 20px; color: white;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
+            <center><p style="padding-top: 10px; color: white;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
 
       </footer>
   </div>

@@ -2,6 +2,7 @@
 {% extends "base.html" %}
 {% block base1 %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <html lang="en">
 <head>
@@ -13,86 +14,139 @@
 
 
     <link rel="stylesheet" type="text/css" href="{% static 'index1.css' %}">
-    <link href='http://fonts.googleapis.com/css?family=Dosis:400,500,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <link
-    rel="stylesheet"
-    href="{% static 'bootstrap/css/bootstrap.min.css' %}"
-    type="text/css"
-  />
-   <link rel="stylesheet" type="text/css" href="{% static 'developers.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" >
+<link rel="stylesheet" type="text/css" href="{% static 'developers.css' %}">
 
 
 </head>
-<body class="contact">
-<section id="content" class="single-wrapper">
+<body class="contact" style="font-size: 16px; font-weight: lighter;">
+    <!-- <section id="content" class="single-wrapper" style="min-height: 100vh;">
 
-<div class="jumbotron" style="margin-top:-5px; padding:0;"> 
-    <div class="grey-background wow fadeIn">
-        <div class="container">
-            <div class="heading-block section-title page-title wow fadeInUp" style="padding: 60px 0 0 0 ; ">
-                <h1><strong> Contact Us </strong></h1>
-            </div>
-        </div>
-    </div>
-    <div class="contact-section" >
-    <div class="container" >
-        <div class="row">
-
-            <div class="contact-details col-md-4 wow fadeInUp" style="margin-top: 70px;">
-                <p> Feel free to call us directly or simply complete our form and we will follow up with you.</p>
-
-                <div class="visit-us" style="margin-top: 30px;">
-                    <div class="contact-icon">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        <div class="jumbotron" style="margin-top:-5px; padding:0;"> 
+            <div class="grey-background wow fadeIn">
+                <div class="container">
+                    <div class="heading-block section-title page-title wow fadeInUp" style="padding: 80px 0 0 0 ; ">
+                        <h1><strong> Contact Us </strong></h1>
                     </div>
-                    <div class="contact-content">
-                        <h3>Visit us</h3>
-                        <p>Kathmandu University</p>
-                        <p>Dhulikhel,Kavre</p>
-                        <p>Nepal</p>
-                    </div>
-                </div>
-
-                <div class="contact-us" style="margin-top: 30px;">
-                    <div class="contact-icon">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                    </div>
-                    <div class="contact-content">
-                        <h3>Contact us</h3>
-                        <p>98010101010</p>
-                        <p>kinder.mailservice@gmail.com</p>
-                        <p>www.kinderweb.com</p>
-                    </div>
+                  <center> <p style=" margin-top: 15px;">Swing by for a cup of coffee, or leave us a message.</p></center>  
                 </div>
             </div>
+            <div class="contact-section" >
+                <div class="container" >
+                    <div class="row" style="display: flex; justify-content:space-between;">
 
-            <div class="contact-form col-md-8 wow fadeIn" style="margin-top: 70px; ">
-                <form method= 'POST' >
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="btn btn-outline-info">Send</button>
-                </form>
+                        <div class="contact-details col-md-4 wow fadeInUp" style="margin-top: 70px; margin-left: -10px;">
+                           
+
+                            <div class="visit-us" style="margin-top: 30px;">
+                                <div class="contact-icon">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <h3>Visit us</h3>
+                                    <p>Kathmandu University</p>
+                                    <p>Dhulikhel,Kavre</p>
+                                    <p>Nepal</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-us" style="margin-top: 30px;">
+                                <div class="contact-icon">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <h3>Contact us</h3>
+                                    <p>98010101010</p>
+                                    <p>kinder.mailservice@gmail.com</p>
+                                    <p>www.kinderweb.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-form col-md-8 wow fadeIn" style="padding-top: 50px;  margin-top: 50px;">
+                            <form method= 'POST' >
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <button class="btn btn-outline-info">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section> -->
+    
+
+<div id="googlemaps">
+</div>
+<div class="container contact-form">
+    <div class="contact-image">
+        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
     </div>
+    <form method="post">
+        <h3 style> Swing by for a cup of coffee, or leave us a message.</h3>
+        <div class="">
+        <form method= 'POST' >
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-outline-info" style="margin-top: 1rem;">Send</button>
+        </form>
+            </div>
+
+    </form>
 </div>
-</section>
-</div>
-<footer>
-    <div class="footer">
-      <footer class="text-muted" style="background-color:black; color: white;">
 
-            <p class="float-right">
+    <footer>
+        <div class="footer">
+          <footer class="text-muted" style="background-color:black; color: white; position: fixed; height: 40px; width: 100%; bottom: 0; left: 0;">
+    
+                <p class="float-right">
+    
+                </p>
+                <center><p style="padding-top: 10px; color: white; font-size: 16px;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
+    
+          </footer>
+      </div>
+    </footer>
 
-            </p>
-            <center><p style="padding-top: 20px; color: white;">Copyright &copy; <script>document.write(new Date().getFullYear()); </script> | All Rights Reserved | KINDER</p></center>
+    <!-- Include the Google Maps API library - required for embedding maps -->
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-      </footer>
-  </div>
-</footer>
+<script type="text/javascript">
+
+// The latitude and longitude of your business / place
+var position = [27.6195, 85.5386];
+
+function showGoogleMaps() {
+
+    var latLng = new google.maps.LatLng(position[0], position[1]);
+
+    var mapOptions = {
+        zoom: 16, // initialize zoom level - the max value is 21
+        streetViewControl: false, // hide the yellow Street View pegman
+        scaleControl: true, // allow users to zoom the Google Map
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: latLng
+    };
+
+    map = new google.maps.Map(document.getElementById('googlemaps'),
+        mapOptions);
+
+    // Show the default red marker at the location
+    marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP
+    });
+}
+
+google.maps.event.addDomListener(window, 'load', showGoogleMaps);
+</script>
 </body>
 </html>
 
 {% endblock %}
+
