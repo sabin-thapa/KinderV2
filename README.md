@@ -1,7 +1,9 @@
 # Kinder-V2
-
-<h2> #Notes: </h2>
 <br>
+<h1>
+Important: Master has been updated on <b> 16th Sept 11AM <b> by Sabin. git pull origin master on the master branch before creating a PR or merging.
+ </h1>
+<h2> #Notes: </h2>
 <ul>
   <li>
 <p>
@@ -13,6 +15,6 @@ Everyone will work on their own branches, and not on the master branch. After ev
   <li>pip install django-bootstrap4</li>
   <li>pip install django-bootstrap-datepicker-plus</li>
  <li> pip install django-bootstrap-modal-forms</li>
-  <li> <b> Important: Master has been updated on 28th of August 2PM by Sabin. git pull origin master on the master branch before creating a PR or merging.</b></li>
+  <li> <b> </b></li>
   </ul>
 
