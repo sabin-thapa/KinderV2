@@ -79,8 +79,9 @@
     {% block innerbase %}
     <div class="jumbotron">
         {% if user.user_teachers != "" %}
-        <a class="btn btn-primary" href="{% url 'result' %}"
-            style="margin-left: 0px; margin-top: 10px; margin-bottom: 15px;">See Result Page</a>
+
+        <a class="btn btn-outline-danger" href="{% url 'result' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </a>
         {% endif %}
         <center>
             <br>

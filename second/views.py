@@ -1,3 +1,4 @@
+from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render, redirect, get_object_or_404
 from second.models import Post, Images, Result, Foods, Attend
 from second.models import Notice, Absentday, Presentday, SID, ROUTINES, Contacts
@@ -39,9 +40,9 @@ import json
 from django.conf import settings
 
 # Create your views here.
-from faker import Faker
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
+
 
 from .models import Room
 
@@ -87,7 +88,8 @@ def token(request):
     endpoint = "MyDjangoChatRoom:{0}:{1}".format(identity, device_id)
 
     if chat_service_sid:
-        chat_grant = ChatGrant(endpoint_id=endpoint,service_sid=chat_service_sid)
+        chat_grant = ChatGrant(endpoint_id=endpoint,
+                               service_sid=chat_service_sid)
         token.add_grant(chat_grant)
 
     response = {
@@ -97,9 +99,11 @@ def token(request):
 
     return JsonResponse(response)
 
+
 def room_detail(request, slug):
     room = Room.objects.filter(slug=slug)
     return render(request, 'room_detail.html', {'room': room})
+
 
 @login_required
 def teacherprofile(request):
@@ -205,7 +209,7 @@ def present(request, id):
     student1 = Presentday.objects.filter(
         name=student, date=datetime.date.today())
     if student1.exists():
-        messages.error(request, 'Attendance already done for today!')
+        messages.error(request, 'Attendance already done!')
 
     else:
         student1 = Presentday.objects.create(
@@ -227,7 +231,7 @@ def absent(request, id):
     student1 = Absentday.objects.filter(
         name=student, date=datetime.date.today())
     if student1.exists():
-        messages.error(request, 'Attendance already done for today!')
+        messages.error(request, 'Attendance already done!')
     else:
         student1 = Absentday.objects.create(
             name=student, date=datetime.date.today())
@@ -489,7 +493,7 @@ class ResultUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 def contacts(request):
     Contact_Form = ContactsForm
-    context={'form': Contact_Form,'rooms': Room.objects.all()}
+    context = {'form': Contact_Form, 'rooms': Room.objects.all()}
     if request.method == 'POST':
         form = Contact_Form(data=request.POST)
 

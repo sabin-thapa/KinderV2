@@ -1,76 +1,71 @@
 {% extends "innerbase.html" %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Student Ids</title>
     {% block scripts %}
 
     <script type="text/javascript">
         window.onload = function () {
-            var a = {
-                {
-                    attend.presentdayss | json_script
-                }
-            } + {
-                {
-                    attend.absentdayss | json_script
-                }
-            }
-            document.getElementById('pd').innerHTML = a;
+            var a = document.getElementById('pdc').innerHTML;
+            var b = document.getElementById('adc').innerHTML;
+            var c = parseInt(a) + parseInt(b);
+            document.getElementById('pd').innerHTML = c;
 
         };
     </script>
     {% endblock %}
 </head>
 
-
 <body>
     {% block innerbase %}
 
     <a class="btn btn-outline-danger" href="{% url 'attendance' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>
-    <div class="row" style="margin-top: 80px;">
-        <div class="col-lg-7 graph">
-
+    <div class="row" style="margin-top: 40px">
+        <div class="col-lg-6 graph">
             <canvas id="myChart"></canvas>
         </div>
         <div class="col-lg-5 details">
+            <div style="padding-left:20px;">
+                <h5>
+                    Total School Days
+                    <span id="pd"></span>
+                </h5>
+                <h5>Total Days Present: <span id="pdc">{{attend.presentdayss}}</span>
+                </h5>
+                <h5>Total Days Absent: <span id="adc">{{attend.absentdayss}}</span>
+                </h5>
+            </div>
+            <br>
+            <h4>
+                <b>{{attend.student.full_name}}</b> was absent on the following
+                date(s):
+            </h4>
+            <br>
 
 
-            <h5>Total School Days:<p id="pd"></p>
-            </h5>
-            <h5>Total Days Present: {{attend.presentdayss}}</h5>
-            <h5>Total Days Absent: {{attend.absentdayss}}</h5>
-            <h3><b>{{attend.student.full_name}}</b> was absent on the following day(s):</h3>
-            <table class="table table-hover" style="margin-top: 30px; width: 20%">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Dates</th>
-                    </tr>
-                </thead>
-
+            <div class="card-columns">
                 {% for d in attend.days %}
-                <tr>
-                    <td>
-                        <ul>
-                            <li>{{d.date}}</li>
-                        </ul>
-                    </td>
+                <div class="card bg-dark" style="height: 80px; width: 170px; margin-bottom: 30px;">
+                    <div class="card-body text-center">
+                        <p class="card-text"><b>
+                                <span style="color: azure;">{{d.date}}</span>
+                            </b></p>
+                    </div>
+                </div>
 
-                </tr>
                 {% endfor %}
-            </table>
+
+            </div>
 
         </div>
-
+        <div class="col-lg-1 details"></div>
 
     </div>
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
@@ -82,14 +77,14 @@
 
             // The data for our dataset
             data: {
-                labels: [
-                    'present', 'absent'
-                ],
+                labels: ["present", "absent"],
                 datasets: [{
                     label: "Attendance",
                     backgroundColor: ["rgb(255, 99, 132)", "rgb(0, 99, 132)"],
                     borderColor: "rgb(255, 99, 132)",
-                    data: [3, 4],
+                    data: [document.getElementById('pdc').innerHTML, document.getElementById('adc')
+                        .innerHTML
+                    ],
                 }, ],
             },
 
