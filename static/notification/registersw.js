@@ -11,7 +11,7 @@ function urlB64ToUint8Array(base64String) {
     return outputData;
 }
 
-const subscribe = async(reg) => {
+const subscribe = async (reg) => {
     const subscription = await reg.pushManager.getSubscription();
     if (subscription) {
         sendSubData(subscription);
@@ -23,14 +23,16 @@ const subscribe = async(reg) => {
     const options = {
         userVisibleOnly: true,
 
-        ...(key && { applicationServerKey: urlB64ToUint8Array(key) })
+        ...(key && {
+            applicationServerKey: urlB64ToUint8Array(key)
+        })
     };
 
     const sub = await reg.pushManager.subscribe(options);
     sendSubData(sub)
 };
 
-const sendSubData = async(subscription) => {
+const sendSubData = async (subscription) => {
     const browser = navigator.userAgent.match(/(firefox|msie|chrome|safari|trident)/ig)[0].toLowerCase();
     const data = {
         status_type: 'subscribe',
@@ -54,7 +56,7 @@ const handleResponse = (res) => {
     console.log(res.status);
 };
 
-const registerSw = async() => {
+const registerSw = async () => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         const reg = await navigator.serviceWorker.register('sw.js');
         initialiseState(reg)
@@ -70,8 +72,4 @@ if (Notification.permission === 'default') {
     });
 }
 
-navigator.serviceWorker.getRegistrations().then(registrations => {
-    if (!registrations[0]) {
-        registerSw();
-    }
-})
+registerSw();
