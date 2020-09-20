@@ -66,8 +66,8 @@ def contact(request):
             template = get_template('contact_form.txt')
             context = {
                 'name': name,
-                'email': email,
                 'message': message,
+                'email': email,
             }
 
             content = template.render(context)

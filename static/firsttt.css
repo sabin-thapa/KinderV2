@@ -1,12 +1,16 @@
 body {
-    padding-top: 40px;
-    font-family: sans-serif;
+  padding-top: 40px;
+  font-family: sans-serif;
 
 }
 
 #banner {
-    background-image: linear-gradient(to right, #8181F7FE, #5882FA);
-}   
+  background-image: url('../media/first/a.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
 /* 
 #nav-bar {
     position: sticky;
@@ -65,249 +69,274 @@ body {
 } */
 
 .lft {
-    color: #fff;
-    padding-top: 10%;
-    margin-left: -10%;
+  color: #fff;
+  padding-top: 10%;
+  margin-left: -10%;
 }
 
-
 .bottom-img {
-    width: 100%;
-    height: 70px;
-    position: relative;
+  width: 100%;
+  height: 50px;
+  position: relative;
 }
 
 .banner-text {
-    font-size: 45px;
-    font-weight: 600;
-    margin-top: 100px;
+
+  font-size: 45px;
+  font-weight: 600;
+  margin-top: 100px;
 }
 
 
 /* Navbar */
 .form-control {
-    box-shadow: none;		
-    font-weight: normal;
-    font-size: 13px;
+  box-shadow: none;
+  font-weight: normal;
+  font-size: 13px;
 }
+
 .navbar {
-    background: #fff;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-bottom: 1px solid #dfe3e8;
-    border-radius: 0;
-    height: 6%;
+  background: #fff;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: 1px solid #dfe3e8;
+  border-radius: 0;
+  height: 6%;
 }
+
 .nav-link img {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    margin: -8px 0;
-    float: left;
-    margin-right: 10px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin: -8px 0;
+  float: left;
+  margin-right: 10px;
 }
+
 .navbar .navbar-brand {
-    padding-left: 0;
-    font-size: 20px;
-    padding-right: 50px;
+  padding-left: 0;
+  font-size: 20px;
+  padding-right: 50px;
 }
+
 .navbar .navbar-brand b {
-    color: #33cabb;		
+  color: #33cabb;
 }
+
 .navbar .form-inline {
-    display: inline-block;
+  display: inline-block;
 }
+
 .navbar a {
-    color: #888;
-    font-size: 15px;
+  color: #888;
+  font-size: 15px;
 }
+
 .navbar .sign-up-btn {
-    min-width: 110px;
-    max-height: 36px;
+  min-width: 110px;
+  max-height: 36px;
 }
 
-.navbar a, .navbar a:active : {
-    color: #fff;
-    padding: 8px 20px;
-    background: transparent;
-    line-height: normal;
+.navbar a,
+.navbar a:active : {
+  color: #fff;
+  padding: 8px 20px;
+  background: transparent;
+  line-height: normal;
 }
 
-.navbar a, .navbar a:hover : {
-    color: #fff !important;
+.navbar a,
+.navbar a:hover : {
+  color: #fff !important;
 }
 
 
-.navbar .btn-primary, .navbar .btn-primary:active {
-    color: #fff;
-    background: #33cabb !important;
-    border: none;
-    
-}	
-.navbar .btn-primary:hover, .navbar .btn-primary:focus {		
-    color: #fff;
-    background: #31bfb1 !important;
+.navbar .btn-primary,
+.navbar .btn-primary:active {
+  color: #fff;
+  background: #33cabb !important;
+  border: none;
+
+}
+
+.navbar .btn-primary:hover,
+.navbar .btn-primary:focus {
+  color: #fff;
+  background: #31bfb1 !important;
 
 
 }
+
 .or-seperator {
-    margin-top: 32px;
-    text-align: center;
-    border-top: 1px solid #e0e0e0;
+  margin-top: 32px;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
 }
+
 .or-seperator b {
-    color: #666;
-    padding: 0 8px;
-    width: 30px;
-    height: 30px;
-    font-size: 13px;
-    text-align: center;
-    line-height: 26px;
-    background: #fff;
-    display: inline-block;
-    border: 1px solid #e0e0e0;
-    border-radius: 50%;
-    position: relative;
-    top: -15px;
-    z-index: 1;
+  color: #666;
+  padding: 0 8px;
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+  text-align: center;
+  line-height: 26px;
+  background: #fff;
+  display: inline-block;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  top: -15px;
+  z-index: 1;
 }
+
 .navbar .action-buttons .dropdown-toggle::after {
-    display: none;
+  display: none;
 }
+
 .form-check-label input {
-    position: relative;
-    top: 1px;
+  position: relative;
+  top: 1px;
 }
-@media (min-width: 1200px){
-    .form-inline .input-group {
-        width: 300px;
-        margin-left: 30px;
-    }
+
+@media (min-width: 1200px) {
+  .form-inline .input-group {
+    width: 300px;
+    margin-left: 30px;
+  }
 }
-@media (max-width: 768px){
-    .navbar .dropdown-menu.action-form {
-        width: 100%;
-        padding: 10px 15px;
-        background: transparent;
-        border: none;
-    }
-    .navbar .form-inline {
-        display: block;
-    }
-    .navbar .input-group {
-        width: 100%;
-    }
+
+@media (max-width: 768px) {
+  .navbar .dropdown-menu.action-form {
+    width: 100%;
+    padding: 10px 15px;
+    background: transparent;
+    border: none;
+  }
+
+  .navbar .form-inline {
+    display: block;
+  }
+
+  .navbar .input-group {
+    width: 100%;
+  }
 }
 
 
-.hoverable{
-    display:inline-block;
-    backface-visibility: hidden;
-    vertical-align: middle;
-    position:relative;
-    box-shadow: 0 0 1px rgba(0,0,0,0);
-    tranform: translateZ(0);
-    transition-duration: .3s;
-    transition-property:transform;
+.hoverable {
+  display: inline-block;
+  backface-visibility: hidden;
+  vertical-align: middle;
+  position: relative;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  tranform: translateZ(0);
+  transition-duration: .3s;
+  transition-property: transform;
+}
+
+.hoverable:before {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+  /* W3C */
+  transition-duration: 0.3s;
+  transition-property: transform, opacity;
+}
+
+.hoverable:hover,
+.hoverable:active,
+.hoverable:focus {
+  transform: translateY(-5px);
+}
+
+.hoverable:hover:before,
+.hoverable:active:before,
+.hoverable:focus:before {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+
+
+@keyframes bounce-animation {
+  16.65% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
   }
-  
-  .hoverable:before{
-    position:absolute;
-    pointer-events: none;
-    z-index:-1;
-    content: '';
-    top: 100%;
-    left: 5%;
-    height:10px;
-    width:90%;
-    opacity:0;
-    background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
-    /* W3C */
-    transition-duration: 0.3s;
-    transition-property: transform, opacity;
+
+  33.3% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
   }
-  
-  .hoverable:hover, .hoverable:active, .hoverable:focus{
-    transform: translateY(-5px);
+
+  49.95% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
   }
-  .hoverable:hover:before, .hoverable:active:before, .hoverable:focus:before{
-    opacity: 1;
-    transform: translateY(-5px);
+
+  66.6% {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
   }
-  
-  
-  
-  @keyframes bounce-animation {
-    16.65% {
-      -webkit-transform: translateY(8px);
-      transform: translateY(8px);
-    }
-  
-    33.3% {
-      -webkit-transform: translateY(-6px);
-      transform: translateY(-6px);
-    }
-  
-    49.95% {
-      -webkit-transform: translateY(4px);
-      transform: translateY(4px);
-    }
-  
-    66.6% {
-      -webkit-transform: translateY(-2px);
-      transform: translateY(-2px);
-    }
-  
-    83.25% {
-      -webkit-transform: translateY(1px);
-      transform: translateY(1px);
-    }
-  
-    100% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-    }
+
+  83.25% {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px);
   }
-  
-  .bounce {
-    animation-name: bounce-animation;
-    animation-duration: 2s;
-    color: #fff;
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
   }
-  
+}
+
+.bounce {
+  animation-name: bounce-animation;
+  animation-duration: 2s;
+  color: #fff;
+}
+
 
 .active {
-    background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
 
-  }
-  
 }
-  
-  /*everything below here is just setting up the page, so dont worry about it */
-  
-  
-  @media (min-width: 768px) {
-    .navbar{
-      text-align: center !important;
-      float: none;
-      display: inline-block;
+
+}
+
+/*everything below here is just setting up the page, so dont worry about it */
+
+
+@media (min-width: 768px) {
+  .navbar {
+    text-align: center !important;
+    float: none;
+    display: inline-block;
+  }
+}
+
+
+
+nav {
+  background: none !important;
+  text-transform: uppercase;
+
+  li {
+    margin-left: 3em;
+    margin-right: 3em;
+
+    a {
+      transition: .5s color ease-in-out;
     }
   }
-  
-
-  
-  nav {
-    background: none !important;
-    text-transform:uppercase;
-    li {
-      margin-left: 3em;
-      margin-right: 3em;
-      a{
-        transition: .5s color ease-in-out;
-      }
-    }
-  }
-  
-
+}
