@@ -11,20 +11,22 @@
     {% block title %}
     Attendance
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static 'second.css' %}">
+    {% block scripts %}
+
     <script>
-        function disableBtn(id) {
-            document.getElementById(id).disabled = true;
+        function dimcolour(id) {
+            document.getElementById(id).style.background = '#000000';
             setTimeout(function () {
-                document.getElementById(id).disabled = false;
-            }, 10000);
+                document.getElementById(id).style.background = '#ffffff';
+            }, 5000);
 
         }
 
-        function enableBtn(id) {
-            document.getElementById(id).disabled = false;
+        function brightcolour(id) {
+            document.getElementById(id).style.background = '#ffffff';
         }
     </script>
+    {% endblock %}
 </head>
 
 
@@ -60,7 +62,8 @@
                     <td>{{i.student.roll}}</td>
 
                     <td>
-                        <a class="present-btn btn btn-primary" href='{% url "present" i.id %}'>Present</a>&emsp;
+                        <a class="present-btn btn btn-primary" href='{% url "present" i.id %}'
+                            onClick="dimcolour(this.id)">Present</a>&emsp;
                         <small><a href='{% url "presentdecrease" i.id %}'>Undo</a></small>
 
                     </td>

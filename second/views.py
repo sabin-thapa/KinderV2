@@ -1,12 +1,7 @@
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render, redirect, get_object_or_404
-from second.models import Post, Images, Result, Foods, Attend
-from second.models import Notice, Absentday, Presentday, SID, ROUTINES, Contacts
-
-from second.models import Attachment, Tutorial, Course
-from second.models import Grading
-from second.models import Course
-from second.models import Assignments, Submissions
+from second.models import (Post, Images, Result, Foods, Attend, Notice, Absentday, Presentday,
+                           SID, ROUTINES, Contacts, Attachment, Tutorial, Course, Grading, Assignments, Submissions)
 
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -14,9 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.ult
 
-from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
+from .forms import (UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm, UserUpdateForm,
+                    ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm, SubmissionForm)
 
-from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm, SubmissionForm
 
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
