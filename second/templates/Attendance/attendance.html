@@ -33,7 +33,14 @@
 
 <body>
     {% block innerbase %}
+    {% if messages %}
+    {% for message in messages %}
+    <div id="alert" class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
 
+    {% endif %}
     <div class="">
         <center>
 
@@ -105,18 +112,18 @@
             </table>
 
 
-            {% if messages %}
-            {% for message in messages %}
-            {% if message.tags %} <script>
-                alert("{{ message }}")
-            </script> {% endif %}
 
-            {% endfor %}
-
-            {% endif %}
 
         </center>
     </div>
+
+    <script>
+        var message_ele = document.getElementById("alert");
+
+        setTimeout(function () {
+            message_ele.style.display = "none";
+        }, 1000);
+    </script>
 
     {% endblock %}
 

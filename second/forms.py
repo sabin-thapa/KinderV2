@@ -82,7 +82,7 @@ class AssignmentForm(forms.ModelForm):
         widgets = {
             'deadline': DateTimePickerInput()
         }
-        fields = ('title', 'description', 'file', 'deadline')
+        fields = ('title', 'description', 'course', 'file', 'deadline')
 
 
 class SubmissionForm(forms.ModelForm):
