@@ -164,6 +164,7 @@ def addresult(request):
     form = ResultForm(request.POST)
 
     if request.method == 'POST':
+
         if form.is_valid():
             form.save()
 
@@ -602,7 +603,7 @@ class TutorialDetailView(DetailView):
 
 class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc']
+    fields = ['title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -612,7 +613,7 @@ class TutorialCreateView(LoginRequiredMixin, CreateView):
 
 class TutorialUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc']
+    fields = ['title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
