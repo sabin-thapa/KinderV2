@@ -6,8 +6,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Add Result</title>
-  <link rel="stylesheet" type="text/css" href="{% static "second.css" %}">
-  <link rel="stylesheet" href="{% static 'form1.css' %}" />
+  {% block scripts %}
+
 
   <script src=" {% static 'registerchild.js' %} "></script>
   <script>
@@ -28,10 +28,14 @@
       }
     });
   </script>
+  {% endblock %}
 </head>
 
 <body style="padding-top: 55px;" class="jumbotron">
   {% block innerbase %}
+  <a style="margin-top: -35px; margin-bottom: 20px;" class="btn btn-outline-danger" href="{% url 'result' %}"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
   <div class="jumbotron">
     <center>
       <div class="form-box">
@@ -40,13 +44,13 @@
           <h1 style="display: none;">{{x.id}}</h1>
           {% endfor %}
         </div>
-        <form method="POST"></form>
-        {% csrf_token %} {% include 'second/form-template.html' %}
-        <div>
-          <button class="btn btn-outline-info" href="{% url 'result' %}" type="submit">
-            ADD
-          </button>
-        </div>
+        <form method="POST">
+          {% csrf_token %} {% include 'second/form-template.html' %}
+          <div>
+            <button class="btn btn-outline-info" href="{% url 'result' %}" type="submit">
+              ADD
+            </button>
+          </div>
         </form>
       </div>
     </center>

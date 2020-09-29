@@ -9,8 +9,11 @@
 
 <body class="jumbotron">
   {% block innerbase %}
+  <a style="margin-top: -35px; margin-bottom: 20px;" class="btn btn-outline-danger" href="{% url 'courses' %}"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
   <div class="heading" style="display: flex; justify-content: space-between;">
-  <h1 style="text-transform: capitalize;"><strong> {{course.course_title}} </strong></h1>
+    <h1 style="text-transform: capitalize;"><strong> {{course.course_title}} </strong></h1>
     <br>
     {% if user.user_teachers != '' %}
     <div class="buttons">
@@ -20,44 +23,62 @@
     {% endif %}
   </div>
   <hr />
-  <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"><img src="https://elf.ku.edu.np/theme/image.php/aardvark/forum/1598794457/icon" class="iconlarge activityicon" alt=" " role="presentation"> Announcements</h1>
+  <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"><img
+      src="https://elf.ku.edu.np/theme/image.php/aardvark/forum/1598794457/icon" class="iconlarge activityicon" alt=" "
+      role="presentation"> Announcements</h1>
   <p>{{course.announcement}}</p>
   <hr /> <br />
-  <h1 >Syllabus</h1>
-  <p><a href="{{course.syllabus_url}}"> <ul style="list-style: none;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">
-  <li>
-    <img src="https://elf.ku.edu.np/theme/image.php/aardvark/core/1598794457/f/pdf-24" class="iconlarge activityicon" alt=" " role="presentation"> {{ course.syllabus }}
-  </li></ul> </p> </a>
+  <h1>Syllabus</h1>
+  <p><a href="{{course.syllabus_url}}">
+      <ul style="list-style: none;" onMouseOver="this.style.color='rgb(39, 185, 185'"
+        onMouseout="this.style.color='rgb(44, 57, 65)'">
+        <li>
+          <img src="https://elf.ku.edu.np/theme/image.php/aardvark/core/1598794457/f/pdf-24"
+            class="iconlarge activityicon" alt=" " role="presentation"> {{ course.syllabus }}
+        </li>
+      </ul>
+  </p> </a>
   <hr />
-  <h1 >Course Plan</h1>
-  <p><a href="{{course.course_plan_url}}"> <ul style="list-style: none;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">
-    <li>
-      <img src="https://elf.ku.edu.np/theme/image.php/aardvark/core/1598794457/f/pdf-24" class="iconlarge activityicon" alt=" " role="presentation"> {{ course.course_plan }}
-    </li></ul></p> </a>
+  <h1>Course Plan</h1>
+  <p><a href="{{course.course_plan_url}}">
+      <ul style="list-style: none;" onMouseOver="this.style.color='rgb(39, 185, 185'"
+        onMouseout="this.style.color='rgb(44, 57, 65)'">
+        <li>
+          <img src="https://elf.ku.edu.np/theme/image.php/aardvark/core/1598794457/f/pdf-24"
+            class="iconlarge activityicon" alt=" " role="presentation"> {{ course.course_plan }}
+        </li>
+      </ul>
+  </p> </a>
   <hr />
   <br />
   <div class="attachments" style="display: flex; justify-content: space-between;">
     <a href="{% url 'attachments' %}">
-      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Attachments</h1>
+      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Attachments
+      </h1>
     </a>
     {% if user.user_teachers != '' %}
     <a style="width: 8%; height: 14%; float: right; " name="createpost" class="zoom btn btn-secondary"
-      href="{% url 'attachment-create' %}"><i class="fa fa-plus" aria-hidden="true" style="font-size:16px margin-top:0;" ></i> Add</a>
+      href="{% url 'attachment-create' %}"><i class="fa fa-plus" aria-hidden="true"
+        style="font-size:16px margin-top:0;"></i> Add</a>
     {% endif %}
   </div>
 
   {% for attachment in course.attachment_set.all %}
   <ul style="list-style: none;">
     <li>
-      <a href="{% url 'attachment-detail' attachment.pk %}" onmouseover="this.style.color='rgb(39, 185, 185)'" onMouseout="this.style.color=' rgb(44, 57, 65)'"><img src="https://elf.ku.edu.np/theme/image.php/aardvark/page/1598794457/icon" class="iconlarge activityicon" alt=" " role="presentation"> {{attachment.title}}  </a>
+      <a href="{% url 'attachment-detail' attachment.pk %}" onmouseover="this.style.color='rgb(39, 185, 185)'"
+        onMouseout="this.style.color=' rgb(44, 57, 65)'"><img
+          src="https://elf.ku.edu.np/theme/image.php/aardvark/page/1598794457/icon" class="iconlarge activityicon"
+          alt=" " role="presentation"> {{attachment.title}} </a>
     </li>
   </ul>
-  {% endfor %} 
+  {% endfor %}
   <hr />
 
   <div class="tutorials" style="display: flex; justify-content: space-between;">
     <a href="{% url 'tutorials' %}">
-      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Tutorials </h1>
+      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Tutorials
+      </h1>
     </a>
     {% if user.user_teachers != '' %}
     <a style="width: 8%; height: 14%; float: right; " name="createpost" class="zoom btn btn-secondary"
@@ -66,15 +87,16 @@
   </div>
 
   {% for i in course.tutorial_set.all %}
-    <a href="{% url 'tutorial-detail' i.pk %}">
-      <h3  onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{ i.title }}</h3>
-    </a>
-      {% video i.video as my %}
-        <iframe width="{{ 360 }}" height="{{ 240 }}" src="{{ my.url }}" frameborder="0" allowfullscreen></iframe>
-      {% endvideo %}
-      <hr />
-    {% endfor %}
-    {% endblock %}
+  <a href="{% url 'tutorial-detail' i.pk %}">
+    <h3 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{ i.title }}
+    </h3>
+  </a>
+  {% video i.video as my %}
+  <iframe width="{{ 360 }}" height="{{ 240 }}" src="{{ my.url }}" frameborder="0" allowfullscreen></iframe>
+  {% endvideo %}
+  <hr />
+  {% endfor %}
+  {% endblock %}
 </body>
 
 </html>

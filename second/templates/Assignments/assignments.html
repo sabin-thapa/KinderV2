@@ -6,99 +6,93 @@ Assignments
 {% endblock %}
 {% load static %}
 
-{% block innerbase %}
 
 <head>
-  <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+
+    {% block scripts %}
+    <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+    {% endblock %}
+
 </head>
+{% block innerbase %}
 
 <body>
 
-  {% load bootstrap4 %}
-  {% bootstrap_javascript jquery='full' %}
-  {{ form.media }}
-  {% if user.user_teachers != "" %}
-  <h2>Add assignment</h2>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %} {% bootstrap_form form %}
-
-
-    <button class="btn btn-outline-info" type="submit">
-      Post Assignment
-    </button>
-    <hr>
-  </form>
-
-  <div class="posted">
-    <h2>Posted Assignments</h2>
-    {% for t in tasks %}
-    <div class="one-assignment">
-      <h2>{{t.title}}</h2>
-      <p>{{t.description}}</p>
-      {% if t.file %}
-      <p>Attached File (click to open):
-        {% endif %}
-        <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
-      <p>Posted On: {{t.date_posted}}</p>
-      <p>Deadline : {{t.deadline}}</p>
-
-      <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">See Submissions</a>
-
-      <a class="btn btn-outline-primary" href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
-
-      <a class="btn btn-outline-danger" href="{% url 'assignment-delete' t.id %}">Delete Assignment</a>
-    </div>
-    {% endfor %}
+    {% load bootstrap4 %}
+    {% bootstrap_javascript jquery='full' %}
+    {{ form.media }}
 
 
 
-    {% elif user.user_parents != "" %}
+    {% if user.user_teachers != "" %}
+    <h2>Add assignment</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {% bootstrap_form form %}
+
+
+        <button class="btn btn-outline-info" type="submit">
+            Post Assignment
+        </button>
+        <hr>
+    </form>
+
     <div class="posted">
-      {% for t in all_tasks %}
-      {% if t.author.user_teachers.school == user.user_parents.school %}
-      {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
-      <div class="one-assignment">
-        <h2>{{t.title}}</h2>
-        <p>{{t.description}}</p>
-        {% if t.file %}
-        <p>Attached File (click to open):
-          {% endif %}
-          <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
-        <p>Posted On: {{t.date_posted}}</p>
-        <p>Deadline : {{t.deadline}}</p>
+        <h2>Posted Assignments</h2>
+        {% for t in tasks %}
+        <div class="one-assignment">
+            <h2>{{t.title}}</h2>
+            <p>{{t.description}}</p>
+            {% if t.file %}
+            <p>Attached File (click to open):
+                {% endif %}
+                <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
+            <p>Posted On: {{t.date_posted}}</p>
+            <p>Deadline : {{t.deadline}}</p>
+
+            <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">See Submissions</a>
+
+            <a class="btn btn-outline-primary" href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
+
+            <a class="btn btn-outline-danger" href="{% url 'assignment-delete' t.id %}">Delete Assignment</a>
+        </div>
+
+        {% endfor %}
 
 
 
-        {% if zz %}
-        <p>Submitted for Grading</p>
+        {% elif user.user_parents != "" %}
 
-        <a class="btn btn-outline-primary" href="{% url 'submissions-update' t.submissions_set.get.id %}">Edit
-          Submission</a>
-        <a class="btn btn-outline-danger" href="{% url 'submission-delete' t.submissions_set.get.id %}">Delete
-          Submission</a>
-        {% else %}
+        {% for t in all_tasks %}
+        {% if t.author.user_teachers.school == user.user_parents.school %}
+        {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
+        <div class="one-assignment">
+            <h2>{{t.title}}</h2>
+            <p>{{t.description}}</p>
+            {% if t.file %}
+            <p>Attached File (click to open):
+                <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
+            {% endif %}
+            <p>Posted On: {{t.date_posted}}</p>
+            <p>Deadline : {{t.deadline}}</p>
+            <a class="btn btn-outline-primary" href="{% url 'assignmentstatus' t.id %}">See Status</a>
+            <hr>
+        </div>
 
-        <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
         {% endif %}
-
-
-      </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
     </div>
-    {% endif %}
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-  </div>
 
 
 
-  <script type="text/javascript">
-    $(function () {
-      $('#datetimepicker1').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss',
-      });
-    });
-  </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss',
+            });
+        });
+    </script>
 
 </body>
 

@@ -145,11 +145,6 @@ def result(request):
     return render(request, 'result.html', context)
 
 
-def analytics(request):
-    context = {}
-    return render(request, 'second/analytics.html', context)
-
-
 @login_required
 def food(request):
     context = {
@@ -164,6 +159,7 @@ def addresult(request):
     form = ResultForm(request.POST)
 
     if request.method == 'POST':
+
         if form.is_valid():
             form.save()
 
@@ -602,7 +598,7 @@ class TutorialDetailView(DetailView):
 
 class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc']
+    fields = ['title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -612,7 +608,7 @@ class TutorialCreateView(LoginRequiredMixin, CreateView):
 
 class TutorialUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc']
+    fields = ['title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -695,18 +691,26 @@ def assignments(request):
             return redirect('assignments')
     else:
         form = AssignmentForm()
-
-    filtered_subs = Submissions.objects.filter(author=request.user)
-
     tasks = Assignments.objects.filter(author=request.user)
+
     all_tasks = Assignments.objects.all()
     context = {
-        'fsubs': filtered_subs,
         'tasks': tasks,
         'all_tasks': all_tasks,
         'form': form,
     }
     return render(request, 'Assignments/assignments.html', context)
+
+
+def assignmentstatus(request, assignment_id):
+    assignment = Assignments.objects.get(pk=assignment_id)
+    submission = Submissions.objects.filter(
+        assignment=assignment, author=request.user)
+    context = {
+        'sub': submission,
+        't': assignment,
+    }
+    return render(request, 'Assignments/assignment_status.html', context)
 
 
 def submissions(request, assignment_id):

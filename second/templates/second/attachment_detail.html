@@ -8,16 +8,20 @@
 
 <body class="jumbotron">
   {% block innerbase %}
+  <a style="margin-top: -35px; margin-bottom: 20px;" class="btn btn-outline-danger" href="{% url 'attachments' %}"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
   <div class="heading" style="display: flex; justify-content: space-between;">
     <h1 style="text-transform: capitalize;"><strong> {{attachment.title}} </strong></h1>
-      <br>
-      {% if user.user_teachers != '' %}
-      <div class="buttons">
-        <a class='btn btn-primary' name="createpost" href="{% url 'attachment-update' object.id %}">Update Attachment</a>
-        <a class='btn btn-outline-danger' name="createpost" href="{% url 'attachment-delete' object.id %}">Delete Attachment</a>
-      </div>
-      {% endif %}
+    <br>
+    {% if user.user_teachers != '' %}
+    <div class="buttons">
+      <a class='btn btn-primary' name="createpost" href="{% url 'attachment-update' object.id %}">Update Attachment</a>
+      <a class='btn btn-outline-danger' name="createpost" href="{% url 'attachment-delete' object.id %}">Delete
+        Attachment</a>
     </div>
+    {% endif %}
+  </div>
   <img src="{{attachment.file.url}}" style="height: 720px; width: 480px;" />
   <p>{{ attachment.date_posted }}</p>
 

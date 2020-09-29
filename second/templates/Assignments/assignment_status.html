@@ -1,0 +1,54 @@
+{% extends "innerbase.html" %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}
+Assignments
+{% endblock %}
+{% load static %}
+
+
+{% block scripts %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+</head>
+{% endblock %}
+
+{% block innerbase %}
+
+<body>
+    <div class="posted">
+
+        {% if t.author.user_teachers.school == user.user_parents.school %}
+        {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
+        <div class="one-assignment">
+            <h2>{{t.title}}</h2>
+            <p>{{t.description}}</p>
+            {% if t.file %}
+            <p>Attached File (click to open):
+                {% endif %}
+                <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
+            <p>Posted On: {{t.date_posted}}</p>
+            <p>Deadline : {{t.deadline}}</p>
+            {% if sub %}
+            <p>Submitted for Grading</p>
+            <a class="btn btn-outline-primary" href="{% url 'submissions-update' sub.get.id %}">Edit
+                Submission</a>
+            <a class="btn btn-outline-danger" href="{% url 'submission-delete' sub.get.id %}">Delete
+                Submission</a>
+            {% else %}
+            <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    </div>
+
+
+</body>
+
+{% endblock %}
+
+</html>

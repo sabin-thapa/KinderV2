@@ -31,7 +31,6 @@
     {% url 'notice-create' as notice_url%}
     {% url 'result' as result_url%}
     {% url 'send-email' as chat_url%}
-    {% url 'analytics' as analytics_url %}
 
     <div class="wrapper">
 
@@ -49,10 +48,7 @@
                     <li class="{% if request.path == home_url %} active {%endif%}">
                         <a href="{% url 'home' %}"> <i class="ico fa fa-home" aria-hidden="true"></i>Home</a>
                     </li>
-                    <li>
-                        <a href="{% url 'analytics' %}" class="{% if request.path == analytics_url %} active {%endif%}">
-                            <i class="ico fa fa-chart-bar" aria-hidden="true"></i>Analytics</a>
-                    </li>
+
                     <li class="{% if request.path == register_url %} active {%endif%}">
                         <a href="{% url 'registerchild' %}"><i class="ico fa fa-address-book"
                                 aria-hidden="true"></i>Register
@@ -100,10 +96,7 @@
                     <li class="{% if request.path == home_url %} active {%endif%}">
                         <a href="{% url 'home' %}"><i class="ico fa fa-home" aria-hidden="true"></i>Home</a>
                     </li>
-                    <li>
-                        <a href="{% url 'analytics' %}" class="{% if request.path == analytics_url %} active {%endif%}">
-                            <i class="ico fa fa-chart-bar" aria-hidden="true"></i>Analytics</a>
-                    </li>
+
                     <li class="{% if request.path == result_url %} active {%endif%}">
                         <a href="{% url 'result' %}"><i class="ico fa fa-percent" aria-hidden="true"></i>See Result</a>
                     </li>
@@ -149,8 +142,7 @@
                             {% endblock %}
                         </h5>
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="bell"><button style='border:0px;' name='bell'><i class="fa fa-bell"></i></button>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
                             </li>
