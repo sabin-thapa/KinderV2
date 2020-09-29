@@ -6,17 +6,24 @@ Assignments
 {% endblock %}
 {% load static %}
 
-{% block innerbase %}
 
 <head>
+
+    {% block scripts %}
     <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+    {% endblock %}
+
 </head>
+{% block innerbase %}
 
 <body>
 
     {% load bootstrap4 %}
     {% bootstrap_javascript jquery='full' %}
     {{ form.media }}
+
+
+
     {% if user.user_teachers != "" %}
     <h2>Add assignment</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -50,11 +57,11 @@ Assignments
         </div>
 
         {% endfor %}
-    </div>
 
 
-    {% elif user.user_parents != "" %}
-    <div class="posted">
+
+        {% elif user.user_parents != "" %}
+
         {% for t in all_tasks %}
         {% if t.author.user_teachers.school == user.user_parents.school %}
         {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
@@ -63,18 +70,18 @@ Assignments
             <p>{{t.description}}</p>
             {% if t.file %}
             <p>Attached File (click to open):
-                {% endif %}
                 <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
+            {% endif %}
             <p>Posted On: {{t.date_posted}}</p>
             <p>Deadline : {{t.deadline}}</p>
             <a class="btn btn-outline-primary" href="{% url 'assignmentstatus' t.id %}">See Status</a>
-
+            <hr>
         </div>
-    </div>
-    {% endif %}
-    {% endif %}
-    {% endfor %}
-    {% endif %}
+
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
     </div>
 
 
