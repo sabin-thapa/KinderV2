@@ -31,11 +31,22 @@ Assignments
             <p>Posted On: {{t.date_posted}}</p>
             <p>Deadline : {{t.deadline}}</p>
             {% if sub %}
+            <p>Submitted on: {{sub.get.date_submitted}}</p>
+            {% if graded %}
+            <p>Graded</p>
+            <p>Grade you received: <strong>{{graded.get.grade}}</strong></p>
+            {% if graded.get.remarks %}
+            <p>Remarks from teacher: {{graded.get.remarks}}</p>
+            {% endif %}
+            <p>(You can't edit your submission now)</p>
+            {% else %}
             <p>Submitted for Grading</p>
             <a class="btn btn-outline-primary" href="{% url 'submissions-update' sub.get.id %}">Edit
                 Submission</a>
             <a class="btn btn-outline-danger" href="{% url 'submission-delete' sub.get.id %}">Delete
                 Submission</a>
+            {% endif %}
+
             {% else %}
             <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">Add Submissions</a>
             {% endif %}

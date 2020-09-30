@@ -75,6 +75,21 @@
   {% endfor %}
   <hr />
 
+  <div class="assignments" style="display: flex; justify-content: space-between;">
+    <a href="{% url 'resassignments' object.pk %}">
+      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Assignments
+      </h1>
+    </a>
+    {% if user.user_teachers != '' %}
+    <a style="width: 8%; height: 14%; float: right; " name="createpost" class="zoom btn btn-secondary"
+      href="{% url 'assignments' %}"><i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i> Add</a>
+    {% endif %}
+
+
+  </div>
+  <hr>
+
+
   <div class="tutorials" style="display: flex; justify-content: space-between;">
     <a href="{% url 'tutorials' %}">
       <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Tutorials
