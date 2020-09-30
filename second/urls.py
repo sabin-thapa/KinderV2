@@ -59,6 +59,10 @@ urlpatterns = [
     path('contacts/', views.contacts, name='send-email'),
 
     path('courses/', CourseListView.as_view(), name='courses'),
+
+    path('courses/<int:course_id>/resassignments/',
+         views.resassignments, name='resassignments'),
+
     path('courses/<int:pk>/', CourseDetailView.as_view(), name='course-detail'),
     path('courses/new/', CourseCreateView.as_view(), name='course-create'),
     path('courses/<int:pk>/update/',
@@ -103,5 +107,6 @@ urlpatterns = [
          views.grade_update, name='grade-update'),
     path('assignment/<int:assignment_id>/status',
          views.assignmentstatus, name='assignmentstatus'),
+
 
 ]

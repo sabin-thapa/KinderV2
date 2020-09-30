@@ -686,15 +686,23 @@ def assignments(request):
             return redirect('assignments')
     else:
         form = AssignmentForm()
-    tasks = Assignments.objects.filter(author=request.user)
 
     all_tasks = Assignments.objects.all()
     context = {
-        'tasks': tasks,
         'all_tasks': all_tasks,
         'form': form,
     }
     return render(request, 'Assignments/assignments.html', context)
+
+
+def resassignments(request, course_id):
+    course = Course.objects.get(pk=course_id)
+    assignment = Assignments.objects.filter(course=course)
+    context = {
+        'course': course,
+        'assignment': assignment,
+    }
+    return render(request, 'Assignments/resassignments.html', context)
 
 
 def assignmentstatus(request, assignment_id):
@@ -772,7 +780,7 @@ def grade_update(request, assignment_id, grade_id):
 
 class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Assignments
-    fields = ['title', 'description', 'file', 'deadline']
+    fields = ['title', 'description', 'course', 'file', 'deadline']
     template_name = 'Assignments/assignments_form.html'
 
     def form_valid(self, form):
