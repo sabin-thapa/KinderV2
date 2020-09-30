@@ -35,6 +35,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('registerchild/', views.registerchild, name='registerchild'),
     path('attendance/', views.attendance, name='attendance'),
+    path('parattendance/', views.parattendance, name='parattendance'),
     path('attendance/<int:pk>', AttendanceDetailView.as_view(),
          name='attendance-detail'),
     path('food/', views.food, name='food'),

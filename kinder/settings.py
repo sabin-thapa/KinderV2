@@ -61,7 +61,7 @@ MIDDLEWARE = [
 
 WEBPUSH_SETTINGS = {
     "VAPID_PUBLIC_KEY": "BDcNT6CqM1LUnoF071bVWQllle33irydRAs67IAyfTHvUPoTHtjFC7jNoJzVQkLNv8WeN-0H-WU7nsRJqrW1x5o",
-    "VAPID_PRIVATE_KEY":"CnhcvVKD-C_5Otm3ibcoDQftQVaxDiO1mAbNNm5LuCg",
+    "VAPID_PRIVATE_KEY": "CnhcvVKD-C_5Otm3ibcoDQftQVaxDiO1mAbNNm5LuCg",
     "VAPID_ADMIN_EMAIL": "kinder.mailservice@gmail.com"
 }
 
@@ -122,13 +122,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -139,10 +139,14 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', 'AC3d2e4f51d5e188cb8f1e3f526de96303')
-TWILIO_API_KEY = os.environ.get('TWILIO_API_KEY', 'SK8a833829a89650f2a3b85eae2523a4bd')
-TWILIO_API_SECRET = os.environ.get('TWILIO_API_SECRET', 'k2MqspU7jSDDQ8dAbECmbCkc5YELSDvz')
-TWILIO_CHAT_SERVICE_SID = os.environ.get('TWILIO_CHAT_SERVICE_SID', 'IS1a6f557fb08a48b39dcc1651c6ad72bb')
+TWILIO_ACCOUNT_SID = os.environ.get(
+    'TWILIO_ACCOUNT_SID', 'AC3d2e4f51d5e188cb8f1e3f526de96303')
+TWILIO_API_KEY = os.environ.get(
+    'TWILIO_API_KEY', 'SK8a833829a89650f2a3b85eae2523a4bd')
+TWILIO_API_SECRET = os.environ.get(
+    'TWILIO_API_SECRET', 'k2MqspU7jSDDQ8dAbECmbCkc5YELSDvz')
+TWILIO_CHAT_SERVICE_SID = os.environ.get(
+    'TWILIO_CHAT_SERVICE_SID', 'IS1a6f557fb08a48b39dcc1651c6ad72bb')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'index'

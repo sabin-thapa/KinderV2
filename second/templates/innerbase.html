@@ -116,7 +116,8 @@
                         <a href="{% url 'tutorials' %}"><i class="ico fa fa-file" aria-hidden="true"></i>Tutorials</a>
                     </li>
                     <li class="{% if request.path == attendance_url %} active {%endif%}">
-                        <a href="{% url 'attendance' %}"> <i class="ico fa fa-check-square" aria-hidden="true"></i>See
+                        <a href="{% url 'parattendance' %}"> <i class="ico fa fa-check-square"
+                                aria-hidden="true"></i>See
                             Attendance</a>
                     </li>
                     <li class="{% if request.path == chat_url %} active {%endif%}">

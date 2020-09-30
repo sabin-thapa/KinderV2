@@ -195,6 +195,15 @@ def attendance(request):
     return render(request, 'Attendance/attendance.html', context)
 
 
+def parattendance(request):
+    sid = SID.objects.filter(childid=request.user.user_parents.ChildID)
+    attendance = Attend.objects.filter(student__in=sid)
+    context = {
+        'attend': attendance,
+    }
+    return render(request, 'Attendance/parents_attendance.html', context)
+
+
 def present(request, id):
     student = Attend.objects.get(id=id)
     student1 = Presentday.objects.filter(
@@ -709,9 +718,11 @@ def assignmentstatus(request, assignment_id):
     assignment = Assignments.objects.get(pk=assignment_id)
     submission = Submissions.objects.filter(
         assignment=assignment, author=request.user)
+    graded = Grading.objects.filter(submission__in=submission)
     context = {
         'sub': submission,
         't': assignment,
+        'graded': graded,
     }
     return render(request, 'Assignments/assignment_status.html', context)
 
