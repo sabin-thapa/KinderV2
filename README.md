@@ -1,7 +1,7 @@
 # Kinder-V2
 <br>
 <h1>
-Important: Master has been updated on <b> 16th Sept 11AM <b> by Sabin. git pull origin master on the master branch before creating a PR or merging.
+Important: Master has been updated on <b> 30th Sept 3PM <b> by Sajan. git pull origin master on the master branch before creating a PR or merging.
  </h1>
 <h2> #Notes: </h2>
 <ul>
