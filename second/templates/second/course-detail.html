@@ -32,7 +32,7 @@
   <li>
     <img src="https://elf.ku.edu.np/theme/image.php/aardvark/core/1598794457/f/pdf-24" class="iconlarge activityicon" alt=" " role="presentation"> {{ course.syllabus }}
   </li></ul> </p> </a>
-  <hr />
+  <hr /> <br />
   <h2 >Course Plan</h2>
   <p><a href="{{course.course_plan_url}}"> <ul style="list-style: none;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">
     <li>
@@ -63,12 +63,12 @@
     </li>
   </ul>
   {% endfor %}
-  <hr />
+  <hr /> <br />
 
   <div class="assignments" style="display: flex; justify-content: space-between;">
     <a href="{% url 'resassignments' object.pk %}">
-      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Assignments
-      </h1>
+      <h2 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Assignments
+      </h2>
     </a>
     {% if user.user_teachers != '' %}
     <a style="width: 8%; height: 14%; float: right; " name="createpost" class="zoom btn btn-secondary"
@@ -77,7 +77,7 @@
 
 
   </div>
-  <hr>
+  <hr> <br />
 
 
   <div class="tutorials" style="display: flex; justify-content: space-between;">
@@ -97,7 +97,7 @@
     </a>
       {% video tutorial.video 'medium' %}
 
-      <hr />
+      <hr /> <br />
     {% endfor %}
  
     {% endblock %}
