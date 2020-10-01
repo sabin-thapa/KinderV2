@@ -18,18 +18,20 @@ class School(models.Model):
     def __str__(self):
         return self.sch
 
+
 class Room(models.Model):
     """Represents chat rooms that users can join"""
     name = models.CharField(max_length=30)
-    talkto=models.ForeignKey(User, on_delete=models.CASCADE)
+    talkto = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.CharField(max_length=50)
 
     def __str__(self):
         """Returns human-readable representation of the model instance."""
         return self.name
-    
+
     def save(self, *args, **kwargs):
         super(Room, self).save(*args, **kwargs)
+
 
 class Post(models.Model):
     content = models.TextField(blank=True)
@@ -217,7 +219,7 @@ class Course(models.Model):
         null=True, blank=True, upload_to='syllabus/', verbose_name="Syllabus")
     course_plan = models.FileField(
         null=True, blank=True, upload_to='course_plan/', verbose_name="Course Plan")
-    date_posted = models.DateTimeField(default = timezone.now)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.course_title
@@ -297,7 +299,7 @@ class Attachment(models.Model):
 
 class Assignments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=500)
     description = models.TextField(blank=True, null=True)
     file = models.FileField(upload_to='assignments/',

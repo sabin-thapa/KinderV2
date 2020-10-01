@@ -1,12 +1,7 @@
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render, redirect, get_object_or_404
-from second.models import Post, Images, Result, Foods, Attend
-from second.models import Notice, Absentday, Presentday, SID, ROUTINES, Contacts
-
-from second.models import Attachment, Tutorial, Course
-from second.models import Grading
-from second.models import Course
-from second.models import Assignments, Submissions
+from second.models import (Post, Images, Result, Foods, Attend, Notice, Absentday, Presentday,
+                           SID, ROUTINES, Contacts, Attachment, Tutorial, Course, Grading, Assignments, Submissions)
 
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -14,9 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.ult
 
-from .forms import UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm
+from .forms import (UserUpdateForm, ResultForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm,
+                    AssignmentForm, GradeForm, SubmissionForm)
 
-from .forms import UserUpdateForm, ResultForm, AssignmentForm, GradeForm, ProfileUpdateForm, StudentRegisterForm, AttendanceForm, AbsentForm, ContactsForm, SubmissionForm
 
 from django.core.paginator import Paginator
 from django.forms import modelformset_factory
@@ -145,11 +140,6 @@ def result(request):
     return render(request, 'result.html', context)
 
 
-def analytics(request):
-    context = {}
-    return render(request, 'second/analytics.html', context)
-
-
 @login_required
 def food(request):
     context = {
@@ -164,6 +154,7 @@ def addresult(request):
     form = ResultForm(request.POST)
 
     if request.method == 'POST':
+
         if form.is_valid():
             form.save()
 
@@ -202,6 +193,15 @@ def attendance(request):
         'students': Attend.objects.all(),
     }
     return render(request, 'Attendance/attendance.html', context)
+
+
+def parattendance(request):
+    sid = SID.objects.filter(childid=request.user.user_parents.ChildID)
+    attendance = Attend.objects.filter(student__in=sid)
+    context = {
+        'attend': attendance,
+    }
+    return render(request, 'Attendance/parents_attendance.html', context)
 
 
 def present(request, id):
@@ -604,6 +604,7 @@ class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
     fields = [ 'title', 'video', 'desc', 'course']
 
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         # form.instance.course = self.request.course  HELP NEEDED
@@ -612,7 +613,7 @@ class TutorialCreateView(LoginRequiredMixin, CreateView):
 
 class TutorialUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc']
+    fields = ['title', 'video', 'desc']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -696,17 +697,35 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
-    filtered_subs = Submissions.objects.filter(author=request.user)
-
-    tasks = Assignments.objects.filter(author=request.user)
     all_tasks = Assignments.objects.all()
     context = {
-        'fsubs': filtered_subs,
-        'tasks': tasks,
         'all_tasks': all_tasks,
         'form': form,
     }
     return render(request, 'Assignments/assignments.html', context)
+
+
+def resassignments(request, course_id):
+    course = Course.objects.get(pk=course_id)
+    assignment = Assignments.objects.filter(course=course)
+    context = {
+        'course': course,
+        'assignment': assignment,
+    }
+    return render(request, 'Assignments/resassignments.html', context)
+
+
+def assignmentstatus(request, assignment_id):
+    assignment = Assignments.objects.get(pk=assignment_id)
+    submission = Submissions.objects.filter(
+        assignment=assignment, author=request.user)
+    graded = Grading.objects.filter(submission__in=submission)
+    context = {
+        'sub': submission,
+        't': assignment,
+        'graded': graded,
+    }
+    return render(request, 'Assignments/assignment_status.html', context)
 
 
 def submissions(request, assignment_id):
@@ -773,7 +792,7 @@ def grade_update(request, assignment_id, grade_id):
 
 class AssignmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Assignments
-    fields = ['title', 'description', 'file', 'deadline']
+    fields = ['title', 'description', 'course', 'file', 'deadline']
     template_name = 'Assignments/assignments_form.html'
 
     def form_valid(self, form):

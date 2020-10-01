@@ -9,8 +9,11 @@
 
 <body class="jumbotron">
   {% block innerbase %}
+  <a style="margin-top: -35px; margin-bottom: 20px;" class="btn btn-outline-danger" href="{% url 'courses' %}"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
   <div class="heading" style="display: flex; justify-content: space-between;">
-  <h1 style="text-transform: capitalize;"><strong> {{course.course_title}} </strong></h1>
+    <h1 style="text-transform: capitalize;"><strong> {{course.course_title}} </strong></h1>
     <br>
     {% if user.user_teachers != '' %}
     <div class="buttons">
@@ -20,6 +23,7 @@
     {% endif %}
   </div>
   <hr />
+
   <h2><img src="https://elf.ku.edu.np/theme/image.php/aardvark/forum/1598794457/icon" class="iconlarge activityicon" alt=" " role="presentation" /> Announcements</h2>
   <p>{{course.announcement}}</p>
   <hr /> <br />
@@ -34,26 +38,47 @@
     <li>
       <img src="https://elf.ku.edu.np/theme/image.php/aardvark/core/1598794457/f/pdf-24" class="iconlarge activityicon" alt=" " role="presentation"> {{ course.course_plan }}
     </li></ul></p> </a>
+
   <hr />
   <br />
   <div class="attachments" style="display: flex; justify-content: space-between;">
     <a href="{% url 'attachments' %}">
       <h2 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Attachments</h2>
+
     </a>
     {% if user.user_teachers != '' %}
     <a style="width: 8%; height: 14%; float: right; " name="createpost" class="zoom btn btn-secondary"
-      href="{% url 'attachment-create' %}"><i class="fa fa-plus" aria-hidden="true" style="font-size:16px margin-top:0;" ></i> Add</a>
+      href="{% url 'attachment-create' %}"><i class="fa fa-plus" aria-hidden="true"
+        style="font-size:16px margin-top:0;"></i> Add</a>
     {% endif %}
   </div>
 
   {% for attachment in course.attachment_set.all %}
   <ul style="list-style: none;">
     <li>
-      <a href="{% url 'attachment-detail' attachment.pk %}" onmouseover="this.style.color='rgb(39, 185, 185)'" onMouseout="this.style.color=' rgb(44, 57, 65)'"><img src="https://elf.ku.edu.np/theme/image.php/aardvark/page/1598794457/icon" class="iconlarge activityicon" alt=" " role="presentation"> {{attachment.title}}  </a>
+      <a href="{% url 'attachment-detail' attachment.pk %}" onmouseover="this.style.color='rgb(39, 185, 185)'"
+        onMouseout="this.style.color=' rgb(44, 57, 65)'"><img
+          src="https://elf.ku.edu.np/theme/image.php/aardvark/page/1598794457/icon" class="iconlarge activityicon"
+          alt=" " role="presentation"> {{attachment.title}} </a>
     </li>
   </ul>
-  {% endfor %} 
+  {% endfor %}
   <hr />
+
+  <div class="assignments" style="display: flex; justify-content: space-between;">
+    <a href="{% url 'resassignments' object.pk %}">
+      <h1 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'"> Assignments
+      </h1>
+    </a>
+    {% if user.user_teachers != '' %}
+    <a style="width: 8%; height: 14%; float: right; " name="createpost" class="zoom btn btn-secondary"
+      href="{% url 'assignments' %}"><i class="fa fa-plus" aria-hidden="true" style="font-size:16px"></i> Add</a>
+    {% endif %}
+
+
+  </div>
+  <hr>
+
 
   <div class="tutorials" style="display: flex; justify-content: space-between;">
     <!-- <a href="{% url 'tutorials' %}">
@@ -76,6 +101,7 @@
     {% endfor %}
  
     {% endblock %}
+
 </body>
 
 </html>

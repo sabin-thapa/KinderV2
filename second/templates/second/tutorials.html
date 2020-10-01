@@ -12,6 +12,9 @@
 
 <body class="jumbotron">
   {% block innerbase %}
+  <a style="margin-top: -35px; margin-bottom: 20px;" class="btn btn-outline-danger" href="{% url 'courses' %}"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
   <div class="heading" style="display: flex; justify-content: space-between;">
     <h1><strong>Tutorials</strong></h1>
     {% if user.user_teachers != '' %}
@@ -27,7 +30,8 @@
   {% if tut.author.user_teachers.school == user.user_teachers.school %}
   <div class="tutorial-list">
     <a href="{% url 'tutorial-detail' tut.id %}">
-      <h2  onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{ tut.title }}</h2>
+      <h2 onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">
+        {{ tut.title }}</h2>
       {% video tut.video 'small' %}
     </a>
     <hr />
