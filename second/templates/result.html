@@ -19,13 +19,64 @@ Results
 
 <body>
 
-    <div>
-        <table class="table table-hover" id="myTable" style="width: 70%">
+    <div class="row ">
+    {% if user.user_parents != "" %}
+    <div style="width:50%;">
+    {% for result in results %}
+        <table class="table table-hover" id="myTable" style="width: 100%">
             <thead class="thead thead-dark">
                 {% if user.user_teachers != "" %}
                 <a class="btn btn-primary" href="{% url 'addresult' %}"
                     style="margin-left: 0px; margin-top: 10px; margin-bottom: 15px;">ADD Result</a>
                 {% endif %}
+            </thead>
+
+            
+
+            {% if user.user_parents.ChildID == result.name.childid %}
+            <td>{{result.term}} Term</td>
+                <tr>
+                <td>Name</td>
+                {% if user.user_teachers != "" %}
+                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
+                {% else %}
+                <td>{{result.name}}</td>
+                {% endif %}
+                </tr>
+                <tr><td>Subject-1</td><td>{{result.subject1}}</td></tr>
+                <tr><td>Subject-2</td><td>{{result.subject2}}</td></tr>
+                <tr><td>Subject-3</td><td>{{result.subject3}}</td></tr>
+                <tr><td>Subject-4</td><td>{{result.subject4}}</td></tr>
+                <tr><td>Grade</td><td>{{result.grade}}</td></tr>
+                <tr><td>Remarks</td><td>{{result.remarks}}</td></tr>    
+                    
+                    
+                    
+                
+                
+
+                
+                
+                
+                
+                
+                
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+
+        </table>
+        </div>
+        {% elif user.user_teachers != "" %}
+        <div style="width:50%;">
+        <table class="table table-hover" id="myTable" style="width:100%;">
+            <thead class="thead thead-dark">
+                {% if user.user_teachers != "" %}
+                <a class="btn btn-primary" href="{% url 'addresult' %}"
+                    style="margin-left: 0px; margin-top: 10px; margin-bottom: 15px;">ADD Result</a>
+                {% endif %}
+            </thead>
                 <tr>
                     <td>Name</td>
                     <td>Subject-1</td>
@@ -35,12 +86,11 @@ Results
                     <td>Grade</td>
                     <td>Remarks</td>
                 </tr>
-            </thead>
-
             {% for result in results %}
 
             {% if user.user_teachers != "" %}
             {% if user == result.name.teacher %}
+            
             <tr>
                 {% if user.user_teachers != "" %}
                 <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
@@ -54,40 +104,113 @@ Results
                 <td>{{result.grade}}</td>
                 <td>{{result.remarks}}</td>
             </tr>
-            {% endif %}
-            {% else %}
-            {% if user.user_parents.ChildID == result.name.childid %}
-            <tr>
-                {% if user.user_teachers != "" %}
-                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
-                {% else %}
-                <td>{{result.name}}</td>
-                {% endif %}
-                <td>{{result.term}}</td>
-
-                <td>{{result.subject1}}</td>
-                <td>{{result.subject2}}</td>
-                <td>{{result.subject3}}</td>
-                <td>{{result.subject4}}</td>
-                <td>{{result.grade}}</td>
-                <td>{{result.remarks}}</td>
-            </tr>
-            {% endif %}
+            {% endif %}            
             {% endif %}
             {% endfor %}
 
 
         </table>
+        </div>
+        {% endif%}
+        <div style="width:50%;">
         <h1>Average Bar Graph</h1>
         <div id='mychart'></div>
+        </div>
     </div>
 
 
 
     <script src="http://cdn.zingchart.com/zingchart.min.js"></script>
-
+    {% if user.user_parents != "" %}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            var tb=document.querySelectorAll('table')
+            var avg=[0,0,0,0];
+            var percentage=0;
+            for(var t=0;t<tb.length;t++)
+            {
+                var tr = tb[t].querySelectorAll('tr');
+                var stdata = [];
+                for (i = 1; i < tr.length; i++) {
+                    stdata[i - 1] = tr[i].querySelectorAll('td')
+                }
+                for (i = 0; i < 1; i++) {
+                    var percent = 0;
+                    var pass = 0;
+                    for (j = 1; j < 5; j++) {
+                        if (stdata[j][1].textContent < 40) pass = 0;
+                        percent += stdata[j][1].textContent / 4
+                    }
+                    stdata[5][1].textContent = grade(percent)
+                    percentage+=percent/tb.length;
+                }
+                for (i = 0; i < stdata.length; i++) {
+                    var pass = 1
+                    for (j = 1; j < 5; j++) {
+                        if (stdata[j][1].textContent < 40) {
+                            pass = 0
+                        }
+                    }
+                    if (pass) {
+                        stdata[6][1].textContent = 'PASS'
+                    } else {
+                        stdata[6][1].textContent = "FAIL"
+                    }
+                }
+            var avgp = 0;
+            for (var i = 1; i < 5; i++) {
+                var sum = 0
+                for (var j = 0; j < stdata.length; j++) {
+                    sum += stdata[i][1].textContent / stdata.length
+                }
+                avg[i - 1] += sum/tb.length;
+                avgp += avg[i - 1] / 4;
+            }
+            }   
+            
+            avg[4] = percentage;
+            chart(avg)
+        })
+
+        function grade(percent) {
+            if (percent >= 90) return "A+"
+            else if (percent >= 80) return 'A'
+            else if (percent >= 70) return 'B+'
+            else if (percent >= 60) return 'B'
+            else if (percent >= 50) return 'C+'
+            else if (percent >= 40) return 'C'
+            else if (percent >= 30) return 'D+'
+            else if (percent >= 20) return 'D'
+            else if (percent >= 10) return 'E+'
+            else return 'E'
+
+        }
+
+        function chart(avg) {
+            var chartData = {
+                "type": "bar",
+                "scale-x": {
+                    "values": [
+                        "Subject-1",
+                        "Subject-2",
+                        "Subject-3",
+                        "Subject-4",
+                        "Percent"
+                    ]
+                },
+                "series": [{
+                    "values": avg
+                }]
+            }
+            zingchart.render({
+                id: "mychart",
+                data: chartData,
+            })
+        }
+    </script>
+    {% elif user.user_teachers != "" %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
             var tr = document.querySelector('table').querySelectorAll('tr');
             var stdata = [];
             for (i = 1; i < tr.length; i++) {
@@ -122,9 +245,13 @@ Results
                 var sum = 0
                 for (var j = 0; j < stdata.length; j++) {
                     sum += stdata[j][i].textContent / stdata.length
+                    console.log(stdata[j][i]);
                 }
                 avg[i - 1] = sum;
                 avgp += avg[i - 1] / 4;
+            }
+            for(var i=0;i<avg.length;i++){
+                console.log(avg[i]);
             }
             avg[4] = avgp;
             chart(avg)
@@ -166,6 +293,7 @@ Results
             })
         }
     </script>
+    {% endif %}
 </body>
 {% endblock %}
 
