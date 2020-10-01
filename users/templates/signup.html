@@ -61,6 +61,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 })
+
+    function disable() {
+      var form=document.querySelectorAll('form')
+
+      for(var i=0;i<form[1].elements.length;i++){
+        form[1].elements[i].disabled=true;
+      }
+      for(var i=0;i<form[2].elements.length;i++){
+        form[2].elements[i].disabled=false;
+      }
+    }
+    function enable(){
+      var form=document.querySelectorAll('form')
+
+      for(var i=0;i<form[1].elements.length;i++){
+        form[1].elements[i].disabled=false;
+      }
+      for(var i=0;i<form[2].elements.length;i++){
+        form[2].elements[i].disabled=true;
+      }
+    }
+
 </script>
 <!--<script type="text/javascript" src="{% static 'register.js' %}"></script>-->
 
@@ -81,10 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="col-md-9 register-right" >
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Teacher</a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" onclick="enable()">Teacher</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Parent</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" onclick="disable()">Parent</a>
                 </li>
             </ul>
           <div class="tab-content" id="myTabContent">
@@ -195,10 +217,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         {{ form_parents.ChildID|as_crispy_field }}
                       </div>
                       <div class="form-group col-md-6 mb-0">
-                        {{ form_parents.school|as_crispy_field }}
+                        {{ form_parents.RelationToChild|as_crispy_field }}
                       </div>
                       <div class="form-group col-md-6 mb-0">
-                        {{ form_parents.RelationToChild|as_crispy_field }}
+                        {{ form_parents.school|as_crispy_field }}
                       </div>
                     </form>
                       <div class=" col-md-8 mb-0">
@@ -218,5 +240,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  -->
 
   </body>
+  <script>
+    var user=document.querySelectorAll('a.nav-link')
+    var form=document.querySelectorAll('form')
+    if(user[1].ariaSelected==='true'){
+      for(var i=0;i<form[1].elements.length;i++){
+        form[1].elements[i].disabled=true;
+      }
+    }else{
+      console.log('error')
+      for(var i=0;i<form[1].elements.length;i++){
+        form[1].elements[i].disabled=false;
+      }
+    }
+  </script>
 </html>
 {% endblock %}
