@@ -87,7 +87,7 @@ Results
                     <td>Remarks</td>
                 </tr>
             {% for result in results %}
-
+            {% if result.term == 'first'%}
             {% if user.user_teachers != "" %}
             {% if user == result.name.teacher %}
             
@@ -104,9 +104,58 @@ Results
                 <td>{{result.grade}}</td>
                 <td>{{result.remarks}}</td>
             </tr>
+            {% endif %}
             {% endif %}            
             {% endif %}
             {% endfor %}
+
+            {% for result in results %}
+            {% if result.term == 'second'%}
+            {% if user.user_teachers != "" %}
+            {% if user == result.name.teacher %}
+            
+            <tr>
+                {% if user.user_teachers != "" %}
+                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
+                {% else %}
+                <td>{{result.name}}</td>
+                {% endif %}
+                <td>{{result.subject1}}</td>
+                <td>{{result.subject2}}</td>
+                <td>{{result.subject3}}</td>
+                <td>{{result.subject4}}</td>
+                <td>{{result.grade}}</td>
+                <td>{{result.remarks}}</td>
+            </tr>
+            {% endif %}
+            {% endif %}            
+            {% endif %}
+            {% endfor %}
+            
+            {% for result in results %}
+            {% if result.term == 'final'%}
+            {% if user.user_teachers != "" %}
+            {% if user == result.name.teacher %}
+            
+            <tr>
+                {% if user.user_teachers != "" %}
+                <td><b><a href="{% url 'result-detail' result.id %}">{{result.name}}</a></b></td>
+                {% else %}
+                <td>{{result.name}}</td>
+                {% endif %}
+                <td>{{result.subject1}}</td>
+                <td>{{result.subject2}}</td>
+                <td>{{result.subject3}}</td>
+                <td>{{result.subject4}}</td>
+                <td>{{result.grade}}</td>
+                <td>{{result.remarks}}</td>
+            </tr>
+            {% endif %}
+            {% endif %}            
+            {% endif %}
+            {% endfor %}
+
+
 
 
         </table>
