@@ -36,7 +36,7 @@ def signup(request):
                 profile.save()
                 username = form1.cleaned_data.get('username')
                 messages.success(request, f'Account created for {username}')
-                room=sm.Room.create(name=username,talkto=user,slug=username)
+                room=sm.Room.objects.create(name=username,talkto=user,slug=username)
                 room.save()
                 return redirect('login')
         elif form2.is_valid() and form_teachers.is_valid():
