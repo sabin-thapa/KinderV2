@@ -7,7 +7,7 @@ self.addEventListener('push', function(event) {
     event.waitUntil(
         self.registration.showNotification(head, {
             body: body,
-            icon: src = '/media/first/p2.png'
+            icon: src = '/media/first/logo.png'
         })
     );
 });

@@ -48,14 +48,13 @@
   {% for i in course %}
   {% if i.instructor.user_teachers.school == user.user_parents.school %}
   {% if i.instructor.user_teachers.grade == user.user_parents.ChildGrade %}
-
-  <div class="course-list" style="padding-bottom: 5px;">
+  <div class="course-list" style="padding-bottom: 5px; background-color: #fff; margin: 2% 0; padding: 1% 2%;">
 
     <a href="{% url 'course-detail' i.id %}">
-      <h2 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h2>
+      <h3 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h3>
     </a>
     <p style="color: rgb(44, 57, 65);">{{i.instructor}}</p>
-    <hr style="height:10%; color: black solid;"  />
+    <hr height="10px" />
   </div>
 
   {% endif %}
