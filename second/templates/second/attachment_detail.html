@@ -20,10 +20,13 @@
       <a class='btn btn-outline-danger' name="createpost" href="{% url 'attachment-delete' object.id %}">Delete
         Attachment</a>
     </div>
+
+    {% if attachment.file %}
+    <p>Attached File (click to open):
+    <a target="blank" href="{{attachment.file_url}}">  <h2> <b> <img src="https://elf.ku.edu.np/theme/image.php/aardvark/page/1598794457/icon" class="iconlarge activityicon" alt=" " role="presentation">  {{attachment.file}} </b></h2>  </a>
+    <p>{{ attachment.date_posted }}</p>
     {% endif %}
-  </div>
-  <img src="{{attachment.file.url}}" style="height: 720px; width: 480px;" />
-  <p>{{ attachment.date_posted }}</p>
+
 
   <div class="col-md-12 xm-0">
     <br />

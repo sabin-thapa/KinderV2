@@ -273,7 +273,7 @@ class Attachment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=50)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
-    file = models.FileField(null=True)
+    file = models.FileField(null=True, upload_to='attachments/', verbose_name="File")
     date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -288,6 +288,13 @@ class Attachment(models.Model):
 
     def save(self, *args, **kwargs):
         super(Attachment, self).save(*args, **kwargs)
+    
+    @property
+    def file_url(self):
+        if self.file and hasattr(self.file, 'url'):
+            return self.file.url
+        else:
+            return None
 
 
 class Assignments(models.Model):

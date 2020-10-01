@@ -16,7 +16,7 @@
 <div class="courses jumbotron">
 
   <div class="heading" style="display: flex; justify-content:space-between;">
-    <h1><strong>My Courses!</strong></h1>
+    <h1><strong> Courses!</strong></h1>
     {% if user.user_teachers != '' %}
     <a style="width: 12%; height: 20%;" name="createpost" class="zoom btn btn-primary"
       href="{% url 'course-create' %}">Add Course</a>
@@ -33,7 +33,7 @@
   <div class="course-list" style="padding-bottom: 5px; background-color: #fff; margin: 2% 0; padding: 1% 2%;">
 
     <a href="{% url 'course-detail' i.id %}">
-      <h1 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h1>
+      <h3 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h3>
     </a>
     <p style="color: rgb(44, 57, 65);">{{i.instructor}}</p>
     <hr height="10px" />
@@ -52,7 +52,7 @@
   <div class="course-list" style="padding-bottom: 5px;">
 
     <a href="{% url 'course-detail' i.id %}">
-      <h1 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h1>
+      <h2 style="color: rgb(44, 57, 65); text-transform: capitalize;" onMouseOver="this.style.color='rgb(39, 185, 185'" onMouseout="this.style.color='rgb(44, 57, 65)'">{{i.course_title}}</h2>
     </a>
     <p style="color: rgb(44, 57, 65);">{{i.instructor}}</p>
     <hr style="height:10%; color: black solid;"  />
