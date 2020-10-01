@@ -11,6 +11,13 @@ Assignments
 
     {% block scripts %}
     <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+
+
+    <style>
+        .table1 td {
+            min-width: 400px;
+        }
+    </style>
     {% endblock %}
 
 </head>
@@ -35,28 +42,57 @@ Assignments
         </button>
         <hr>
     </form>
+        <script src="{% static '/notification/assignmentsite.js' %}"></script>
 
     <div class="posted">
         <h2>Posted Assignments</h2>
         {% for t in all_tasks %}
+
         <div class="one-assignment">
-            <h2>{{t.title}}</h2>
-            <p>{{t.description}}</p>
-            <p>Course: {{t.course}}</p>
-            {% if t.file %}
-            <p>Attached File (click to open):
-                {% endif %}
-                <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
-            <p>Posted On: {{t.date_posted}}</p>
-            <p>Deadline : {{t.deadline}}</p>
+            <h3 style="color:rgb(39, 185, 185);"><strong>{{t.title}}</strong></h3>
+            <p style="padding-left: 30px;">{{t.description}}</p>
 
-            {% if t.author == request.user %}
-            <a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">See Submissions</a>
+            <table class="table1 table table-hover">
+                <tbody>
+                    <tr>
+                        <td><strong>Course:</strong></td>
+                        <td>{{t.course}}</td>
+                    </tr>
+                    {% if t.file %}
+                    <tr>
+                        <td><strong><strong>Attached File</strong> (click to open):</strong></td>
+                        <td><a target="_blank" href="{{t.file_url}}"> <i
+                                    style="padding-left: 10px; padding-right: 10px;" class="fa fa-file"
+                                    aria-hidden="true"></i>{{t.file}}</a></td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td><strong>Posted On:</strong></td>
+                        <td>{{t.date_posted}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deadline:</strong></td>
+                        <td>{{t.deadline}}</td>
+                    </tr>
+                    {% if t.author == request.user %}
+                    <tr>
+                        <td><a class="btn btn-outline-primary" href="{% url 'submissions' t.id %}">See Submissions</a>
 
-            <a class="btn btn-outline-primary" href="{% url 'assignment-update' t.id %}">Edit Assignment</a>
+                            <a class="btn btn-outline-primary" href="{% url 'assignment-update' t.id %}">Edit
+                                Assignment</a>
 
-            <a class="btn btn-outline-danger" href="{% url 'assignment-delete' t.id %}">Delete Assignment</a>
-            {% endif %}
+                            <a class="btn btn-outline-danger" href="{% url 'assignment-delete' t.id %}">Delete
+                                Assignment</a></td>
+                    </tr>
+                    {% endif %}
+
+                </tbody>
+            </table>
+
+
+
+
+
         </div>
 
         {% endfor %}
@@ -68,17 +104,44 @@ Assignments
         {% for t in all_tasks %}
         {% if t.author.user_teachers.school == user.user_parents.school %}
         {% if t.author.user_teachers.grade == user.user_parents.ChildGrade %}
+
+
         <div class="one-assignment">
-            <h2>{{t.title}}</h2>
+            <h3 style="color:rgb(39, 185, 185);"><strong>{{t.title}}</strong></h3>
             <p>{{t.description}}</p>
-            <p>{{t.course}}</p>
-            {% if t.file %}
-            <p>Attached File (click to open):
-                <a target="_blank" href="{{t.file_url}}"> {{t.file}}</a></p>
-            {% endif %}
-            <p>Posted On: {{t.date_posted}}</p>
-            <p>Deadline : {{t.deadline}}</p>
-            <a class="btn btn-outline-primary" href="{% url 'assignmentstatus' t.id %}">See Status</a>
+
+            <table class="table1 table table-hover">
+
+                <tbody>
+                    <tr>
+                        <td><strong>Course:</strong></td>
+                        <td>{{t.course}}</td>
+                    </tr>
+                    {% if t.file %}
+                    <tr>
+                        <td><strong>Attached File</strong>:</td>
+                        <td><u><a target="_blank" href="{{t.file_url}}"> <i
+                                        style="padding-left: 10px; padding-right: 10px;" class="fa fa-file"
+                                        aria-hidden="true"></i>{{t.file}}</a></u></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <td><strong>Posted On:</strong></td>
+                        <td> {{t.date_posted}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deadline:</strong> </td>
+                        <td>{{t.deadline}}</td>
+                    </tr>
+                    <tr>
+                        <td><a class="btn btn-outline-primary" href="{% url 'assignmentstatus' t.id %}">See Status</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
             <hr>
         </div>
 

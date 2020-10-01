@@ -17,61 +17,48 @@
       background-color: lightgrey;
       width: 30px;
       border: 2px solid black;
-      padding: 50px;
       margin: 20px;
+    }
+    body{
+      height:100%;
+      overflow-y:hidden;
     }
   </style>
 </head>
 
-<body>
   {% block innerbase %}
-  <div class="row">
-    <div class="col-lg-2 col-md-2"></div>
-    <div class="col-lg-2 col-md-2">
-
-      <div class="container" style="margin-top: 100px;">
-        <center>
-          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" target="_blank"
-            style="width: 200px; height: 200px;">
-          <div class="media-body">
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
-          </div>
-        </center>
-      </div>
-
-
-    </div>
-    <div class="col-lg-5 col-md-5 profile" style="margin-top: 100px;">
+  <body style="height:100%;overflow-y:hidden;">
+  <center>
+  <div>
+    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" target="_blank"
+    style="width: 250px; height: 250px;">
+    <div style="background-color:#f1b739;width:50%;border-radius:3%;color:black;margin-top:-120px;padding-top:125px;">
+    <h2 class="account-heading">{{ user.username }}</h2>
+    <div class="col-lg-9 col-md-9 profile" style="margin-top: 10px;">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile Info</legend>
           {{ u_form|crispy}}
           {{ p_form|crispy}}
         </fieldset>
-
         <div class="password-reset">
           <a href="{% url 'password_reset' %}"> <strong>Reset your password here.</strong></a>
         </div>
-
         <br>
-        <br>
-
         <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
+          <button class="btn btn-primary" type="submit">Update</button>
         </div>
       </form>
+      <br>
+      <br>
     </div>
-    <div class="col-lg-3 col-md-3"></div>
-
+    </div>
+    
   </div>
-
-
-
-
-
-  </div>
-  </div>
+  </center>
+  <script>
+var help=document.getElementById("hint_id_username");
+help.style.display="none";
+</script>
   {% endblock %}
 </body>
