@@ -67,23 +67,23 @@
                                 aria-hidden="true"></i>Attendance</a>
                     </li>
                     <li class="{% if request.path == courses_url %} active {%endif%}">
-                        <a href="{% url 'courses' %}"><i class="ico fa fa-file-pdf" aria-hidden="true"></i>Resources</a>
+                        <a href="{% url 'courses' %}"><i class="ico fa fa-file-pdf" aria-hidden="true"></i>Courses</a>
                     </li>
                     <li class="{% if request.path == assignments_url %} active {%endif%}">
                         <a href="{% url 'assignments' %}"><i class="ico fa fa-pen"
                                 aria-hidden="true"></i>Assignments</a>
                     </li>
-                    <li class="{% if request.path == tutorials_url %} active {%endif%}">
+                    <!-- <li class="{% if request.path == tutorials_url %} active {%endif%}">
                         <a href="{% url 'tutorials' %}"><i class="ico fa fa-file" aria-hidden="true"></i>Tutorials</a>
-                    </li>
+                    </li> -->
                     <li class="{% if request.path == routine_url %} active {%endif%}">
                         <a href="{% url 'routine' %}"><i class="ico fa fa-calendar" aria-hidden="true"></i>Class
                             Routine</a>
                     </li>
-                    <li class="{% if request.path == notice_url %} active {%endif%}">
+                    <!-- <li class="{% if request.path == notice_url %} active {%endif%}">
                         <a href="{% url 'notice-create' %}"><i class="ico fa fa-newspaper" aria-hidden="true"></i>Add
                             Notice</a>
-                    </li>
+                    </li> -->
 
                     <li class="{% if request.path == result_url %} active {%endif%}">
                         <a href="{% url 'result' %}"><i class="ico fa fa-percent" aria-hidden="true"></i>Add Results</a>
@@ -112,14 +112,11 @@
                             Routine</a>
                     </li>
                     <li class="{% if request.path == courses_url %} active {%endif%}">
-                        <a href="{% url 'courses' %}"><i class="ico fa fa-file-pdf" aria-hidden="true"></i>Resources</a>
+                        <a href="{% url 'courses' %}"><i class="ico fa fa-file-pdf" aria-hidden="true"></i>Courses</a>
                     </li>
                     <li class="{% if request.path == assignments_url %} active {%endif%}">
                         <a href="{% url 'assignments' %}"><i class="ico fa fa-pen"
                                 aria-hidden="true"></i>Assignments</a>
-                    </li>
-                    <li class="{% if request.path == tutorials_url %} active {%endif%}">
-                        <a href="{% url 'tutorials' %}"><i class="ico fa fa-file" aria-hidden="true"></i>Tutorials</a>
                     </li>
                     <li class="{% if request.path == attendance_url %} active {%endif%}">
                         <a href="{% url 'attendance' %}"> <i class="ico fa fa-check-square" aria-hidden="true"></i>See

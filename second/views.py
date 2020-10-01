@@ -602,7 +602,7 @@ class TutorialDetailView(DetailView):
 
 class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc']
+    fields = [ 'title', 'video', 'desc', 'course']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -626,7 +626,7 @@ class TutorialUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class TutorialDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tutorial
-    success_url = '/home/tutorials/'
+    success_url = '/home/courses/'
 
     def test_func(self):
         if self.request.user.user_teachers != '':
