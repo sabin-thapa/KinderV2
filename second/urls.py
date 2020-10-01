@@ -13,6 +13,8 @@ urlpatterns = [
     path('home/', views.postsandnotices, name='home'),
     path('home/webpush/', include('webpush.urls')),
     path('notice/new/send_push/', views.send_push),
+     path('assignments/send_push/', views.send_push),
+
     path('home/sw.js', TemplateView.as_view(template_name='sw.js',
                                             content_type='application/x-javascript'), name='sw.js'),
 
