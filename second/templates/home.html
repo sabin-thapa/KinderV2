@@ -101,14 +101,15 @@
 
             <div class="col-lg-3 notices">
                 {% if user.is_authenticated %}
-            
+
                 <div style="padding-top: 20px;">
                     <div class="notice-header">
                         <center>
-                            <h4>Notices and Events 
+                            <h4>Notices and Events
                                 {% if user.user_teachers != '' %}
-                                <a name="createpost" class="zoom btn btn-secondary"
-                                  href="{% url 'notice-create' %}"><i class="fa fa-plus" aria-hidden="true" ></i> </a>
+                                <a style="padding-left: 10px; margin-top: 5px;" name="createpost"
+                                    href="{% url 'notice-create' %}"><i class="fa fa-plus-circle"
+                                        aria-hidden="true"></i> </a>
                                 {% endif %}
                             </h4>
                         </center>
@@ -155,7 +156,7 @@
 
 
 
-    <script src="{% static '/notification/registerSw.js' %}"></script>
+                <script src="{% static '/notification/registerSw.js' %}"></script>
 
 
 
