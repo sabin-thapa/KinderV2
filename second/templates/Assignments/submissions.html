@@ -5,43 +5,98 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-{% block innerbase %}
+
 
 <head>
+    {% block scripts %}
     <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+    <style>
+        .table1 td {
+            min-width: 400px;
+        }
+    </style>
+    {% endblock %}
 </head>
+
+{% block innerbase %}
 
 <body>
 
 
     {% if user.user_teachers != "" %}
     <h3>All Submissions For:</h3>
-    <h2>{{assignment.title}}</h2>
+    <h3 style="color:rgb(39, 185, 185);"><strong>{{assignment.title}}</strong></h3>
     {%for s in subs %}
     <div class="one-sub">
-        <p>Submission by: {{s.author}}</p>
-        <p><a target="_blank" href="{{s.file_url}}"> {{s.file}}</a></p>
-        <p>Date Submitted: {{s.date_submitted}}</p>
-        {% if s.grading_set.exists %}
-        <p>Graded {{s.grading_set.get.grade}}</p>
 
-        <a class="btn btn-outline-primary" href="{% url 'grade-update' assignment.id s.grading_set.get.id %}">Update
-            Grade</a>
+        <table class="table1 table table-hover">
+            <tbody>
+                <tr>
+                    <td><strong>Submission by:</strong></td>
+                    <td>{{s.author}}</td>
+                </tr>
+                {% if s.file %}
+                <tr>
+                    <td><strong>File Uploaded: </strong></td>
+                    <td><u><a target="_blank" href="{{s.file_url}}"><i style="padding-left: 10px; padding-right: 10px;"
+                                    class="fa fa-file" aria-hidden="true"></i>
+                                {{s.file}}</a></u></td>
+                </tr>
+                {% endif %}
 
-        {% else %}
-        <a class="btn btn-outline-primary" href="{% url 'gradesubmissions' assignment.id s.id  %}">Add Grade</a>
+                {% if s.grading_set.exists %}
+                <tr>
+                    <td><strong>Graded Given: </strong> </td>
+                    <td>{{s.grading_set.get.grade}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a class="btn btn-outline-primary"
+                            href="{% url 'grade-update' assignment.id s.grading_set.get.id %}">Update
+                            Grade</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td><a class="btn btn-outline-primary" href="{% url 'gradesubmissions' assignment.id s.id  %}">Add
+                            Grade</a> </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
 
-        {% endif %}
+
+
     </div>
     {% endfor %}
 
     {% elif user.user_parents != "" %}
-
-    <h2>{{assignment.title}}</h2>
+    <h3 style="color:rgb(39, 185, 185);"><strong>{{assignment.title}}</strong></h3>
     <p>{{assignment.description}}</p>
-    <p>Attached File (if any):</p><a target="_blank" href="{{assignment.file_url}}"> {{assignment.file}}</a>
-    <p>Date Posted: {{assignment.date_posted}}</p>
-    <p>Deadline : {{assignment.deadline}}</p>
+
+    <table class="table1 table table-hover">
+        <tbody>
+            {% if assignment.file %}
+            <tr>
+                <td><strong>Attached File</strong></td>
+                <td><a target="_blank" href="{{assignment.file_url}}">
+                        <i style="padding-left: 10px; padding-right: 10px;" class="fa fa-file"
+                            aria-hidden="true"></i><u>{{assignment.file}}</u></a></td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td><strong>Date Posted:</strong></td>
+                <td>{{assignment.date_posted}}</td>
+            </tr>
+            <tr>
+                <td><strong>Deadline:</strong> </td>
+                <td>{{assignment.deadline}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
 
     <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}

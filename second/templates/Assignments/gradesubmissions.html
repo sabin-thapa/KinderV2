@@ -8,7 +8,14 @@
 
 <head>
     <meta charset="UTF-8">
-
+    {% block scripts %}
+    <link rel="stylesheet" href="{% static 'assignments.css' %}" type="text/css" />
+    <style>
+        .table1 td {
+            min-width: 400px;
+        }
+    </style>
+    {% endblock %}
 
 
 </head>
@@ -16,9 +23,25 @@
 <body>
     {% block innerbase %}
     <h3>Grade Submission</h3>
-    <p>{{submission.assignment}}</p>
-    <p>{{submission.file}}</p>
-    <p>{{submission.date_submitted}}</p>
+
+    <table class="table1 table table-hover">
+        <tbody>
+            <tr>
+                <td><strong>Assignment:</strong></td>
+                <td>{{submission.assignment}}</td>
+            </tr>
+            <tr>
+                <td><strong>Submission:</strong></td>
+                <td>{{submission.file}}</td>
+            </tr>
+            <tr>
+                <td><strong>Submission Date:</strong></td>
+                <td>{{submission.date_submitted}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
 
     <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}

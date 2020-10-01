@@ -602,8 +602,7 @@ class TutorialDetailView(DetailView):
 
 class TutorialCreateView(LoginRequiredMixin, CreateView):
     model = Tutorial
-    fields = [ 'title', 'video', 'desc', 'course']
-
+    fields = ['title', 'video', 'desc', 'course']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

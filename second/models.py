@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -273,7 +274,8 @@ class Attachment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=50)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
-    file = models.FileField(null=True, upload_to='attachments/', verbose_name="File")
+    file = models.FileField(
+        null=True, upload_to='attachments/', verbose_name="File")
     date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -288,7 +290,7 @@ class Attachment(models.Model):
 
     def save(self, *args, **kwargs):
         super(Attachment, self).save(*args, **kwargs)
-    
+
     @property
     def file_url(self):
         if self.file and hasattr(self.file, 'url'):
@@ -336,7 +338,7 @@ class Submissions(models.Model):
     description = models.TextField(null=True, blank=True)
     file = models.FileField(upload_to='submissions/',
                             null=True, blank=True, verbose_name="File")
-    date_submitted = models.DateTimeField(default=timezone.now)
+    date_submitted = models.DateTimeField(default=datetime.now)
 
     class Meta:
         ordering = ['-date_submitted']
