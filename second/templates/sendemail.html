@@ -64,14 +64,12 @@
 {% block innerbase %}
   <section class="hero is-info">
     <div class="hero-body has-text-centered">
+      <img src="\media\first\chat.png" alt="Chat Logo" width="100px" height="100px" style="margin: 2px;">
       <div class="container">
         <h1 class="title is-2">
-          Let's Chat !!
+          <B> Welcome  </B>
         </h1>
-        <h2 class="subtitle is-5">
-          An exploration into Twilio Programmable Chat.
-          <br/> Join one of the rooms below to start your adventure
-        </h2>
+
       </div>
     </div>
   </section>
@@ -82,42 +80,41 @@
       {% for room in rooms %}
       {% if room.talkto == user %}
         <div class="column">
-          <div class="card rounded-edges">
-            <div class="card-content">
-              <p class="title is-4">{{room.name}}</p>
+
+          <h3 class="title is-4" ><B>{{room.name}},</B> Click Below To Chat With Your Child's Class Teacher</h3>
               <div class="content">
                 <p>
                   {{room.description}}
                 </p>
-                <a href="rooms/{{room.slug}}" class="button">Join Room</a>
-              </div>
-            </div>
+                <a href="rooms/{{room.slug}}" button class="btn btn-outline-info" type="submit" style="font-size: 25px; border-radius: 15px;">Chat</a>
+
           </div>
         </div>
         {% endif %}
         {% endfor %}
       {% elif user.user_teachers != ''%}
+      <h3 class="title is-4" > Click On Parents Name Below To Chat </h3>
+
       {% for room in rooms %}
       {% if room.talkto.user_parents.school == user.user_teachers.school %}
       {% if room.talkto.user_parents.ChildGrade == user.user_teachers.grade %}
         <div class="column">
-          <div class="card rounded-edges">
-            <div class="card-content">
-              <p class="title is-4">{{room.name}}</p>
+
               <div class="content">
                 <p>
                   {{room.description}}
                 </p>
-                <a href="rooms/{{room.slug}}" class="button">Join Room</a>
-              </div>
-            </div>
+                <img class="rounded-circle account-img" src="{{ room.talkto.profile.image.url }}" target="_blank"
+                  style="width: 40px; height: 40px;">
+                <a href="rooms/{{room.slug}}" button class="btn btn-outline-info" type="submit" style="font-size: 25px; border-radius: 15px;">Chat with {{room.talkto}}</a>
+
           </div>
         </div>
         {% endif %}
         {% endif %}
         {% endfor %}
       {% endif %}
-        
+
       </div>
     </div>
   </section>
