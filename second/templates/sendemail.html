@@ -93,17 +93,20 @@
         {% endif %}
         {% endfor %}
       {% elif user.user_teachers != ''%}
+      <h3 class="title is-4" > Click On Parents Name Below To Chat </h3>
+
       {% for room in rooms %}
       {% if room.talkto.user_parents.school == user.user_teachers.school %}
       {% if room.talkto.user_parents.ChildGrade == user.user_teachers.grade %}
         <div class="column">
 
-          <h3 class="title is-4" > Click On Parents Name Below To Chat </h3>
               <div class="content">
                 <p>
                   {{room.description}}
                 </p>
-                <a href="rooms/{{room.slug}}" button class="btn btn-outline-info" type="submit" style="font-size: 25px; border-radius: 15px;">Chat</a>
+                <img class="rounded-circle account-img" src="{{ room.talkto.profile.image.url }}" target="_blank"
+                  style="width: 40px; height: 40px;">
+                <a href="rooms/{{room.slug}}" button class="btn btn-outline-info" type="submit" style="font-size: 25px; border-radius: 15px;">Chat with {{room.talkto}}</a>
 
           </div>
         </div>
